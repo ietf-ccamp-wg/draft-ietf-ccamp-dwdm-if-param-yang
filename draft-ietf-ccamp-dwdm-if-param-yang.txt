@@ -5,17 +5,17 @@
 Internet Engineering Task Force                       G. Galimberti, Ed.
 Internet-Draft                                                     Cisco
 Intended status: Experimental                                   R. Kunze
-Expires: September 10, 2020                                      A. Burk
+Expires: January 13, 2022                                        A. Burk
                                                         Deutsche Telekom
                                                      D. Hiremagalur, Ed.
                                                          G. Grammel, Ed.
                                                                  Juniper
-                                                           March 9, 2020
+                                                           July 12, 2021
 
 
 A YANG model to manage the optical interface parameters for an external
                       transponder in a WDM network
-                 draft-ietf-ccamp-dwdm-if-param-yang-03
+                 draft-ietf-ccamp-dwdm-if-param-yang-06
 
 Abstract
 
@@ -53,9 +53,9 @@ Status of This Memo
 
 
 
-G. Galimberti, et al.  Expires September 10, 2020               [Page 1]
+G. Galimberti, et al.   Expires January 13, 2022                [Page 1]
 
-Internet-Draft   draft-ietf-ccamp-dwdm-if-param-yang-03       March 2020
+Internet-Draft   draft-ietf-ccamp-dwdm-if-param-yang-06        July 2021
 
 
    working documents as Internet-Drafts.  The list of current Internet-
@@ -66,11 +66,11 @@ Internet-Draft   draft-ietf-ccamp-dwdm-if-param-yang-03       March 2020
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on September 10, 2020.
+   This Internet-Draft will expire on January 13, 2022.
 
 Copyright Notice
 
-   Copyright (c) 2020 IETF Trust and the persons identified as the
+   Copyright (c) 2021 IETF Trust and the persons identified as the
    document authors.  All rights reserved.
 
    This document is subject to BCP 78 and the IETF Trust's Legal
@@ -95,27 +95,27 @@ Table of Contents
      4.2.  Use Cases . . . . . . . . . . . . . . . . . . . . . . . .   5
      4.3.  Optical Interface for external transponder in a WDM
            network . . . . . . . . . . . . . . . . . . . . . . . . .   5
-   5.  Structure of the Yang Module  . . . . . . . . . . . . . . . .   7
-   6.  Yang Module . . . . . . . . . . . . . . . . . . . . . . . . .   8
-   7.  Security Considerations . . . . . . . . . . . . . . . . . . .  19
-   8.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .  19
-   9.  Acknowledgements  . . . . . . . . . . . . . . . . . . . . . .  20
-   10. Contributors  . . . . . . . . . . . . . . . . . . . . . . . .  20
-   11. References  . . . . . . . . . . . . . . . . . . . . . . . . .  21
-     11.1.  Normative References . . . . . . . . . . . . . . . . . .  21
-     11.2.  Informative References . . . . . . . . . . . . . . . . .  23
-   Appendix A.  Change Log . . . . . . . . . . . . . . . . . . . . .  23
-   Appendix B.  Open Issues  . . . . . . . . . . . . . . . . . . . .  23
+   5.  Structure of the Yang Module  . . . . . . . . . . . . . . . .   9
+   6.  Yang Module . . . . . . . . . . . . . . . . . . . . . . . . .  10
+   7.  Security Considerations . . . . . . . . . . . . . . . . . . .  21
+   8.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .  21
+   9.  Acknowledgements  . . . . . . . . . . . . . . . . . . . . . .  22
+   10. Contributors  . . . . . . . . . . . . . . . . . . . . . . . .  22
+   11. References  . . . . . . . . . . . . . . . . . . . . . . . . .  23
+     11.1.  Normative References . . . . . . . . . . . . . . . . . .  23
+     11.2.  Informative References . . . . . . . . . . . . . . . . .  25
+   Appendix A.  Change Log . . . . . . . . . . . . . . . . . . . . .  25
+   Appendix B.  Open Issues  . . . . . . . . . . . . . . . . . . . .  26
 
 
 
-G. Galimberti, et al.  Expires September 10, 2020               [Page 2]
+G. Galimberti, et al.   Expires January 13, 2022                [Page 2]
 
-Internet-Draft   draft-ietf-ccamp-dwdm-if-param-yang-03       March 2020
+Internet-Draft   draft-ietf-ccamp-dwdm-if-param-yang-06        July 2021
 
 
-   Appendix C.  Applicability examples . . . . . . . . . . . . . . .  23
-   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  24
+   Appendix C.  Applicability examples . . . . . . . . . . . . . . .  26
+   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  26
 
 1.  Introduction
 
@@ -165,9 +165,9 @@ Internet-Draft   draft-ietf-ccamp-dwdm-if-param-yang-03       March 2020
 
 
 
-G. Galimberti, et al.  Expires September 10, 2020               [Page 3]
+G. Galimberti, et al.   Expires January 13, 2022                [Page 3]
 
-Internet-Draft   draft-ietf-ccamp-dwdm-if-param-yang-03       March 2020
+Internet-Draft   draft-ietf-ccamp-dwdm-if-param-yang-06        July 2021
 
 
    This memo specifies a Yang model for optical interfaces.
@@ -221,9 +221,9 @@ Internet-Draft   draft-ietf-ccamp-dwdm-if-param-yang-03       March 2020
 
 
 
-G. Galimberti, et al.  Expires September 10, 2020               [Page 4]
+G. Galimberti, et al.   Expires January 13, 2022                [Page 4]
 
-Internet-Draft   draft-ietf-ccamp-dwdm-if-param-yang-03       March 2020
+Internet-Draft   draft-ietf-ccamp-dwdm-if-param-yang-06        July 2021
 
 
 4.1.  Optical Parameters Description
@@ -271,112 +271,223 @@ Internet-Draft   draft-ietf-ccamp-dwdm-if-param-yang-03       March 2020
    notify the client.
 
    module: ietf-ext-xponder-wdm-if
-    augment /if:interfaces/if:interface:
+     augment /if:interfaces/if:interface:
        +--rw optIfOChRsSs
           +--rw if-current-mode
 
 
 
-G. Galimberti, et al.  Expires September 10, 2020               [Page 5]
+G. Galimberti, et al.   Expires January 13, 2022                [Page 5]
 
-Internet-Draft   draft-ietf-ccamp-dwdm-if-param-yang-03       March 2020
+Internet-Draft   draft-ietf-ccamp-dwdm-if-param-yang-06        July 2021
 
 
-          |  +--ro mode-id?                      string
-          |  +--ro application-identifier?       string
-          |  +--ro min-central-frequency?        frequency-thz
-          |  +--ro max-central-frequency?        frequency-thz
-          |  +--ro min-input-power?              dbm-t
-          |  +--ro max-input-power?              dbm-t
-          |  +--ro min-output-power?             dbm-t
-          |  +--ro max-output-power?             dbm-t
-          |  +--ro min-osnr-margin?              int32
-          |  +--ro min-q-margin?                 int32
-          |  +--ro fec-info?                     string
-          |  +--ro fec-bitrate?                  string
-          |  +--ro fec-gain?                     string
-          |  +--ro fec-ber-mantissa-threshold?   uint32
-          |  +--ro fec-ber-exponent-threshold?   int32
-          |  +--ro number-of-lanes?              uint32
-          |  +--ro min-laser-temperature?        int32
-          |  +--ro max-laser-temperature?        int32
-          |  +--ro max-total-rx-optical-power?   dbm-t
-          |  +--ro max-chromatic-dispersion?     int32
-          |  +--ro max-diff-group-delay?         int32
-          |  +--ro modulation-format?            string
-          |  +--ro baud-rate?                    string
-          |  +--ro bits-per-symbol?              uint32
-          |  +--ro num-symbols-in-alphabet?      uint32
-          |  +--ro symbols-index?                uint32
+          |  +--ro mode-id?                          string
+          |  +--ro (mode)
+          |     +--:(G.698.2)
+          |     |  +--ro standard-mode?          standard-mode
+          |     +--:(organizational-mode)
+          |     |  +--ro organizational-mode
+          |     |     +--ro operational-mode?
+          |     |     |       operational-mode
+          |     |     +--ro organization-identifier?
+          |     |     |       organization-identifier
+          |     |     +--ro min-central-frequency?
+          |     |     |       frequency-thz
+          |     |     +--ro max-central-frequency?
+          |     |     |       frequency-thz
+          |     |     +--ro minimum-channel-spacing?
+          |     |     |       frequency-ghz
+          |     |     +--ro tx-channel-power-min?      dbm-t
+          |     |     +--ro tx-channel-power-max?      dbm-t
+          |     |     +--ro rx-channel-power-min?      dbm-t
+          |     |     +--ro rx-channel-power-max?      dbm-t
+          |     |     +--ro rx-total-power-max?
+          |     +--:(explicit-mode)
+          |        +--ro explicit-mode
+          |           +--ro supported-modes
+          |           |  +--ro supported-application-codes*
+          |           |  |       -> ../../../mode-id
+          |           |  +--ro supported-organizational-modes*
+          |           |  |       -> ../../../mode-id
+          |           +--ro line-coding-bitrate?
+          |           |       identityref
+          |           +--ro min-central-frequency?
+          |           |        layer0-types:frequency-thz
+          |           +--ro max-central-frequency?
+          |           |      layer0-types:frequency-thz
+          |           +--ro min-channel-input-power?          dbm-t
+          |           +--ro max-channel-input-power?          dbm-t
+          |           +--ro min-channel-output-power?         dbm-t
+          |           +--ro max-channel-output-power?         dbm-t
+          |           +--ro osnr-margin?                      int32
+          |           +--ro q-margin?                         int32
+          |           +--ro fec-info?                         string
+          |           +--ro fec-bitrate?                      string
+          |           +--ro fec-gain?                         string
+          |           +--ro pre-fec-ber-mantissa-threshold?   uint32
+          |           +--ro pre-fec-ber-exponent-threshold?   int32
+          |           +--ro number-of-lanes?                  uint32
+          |           +--ro min-laser-temperature?            int32
+          |           +--ro max-laser-temperature?            int32
+
+
+
+G. Galimberti, et al.   Expires January 13, 2022                [Page 6]
+
+Internet-Draft   draft-ietf-ccamp-dwdm-if-param-yang-06        July 2021
+
+
+          |           +--ro max-total-rx-optical-power?       dbm-t
+          |           +--ro chromatic-and-polariz-disp-penal* []
+          |           |  +--ro chromatic-dispersion
+          |           |  |       decimal64
+          |           |  +--ro polarization-mode-dispersion
+          |           |  |       decimal64
+          |           |  +--ro penalty
+          |           |          decimal64
+          |           +--ro max-chromatic-dispersion?         int32
+          |           +--ro max-diff-group-delay?             int32
+          |           +--ro max-polarization-dependent-loss?
+          |           |          decimal64
+          |           +--ro modulation-format?                string
+          |           +--ro baud-rate?                        uint32
+          |           +--ro bits-per-symbol?                  uint32
+          |           +--ro num-symbols-in-alphabet?          uint32
+          |           +--ro symbols-index?                    uint32
           +--ro if-supported-mode
-          |  +--ro number-of-modes-supported?   uint32
-          |  +--ro mode-list* [mode-id]
-          |     +--ro mode-id?                  string
-          |     +--ro application-identifer?    string
-          |     +--ro min-central-frequency?    frequency-thz
-          |     +--ro max-central-frequency?    frequency-thz
-          |     +--ro min-channel-input-power?  dbm-t
-          |     +--ro max-channel-input-power?  dbm-t
-          |     +--ro min-channel-output-power? dbm-t
-          |     +--ro max-channel-output-power? dbm-t
-          |     +--ro min-osnr-margin?          int32
-          |     +--ro min-q-margin?             int32
-          |     +--ro fec-info?                 string
-          |     +--ro fec-bitrate?              string
-          |     +--ro fec-gain?                 string
-          |     +--ro pre-fec-ber-mantissa-threshold? uint32
-          |     +--ro pre-fec-ber-exponent-threshold? int32
-          |     +--ro number-of-lanes?          uint32
-          |     +--ro min-laser-temperature?    int32
-          |     +--ro max-laser-temperature?    int32
-          |     +--ro max-total-rx-optical-power? dbm-t
+          |  +--ro number-of-modes-supported?        uint32
+          +--rw if-supported-modes*
+          |  |  +--ro mode-id?                          string
+          |  +--ro (mode)
+          |     +--:(G.698.2)
+          |     |  +--ro standard-mode?          standard-mode
+          |     +--:(organizational-mode)
+          |     |  +--ro organizational-mode
+          |     |     +--ro operational-mode?
+          |     |     |       operational-mode
+          |     |     +--ro organization-identifier?
+          |     |     |       organization-identifier
+          |     |     +--ro min-central-frequency?
+          |     |     |       frequency-thz
+          |     |     +--ro max-central-frequency?
+          |     |     |       frequency-thz
+          |     |     +--ro minimum-channel-spacing?
+          |     |     |       frequency-ghz
+          |     |     +--ro tx-channel-power-min?      dbm-t
+          |     |     +--ro tx-channel-power-max?      dbm-t
+          |     |     +--ro rx-channel-power-min?      dbm-t
+          |     |     +--ro rx-channel-power-max?      dbm-t
+          |     |     +--ro rx-total-power-max?
+          |     +--:(explicit-mode)
+          |        +--ro explicit-mode
+          |           +--ro supported-modes
+          |           |  +--ro supported-application-codes*
+          |           |  |       -> ../../../mode-id
+          |           |  +--ro supported-organizational-modes*
+          |           |  |       -> ../../../mode-id
 
 
 
-G. Galimberti, et al.  Expires September 10, 2020               [Page 6]
+G. Galimberti, et al.   Expires January 13, 2022                [Page 7]
 
-Internet-Draft   draft-ietf-ccamp-dwdm-if-param-yang-03       March 2020
+Internet-Draft   draft-ietf-ccamp-dwdm-if-param-yang-06        July 2021
 
 
-          |     +--ro max-chromatic-dispersion? int32
-          |     +--ro max-diff-group-delay?     int32
-          |     +--ro modulation-format?        string
-          |     +--ro baud-rate?                string
-          |     +--ro bits-per-symbol?          uint32
-          |     +--ro num-symbols-in-alphabet?  uint32
-          |     +--ro symbols-index?            uint32
-          +--rw current-opt-if-och-mode-params
-             +--rw mode-id?                          string
-             +--rw central-frequency?                frequency-thz
-             +--rw channel-output-power?             dbm-t
-             +--ro channel-input-power?              dbm-t
-             +--ro total-input-power?                dbm-t
-             +--rw min-fec-ber-mantissa-threshold?   uint32
-             +--rw min-fec-ber-exponent-threshold?   int32
-             +--rw max-fec-ber-mantissa-threshold?   uint32
-             +--rw max-fec-ber-exponent-threshold?   int32
-             +--rw number-of-tcas-supported?         uint32
-             +--rw mode-list* [tca-type]
-             |  +--rw tca-type        opt-if-och-tca-types
-             |  +--rw min-threshold?                 int32
-             |  +--rw max-threshold?                 int32
-             +--ro cur-osnr?                         int32
-             +--ro cur-q-factor?                     int32
-             +--ro uncorrected-words?                uint64
-             +--ro pre-fec-ber-mantissa?             uint32
-             +--ro pre-fec-ber-exponent?             int32
+          |           +--ro line-coding-bitrate?
+          |           |  |       identityref
+          |           +--ro min-central-frequency?
+          |           |  |       layer0-types:frequency-thz
+          |           +--ro max-central-frequency?
+          |           |  |       layer0-types:frequency-thz
+          |           +--ro min-channel-input-power?          dbm-t
+          |           +--ro max-channel-input-power?          dbm-t
+          |           +--ro min-channel-output-power?         dbm-t
+          |           +--ro max-channel-output-power?         dbm-t
+          |           +--ro osnr-margin?                      int32
+          |           +--ro q-margin?                         int32
+          |           +--ro fec-info?                         string
+          |           +--ro fec-bitrate?                      string
+          |           +--ro fec-gain?                         string
+          |           +--ro pre-fec-ber-mantissa-threshold?   uint32
+          |           +--ro pre-fec-ber-exponent-threshold?   int32
+          |           +--ro number-of-lanes?                  uint32
+          |           +--ro min-laser-temperature?            int32
+          |           +--ro max-laser-temperature?            int32
+          |           +--ro max-total-rx-optical-power?       dbm-t
+          |           +--ro chromatic-and-polariz-disp-penal* []
+          |           |  +--ro chromatic-dispersion
+          |           |  |       decimal64
+          |           |  +--ro polarization-mode-dispersion
+          |           |  |       decimal64
+          |           |  +--ro penalty
+          |           |  |       decimal64
+          |           +--ro max-chromatic-dispersion?         int32
+          |           +--ro max-diff-group-delay?             int32
+          |           +--ro max-polarization-dependent-loss?
+          |           |          decimal64
+          |           +--ro modulation-format?                string
+          |           +--ro baud-rate?                        uint32
+          |           +--ro bits-per-symbol?                  uint32
+          |           +--ro num-symbols-in-alphabet?          uint32
+          |           +--ro symbols-index?                    uint32
+          +--rw provisioning-opt-if-och-mode-params
+             +--rw provisioning-opt-if-och-mode-params
+                +--rw mode-id?                          string
+                +--rw (mode)
+                +--rw central-frequency?
+                |           layer0-types:frequency-thz
+                +--rw channel-output-power?             dbm-t
+                +--ro channel-input-power?              dbm-t
+                +--ro total-input-power?                dbm-t
+                +--rw number-of-tcas-supported?         uint32
+                +--rw mode-list* [tca-type]
+
+
+
+G. Galimberti, et al.   Expires January 13, 2022                [Page 8]
+
+Internet-Draft   draft-ietf-ccamp-dwdm-if-param-yang-06        July 2021
+
+
+                |  +--rw tca-type         opt-if-och-tca-types
+                |  +--rw min-threshold?   int32
+                |  +--rw max-threshold?   int32
+                +--ro cur-osnr?                         int32
+                +--ro cur-q-factor?                     int32
+                +--ro uncorrected-words?                uint64
+                +--ro pre-fec-ber-mantissa?             uint32
+                +--ro pre-fec-ber-exponent?             int32
+                +--ro cd-pmd-penalty
+                |          layer0-types:cd-pmd-penalty
+                +--ro pdl-penalty
+                |          layer0-types:pdl-penalty
+                +--ro diff-group-delay                  int32
+                +--rw explicit-mode-provisioning
+                   +--rw fec                               string
+                   +--rw pre-fec-ber-mantissa-threshold?   uint32
+                   +--rw pre-fec-ber-exponent-threshold?   int32
+                   +--rw number-of-lanes?                  uint32
+                   +--rw modulation-format?                string
+                   +--rw baud-rate?                        uint32
+                   +--rw bits-per-symbol?                  uint32
+                   +--rw num-symbols-in-alphabet?          uint32
+                   +--rw symbols-index?                    uint32
+
+
+
+
      notifications:
        +---n opt-if-och-central-frequency-change
-       |  +--ro if-name?   -> /if:interfaces/interface/name
+       |  +--ro if-name?               -> /if:interfaces/interface/name
        |  +--ro new-opt-if-och-central-frequency
-       |     +--ro central-frequency?               uint32
+       |     +--ro central-frequency?   layer0-types:frequency-thz
        +---n opt-if-och-mode-change
        |  +--ro if-name?   -> /if:interfaces/interface/name
-       |  +--ro mode-id?                             string
+       |  +--ro mode-id?   string
        +---n opt-if-och-min-tca
-          +--ro if-name?   -> /if:interfaces/interface/name
+          +--ro if-name?    -> /if:interfaces/interface/name
           +--ro tca-type?   opt-if-och-tca-types
-
 
 5.  Structure of the Yang Module
 
@@ -389,9 +500,10 @@ Internet-Draft   draft-ietf-ccamp-dwdm-if-param-yang-03       March 2020
 
 
 
-G. Galimberti, et al.  Expires September 10, 2020               [Page 7]
+
+G. Galimberti, et al.   Expires January 13, 2022                [Page 9]
 
-Internet-Draft   draft-ietf-ccamp-dwdm-if-param-yang-03       March 2020
+Internet-Draft   draft-ietf-ccamp-dwdm-if-param-yang-06        July 2021
 
 
 6.  Yang Module
@@ -402,7 +514,7 @@ Internet-Draft   draft-ietf-ccamp-dwdm-if-param-yang-03       March 2020
 
    <CODE BEGINS> file "ietf-ext-xponder-wdm-if.yang"
 
-   module draft-ietf-ccamp-dwdm-if-param-yang-03 {
+   module ietf-ext-xponder-wdm-if {
      namespace "urn:ietf:params:xml:ns:yang:ietf-ext-xponder-wdm-if";
      prefix ietf-ext-xponder-wdm-if;
 
@@ -440,16 +552,23 @@ Internet-Draft   draft-ietf-ccamp-dwdm-if-param-yang-03       March 2020
         Legal Provisions Relating to IETF Documents
         (http://trustee.ietf.org/license-info).";
 
-     revision "2020-03-09" {
+     revision "2021-06-28" {
        description
 
 
 
-G. Galimberti, et al.  Expires September 10, 2020               [Page 8]
+G. Galimberti, et al.   Expires January 13, 2022               [Page 10]
 
-Internet-Draft   draft-ietf-ccamp-dwdm-if-param-yang-03       March 2020
+Internet-Draft   draft-ietf-ccamp-dwdm-if-param-yang-06        July 2021
 
 
+         "Revision 1.6";
+       reference
+         "";
+       }
+
+     revision "2020-03-09" {
+       description
          "Revision 1.5";
        reference
          "";
@@ -491,26 +610,29 @@ Internet-Draft   draft-ietf-ccamp-dwdm-if-param-yang-03       March 2020
            "Initial revision.";
          reference
            "";
+
+
+
+G. Galimberti, et al.   Expires January 13, 2022               [Page 11]
+
+Internet-Draft   draft-ietf-ccamp-dwdm-if-param-yang-06        July 2021
+
+
        }
+
 
 
 
 
        typedef dbm-t {
            type int32;
-
-
-
-G. Galimberti, et al.  Expires September 10, 2020               [Page 9]
-
-Internet-Draft   draft-ietf-ccamp-dwdm-if-param-yang-03       March 2020
-
-
            units ".01dbm";
-         }
+
          description "
            Amplifiers and Transceivers Power in dBm";
        }
+
+
        typedef opt-if-och-tca-types {
          type enumeration {
            enum max-laser-linewdt {
@@ -544,6 +666,14 @@ Internet-Draft   draft-ietf-ccamp-dwdm-if-param-yang-03       March 2020
            enum min-osnr-tca{
              description "Min OSNR TCA";
            }
+
+
+
+G. Galimberti, et al.   Expires January 13, 2022               [Page 12]
+
+Internet-Draft   draft-ietf-ccamp-dwdm-if-param-yang-06        July 2021
+
+
            enum max-osnr-tca{
              description "Max OSNR TCA";
            }
@@ -554,14 +684,6 @@ Internet-Draft   draft-ietf-ccamp-dwdm-if-param-yang-03       March 2020
              description "Temperature TCA";
            }
            enum min-fec-ber-tca{
-
-
-
-G. Galimberti, et al.  Expires September 10, 2020              [Page 10]
-
-Internet-Draft   draft-ietf-ccamp-dwdm-if-param-yang-03       March 2020
-
-
              description "Min Pre Fec BER TCA";
            }
            enum max-fec-ber-tca{
@@ -600,6 +722,14 @@ Internet-Draft   draft-ietf-ccamp-dwdm-if-param-yang-03       March 2020
          }
        }
 
+
+
+
+G. Galimberti, et al.   Expires January 13, 2022               [Page 13]
+
+Internet-Draft   draft-ietf-ccamp-dwdm-if-param-yang-06        July 2021
+
+
        grouping opt-if-och-tca-thresholds {
          description "Thresholds for TCA's";
          leaf  tca-type {
@@ -610,14 +740,6 @@ Internet-Draft   draft-ietf-ccamp-dwdm-if-param-yang-03       March 2020
            type int32;
            description "A TCA is generated if the variable is less than
                         this value";
-
-
-
-G. Galimberti, et al.  Expires September 10, 2020              [Page 11]
-
-Internet-Draft   draft-ietf-ccamp-dwdm-if-param-yang-03       March 2020
-
-
          }
          leaf  max-threshold {
            type int32;
@@ -656,6 +778,14 @@ Internet-Draft   draft-ietf-ccamp-dwdm-if-param-yang-03       March 2020
 
        grouping opt-if-och-central-frequency {
          description "Interface Central Frequency";
+
+
+
+G. Galimberti, et al.   Expires January 13, 2022               [Page 14]
+
+Internet-Draft   draft-ietf-ccamp-dwdm-if-param-yang-06        July 2021
+
+
          leaf  central-frequency {
            type layer0-types:frequency-thz;
            description "This parameter indicates the frequency of this
@@ -665,14 +795,6 @@ Internet-Draft   draft-ietf-ccamp-dwdm-if-param-yang-03       March 2020
 
        grouping opt-if-och-modulation-params {
          description "Optical modulation parameters for the lane";
-
-
-
-
-G. Galimberti, et al.  Expires September 10, 2020              [Page 12]
-
-Internet-Draft   draft-ietf-ccamp-dwdm-if-param-yang-03       March 2020
-
 
          leaf modulation-format {
            type string { length "1..255"; }
@@ -712,6 +834,14 @@ Internet-Draft   draft-ietf-ccamp-dwdm-if-param-yang-03       March 2020
            units ".01C";
            config false;
            description "Minimum Laser Temperature of this mode for
+
+
+
+G. Galimberti, et al.   Expires January 13, 2022               [Page 15]
+
+Internet-Draft   draft-ietf-ccamp-dwdm-if-param-yang-06        July 2021
+
+
                         this lane";
          }
          leaf max-laser-temperature {
@@ -722,14 +852,6 @@ Internet-Draft   draft-ietf-ccamp-dwdm-if-param-yang-03       March 2020
                         this lane";
          }
          leaf max-total-rx-optical-power {
-
-
-
-G. Galimberti, et al.  Expires September 10, 2020              [Page 13]
-
-Internet-Draft   draft-ietf-ccamp-dwdm-if-param-yang-03       March 2020
-
-
            type dbm-t;
            config false;
            description "Maximum rx optical power of this mode for this
@@ -768,6 +890,14 @@ Internet-Draft   draft-ietf-ccamp-dwdm-if-param-yang-03       March 2020
          leaf  min-fec-ber-mantissa-threshold {
            type uint32;
            description "Min Mantissa of the FEC BER threshold";
+
+
+
+G. Galimberti, et al.   Expires January 13, 2022               [Page 16]
+
+Internet-Draft   draft-ietf-ccamp-dwdm-if-param-yang-06        July 2021
+
+
          }
          leaf  min-fec-ber-exponent-threshold {
            type int32;
@@ -778,14 +908,6 @@ Internet-Draft   draft-ietf-ccamp-dwdm-if-param-yang-03       March 2020
            description "Max Mantissa of the FEC BER threshold";
          }
          leaf  max-fec-ber-exponent-threshold {
-
-
-
-G. Galimberti, et al.  Expires September 10, 2020              [Page 14]
-
-Internet-Draft   draft-ietf-ccamp-dwdm-if-param-yang-03       March 2020
-
-
            type int32;
            description "Max Exponent of the FEC BER threshold";
          }
@@ -824,6 +946,14 @@ Internet-Draft   draft-ietf-ccamp-dwdm-if-param-yang-03       March 2020
          description "OSNR margin to FEC threshold";
        }
        leaf  cur-q-factor {
+
+
+
+G. Galimberti, et al.   Expires January 13, 2022               [Page 17]
+
+Internet-Draft   draft-ietf-ccamp-dwdm-if-param-yang-06        July 2021
+
+
          type int32;
          units "dB";
          config false;
@@ -834,14 +964,6 @@ Internet-Draft   draft-ietf-ccamp-dwdm-if-param-yang-03       March 2020
          config false;
          description "Post-FEC errored words";
        }
-
-
-
-G. Galimberti, et al.  Expires September 10, 2020              [Page 15]
-
-Internet-Draft   draft-ietf-ccamp-dwdm-if-param-yang-03       March 2020
-
-
        leaf  pre-fec-ber-mantissa {
          type uint32;
          config false;
@@ -880,6 +1002,14 @@ Internet-Draft   draft-ietf-ccamp-dwdm-if-param-yang-03       March 2020
        leaf max-central-frequency {
          type layer0-types:frequency-thz;
          config false;
+
+
+
+G. Galimberti, et al.   Expires January 13, 2022               [Page 18]
+
+Internet-Draft   draft-ietf-ccamp-dwdm-if-param-yang-06        July 2021
+
+
          description "This parameter indicates the minimum frequency
                       for this template";
        }
@@ -890,14 +1020,6 @@ Internet-Draft   draft-ietf-ccamp-dwdm-if-param-yang-03       March 2020
        }
        leaf max-channel-input-power {
          type dbm-t;
-
-
-
-G. Galimberti, et al.  Expires September 10, 2020              [Page 16]
-
-Internet-Draft   draft-ietf-ccamp-dwdm-if-param-yang-03       March 2020
-
-
          config false;
          description "The maximum input power of this interface";
        }
@@ -936,6 +1058,14 @@ Internet-Draft   draft-ietf-ccamp-dwdm-if-param-yang-03       March 2020
        }
        list mode-list {
          key "mode-id";
+
+
+
+G. Galimberti, et al.   Expires January 13, 2022               [Page 19]
+
+Internet-Draft   draft-ietf-ccamp-dwdm-if-param-yang-06        July 2021
+
+
          description "List of the modes";
          uses opt-if-och-mode;
        }
@@ -946,14 +1076,6 @@ Internet-Draft   draft-ietf-ccamp-dwdm-if-param-yang-03       March 2020
 
        leaf "if-name" {
          type leafref { path "/if:interfaces/if:interface/if:name"; }
-
-
-
-G. Galimberti, et al.  Expires September 10, 2020              [Page 17]
-
-Internet-Draft   draft-ietf-ccamp-dwdm-if-param-yang-03       March 2020
-
-
          description "Interface name";
        }
        container new-opt-if-och-central-frequency {
@@ -992,6 +1114,14 @@ Internet-Draft   draft-ietf-ccamp-dwdm-if-param-yang-03       March 2020
        description "Parameters for an optical interface";
 
        container optIfOChRsSs {
+
+
+
+G. Galimberti, et al.   Expires January 13, 2022               [Page 20]
+
+Internet-Draft   draft-ietf-ccamp-dwdm-if-param-yang-06        July 2021
+
+
          description "RsSs path configuration for an interface";
 
          container if-current-mode {
@@ -1002,14 +1132,6 @@ Internet-Draft   draft-ietf-ccamp-dwdm-if-param-yang-03       March 2020
            config false;
            description "Supported mode list of this interface";
            uses opt-if-och-mode-list;
-
-
-
-G. Galimberti, et al.  Expires September 10, 2020              [Page 18]
-
-Internet-Draft   draft-ietf-ccamp-dwdm-if-param-yang-03       March 2020
-
-
          }
          container current-opt-if-och-mode-params {
            description "Current parameters of this interface";
@@ -1049,22 +1171,17 @@ Internet-Draft   draft-ietf-ccamp-dwdm-if-param-yang-03       March 2020
    This document registers a YANG module in the YANG Module Names
    registry [RFC6020].
 
+
+
+G. Galimberti, et al.   Expires January 13, 2022               [Page 21]
+
+Internet-Draft   draft-ietf-ccamp-dwdm-if-param-yang-06        July 2021
+
+
    This document registers a YANG module in the YANG Module Names
    registry [RFC6020].
 
    prefix: ietf-ext-xponder-wdm-if reference: RFC XXXX
-
-
-
-
-
-
-
-
-G. Galimberti, et al.  Expires September 10, 2020              [Page 19]
-
-Internet-Draft   draft-ietf-ccamp-dwdm-if-param-yang-03       March 2020
-
 
 9.  Acknowledgements
 
@@ -1109,17 +1226,25 @@ Internet-Draft   draft-ietf-ccamp-dwdm-if-param-yang-03       March 2020
                  email wwakim@cisco.com
 
                Kam Lam
+
+
+
+G. Galimberti, et al.   Expires January 13, 2022               [Page 22]
+
+Internet-Draft   draft-ietf-ccamp-dwdm-if-param-yang-06        July 2021
+
+
                  Nokia
                  USA
                  +1 732 331 3476
                  kam.lam@nokia.com
 
-
-
-
-G. Galimberti, et al.  Expires September 10, 2020              [Page 20]
-
-Internet-Draft   draft-ietf-ccamp-dwdm-if-param-yang-03       March 2020
+               Sergio Belotti
+                 Nokia
+                 Via Energy Park
+                 20871 Vimercate (MB)
+                 Italy
+                 Sergio.belotti@nokia.com
 
 
 11.  References
@@ -1153,6 +1278,18 @@ Internet-Draft   draft-ietf-ccamp-dwdm-if-param-yang-03       March 2020
               functional blocks", ITU-T Recommendation G.798, Devember
               2017.
 
+
+
+
+
+
+
+
+G. Galimberti, et al.   Expires January 13, 2022               [Page 23]
+
+Internet-Draft   draft-ietf-ccamp-dwdm-if-param-yang-06        July 2021
+
+
    [ITU.G8201]
               International Telecommunications Union, "Error performance
               parameters and objectives for multi-operator international
@@ -1169,14 +1306,6 @@ Internet-Draft   draft-ietf-ccamp-dwdm-if-param-yang-03       March 2020
               International Telecommunications Union, "Architecture of
               optical transport networks", ITU-T Recommendation G.872,
               January 2017.
-
-
-
-
-G. Galimberti, et al.  Expires September 10, 2020              [Page 21]
-
-Internet-Draft   draft-ietf-ccamp-dwdm-if-param-yang-03       March 2020
-
 
    [ITU.G874]
               International Telecommunications Union, "Management
@@ -1210,6 +1339,13 @@ Internet-Draft   draft-ietf-ccamp-dwdm-if-param-yang-03       March 2020
               STD 58, RFC 2579, DOI 10.17487/RFC2579, April 1999,
               <https://www.rfc-editor.org/info/rfc2579>.
 
+
+
+G. Galimberti, et al.   Expires January 13, 2022               [Page 24]
+
+Internet-Draft   draft-ietf-ccamp-dwdm-if-param-yang-06        July 2021
+
+
    [RFC2580]  McCloghrie, K., Ed., Perkins, D., Ed., and J.
               Schoenwaelder, Ed., "Conformance Statements for SMIv2",
               STD 58, RFC 2580, DOI 10.17487/RFC2580, April 1999,
@@ -1223,16 +1359,6 @@ Internet-Draft   draft-ietf-ccamp-dwdm-if-param-yang-03       March 2020
               Managed Objects for the Optical Interface Type", RFC 3591,
               DOI 10.17487/RFC3591, September 2003,
               <https://www.rfc-editor.org/info/rfc3591>.
-
-
-
-
-
-
-G. Galimberti, et al.  Expires September 10, 2020              [Page 22]
-
-Internet-Draft   draft-ietf-ccamp-dwdm-if-param-yang-03       March 2020
-
 
    [RFC6205]  Otani, T., Ed. and D. Li, Ed., "Generalized Labels for
               Lambda-Switch-Capable (LSC) Label Switching Routers",
@@ -1268,6 +1394,14 @@ Appendix A.  Change Log
    Note to RFC Editor: please remove this appendix before publication as
    an RFC.
 
+
+
+
+G. Galimberti, et al.   Expires January 13, 2022               [Page 25]
+
+Internet-Draft   draft-ietf-ccamp-dwdm-if-param-yang-06        July 2021
+
+
 Appendix B.  Open Issues
 
    Note to RFC Editor: please remove this appendix before publication as
@@ -1281,15 +1415,6 @@ Appendix C.  Applicability examples
 
    In OpenROADM MSA there is a limited number of DWDM interfaces
    supported.  Basically only the 100G Staircase FEC and 400G oFEC are
-
-
-
-
-G. Galimberti, et al.  Expires September 10, 2020              [Page 23]
-
-Internet-Draft   draft-ietf-ccamp-dwdm-if-param-yang-03       March 2020
-
-
    supported and these two kind of interfaces can be easily summarized
    with the "mode-id" and the "application-identifier" strings.
 
@@ -1322,6 +1447,17 @@ Internet-Draft   draft-ietf-ccamp-dwdm-if-param-yang-03       March 2020
 
 Authors' Addresses
 
+
+
+
+
+
+
+G. Galimberti, et al.   Expires January 13, 2022               [Page 26]
+
+Internet-Draft   draft-ietf-ccamp-dwdm-if-param-yang-06        July 2021
+
+
    Gabriele Galimberti (editor)
    Cisco
    Via Santa Maria Molgora, 48 c
@@ -1330,20 +1466,6 @@ Authors' Addresses
 
    Phone: +390392091462
    Email: ggalimbe@cisco.com
-
-
-
-
-
-
-
-
-
-
-
-G. Galimberti, et al.  Expires September 10, 2020              [Page 24]
-
-Internet-Draft   draft-ietf-ccamp-dwdm-if-param-yang-03       March 2020
 
 
    Ruediger Kunze
@@ -1387,14 +1509,4 @@ Internet-Draft   draft-ietf-ccamp-dwdm-if-param-yang-03       March 2020
 
 
 
-
-
-
-
-
-
-
-
-
-
-G. Galimberti, et al.  Expires September 10, 2020              [Page 25]
+G. Galimberti, et al.   Expires January 13, 2022               [Page 27]
