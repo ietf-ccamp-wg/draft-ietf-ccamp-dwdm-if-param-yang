@@ -1,0 +1,1632 @@
+<?xml version="1.0" encoding="US-ASCII"?>
+<!-- this is version 0 of this xml2rfc template, and was used to generate the text templates found in draft-harrington-text-mib-doc-template-04.txt -->
+<!--
+    DOCTYPE processing
+
+To use this XML template, the rfc2629.dtd from the xml2rfc distribution should
+be in the local directory. The xml2rfc distribution is available from
+http://xml.resource.org/
+
+ The ENTITY clauses create an include of the named XML files, which
+contains references written in xml2rfc format.
+
+ XML2RFC offers an include feature described in the XML2RFC README
+  file.  That syntax, however, contradicts the DTD requirements to
+  have <reference> elements within the <references> element, so an
+  XML parser is likely to find your XML file invalid.  It may be
+  possible that XML2RFC will change their DTD so that the XML file
+  remains valid when their style of include is used.
+
+Some editors, such as XXE, resolve the ENTITY clauses before displaying the
+document to be edited.
+-->
+<!DOCTYPE rfc SYSTEM "rfc2629.dtd" [
+<!ENTITY rfc2863 SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.2863.xml">
+<!ENTITY rfc2119 SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.2119.xml">
+<!ENTITY rfc2578 SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.2578.xml">
+<!ENTITY rfc2579 SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.2579.xml">
+<!ENTITY rfc2580 SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.2580.xml">
+<!ENTITY rfc2629 SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.2629.xml">
+<!ENTITY rfc3410 SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.3410.xml">
+<!ENTITY rfc4181 SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.4181.xml">
+<!ENTITY rfc3591 SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.3591.xml">
+<!ENTITY rfc6205 SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.6205.xml">
+<!ENTITY rfc4054 SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.4054.xml">
+]>
+
+<?rfc toc="yes"?>
+<?rfc symrefs="yes"?>
+<?rfc compact="yes"?>
+<?rfc subcompact="no"?>
+<?rfc strict="no"?>
+<?rfc rfcedstyle="no"?>
+<?rfc comments="no"?>
+<?rfc inline="yes"?>
+
+<!-- Document  section
+
+Specify the category attribute per RFC2026
+options are info, std, bcp, or exp.
+
+docname is the name of the output document. This is optional;
+the default is to use the base portion of the XML file name.
+
+For Internet-drafts, indicate which intellectual property notice
+to use per the rules of RFC3978. The value (as of this template) can be:
+    full3978 -
+    noModification3978 -
+    noDerivatives3978 -
+ The Intellectual Property section will be generated automatically by
+  XML2RFC, based on the ipr attribute in the rfc element.
+
+If this document obsoletes an RFC, specify the RFC in the "obsoletes" attribute
+If this document updates an RFC, specify the RFC in the "updates" attribute
+-->
+<rfc category="exp" docName="draft-ietf-ccamp-dwdm-if-param-yang-07" ipr="trust200902">
+  <front>
+    <!--
+Enter the full document title and an abbreviated version
+  to use in the page header.
+-->
+
+    <title abbrev="draft-ietf-ccamp-dwdm-if-param-yang-07">  A YANG model to manage
+    the optical interface parameters for an external transponder in a WDM network
+    </title>
+
+    <!-- copy the author block as many times as needed, one for each author.-->
+
+    <!-- If the author is acting as editor, use the <role=editor> attribute-->
+
+    <!-- see RFC2223 for guidelines regarding author names -->
+
+    <author fullname="Gabriele Galimberti" role="editor"
+            surname="G. Galimberti">
+      <organization>Cisco</organization>
+
+      <address>
+        <postal>
+          <street>Via Santa Maria Molgora, 48 c</street>
+
+          <city>20871 - Vimercate</city>
+
+          <country>Italy</country>
+        </postal>
+
+        <phone>+390392091462</phone>
+
+        <email>ggalimbe@cisco.com</email>
+      </address>
+    </author>
+
+      <author fullname="Ruediger Kunze"
+            surname="R. Kunze">
+      <organization>Deutsche Telekom</organization>
+
+      <address>
+        <postal>
+          <street>Winterfeldtstr. 21-27</street>
+
+          <city>10781 Berlin</city>
+
+          <country>Germany</country>
+        </postal>
+
+        <phone>+491702275321</phone>
+
+        <email>RKunze@telekom.de</email>
+      </address>
+    </author>
+
+      <author fullname="Andreas Burk"
+            surname="A. Burk">
+      <organization>Deutsche Telekom</organization>
+
+      <address>
+        <postal>
+          <street></street>
+
+          <city></city>
+
+          <country>Germany</country>
+        </postal>
+
+        <phone>+49</phone>
+
+        <email>andreas.burk@telekom.de</email>
+      </address>
+    </author>
+
+        <author fullname="Dharini Hiremagalur" role="editor"
+            surname="D. Hiremagalur">
+      <organization>Juniper</organization>
+
+      <address>
+         <postal>
+         <street> 1133 Innovation Way</street>
+          <city>Sunnyvale - 94089 California</city>
+          <country>USA</country>
+        </postal>
+
+        <phone></phone>
+
+        <email>dharinih@juniper.net</email>
+      </address>
+    </author>
+
+
+       <author fullname="Gert Grammel" initials="G" role="editor"
+            surname="Grammel">
+      <organization>Juniper</organization>
+      <address>
+        <postal>
+              <street> Oskar-Schlemmer Str. 15</street>
+          <city>80807 Muenchen</city>
+          <country>Germany</country>
+        </postal>
+
+        <phone>+49 1725186386</phone>
+
+        <email>ggrammel@juniper.net</email>
+      </address>
+    </author>
+
+
+
+
+    <!-- month and day will be generated automatically by XML2RFC;
+be sure the year is current.-->
+
+    <date month="January" year="2022" />
+
+    <!-- IETF area is optional -->
+
+    <area>Operations &amp; Management Area</area>
+
+    <!--WG name at the upper left corner of the doc,
+IETF is fine for non-WG IETF submissions -->
+
+    <workgroup>Internet Engineering Task Force</workgroup>
+
+    <keyword>Network Management</keyword>
+
+    <keyword>External transponder in a WDM network Yang model</keyword>
+
+    <keyword>Yang</keyword>
+
+    <!--add additional keywords here for IETF website search engine -->
+<abstract>
+
+<t>
+   This memo defines a Yang model related to the Optical Transceiver
+   parameters characterising coherent 100G and above interfaces.
+   100G and above Transceivers support coherent modulation, multiple
+   modulation formats, multiple FEC codes including some not yet specified
+   (or by in phase of specification by)
+   ITU-T G.698.2 <xref target="ITU.G698.2"/> or any other ITU-T
+   recommendation.
+   Use cases are described in RFC7698.
+ </t>
+<t> The Yang model defined in this memo can be used for Optical Parameters
+   monitoring and/or configuration of the endpoints of a multi-vendor
+   IaDI optical link.
+   The use of this model does not guarantee interworking of transceivers
+   over a DWDM. Optical path feasibility and interoperability has to be
+   determined by tools and algorithms outside the scope of this document.
+   The purpose of this model is to program interface parameters to 
+   consistently configure the mode of operation of transceivers.
+</t>
+
+</abstract>
+
+<note title="Copyright Notice">
+
+ <t> Copyright (c) 2014 IETF Trust and the persons identified as the
+   document authors.  All rights reserved.
+ </t>
+
+   </note>
+
+   </front>
+
+  <middle>
+
+    <section title="Introduction">
+      <!--You can echo the abstract in the Introduction, providing citations here,
+but you should provide more than just the abstract. -->
+
+      <t>This memo defines a Yang model that translates and obsolete
+   the SNMP mib module
+   defined in draft-galikunze-ccamp-dwdm-if-snmp-mib for managing single
+   channel optical interface parameters of DWDM applications, using the
+   approach specified in G.698.2.
+   This model supports parameters to characterize coherent transceivers found in
+   current implementations to specify the mode of operation.
+   As application identifiers like those specified in
+   ITU-T G.874 <xref target="ITU.G874"/> ITU-T G.698.2 <xref target="ITU.G698.2"/>
+   may not be available we use mode templates instead. 
+   A mode template describes transceiver characteristics in
+   detail and can be identified by a mode-id.
+   </t>
+
+<t>This draft refers and supports the RFC7698.
+</t>
+
+  <t> The YANG model describing and extending the optical
+   parameters allows different vendors and operators to retrieve, provision and
+   exchange information across the multi-vendor IaDI interfaces in an
+   abstract manner.
+</t>
+
+   <t> The concept introduced by this YANG model is the notion of a mode.
+     A mode is a combination of parameters or parameter ranges that is supported
+     by a transceiver. As an example, operating a device in QPSK mode may use
+     a different FEC and requires less OSNR to reach the FEC limit than the same
+     transceiver operating in QAM16 mode. Given the number of parameters and
+     their possible combinations it is important for vendors to be able to
+     qualify a set of combinations which is the basis to define a mode.
+     The YANG model furthermore provides means to select one mode as
+     current-mode from that pre-defined list of modes supported by the
+     transceiver module.
+     Once selected, current-opt-if-och-mode-params provide the means to configure
+     specific parameters at run time and retrieve actual parameters from the
+     module. For example, the frequency is a parameter that can be set within
+     min/max boundaries set by the current mode. Laser Temperature however
+     is a ro parameter available at run-time that can be checked against the
+     mode boundaries and may trigger an event. </t>
+
+
+    </section>
+    <section title="The Internet-Standard Management Framework">
+    <t><cref>The title and text for this section has been copied from the
+    official boilerplate, and should not be modified unless the boilerplate text
+    at http;//ops.ietf.org/mib-boilerplate.html has changed. See RFC4818
+    section 3.1 for a discussion of the boilerplate section.</cref></t>
+
+    <t>For a detailed overview of the documents that describe the current
+    Internet-Standard Management Framework, please refer to section 7 of RFC
+    3410 <xref target="RFC3410"></xref>.</t>
+
+      <t> This memo specifies a Yang model for optical interfaces. </t>
+    </section>
+
+
+    <section title="Conventions">
+    <t><cref>[TEMPLATE TODO] This boilerplate should be used if the
+    RFC2119 key words are used in the internet draft. The text in
+    this section has been copied from the official boilerplate, and
+    should not be modified. </cref></t>
+
+     <t>The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL
+      NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and
+     "OPTIONAL" in this document are to be interpreted as described
+     in RFC 2119 <xref target="RFC2119"></xref> In the description of
+     OIDs the convention: Set (S) Get (G) and Trap (T) conventions
+     will describe the action allowed by the parameter.</t>
+    </section>
+
+    <!-- ********************************************* -->
+    <section title="Overview">
+
+     <t><cref>[TEMPLATE TODO] The narrative part should include an
+     overview section that describes the scope and field of application
+     of the MIB modules defined by the specification. See RFC4181
+     section 3.2 for a discussion of the Narrative section. </cref></t>
+
+
+   <figure anchor="my_figure" title="External transponder in WDM netwoks">
+<preamble> <xref target="my_figure"/> shows a set of reference points, for
+   single-channel connection between transmitters (Tx) and receivers (Rx).
+   Here the DWDM  network elements include an OM (Optical Multiplexer) 
+   and an OD (Optical Demultiplexer) which are used
+   as a pair with the opposing element, one or more optical amplifiers
+   and may also include one or more OADMs. </preamble>
+<artwork><![CDATA[
+     Ss +-------------------------------------------------+ Rs
+      | |              DWDM Network Elements              | |
++---+ | |  | \                                       / |  | | +---+
+Tx L1---|->|   \    +------+            +------+   /   |--|-->Rx L1
++---+   |  |    |   |      |  +------+  |      |  |    |  |   +---+
++---+   |  |    |   |      |  |      |  |      |  |    |  |   +---+
+Tx L2---|->| OM |-->|------|->|ROADM |--|------|->| OD |--|-->Rx L2
++---+   |  |    |   |      |  |      |  |      |  |    |  |   +---+
++---+   |  |    |   |      |  +------+  |      |  |    |  |   +---+
+Tx L3---|->|   /    | DWDM |    |  ^    | DWDM |   \   |--|-->Rx L3
++---+   |  | /      | Link +----|--|----+ Link |     \ |  |   +---+
+        +-----------+           |  |           +----------+
+                             +--+  +--+
+                             |        |
+                          Rs v        | Ss
+                          +-----+  +-----+
+                          |RxLx |  |TxLx |
+                          +-----+  +-----+
+
+Ss = reference point at the DWDM network element tributary output
+Rs = reference point at the DWDM network element tributary input
+Lx = Lambda x
+OM = Optical Mux
+OD = Optical Demux
+ROADM = Reconfigurable Optical Add Drop Mux
+]]></artwork>
+<postamble> from Fig. 5.1/G.698.2 </postamble>
+</figure>
+
+
+    <section title="Optical Parameters Description">
+   <t>The link between the external transponders through a WDM network media
+     channels are managed at the edges, i.e. at the transmitters (Tx) and
+     receivers (Rx) attached to the S and R reference points respectively.
+   </t>
+
+   <t>Definitions of the optical parameters are provided below to
+   increase the readability of the document.</t>
+
+
+    <section title="Parameters at Ss ">
+
+   <t>
+      <list style='hanging'>
+
+   <t hangText="output-power:"> <vspace blankLines="0" />
+   The mean launched power at Ss is the average power (in dBm) of a
+   pseudo-random data sequence coupled into the DWDM link.</t>
+
+   <t hangText="central frequency:"> <vspace blankLines="0" />
+   This parameter indicates the Central frequency value that Ss and Rs will be
+   set to work (in THz)</t>
+
+   </list>
+   </t>
+
+</section>
+
+
+    <section title="Interface at point Rs ">
+<t>
+
+<list style='hanging'>
+
+   <t hangText="input-power:"> <vspace blankLines="0" />
+   The  average received power (in dBm) at point Rs.</t>
+
+   <t hangText="Curr-OSNR:"> <vspace blankLines="0" />
+   Current Optical Signal to Noise Ratio (OSNR) estimated at Rx Transceiver port. </t>
+
+   <t hangText="Curr-q-factor:"> <vspace blankLines="0" />
+   "Q" factor estimated at Rx Transceiver port. </t>
+
+</list>
+ </t>
+
+</section>
+
+ </section>
+
+
+ <section title="Use Cases">
+    <!--You can echo the abstract in the Introduction, providing citations here,
+   but you should provide more than just the abstract. -->
+   <t>
+   The use cases are described in
+   draft-ietf-ccamp-dwdm-if-mng-ctrl-fwk </t>
+
+</section>
+
+  <section title="Optical Interface for external transponder in a WDM network">
+     <t>
+    The ietf-ext-xponder-wdm-if is an augment to the ietf-interface. It
+    allows the  user to set the operating mode of transceivers as well as other
+    operational parameters.
+    The module provides also treshold settings and notifications to supervise
+    measured parameters and notify the client.
+  </t>
+   <figure align='left'>
+     <artwork><![CDATA[
+module: ietf-ext-xponder-wdm-if
+  augment /if:interfaces/if:interface:
+    +--rw optIfOChRsSs
+       +--ro if-current-mode
+       |  +--ro mode-id?                          string
+       |  +--ro (mode)
+       |     +--:(G.698.2)
+       |     |  +--ro standard-mode?          standard-mode
+       |     +--:(organizational-mode)
+       |     |  +--ro organizational-mode
+       |     |     +--ro operational-mode?
+       |     |     |       operational-mode
+       |     |     +--ro organization-identifier?
+       |     |     |       organization-identifier
+       |     |     +--ro min-central-frequency?
+       |     |     |       frequency-thz
+       |     |     +--ro max-central-frequency?
+       |     |     |       frequency-thz
+       |     |     +--ro minimum-channel-spacing?
+       |     |     |       frequency-ghz
+       |     |     +--ro tx-channel-power-min?      dbm-t
+       |     |     +--ro tx-channel-power-max?      dbm-t
+       |     |     +--ro rx-channel-power-min?      dbm-t
+       |     |     +--ro rx-channel-power-max?      dbm-t
+       |     |     +--ro rx-total-power-max?
+       |     +--:(explicit-mode)
+       |        +--ro explicit-mode
+       |           +--ro supported-modes
+       |           |  +--ro supported-application-codes*
+       |           |  |       -> ../../../mode-id
+       |           |  +--ro supported-organizational-modes*
+       |           |  |       -> ../../../mode-id
+       |           +--ro line-coding-bitrate?
+       |           |       identityref
+       |           +--ro min-central-frequency?     
+       |           |        layer0-types:frequency-thz
+       |           +--ro max-central-frequency?     
+       |           |      layer0-types:frequency-thz
+       |           +--ro min-channel-input-power?          dbm-t
+       |           +--ro max-channel-input-power?          dbm-t
+       |           +--ro min-channel-output-power?         dbm-t
+       |           +--ro max-channel-output-power?         dbm-t
+       |           +--ro osnr-margin?                      int32
+       |           +--ro q-margin?                         int32
+       |           +--ro fec-info?                         string
+       |           +--ro fec-bitrate?                      string
+       |           +--ro fec-gain?                         string
+       |           +--ro pre-fec-ber-mantissa-threshold?   uint32
+       |           +--ro pre-fec-ber-exponent-threshold?   int32
+       |           +--ro number-of-lanes?                  uint32
+       |           +--ro min-laser-temperature?            int32
+       |           +--ro max-laser-temperature?            int32
+       |           +--ro max-total-rx-optical-power?       dbm-t
+       |           +--ro chromatic-and-polariz-disp-penal* []
+       |           |  +--ro chromatic-dispersion
+       |           |  |       decimal64
+       |           |  +--ro polarization-mode-dispersion
+       |           |  |       decimal64
+       |           |  +--ro penalty
+       |           |          decimal64
+       |           +--ro max-chromatic-dispersion?         int32
+       |           +--ro max-diff-group-delay?             int32
+       |           +--ro max-polarization-dependent-loss?
+       |           |          decimal64
+       |           +--ro modulation-format?                string
+       |           +--ro baud-rate?                        uint32
+       |           +--ro bits-per-symbol?                  uint32
+       |           +--ro num-symbols-in-alphabet?          uint32
+       |           +--ro symbols-index?                    uint32
+       +--ro if-supported-mode
+       |  +--ro number-of-modes-supported?        uint32
+       +--rw if-supported-modes*
+       |  |  +--ro mode-id?                          string
+       |  +--ro (mode)
+       |     +--:(G.698.2)
+       |     |  +--ro standard-mode?          standard-mode
+       |     +--:(organizational-mode)
+       |     |  +--ro organizational-mode
+       |     |     +--ro operational-mode?
+       |     |     |       operational-mode
+       |     |     +--ro organization-identifier?
+       |     |     |       organization-identifier
+       |     |     +--ro min-central-frequency?
+       |     |     |       frequency-thz
+       |     |     +--ro max-central-frequency?
+       |     |     |       frequency-thz
+       |     |     +--ro minimum-channel-spacing?
+       |     |     |       frequency-ghz
+       |     |     +--ro tx-channel-power-min?      dbm-t
+       |     |     +--ro tx-channel-power-max?      dbm-t
+       |     |     +--ro rx-channel-power-min?      dbm-t
+       |     |     +--ro rx-channel-power-max?      dbm-t
+       |     |     +--ro rx-total-power-max?
+       |     +--:(explicit-mode)
+       |        +--ro explicit-mode
+       |           +--ro supported-modes
+       |           |  +--ro supported-application-codes*
+       |           |  |       -> ../../../mode-id
+       |           |  +--ro supported-organizational-modes*
+       |           |  |       -> ../../../mode-id
+       |           +--ro line-coding-bitrate?
+       |           |  |       identityref
+       |           +--ro min-central-frequency?     
+       |           |  |       layer0-types:frequency-thz
+       |           +--ro max-central-frequency?     
+       |           |  |       layer0-types:frequency-thz
+       |           +--ro min-channel-input-power?          dbm-t
+       |           +--ro max-channel-input-power?          dbm-t
+       |           +--ro min-channel-output-power?         dbm-t
+       |           +--ro max-channel-output-power?         dbm-t
+       |           +--ro osnr-margin?                      int32
+       |           +--ro q-margin?                         int32
+       |           +--ro fec-info?                         string
+       |           +--ro fec-bitrate?                      string
+       |           +--ro fec-gain?                         string
+       |           +--ro pre-fec-ber-mantissa-threshold?   uint32
+       |           +--ro pre-fec-ber-exponent-threshold?   int32
+       |           +--ro number-of-lanes?                  uint32
+       |           +--ro min-laser-temperature?            int32
+       |           +--ro max-laser-temperature?            int32
+       |           +--ro max-total-rx-optical-power?       dbm-t
+       |           +--ro chromatic-and-polariz-disp-penal* []
+       |           |  +--ro chromatic-dispersion
+       |           |  |       decimal64
+       |           |  +--ro polarization-mode-dispersion
+       |           |  |       decimal64
+       |           |  +--ro penalty
+       |           |  |       decimal64
+       |           +--ro max-chromatic-dispersion?         int32
+       |           +--ro max-diff-group-delay?             int32
+       |           +--ro max-polarization-dependent-loss?
+       |           |          decimal64
+       |           +--ro modulation-format?                string
+       |           +--ro baud-rate?                        uint32
+       |           +--ro bits-per-symbol?                  uint32
+       |           +--ro num-symbols-in-alphabet?          uint32
+       |           +--ro symbols-index?                    uint32
+       +--rw provisioning-opt-if-och-mode-params
+          +--rw provisioning-opt-if-och-mode-params
+             +--rw mode-id?                          string
+             +--rw (mode)
+             +--rw central-frequency?         
+             |           layer0-types:frequency-thz
+             +--rw channel-output-power?             dbm-t
+             +--ro channel-input-power?              dbm-t
+             +--ro total-input-power?                dbm-t
+             +--rw number-of-tcas-supported?         uint32
+             +--rw mode-list* [tca-type]
+             |  +--rw tca-type         opt-if-och-tca-types
+             |  +--rw min-threshold?   int32
+             |  +--rw max-threshold?   int32
+             +--ro cur-osnr?                         int32
+             +--ro cur-q-factor?                     int32
+             +--ro uncorrected-words?                uint64
+             +--ro pre-fec-ber-mantissa?             uint32
+             +--ro pre-fec-ber-exponent?             int32
+             +--ro cd-pmd-penalty                  
+             |          layer0-types:cd-pmd-penalty
+             +--ro pdl-penalty                     
+             |          layer0-types:pdl-penalty
+             +--ro diff-group-delay                  int32
+             +--rw explicit-mode-provisioning
+                +--rw fec                               string
+                +--rw pre-fec-ber-mantissa-threshold?   uint32
+                +--rw pre-fec-ber-exponent-threshold?   int32
+                +--rw number-of-lanes?                  uint32
+                +--rw modulation-format?                string
+                +--rw baud-rate?                        uint32
+                +--rw bits-per-symbol?                  uint32
+                +--rw num-symbols-in-alphabet?          uint32
+                +--rw symbols-index?                    uint32
+
+
+
+
+  notifications:
+    +---n opt-if-och-central-frequency-change
+    |  +--ro if-name?               -> /if:interfaces/interface/name
+    |  +--ro new-opt-if-och-central-frequency
+    |     +--ro central-frequency?   layer0-types:frequency-thz
+    +---n opt-if-och-mode-change
+    |  +--ro if-name?   -> /if:interfaces/interface/name
+    |  +--ro mode-id?   string
+    +---n opt-if-och-min-tca
+       +--ro if-name?    -> /if:interfaces/interface/name
+       +--ro tca-type?   opt-if-och-tca-types
+    ]]></artwork>
+    </figure>
+
+
+    </section>
+
+  </section>
+
+
+    <section title="Structure of the Yang Module">
+
+    <t>ietf-ext-xponder-wdm-if is a top level model for the support
+       of this feature.
+       </t>
+
+
+      </section>
+
+       <section title="Yang Module">
+
+        <t>The ietf-ext-xponder-wdm-if is defined as an extension to
+           ietf interfaces.
+        </t>
+
+       <figure align='left'>
+
+    <artwork><![CDATA[
+
+<CODE BEGINS> file "ietf-ext-xponder-wdm-if.yang"
+
+module ietf-ext-xponder-wdm-if {
+  namespace "urn:ietf:params:xml:ns:yang:ietf-ext-xponder-wdm-if";
+  prefix ietf-ext-xponder-wdm-if;
+
+  import ietf-interfaces {
+    prefix if;
+  }
+
+  import ietf-layer0-types {
+    prefix "l0-types";
+  }
+
+  import ietf-layer0-types-ext {
+    prefix "l0-types-ext";
+  }
+
+  organization
+    "IETF CCAMP
+    Working Group";
+
+  contact
+    "WG Web:   <http://tools.ietf.org/wg/ccamp/>
+     WG List:  <mailto:ccamp@ietf.org>
+
+
+     Editor:   Dharini Hiremagalur
+               <mailto:dharinih@juniper.net>";
+
+  description
+    "This module contains a collection of YANG definitions for
+     configuring Optical interfaces.
+
+     Copyright (c) 2016 IETF Trust and the persons identified
+     as authors of the code.  All rights reserved.
+
+     Redistribution and use in source and binary forms, with or
+     without modification, is permitted pursuant to, and
+     subject to the license terms contained in, the Simplified
+     BSD License set forth in Section 4.c of the IETF Trust's
+     Legal Provisions Relating to IETF Documents
+     (http://trustee.ietf.org/license-info).";
+
+  revision "2022-01-10" {
+    description
+      "Revision 1.7";
+    reference
+      "";
+    }
+
+  revision "2021-06-28" {
+    description
+      "Revision 1.6";
+    reference
+      "";
+    }
+
+  revision "2020-03-09" {
+    description
+      "Revision 1.5";
+    reference
+      "";
+    }
+
+  revision "2019-11-04" {
+    description
+      "Revision 1.4";
+    reference
+      "";
+    }
+
+  revision "2019-07-08" {
+    description
+      "Revision 1.3";
+    reference
+      "";
+    }
+    revision "2018-10-22" {
+      description
+        "Revision 1.2";
+      reference
+        "";
+    }
+    revision "2018-03-06" {
+      description
+        "Revision 1.1";
+      reference
+        "";
+    }
+    revision "2017-03-06" {
+      description
+        "Revision 1.0";
+      reference
+        "";
+    }
+    revision "2016-03-17" {
+      description
+        "Initial revision.";
+      reference
+        "";
+    }
+
+    
+]]></artwork>
+
+</figure>
+
+<figure align='left'>
+
+
+    <artwork><![CDATA[
+
+
+    typedef dbm-t {
+        type int32;
+        units ".01dbm";
+      
+      description "
+        Amplifiers and Transceivers Power in dBm";
+    }
+
+
+    typedef opt-if-och-tca-types {
+      type enumeration {
+        enum max-laser-linewdt {
+          description "The maximum laser linewidth";
+        }
+        enum min-tx-power-tca {
+          description "The min tx power TCA";
+        }
+        enum max-tx-power-tca {
+          description "The min tx power TCA";
+        }
+        enum min-rx-power-tca{
+          description "The min tx power TCA";
+        }
+        enum max-rx-power-tca{
+          description "The min tx power TCA";
+        }
+        enum max-pol-power-diff-tca{
+          description "The power difference between polarization
+          TCA";
+        }
+        enum max-pol-skew-diff-tca{
+          description "The skew between the two polarization TCA";
+        }
+        enum min-frequency-offset-tca{
+          description "Min Frequency offset TCA";
+        }
+        enum max-frequency-offset-tca{
+          description "Max Frequency offset TCA";
+        }
+        enum min-osnr-tca{
+          description "Min OSNR TCA";
+        }
+        enum max-osnr-tca{
+          description "Max OSNR TCA";
+        }
+        enum min-laser-temperature-tca{
+          description "The min tx power TCA";
+        }
+        enum max-laser-temperature-tca{
+          description "Temperature TCA";
+        }
+        enum min-fec-ber-tca{
+          description "Min Pre Fec BER TCA";
+        }
+        enum max-fec-ber-tca{
+          description "Max Pre Fec BER TCA";
+        }
+        enum min-q-tca{
+          description "Min Q TCA";
+        }
+        enum max-q-tca {
+          description "Max Q TCA";
+        }
+      }
+      description "The different types of TCA's";
+    }
+
+    grouping opt-if-och-power {
+      description "Interface optical Power";
+
+      leaf channel-output-power {
+        type dbm-t;
+        description "The output power for this interface in .01 dBm.
+                     The setting of the output power is optional";
+      }
+
+      leaf channel-input-power {
+        type dbm-t;
+        config false;
+        description "The current channel input power of this
+        interface";
+      }
+
+      leaf total-input-power {
+        type dbm-t;
+        config false;
+        description "The total input power of this interface";
+      }
+    }
+
+    grouping opt-if-och-tca-thresholds {
+      description "Thresholds for TCA's";
+      leaf  tca-type {
+        type opt-if-och-tca-types;
+        description  "type of the TCA eg TX Power";
+      }
+      leaf  min-threshold {
+        type int32;
+        description "A TCA is generated if the variable is less than
+                     this value";
+      }
+      leaf  max-threshold {
+        type int32;
+        description "A TCA is generated if the variable is more than
+                     this value";
+      }
+    }
+
+    grouping opt-if-och-fec {
+      description "FEC info";
+
+      leaf fec-info {
+        type string { length "1..255"; }
+        config false;
+        description "FEC Type - eg GFEC";
+      }
+      leaf fec-bitrate {
+        type string { length "1..255"; }
+        config false;
+        description "FEC Overhead rate ";
+      }
+      leaf fec-gain {
+        type string { length "1..255"; }
+        config false;
+        description "FEC Overhead rate ";
+      }
+      leaf  pre-fec-ber-mantissa-threshold {
+        type uint32;
+        description "Mantissa of the FEC BER threshold";
+      }
+      leaf  pre-fec-ber-exponent-threshold {
+        type int32;
+        description "Exponent of the FEC BER threshold";
+      }
+    }
+
+    grouping opt-if-och-central-frequency {
+      description "Interface Central Frequency";
+      leaf  central-frequency {
+        type layer0-types:frequency-thz;
+        description "This parameter indicates the frequency of this
+                     interface ";
+      }
+    }
+
+    grouping opt-if-och-modulation-params {
+      description "Optical modulation parameters for the lane";
+
+      leaf modulation-format {
+        type string { length "1..255"; }
+        config false;
+        description "Modulation format for this mode";
+      }
+      leaf baud-rate {
+        type uint32;
+        description "Baud-rate or symbol rate";
+      }
+      leaf  bits-per-symbol {
+        type uint32;
+        description "This parameter the bits per symbol for this
+        mode";
+      }
+      leaf  num-symbols-in-alphabet {
+        type uint32;
+        description "This parameter the bits per symbol for this
+        mode";
+      }
+      leaf  symbols-index {
+        type uint32;
+        description "This parameter is the symbol index this mode";
+      }
+    }
+
+    grouping opt-if-och-lane-param {
+      description "Optical parameters for the lane";
+
+      leaf number-of-lanes {
+        type  uint32;
+        config false;
+        description "Number of optical lanes of this interface";
+      }
+      leaf min-laser-temperature {
+        type  int32;
+        units ".01C";
+        config false;
+        description "Minimum Laser Temperature of this mode for
+                     this lane";
+      }
+      leaf max-laser-temperature {
+        type  int32;
+        units ".01C";
+        config false;
+        description "Maximum Laser Temperature of this mode for
+                     this lane";
+      }
+      leaf max-total-rx-optical-power {
+        type dbm-t;
+        config false;
+        description "Maximum rx optical power of this mode for this
+                     lane";
+      }
+      leaf max-chromatic-dispersion {
+        type int32;
+        config false;
+        description "Maximum chromatic dispersion of this mode for
+                     this lane";
+      }
+      leaf max-diff-group-delay  {
+        type int32;
+        config false;
+        description "Maximum Differential group delay of this mode
+                     for this lane";
+      }
+      uses opt-if-och-modulation-params;
+    }
+
+    grouping opt-if-och-tca-list {
+      description "List of TCA's";
+      leaf number-of-tcas-supported {
+        type uint32;
+        description "Number of TCAs supported by this interface";
+      }
+      list mode-list {
+        key "tca-type";
+        description "List of the TCAs";
+        uses opt-if-och-tca-thresholds;
+      }
+    }
+
+    grouping opt-if-och-fec-tca-thresholds {
+      description "Pre FEC BER Thresholds for TCA's";
+      leaf  min-fec-ber-mantissa-threshold {
+        type uint32;
+        description "Min Mantissa of the FEC BER threshold";
+      }
+      leaf  min-fec-ber-exponent-threshold {
+        type int32;
+        description "Min Exponent of the FEC BER threshold";
+      }
+      leaf  max-fec-ber-mantissa-threshold {
+        type uint32;
+        description "Max Mantissa of the FEC BER threshold";
+      }
+      leaf  max-fec-ber-exponent-threshold {
+        type int32;
+        description "Max Exponent of the FEC BER threshold";
+      }
+    }
+
+    grouping opt-if-och-mode-params  {
+      description "OCh mode parameters";
+      leaf mode-id {
+        type string { length "1..255"; }
+        description "ID for the OCh mode template";
+      }
+      leaf  min-osnr-margin {
+        type int32;
+        units "dB";
+        config false;
+        description "OSNR margin to FEC threshold";
+      }
+      leaf  q-margin {
+        type int32;
+        units "dB";
+        config false;
+        description "Q-Factor margin to FEC threshold";
+      }
+      uses opt-if-och-central-frequency;
+      uses opt-if-och-power;
+      uses opt-if-och-fec-tca-thresholds;
+      uses opt-if-och-tca-list;
+   }
+
+  grouping opt-if-och-statistics {
+    description "OCh statistics";
+    leaf  cur-osnr {
+      type int32;
+      units "dB";
+      config false;
+      description "OSNR margin to FEC threshold";
+    }
+    leaf  cur-q-factor {
+      type int32;
+      units "dB";
+      config false;
+      description "Q-Factor of the interface";
+    }
+    leaf  uncorrected-words {
+      type uint64;
+      config false;
+      description "Post-FEC errored words";
+    }
+    leaf  pre-fec-ber-mantissa {
+      type uint32;
+      config false;
+      description "Pre-FEC errored words mantissa";
+    }
+    leaf  pre-fec-ber-exponent {
+      type int32;
+      config false;
+      description "Pre-FEC errored words exponent";
+    }
+  }
+
+  grouping opt-if-och-mode  {
+    description "OCh mode template";
+
+    leaf mode-id {
+      type string { length "1..255"; }
+      config false;
+      description "ID for the OCh mode template";
+    }
+    leaf application-identifier {
+      type uint32;
+      config false;
+      description "This parameter indicates the application
+                   identifier according to G.698.2";
+    }
+
+
+    leaf min-central-frequency {
+      type layer0-types:frequency-thz;
+      config false;
+      description
+        "his parameter indicates the minimum frequency for
+                   this template";
+    }
+    leaf max-central-frequency {
+      type layer0-types:frequency-thz;
+      config false;
+      description "This parameter indicates the minimum frequency
+                   for this template";
+    }
+    leaf min-channel-input-power {
+      type dbm-t;
+      config false;
+      description "The minimum input power of this interface";
+    }
+    leaf max-channel-input-power {
+      type dbm-t;
+      config false;
+      description "The maximum input power of this interface";
+    }
+    leaf min-channel-output-power {
+      type dbm-t;
+      config false;
+      description "The minimum output power of this interface";
+    }
+    leaf max-channel-output-power {
+      type dbm-t;
+      config false;
+      description "The maximum output power of this interface";
+    }
+    leaf  osnr-margin {
+      type int32;
+      units "dB";
+      config false;
+      description "OSNR margin to FEC threshold";
+    }
+    leaf  q-margin {
+      type int32;
+      units "dB";
+      config false;
+      description "Q-Factor margin to FEC threshold";
+    }
+    uses opt-if-och-fec;
+    uses opt-if-och-lane-param;
+  }
+
+  grouping opt-if-och-mode-list {
+    description "List of Mode list group";
+
+    leaf number-of-modes-supported {
+      type uint32;
+      description "Number of modes supported by this interface";
+    }
+    list mode-list {
+      key "mode-id";
+      description "List of the modes";
+      uses opt-if-och-mode;
+    }
+  }
+
+  notification opt-if-och-central-frequency-change {
+    description "A change of Central Frequency has been detected";
+
+    leaf "if-name" {
+      type leafref { path "/if:interfaces/if:interface/if:name"; }
+      description "Interface name";
+    }
+    container new-opt-if-och-central-frequency {
+      description "The new Central Frequency of the interface";
+      uses opt-if-och-central-frequency;
+    }
+  }
+
+  notification opt-if-och-mode-change {
+    description "A change of Mode Template has been detected";
+
+    leaf "if-name" {
+      type leafref { path "/if:interfaces/if:interface/if:name"; }
+      description "Interface name";
+    }
+    leaf mode-id {
+      type string { length "1..255"; }
+      description  "ID for the OCh mode template";
+    }
+  }
+
+  notification opt-if-och-min-tca {
+    description "A min output TCA notification";
+
+    leaf "if-name" {
+      type leafref { path "/if:interfaces/if:interface/if:name"; }
+      description "Interface name";
+    }
+    leaf tca-type {
+      type opt-if-och-tca-types;
+      description "Type of TCA for eg min tx power TCA";
+    }
+  }
+
+  augment "/if:interfaces/if:interface" {
+    description "Parameters for an optical interface";
+
+    container optIfOChRsSs {
+      description "RsSs path configuration for an interface";
+
+      container if-current-mode {
+        description "Current mode template of the interface";
+        uses opt-if-och-mode;
+      }
+      container if-supported-mode {
+        config false;
+        description "Supported mode list of this interface";
+        uses opt-if-och-mode-list;
+      }
+      container current-opt-if-och-mode-params {
+        description "Current parameters of this interface";
+          uses opt-if-och-mode-params;
+          uses opt-if-och-statistics;
+      }
+    }
+  }
+}
+
+<CODE ENDS>
+
+        ]]></artwork>
+
+      </figure>
+
+    </section>
+
+
+    <section title="Security Considerations">
+
+
+
+<t>The YANG module defined in this memo is designed to be accessed via the NETCONF
+protocol [RFC6241]. he lowest NETCONF layer is the
+secure transport layer and the mandatory-to-implement secure transport is SSH [RFC6242].
+The NETCONF access control model [RFC6536] provides the means to restrict access for
+particular NETCONF users to a pre-configured subset of all available NETCONF protocol
+operation and content.</t>
+
+
+
+<t><cref>[TEMPLATE TODO] you should explicitly list by name any readable objects that
+are sensitive or vulnerable and the associated security risks should
+be spelled out (for instance, if they might reveal customer
+information or violate personal privacy laws such as those of the
+European Union if exposed to unathorized parties).</cref></t>
+
+
+
+<t><cref>[TEMPLATE TODO] The following three boilerplate paragraphs
+should not be changed without very good reason. Changes will almost
+certainly require justification during IESG review.</cref></t>
+
+
+    </section>
+
+    <section title="IANA Considerations">
+
+<t><cref>[TEMPLATE TODO] In order to comply with IESG policy as set forth in
+http://www.ietf.org/ID-Checklist.html, every Internet-Draft that is
+submitted to the IESG for publication MUST contain an IANA
+Considerations section. The requirements for this section vary depending
+what actions are required of the IANA. See "Guidelines for Writing an IANA
+Considerations Section in RFCs" [RFC2434]. and see [RFC4181] section 3.5 for more
+information on writing an IANA clause for a MIB module internet draft.</cref></t>
+
+    <t>This document registers a URI in the IETF XML registry [RFC3688]. Following the
+         format in [RFC3688], the following registration is requested to be made:</t>
+
+    <t>URI: urn:ietf:params:xml:ns:yang:ietf-interfaces:ietf-ext-xponder-wdm-if</t>
+    <t>Registrant Contact: The IESG.</t>
+
+    <t>XML: N/A, the requested URI is an XML namespace.</t>
+
+    <t>This document registers a YANG module in the YANG Module Names
+       registry [RFC6020].</t>
+
+    <t>This document registers a YANG module in the YANG Module Names
+       registry [RFC6020].</t>
+
+    <t>prefix: ietf-ext-xponder-wdm-if reference: RFC XXXX</t>
+    </section>
+
+    <!-- The Author's Addresses section will be generated automatically by XML2RFC
+    from the front information. -->
+
+   <section title="Acknowledgements">
+  <t>  
+  </t></section>
+
+    <section title="Contributors">
+        <figure align='left'>
+        <artwork><![CDATA[
+            Dean Bogdanovic
+              Westford
+              U.S.A.
+              email ivandean@gmail.com
+
+            Bernd Zeuner
+              Deutsche Telekom
+              Darmstadt
+              Germany
+              email B.Zeuner@telekom.de
+              
+            Massimiliano Salsi
+              Juniper Networks
+              1133 Innovation Way
+              Sunnyvale, CA, 94089
+              U.S.A.
+              +1 408936847
+              email msalsi@google.com
+
+            Arnold Mattheus
+              Deutsche Telekom
+              Darmstadt
+              Germany
+              email a.mattheus@telekom.de
+
+            Manuel Paul
+              Deutsche Telekom
+              Berlin
+              Germany
+              email Manuel.Paul@telekom.de
+
+            Walid Wakim
+              Cisco
+              9501 Technology Blvd
+              ROSEMONT, ILLINOIS 60018
+              UNITED STATES
+              email wwakim@cisco.com
+
+            Kam Lam
+              Nokia
+              USA
+              +1 732 331 3476
+              kam.lam@nokia.com
+
+            Sergio Belotti
+              Nokia
+              Via Energy Park
+              20871 Vimercate (MB)
+              Italy
+              Sergio.belotti@nokia.com
+
+     ]]></artwork>
+      </figure>
+
+    </section>
+
+</middle>
+<back>
+
+    <!-- References Section -->
+
+    <!-- Section 4.7f of [RFC2223bis] specifies the requirements for the
+   references sections.  In particular, there MUST be separate lists of
+   normative and informative references, each in a separate section.
+   The style SHOULD follow that of recently published RFCs.
+
+   The standard MIB boilerplate available at
+   http://www.ops.ietf.org/mib-boilerplate.html includes lists of
+   normative and informative references that MUST appear in all IETF
+   specifications that contain MIB modules.  If items from other MIB
+   modules appear in an IMPORTS statement in the Definitions section,
+   then the specifications containing those MIB modules MUST be included
+   in the list of normative references.  When items are imported from an
+   IANA-maintained MIB module the corresponding normative reference
+   SHALL point to the on-line version of that MIB module.  It is the
+   policy of the RFC Editor that all references must be cited in the
+   text;  such citations MUST appear in the overview section where
+   documents containing imported definitions (other than those already
+   mentioned in the MIB boilerplate) are required to be mentioned (cf.
+   Section 3.2).
+
+In general, each normative reference SHOULD point to the most recent
+version of the specification in question.
+-->
+
+    <references title="Normative References">
+        <!-- [TEMPLATE TODO] rfc2119, 2578, 2579, and 2580 are required to support MIB
+      module boilerplate text. -->
+
+      &rfc2863;
+
+      &rfc2119;
+
+      &rfc2578;
+
+      &rfc2579;
+
+      &rfc2580;
+
+      &rfc3591;
+
+      &rfc6205;
+      
+
+     <reference anchor="ITU.G698.2">
+     <front>
+         <title>
+         Amplified multichannel dense wavelength division multiplexing
+    applications with single channel optical interfaces
+          </title>
+          <author>
+          <organization>International Telecommunications Union</organization>
+          </author>
+          <date month="November" year="2009"/>
+      </front>
+          <seriesInfo name="ITU-T" value="Recommendation G.698.2"/>
+      </reference>
+
+
+      <reference anchor="ITU.G709">
+  <front>
+      <title>
+      Interface for the Optical Transport Network (OTN)
+      </title>
+      <author>
+      <organization>International Telecommunications Union</organization>
+      </author>
+      <date month="June" year="2016"/>
+  </front>
+          <seriesInfo name="ITU-T" value="Recommendation G.709"/>
+      </reference>
+
+
+      <reference anchor="ITU.G872">
+  <front>
+      <title>
+      Architecture of optical transport networks
+      </title>
+      <author>
+      <organization>International Telecommunications Union</organization>
+      </author>
+      <date month="January" year="2017"/>
+  </front>
+          <seriesInfo name="ITU-T" value="Recommendation G.872"/>
+      </reference>
+
+
+  <reference anchor="ITU.G798">
+  <front>
+      <title>
+      Characteristics of optical transport network hierarchy equipment functional blocks
+      </title>
+      <author>
+      <organization>International Telecommunications Union</organization>
+      </author>
+      <date month="Devember" year="2017"/>
+  </front>
+          <seriesInfo name="ITU-T" value="Recommendation G.798"/>
+      </reference>
+
+
+
+  <reference anchor="ITU.G874">
+  <front>
+      <title>
+      Management aspects of optical transport network elements
+      </title>
+      <author>
+      <organization>International Telecommunications Union</organization>
+      </author>
+      <date month="October" year="2020"/>
+  </front>
+          <seriesInfo name="ITU-T" value="Recommendation G.874"/>
+      </reference>
+
+
+
+  <reference anchor="ITU.G874.1">
+  <front>
+      <title>
+      Optical transport network (OTN): Protocol-neutral management information model
+      for the network element view
+      </title>
+      <author>
+      <organization>International Telecommunications Union</organization>
+      </author>
+      <date month="November" year="2016"/>
+  </front>
+          <seriesInfo name="ITU-T" value="Recommendation G.874.1"/>
+      </reference>
+
+
+  <reference anchor="ITU.G959.1">
+  <front>
+      <title>
+      Optical transport network physical layer interfaces
+      </title>
+      <author>
+      <organization>International Telecommunications Union</organization>
+      </author>
+      <date month="November" year="2009"/>
+  </front>
+          <seriesInfo name="ITU-T" value="Recommendation G.959.1"/>
+      </reference>
+
+
+  <reference anchor="ITU.G826">
+  <front>
+      <title>
+      End-to-end error performance parameters and objectives for international,
+      constant bit-rate digital paths and connections
+      </title>
+      <author>
+      <organization>International Telecommunications Union</organization>
+      </author>
+      <date month="December" year="2002"/>
+  </front>
+          <seriesInfo name="ITU-T" value="Recommendation G.826"/>
+      </reference>
+
+
+
+  <reference anchor="ITU.G8201">
+  <front>
+      <title>
+      Error performance parameters and objectives for multi-operator international
+      paths within the Optical Transport Network (OTN)
+      </title>
+      <author>
+      <organization>International Telecommunications Union</organization>
+      </author>
+      <date month="April" year="2011"/>
+  </front>
+          <seriesInfo name="ITU-T" value="Recommendation G.8201"/>
+      </reference>
+
+
+  <reference anchor="ITU.G694.1">
+  <front>
+      <title>
+      Spectral grids for WDM applications: DWDM frequency grid
+      </title>
+      <author>
+      <organization>International Telecommunications Union</organization>
+      </author>
+      <date month="February" year="2012"/>
+  </front>
+          <seriesInfo name="ITU-T" value="Recommendation G.694.1"/>
+      </reference>
+
+  <reference anchor="ITU.G7710">
+  <front>
+      <title>
+      Common equipment management function requirements
+      </title>
+      <author>
+      <organization>International Telecommunications Union</organization>
+      </author>
+      <date month="August" year="2017"/>
+  </front>
+          <seriesInfo name="ITU-T" value="Recommendation G.7710"/>
+      </reference>
+
+
+
+</references>
+
+    <references title="Informative References">
+
+<!--  RFC3410 is required to support the boilerplate text.-->
+      &rfc3410;
+
+     &rfc2629;
+
+     &rfc4181;
+
+    &rfc4054;
+    </references>
+
+    <!--
+<section anchor="appendix" title="Appendix A">
+<t>You can add appendices just as regular sections, the only
+difference is that they go under "back" element, and get letters
+instead of numbers</t>
+</section>
+-->
+
+    <section title="Change Log ">
+      <t>This optional section should be removed before the internet draft is
+      submitted to the IESG for publication as an RFC.</t>
+      <t>Note to RFC Editor: please remove this appendix before publication as an RFC.</t>
+<!--
+      from draft 12 to draft 13
+      <t><list style="numbers">
+      <t></t>
+        </list></t>
+          -->
+    </section>
+
+    <section title="Open Issues">
+      <t><cref>[TEMPLATE TODO] This list of issues listed in this optional section should
+      be cleared and removed, and this optional section should be removed before the
+      internet draft is submitted to the IESG for publication as an RFC.</cref></t>
+      <t>Note to RFC Editor: please remove this appendix before publication as an RFC.</t>
+           <!--
+      <t><list style="numbers">
+          <t>Contributor addresses need to be updated</t>
+        </list></t>
+        -->
+    </section>
+
+    <section title="Applicability examples">
+      <t>As an examample here below is the way and OpenROADM compliant equipment 
+        could be managed using the Yang models described in thei draft.</t>
+      <t>In OpenROADM MSA there is a limited number of DWDM interfaces supported.
+        Basically only the 100G Staircase FEC and 400G oFEC are supported and these
+        two kind of interfaces can be easily summarized with the "mode-id" and
+        the "application-identifier" strings.
+      </t>
+      <t> the models below are enough to identify the interface and few working parameters:
+      </t>
+
+   <figure align='left'>
+     <artwork><![CDATA[
+module: ietf-ext-xponder-wdm-if
+ augment /if:interfaces/if:interface:
+    +--rw optIfOChRsSs
+       +--rw if-current-mode
+       |  +--ro mode-id?                      string
+       |  +--ro application-identifier?       string
+       .
+       .
+       .
+       +--rw current-opt-if-och-mode-params
+          +--rw mode-id?                          string
+          +--rw central-frequency?                frequency-thz
+          +--rw channel-output-power?             dbm-t
+          +--ro channel-input-power?              dbm-t
+          .
+          .
+          .
+          +--ro cur-osnr?                         int32
+          +--ro cur-q-factor?                     int32
+          +--ro uncorrected-words?                uint64
+          +--ro pre-fec-ber-mantissa?             uint32
+          +--ro pre-fec-ber-exponent?             int32
+
+    ]]></artwork>
+    </figure>
+
+
+    </section>
+
+
+
+    <!--
+$Id: mib-doc-template.xml,v 1.4 2008/02/08 21:53:33 H73653 Exp $
+
+  -->
+  </back>
+</rfc>
