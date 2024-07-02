@@ -1,0 +1,130 @@
+module: ietf-ext-xponder-wdm-if
+
+  augment /if:interfaces:
+    +--rw optIf-templates
+       +--rw explicit-transceiver-modes
+          +--rw explicit-transceiver-mode*
+                  [explicit-transceiver-mode-id]
+             +--rw explicit-transceiver-mode-id        string
+             +--ro line-coding-bitrate?                identityref
+             +--ro bitrate?                            uint16
+             +--ro max-diff-group-delay?               decimal-2
+             +--ro max-chromatic-dispersion?           decimal-2
+             +--ro cd-penalty* [cd-value]
+             |  +--ro cd-value         decimal-2
+             |  +--ro penalty-value    union
+             +--ro max-polarization-mode-dispersion?   decimal-2
+             +--ro pmd-penalty* [pmd-value]
+             |  +--ro pmd-value        decimal-2
+             |  +--ro penalty-value    union
+             +--ro max-polarization-dependent-loss
+             |       power-loss-or-null
+             +--ro pdl-penalty* [pdl-value]
+             |  +--ro pdl-value        power-loss
+             |  +--ro penalty-value    union
+             +--ro available-modulation-type?          identityref
+             +--ro min-OSNR?                           snr
+             +--ro rx-ref-channel-power?               power-dbm
+             +--ro rx-channel-power-penalty* [rx-channel-power-value]
+             |  +--ro rx-channel-power-value    power-dbm
+             |  +--ro penalty-value             union
+             +--ro min-Q-factor?                       decimal-2
+             +--ro available-baud-rate?                decimal64
+             +--ro roll-off?                           decimal64
+             +--ro min-carrier-spacing?                frequency-ghz
+             +--ro available-fec-type?                 identityref
+             +--ro fec-code-rate?                      decimal64
+             +--ro fec-threshold?                      decimal64
+             +--ro in-band-osnr?                       snr
+             +--ro out-of-band-osnr?                   snr
+             +--ro tx-polarization-power-difference?   power-ratio
+             +--ro polarization-skew?                  decimal-2
+  augment /if:interfaces/if:interface:
+    +--rw optIfOChRsSs
+       +--rw supported-modes!
+       |  +--ro supported-mode* [mode-id]
+       |     +--ro mode-id                         string
+       |     +--ro (mode)
+       |        +--:(G.698.2)
+       |        |  +--ro standard-mode?            standard-mode
+       |        |  +--ro line-coding-bitrate*      identityref
+       |        |  +--ro min-central-frequency?    frequency-thz
+       |        |  +--ro max-central-frequency?    frequency-thz
+       |        |  +--ro transceiver-tunability?   frequency-ghz
+       |        |  +--ro tx-channel-power-min?     power-dbm
+       |        |  +--ro tx-channel-power-max?     power-dbm
+       |        |  +--ro rx-channel-power-min?     power-dbm
+       |        |  +--ro rx-channel-power-max?     power-dbm
+       |        |  +--ro rx-total-power-max?       power-dbm
+       |        +--:(organizational-mode)
+       |        |  +--ro organizational-mode
+       |        |     +--ro operational-mode?
+       |        |     |       operational-mode
+       |        |     +--ro organization-identifier?
+       |        |     |       organization-identifier
+       |        |     +--ro line-coding-bitrate*       identityref
+       |        |     +--ro min-central-frequency?     frequency-thz
+       |        |     +--ro max-central-frequency?     frequency-thz
+       |        |     +--ro transceiver-tunability?    frequency-ghz
+       |        |     +--ro tx-channel-power-min?      power-dbm
+       |        |     +--ro tx-channel-power-max?      power-dbm
+       |        |     +--ro rx-channel-power-min?      power-dbm
+       |        |     +--ro rx-channel-power-max?      power-dbm
+       |        |     +--ro rx-total-power-max?        power-dbm
+       |        +--:(explicit-mode)
+       |           +--ro explicit-mode
+       |              +--ro min-central-frequency?
+       |              |       frequency-thz
+       |              +--ro max-central-frequency?
+       |              |       frequency-thz
+       |              +--ro transceiver-tunability?
+       |              |       frequency-ghz
+       |              +--ro tx-channel-power-min?
+       |              |       power-dbm
+       |              +--ro tx-channel-power-max?
+       |              |       power-dbm
+       |              +--ro rx-channel-power-min?
+       |              |       power-dbm
+       |              +--ro rx-channel-power-max?
+       |              |       power-dbm
+       |              +--ro rx-total-power-max?
+       |              |       power-dbm
+       |              +--ro compatible-modes
+       |              |  +--ro supported-application-codes*
+       |              |  |       -> ../../../../supported-mode/mode-id
+       |              |  +--ro supported-organizational-modes*
+       |              |          -> ../../../../supported-mode/mode-id
+       |              +--ro explicit-transceiver-mode-ref?   leafref
+       +--rw current-opt-if-och-mode-params
+          +--rw configured-mode?            union
+          +--rw line-coding-bitrate?        identityref
+          +--rw tx-channel-power?           power-dbm-or-null
+          +--ro rx-channel-power?           power-dbm-or-null
+          +--ro rx-total-power?             power-dbm-or-null
+          +--ro min-osnr-margin?            l0-types:snr-or-null
+          +--ro q-margin?                   int32
+          +--rw central-frequency?          l0-types:frequency-thz
+          +--rw min-fec-ber-threshold?      decimal64
+          +--rw max-fec-ber-threshold?      decimal64
+          +--rw number-of-tcas-supported?   uint32
+          +--rw tca-list* [tca-type]
+          |  +--rw tca-type         opt-if-och-tca-types
+          |  +--rw min-threshold?   int32
+          |  +--rw max-threshold?   int32
+          +--ro cur-osnr?                   l0-types:snr
+          +--ro cur-q-factor?               int32
+          +--ro uncorrected-words?          uint64
+          +--ro pre-fec-ber?                decimal64
+
+  notifications:
+    +---n opt-if-och-central-frequency-change
+    |  +--ro if-name?
+    |  |       -> /if:interfaces/interface/name
+    |  +--ro new-opt-if-och-central-frequency
+    |     +--ro central-frequency?   l0-types:frequency-thz
+    +---n opt-if-och-mode-change
+    |  +--ro if-name?   -> /if:interfaces/interface/name
+    |  +--ro mode-id?   string
+    +---n opt-if-och-min-tca
+       +--ro if-name?    -> /if:interfaces/interface/name
+       +--ro tca-type?   opt-if-och-tca-types
