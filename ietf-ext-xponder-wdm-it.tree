@@ -104,13 +104,12 @@ module: ietf-ext-xponder-wdm-if
           +--ro min-osnr-margin?            l0-types:snr-or-null
           +--ro q-margin?                   int32
           +--rw central-frequency?          l0-types:frequency-thz
-          +--rw min-fec-ber-threshold?      decimal64
-          +--rw max-fec-ber-threshold?      decimal64
           +--rw number-of-tcas-supported?   uint32
           +--rw tca-list* [tca-type]
-          |  +--rw tca-type         opt-if-och-tca-types
-          |  +--rw min-threshold?   int32
-          |  +--rw max-threshold?   int32
+          |  +--rw tca-type                opt-if-och-tca-types
+          |  +--rw min-threshold?          int32
+          |  +--rw max-threshold?          int32
+          |  +--rw threshold-hysteresis?   int32
           +--ro cur-osnr?                   l0-types:snr
           +--ro cur-q-factor?               int32
           +--ro uncorrected-words?          uint64

@@ -171,7 +171,7 @@ Enter the full document title and an abbreviated version
     <!-- month and day will be generated automatically by XML2RFC;
 be sure the year is current.-->
 
-    <date day="21" month="June" year="2024" />
+    <date day="3" month="July" year="2024" />
 
     <!-- IETF area is optional -->
 
@@ -531,13 +531,12 @@ module: ietf-ext-xponder-wdm-if
           +--ro min-osnr-margin?            l0-types:snr-or-null
           +--ro q-margin?                   int32
           +--rw central-frequency?          l0-types:frequency-thz
-          +--rw min-fec-ber-threshold?      decimal64
-          +--rw max-fec-ber-threshold?      decimal64
           +--rw number-of-tcas-supported?   uint32
           +--rw tca-list* [tca-type]
-          |  +--rw tca-type         opt-if-och-tca-types
-          |  +--rw min-threshold?   int32
-          |  +--rw max-threshold?   int32
+          |  +--rw tca-type                opt-if-och-tca-types
+          |  +--rw min-threshold?          int32
+          |  +--rw max-threshold?          int32
+          |  +--rw threshold-hysteresis?   int32
           +--ro cur-osnr?                   l0-types:snr
           +--ro cur-q-factor?               int32
           +--ro uncorrected-words?          uint64
@@ -585,7 +584,7 @@ module: ietf-ext-xponder-wdm-if
 
 <CODE BEGINS> file "ietf-ext-xponder-wdm-if.yang"
 
-odule ietf-ext-xponder-wdm-if {
+module ietf-ext-xponder-wdm-if {
   yang-version 1.1;
   namespace "urn:ietf:params:xml:ns:yang:ietf-ext-xponder-wdm-if";
   prefix wdm-if;
@@ -636,7 +635,7 @@ odule ietf-ext-xponder-wdm-if {
     (https://www.rfc-editor.org/info/rfcXXXX); see the RFC itself
     for full legal notices.";
 
-  revision "2024-07-01" {
+  revision "2024-07-03" {
     description
       "Revision 1.11";
     reference
@@ -727,7 +726,6 @@ odule ietf-ext-xponder-wdm-if {
     reference
       "";
   }
-
     <CODE ENDS>
 
 ]]></artwork>
@@ -743,60 +741,42 @@ odule ietf-ext-xponder-wdm-if {
 
   typedef opt-if-och-tca-types {
     type enumeration {
-      enum max-laser-linewdt {
-        description "The maximum laser linewidth";
+      enum laser-linewdt {
+        description "The laser linewidth";
       }
-      enum min-tx-power-tca {
-        description "The min tx power TCA";
+      enum tx-power-tca {
+        description "The tx power TCA";
       }
-      enum max-tx-power-tca {
-        description "The min tx power TCA";
+      enum rx-power-tca {
+        description "The tx power TCA";
       }
-      enum min-rx-power-tca{
-        description "The min tx power TCA";
-      }
-      enum max-rx-power-tca{
-        description "The min tx power TCA";
-      }
-      enum max-pol-power-diff-tca{
+      enum pol-power-diff-tca {
         description "The power difference between polarization
         TCA";
       }
-      enum max-pol-skew-diff-tca{
+      enum pol-skew-diff-tca {
         description "The skew between the two polarization TCA";
       }
-      enum min-frequency-offset-tca{
-        description "Min Frequency offset TCA";
+      enum cd-tca {
+        description "The chromatic dispersion TCA";
       }
-      enum max-frequency-offset-tca{
-        description "Max Frequency offset TCA";
+      enum frequency-offset-tca {
+        description "Frequency offset TCA";
       }
-      enum min-osnr-tca{
-        description "Min OSNR TCA";
+      enum osnr-tca {
+        description "OSNR TCA";
       }
-      enum max-osnr-tca{
-        description "Max OSNR TCA";
+      enum laser-temperature-tca {
+        description "Laser temperature TCA";
       }
-      enum min-laser-temperature-tca{
-        description "The min tx power TCA";
+      enum pre-fec-ber-tca {
+        description "Pre Fec BER TCA";
       }
-      enum max-laser-temperature-tca{
-        description "Temperature TCA";
+      enum uncorrected-words-tca {
+        description "Uncorrected words TCA";
       }
-      enum min-pre-fec-ber-tca{
-        description "Min Pre Fec BER TCA";
-      }
-      enum max-pre-fec-ber-tca{
-        description "Max Pre Fec BER TCA";
-      }
-      enum max-uncorrected-words-tca{
-        description "Max uncorrected words TCA";
-      }
-      enum min-q-tca{
-        description "Min Q TCA";
-      }
-      enum max-q-tca {
-        description "Max Q TCA";
+      enum q-factor-tca{
+        description "Q Factor TCA";
       }
     }
     description "The different types of TCA's";
@@ -807,7 +787,7 @@ odule ietf-ext-xponder-wdm-if {
 
     leaf channel-output-power {
       type l0-types:power-dbm-or-null;
-      description "The output power for this interface in .01 dBm.
+      description "The output power for this interface in dBm.
       The setting of the output power is optional";
     }
 
@@ -841,38 +821,10 @@ odule ietf-ext-xponder-wdm-if {
       description "A TCA is generated if the variable is more than
       this value";
     }
-  }
-
-  grouping opt-if-och-fec {
-    description "FEC type / info";
-
-    leaf available-fec-type {
-      type identityref {
-        base l0-types:fec-type;
-      }
-      config false;
-      description "Available FEC";
-    }
-
-    leaf fec-set {
-      type identityref {
-        base l0-types:fec-type;
-      }
-      description "FEC provisioning";
-    }
-    leaf fec-code-rate {
-      type decimal64 {
-        fraction-digits 8;
-        range "0..max";
-      }
-      config false;
-      description "FEC-code-rate";
-    }
-    leaf pre-fec-ber-threshold {
-      type decimal64 {
-        fraction-digits 18;
-      }
-      description " FEC BER threshold";
+    leaf threshold-hysteresis {
+      type int32;
+      description "The TCA raise/clear hysteresisis around the
+      threshold value to avoi alert flikering";
     }
   }
 
@@ -898,22 +850,6 @@ odule ietf-ext-xponder-wdm-if {
     }
   }
 
-  grouping opt-if-och-fec-tca-thresholds {
-    description "Pre FEC BER Thresholds for TCA's";
-    leaf min-fec-ber-threshold {
-      type decimal64 {
-        fraction-digits 18;
-      }
-      description "Min FEC BER threshold";
-    }
-    leaf max-fec-ber-threshold {
-      type decimal64 {
-        fraction-digits 18;
-      }
-      description "Max FEC BER threshold";
-    }
-  }
-
   grouping opt-if-och-mode-params {
     description "OCh mode parameters";
 
@@ -930,7 +866,7 @@ odule ietf-ext-xponder-wdm-if {
       description "Q-Factor margin to FEC threshold";
     }
     uses opt-if-och-central-frequency;
-    uses opt-if-och-fec-tca-thresholds;
+//    uses opt-if-och-fec-tca-thresholds;
     uses opt-if-och-tca-list;
   }
 
