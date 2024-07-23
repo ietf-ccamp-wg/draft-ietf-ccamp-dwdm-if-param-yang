@@ -1,470 +1,302 @@
 module ietf-ext-xponder-wdm-if {
+  yang-version 1.1;
   namespace "urn:ietf:params:xml:ns:yang:ietf-ext-xponder-wdm-if";
-  prefix ietf-ext-xponder-wdm-if;
+  prefix wdm-if;
 
   import ietf-interfaces {
     prefix if;
   }
 
   import ietf-layer0-types {
-    prefix "layer0-types";
+    prefix "l0-types";
   }
 
   organization
-    "IETF CCAMP
-    Working Group";
+    "IETF CCAMP Working Group";
 
   contact
     "WG Web:   <http://tools.ietf.org/wg/ccamp/>
-     WG List:  <mailto:ccamp@ietf.org>
+    WG List:  <mailto:ccamp@ietf.org>
 
-     Editor:   Dharini Hiremagalur
-               <mailto:dharinih@juniper.net>";
+
+    Editor:   Dharini Hiremagalur
+              <mailto:dharinih@juniper.net>
+
+    Editor:   Gabriele Galimberti
+              <mailto:  ggalimbe56@gmail.com>
+
+    Editor:   Gert Grammel
+              <mailto:ggrammel@juniper.net>
+
+    Editor:   Roberto Manzotti
+              <mailto:rmanzott@cisco.com>";
 
   description
     "This module contains a collection of YANG definitions for
-     configuring Optical interfaces.
+    configuring Optical interfaces.
 
-     Copyright (c) 2016 IETF Trust and the persons identified
-     as authors of the code.  All rights reserved.
+    Copyright (c) 2016 IETF Trust and the persons identified
+    as authors of the code.  All rights reserved.
 
-     Redistribution and use in source and binary forms, with or
-     without modification, is permitted pursuant to, and
-     subject to the license terms contained in, the Simplified
-     BSD License set forth in Section 4.c of the IETF Trust's
-     Legal Provisions Relating to IETF Documents
-     (http://trustee.ietf.org/license-info).";
+    Redistribution and use in source and binary forms, with or
+    without modification, is permitted pursuant to, and
+    subject to the license terms contained in, the Revised
+    BSD License set forth in Section 4.c of the IETF Trust's
+    Legal Provisions Relating to IETF Documents
+    (http://trustee.ietf.org/license-info).
+
+    This version of this YANG module is part of RFC XXXX
+    (https://www.rfc-editor.org/info/rfcXXXX); see the RFC itself
+    for full legal notices.";
+
+  revision "2024-07-03" {
+    description
+      "Revision 1.11";
+    reference
+      "This version of this YANG module is part of RFC XXXX
+     (https://www.rfc-editor.org/info/rfcXXXX); see the RFC itself
+     for full legal notices.";
+  }
+  revision "2023-10-23" {
+    description
+      "Revision 1.10";
+    reference
+      "";
+  }
+
+  revision "2023-03-13" {
+    description
+      "Revision 1.9";
+    reference
+      "";
+  }
+
+  revision "2022-10-24" {
+    description
+      "Revision 1.8";
+    reference
+      "";
+  }
+
+  revision "2022-01-10" {
+    description
+      "Revision 1.7";
+    reference
+      "";
+  }
 
   revision "2021-06-28" {
     description
       "Revision 1.6";
     reference
       "";
-    }
+  }
 
   revision "2020-03-09" {
     description
       "Revision 1.5";
     reference
       "";
-    }
+  }
 
   revision "2019-11-04" {
     description
       "Revision 1.4";
     reference
       "";
-    }
+  }
 
   revision "2019-07-08" {
     description
       "Revision 1.3";
     reference
       "";
-    }
-    revision "2018-10-22" {
-      description
-        "Revision 1.2";
-      reference
-        "";
-    }
-    revision "2018-03-06" {
-      description
-        "Revision 1.1";
-      reference
-        "";
-    }
-    revision "2017-03-06" {
-      description
-        "Revision 1.0";
-      reference
-        "";
-    }
-    revision "2016-03-17" {
-      description
-        "Initial revision.";
-      reference
-        "";
-    }
+  }
 
-    typedef dbm-t {
-        type int32;
-        units ".01dbm";
+  revision "2018-10-22" {
+    description
+      "Revision 1.2";
+    reference
+      "";
+  }
 
-      description "
-        Amplifiers and Transceivers Power in dBm";
-    }
+  revision "2018-03-06" {
+    description
+      "Revision 1.1";
+    reference
+      "";
+  }
 
-    typedef opt-if-och-tca-types {
-      type enumeration {
-        enum max-laser-linewdt {
-          description "The maximum laser linewidth";
-        }
-        enum min-tx-power-tca {
-          description "The min tx power TCA";
-        }
-        enum max-tx-power-tca {
-          description "The min tx power TCA";
-        }
-        enum min-rx-power-tca{
-          description "The min tx power TCA";
-        }
-        enum max-rx-power-tca{
-          description "The min tx power TCA";
-        }
-        enum max-pol-power-diff-tca{
-          description "The power difference between polarization
-          TCA";
-        }
-        enum max-pol-skew-diff-tca{
-          description "The skew between the two polarization TCA";
-        }
-        enum min-frequency-offset-tca{
-          description "Min Frequency offset TCA";
-        }
-        enum max-frequency-offset-tca{
-          description "Max Frequency offset TCA";
-        }
-        enum min-osnr-tca{
-          description "Min OSNR TCA";
-        }
-        enum max-osnr-tca{
-          description "Max OSNR TCA";
-        }
-        enum min-laser-temperature-tca{
-          description "The min tx power TCA";
-        }
-        enum max-laser-temperature-tca{
-          description "Temperature TCA";
-        }
-        enum min-fec-ber-tca{
-          description "Min Pre Fec BER TCA";
-        }
-        enum max-fec-ber-tca{
-          description "Max Pre Fec BER TCA";
-        }
-        enum min-q-tca{
-          description "Min Q TCA";
-        }
-        enum max-q-tca {
-          description "Max Q TCA";
-        }
+  revision "2017-03-06" {
+    description
+      "Revision 1.0";
+    reference
+      "";
+  }
+
+  revision "2016-03-17" {
+    description
+      "Initial revision.";
+    reference
+      "";
+  }
+
+  typedef opt-if-och-tca-types {
+    type enumeration {
+      enum laser-linewdt {
+        description "The laser linewidth";
       }
-      description "The different types of TCA's";
-    }
-
-    grouping opt-if-och-power {
-      description "Interface optical Power";
-
-      leaf channel-output-power {
-        type dbm-t;
-        description "The output power for this interface in .01 dBm.
-                     The setting of the output power is optional";
+      enum tx-power-tca {
+        description "The tx power TCA";
       }
-
-      leaf channel-input-power {
-        type dbm-t;
-        config false;
-        description "The current channel input power of this
-        interface";
+      enum rx-power-tca {
+        description "The tx power TCA";
       }
-
-      leaf total-input-power {
-        type dbm-t;
-        config false;
-        description "The total input power of this interface";
+      enum pol-power-diff-tca {
+        description "The power difference between polarization
+        TCA";
+      }
+      enum pol-skew-diff-tca {
+        description "The skew between the two polarization TCA";
+      }
+      enum cd-tca {
+        description "The chromatic dispersion TCA";
+      }
+      enum frequency-offset-tca {
+        description "Frequency offset TCA";
+      }
+      enum osnr-tca {
+        description "OSNR TCA";
+      }
+      enum laser-temperature-tca {
+        description "Laser temperature TCA";
+      }
+      enum pre-fec-ber-tca {
+        description "Pre Fec BER TCA";
+      }
+      enum uncorrected-words-tca {
+        description "Uncorrected words TCA";
+      }
+      enum q-factor-tca{
+        description "Q Factor TCA";
       }
     }
+    description "The different types of TCA's";
+  }
 
-    grouping opt-if-och-tca-thresholds {
-      description "Thresholds for TCA's";
-      leaf  tca-type {
-        type opt-if-och-tca-types;
-        description  "type of the TCA eg TX Power";
-      }
-      leaf  min-threshold {
-        type int32;
-        description "A TCA is generated if the variable is less than
-                     this value";
-      }
-      leaf  max-threshold {
-        type int32;
-        description "A TCA is generated if the variable is more than
-                     this value";
-      }
+  grouping opt-if-och-power {
+    description "Interface optical Power";
+
+    leaf channel-output-power {
+      type l0-types:power-dbm-or-null;
+      description "The output power for this interface in dBm.
+      The setting of the output power is optional";
     }
 
-    grouping opt-if-och-fec {
-      description "FEC info";
-
-      leaf fec-info {
-        type string { length "1..255"; }
-        config false;
-        description "FEC Type - eg GFEC";
-      }
-      leaf fec-bitrate {
-        type string { length "1..255"; }
-        config false;
-        description "FEC Overhead rate ";
-      }
-      leaf fec-gain {
-        type string { length "1..255"; }
-        config false;
-        description "FEC Overhead rate ";
-      }
-      leaf  pre-fec-ber-mantissa-threshold {
-        type uint32;
-        description "Mantissa of the FEC BER threshold";
-      }
-      leaf  pre-fec-ber-exponent-threshold {
-        type int32;
-        description "Exponent of the FEC BER threshold";
-      }
-    }
-
-    grouping opt-if-och-central-frequency {
-      description "Interface Central Frequency";
-      leaf  central-frequency {
-        type layer0-types:frequency-thz;
-        description "This parameter indicates the frequency of this
-                     interface ";
-      }
-    }
-
-    grouping opt-if-och-modulation-params {
-      description "Optical modulation parameters for the lane";
-
-      leaf modulation-format {
-        type string { length "1..255"; }
-        config false;
-        description "Modulation format for this mode";
-      }
-      leaf baud-rate {
-        type uint32;
-        description "Baud-rate or symbol rate";
-      }
-      leaf  bits-per-symbol {
-        type uint32;
-        description "This parameter the bits per symbol for this
-        mode";
-      }
-      leaf  num-symbols-in-alphabet {
-        type uint32;
-        description "This parameter the bits per symbol for this
-        mode";
-      }
-      leaf  symbols-index {
-        type uint32;
-        description "This parameter is the symbol index this mode";
-      }
-    }
-
-    grouping opt-if-och-lane-param {
-      description "Optical parameters for the lane";
-
-      leaf number-of-lanes {
-        type  uint32;
-        config false;
-        description "Number of optical lanes of this interface";
-      }
-      leaf min-laser-temperature {
-        type  int32;
-        units ".01C";
-        config false;
-        description "Minimum Laser Temperature of this mode for
-                     this lane";
-      }
-      leaf max-laser-temperature {
-        type  int32;
-        units ".01C";
-        config false;
-        description "Maximum Laser Temperature of this mode for
-                     this lane";
-      }
-      leaf max-total-rx-optical-power {
-        type dbm-t;
-        config false;
-        description "Maximum rx optical power of this mode for this
-                     lane";
-      }
-      leaf max-chromatic-dispersion {
-        type int32;
-        config false;
-        description "Maximum chromatic dispersion of this mode for
-                     this lane";
-      }
-      leaf max-diff-group-delay  {
-        type int32;
-        config false;
-        description "Maximum Differential group delay of this mode
-                     for this lane";
-      }
-      uses opt-if-och-modulation-params;
-    }
-
-    grouping opt-if-och-tca-list {
-      description "List of TCA's";
-      leaf number-of-tcas-supported {
-        type uint32;
-        description "Number of TCAs supported by this interface";
-      }
-      list mode-list {
-        key "tca-type";
-        description "List of the TCAs";
-        uses opt-if-och-tca-thresholds;
-      }
-    }
-
-    grouping opt-if-och-fec-tca-thresholds {
-      description "Pre FEC BER Thresholds for TCA's";
-      leaf  min-fec-ber-mantissa-threshold {
-        type uint32;
-        description "Min Mantissa of the FEC BER threshold";
-      }
-      leaf  min-fec-ber-exponent-threshold {
-        type int32;
-        description "Min Exponent of the FEC BER threshold";
-      }
-      leaf  max-fec-ber-mantissa-threshold {
-        type uint32;
-        description "Max Mantissa of the FEC BER threshold";
-      }
-      leaf  max-fec-ber-exponent-threshold {
-        type int32;
-        description "Max Exponent of the FEC BER threshold";
-      }
-    }
-
-    grouping opt-if-och-mode-params  {
-      description "OCh mode parameters";
-      leaf mode-id {
-        type string { length "1..255"; }
-        description "ID for the OCh mode template";
-      }
-      leaf  min-osnr-margin {
-        type int32;
-        units "dB";
-        config false;
-        description "OSNR margin to FEC threshold";
-      }
-      leaf  q-margin {
-        type int32;
-        units "dB";
-        config false;
-        description "Q-Factor margin to FEC threshold";
-      }
-      uses opt-if-och-central-frequency;
-      uses opt-if-och-power;
-      uses opt-if-och-fec-tca-thresholds;
-      uses opt-if-och-tca-list;
-   }
-
-  grouping opt-if-och-statistics {
-    description "OCh statistics";
-    leaf  cur-osnr {
-      type int32;
-      units "dB";
+    leaf channel-input-power {
+      type l0-types:power-dbm-or-null;
       config false;
-      description "OSNR margin to FEC threshold";
+      description "The current channel input power of this
+      interface";
     }
-    leaf  cur-q-factor {
-      type int32;
-      units "dB";
+
+    leaf total-input-power {
+      type l0-types:power-dbm-or-null;
       config false;
-      description "Q-Factor of the interface";
-    }
-    leaf  uncorrected-words {
-      type uint64;
-      config false;
-      description "Post-FEC errored words";
-    }
-    leaf  pre-fec-ber-mantissa {
-      type uint32;
-      config false;
-      description "Pre-FEC errored words mantissa";
-    }
-    leaf  pre-fec-ber-exponent {
-      type int32;
-      config false;
-      description "Pre-FEC errored words exponent";
+      description "The total input power of this interface";
     }
   }
 
-  grouping opt-if-och-mode  {
-    description "OCh mode template";
-
-    leaf mode-id {
-      type string { length "1..255"; }
-      config false;
-      description "ID for the OCh mode template";
+  grouping opt-if-och-tca-thresholds {
+    description "Thresholds for TCA's";
+    leaf tca-type {
+      type opt-if-och-tca-types;
+      description "type of the TCA eg TX Power";
     }
-    leaf application-identifier {
-      type uint32;
-      config false;
-      description "This parameter indicates the application
-                   identifier according to G.698.2";
-    }
-
-    leaf min-central-frequency {
-      type layer0-types:frequency-thz;
-      config false;
-      description
-        "his parameter indicates the minimum frequency for
-                   this template";
-    }
-    leaf max-central-frequency {
-      type layer0-types:frequency-thz;
-      config false;
-      description "This parameter indicates the minimum frequency
-                   for this template";
-    }
-    leaf min-channel-input-power {
-      type dbm-t;
-      config false;
-      description "The minimum input power of this interface";
-    }
-    leaf max-channel-input-power {
-      type dbm-t;
-      config false;
-      description "The maximum input power of this interface";
-    }
-    leaf min-channel-output-power {
-      type dbm-t;
-      config false;
-      description "The minimum output power of this interface";
-    }
-    leaf max-channel-output-power {
-      type dbm-t;
-      config false;
-      description "The maximum output power of this interface";
-    }
-    leaf  osnr-margin {
+    leaf min-threshold {
       type int32;
+      description "A TCA is generated if the variable is less than
+      this value";
+    }
+    leaf max-threshold {
+      type int32;
+      description "A TCA is generated if the variable is more than
+      this value";
+    }
+    leaf threshold-hysteresis {
+      type int32;
+      description "The TCA raise/clear hysteresisis around the
+      threshold value to avoi alert flikering";
+    }
+  }
+
+  grouping opt-if-och-central-frequency {
+    description "Interface Central Frequency";
+    leaf central-frequency {
+      type l0-types:frequency-thz;
+      description "This parameter indicates the frequency of this
+      interface ";
+    }
+  }
+
+  grouping opt-if-och-tca-list {
+    description "List of TCA's";
+    leaf number-of-tcas-supported {
+      type uint32;
+      description "Number of TCAs supported by this interface";
+    }
+    list tca-list {
+      key "tca-type";
+      description "List of the TCAs";
+      uses opt-if-och-tca-thresholds;
+    }
+  }
+
+  grouping opt-if-och-mode-params {
+    description "OCh mode parameters";
+
+    leaf min-osnr-margin {
+      type l0-types:snr-or-null;
       units "dB";
       config false;
       description "OSNR margin to FEC threshold";
     }
-    leaf  q-margin {
+    leaf q-margin {
       type int32;
       units "dB";
       config false;
       description "Q-Factor margin to FEC threshold";
     }
-    uses opt-if-och-fec;
-    uses opt-if-och-lane-param;
+    uses opt-if-och-central-frequency;
+//    uses opt-if-och-fec-tca-thresholds;
+    uses opt-if-och-tca-list;
   }
 
-  grouping opt-if-och-mode-list {
-    description "List of Mode list group";
-
-    leaf number-of-modes-supported {
-      type uint32;
-      description "Number of modes supported by this interface";
+  grouping opt-if-och-statistics {
+    description "OCh statistics";
+    leaf cur-osnr {
+      type l0-types:snr;
+      units "dB";
+      config false;
+      description "OSNR margin to FEC threshold";
     }
-    list mode-list {
-      key "mode-id";
-      description "List of the modes";
-      uses opt-if-och-mode;
+    leaf cur-q-factor {
+      type int32;
+      units "dB";
+      config false;
+      description "Q-Factor of the interface";
+    }
+    leaf uncorrected-words {
+      type uint64;
+      config false;
+      description "Post-FEC errored words";
+    }
+    leaf pre-fec-ber {
+      type decimal64 {
+        fraction-digits 18;
+      }
+      config false;
+      description "Pre-FEC errored words";
     }
   }
 
@@ -490,7 +322,7 @@ module ietf-ext-xponder-wdm-if {
     }
     leaf mode-id {
       type string { length "1..255"; }
-      description  "ID for the OCh mode template";
+      description "ID for the OCh mode template";
     }
   }
 
@@ -507,25 +339,78 @@ module ietf-ext-xponder-wdm-if {
     }
   }
 
+  augment "/if:interfaces" {
+    description
+      "Template definition for Optical Interface explicit-modes";
+    container "optIf-templates" {
+      description "Optical Interface explicit-mode templates";
+      container explicit-transceiver-modes {
+        description
+          "The top level container for the list of the
+          transceivers' explicit modes.";
+        list explicit-transceiver-mode {
+          key explicit-transceiver-mode-id;
+          description
+            "The list of the transceivers' explicit modes.";
+          leaf explicit-transceiver-mode-id {
+            type string;
+            description
+              "The identifier of the transceivers' explicit mode.";
+          }
+          uses l0-types:explicit-mode;
+        } // list explicit-transceiver-mode
+      } // container explicit-transceiver-modes
+    }
+  }
+
   augment "/if:interfaces/if:interface" {
     description "Parameters for an optical interface";
 
     container optIfOChRsSs {
       description "RsSs path configuration for an interface";
 
-      container if-current-mode {
-        description "Current mode template of the interface";
-        uses opt-if-och-mode;
+      uses l0-types:transceiver-capabilities {
+        augment "supported-modes/supported-mode/mode/"
+        + "explicit-mode/explicit-mode" {
+          description
+            "Augment the explicit-mode container with the
+            proper leafref.";
+          leaf explicit-transceiver-mode-ref {
+            type leafref {
+              path "../../../../../../wdm-if:optIf-templates"
+                   + "/wdm-if:explicit-transceiver-modes"
+                   + "/wdm-if:explicit-transceiver-mode"
+                   + "/wdm-if:explicit-transceiver-mode-id";
+            }
+            description
+              "The refernce to the explicit transceiver
+              mode template.";
+          }
+        }
       }
-      container if-supported-mode {
-        config false;
-        description "Supported mode list of this interface";
-        uses opt-if-och-mode-list;
-      }
+
       container current-opt-if-och-mode-params {
+        leaf configured-mode {
+          type union {
+            type empty;
+            type leafref {
+              path "../../supported-modes/supported-mode/mode-id";
+            }
+          }
+          description
+            "Reference to the configured mode for transceiver
+            compatibility approach.
+
+            The empty value is used to report that no mode has
+            been configured and there is no default mode.
+
+            When not present, the configured-mode is not reported
+            by the server.";
+        }
+        uses l0-types:common-transceiver-param;
         description "Current parameters of this interface";
-          uses opt-if-och-mode-params;
-          uses opt-if-och-statistics;
+        uses opt-if-och-mode-params;
+        uses opt-if-och-statistics;
       }
     }
   }

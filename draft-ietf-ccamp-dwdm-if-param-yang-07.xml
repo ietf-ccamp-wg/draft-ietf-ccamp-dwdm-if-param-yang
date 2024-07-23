@@ -176,7 +176,7 @@ Enter the full document title and an abbreviated version
     <!-- month and day will be generated automatically by XML2RFC;
 be sure the year is current.-->
 
-    <date month="January" year="2022" />
+    <date month="June" year="2022" />
 
     <!-- IETF area is optional -->
 
@@ -429,23 +429,26 @@ module: ietf-ext-xponder-wdm-if
        |  +--ro (mode)
        |     +--:(G.698.2)
        |     |  +--ro standard-mode?          standard-mode
+       |     |     +--ro application-code
+       |     |     +--ro central-frequency?         
+       |     |     |           layer0-types:frequency-thz
+       |     |     +--ro channel-output-power?             dbm-t
+       |     |     +--ro channel-input-power?              dbm-t
        |     +--:(organizational-mode)
        |     |  +--ro organizational-mode
        |     |     +--ro operational-mode?
        |     |     |       operational-mode
        |     |     +--ro organization-identifier?
        |     |     |       organization-identifier
-       |     |     +--ro min-central-frequency?
-       |     |     |       frequency-thz
-       |     |     +--ro max-central-frequency?
-       |     |     |       frequency-thz
-       |     |     +--ro minimum-channel-spacing?
-       |     |     |       frequency-ghz
-       |     |     +--ro tx-channel-power-min?      dbm-t
-       |     |     +--ro tx-channel-power-max?      dbm-t
-       |     |     +--ro rx-channel-power-min?      dbm-t
-       |     |     +--ro rx-channel-power-max?      dbm-t
-       |     |     +--ro rx-total-power-max?
+       |     |     +--ro part-number-identifier?
+       |     |     |       part-number-identifier
+       |     |     +--ro central-frequency?         
+       |     |     |           layer0-types:frequency-thz
+       |     |     +--ro channel-output-power?             dbm-t
+       |     |     +--ro channel-input-power?              dbm-t
+       |     |     +--ro fec-info?                         string
+       |     |     +--ro modulation-format?                string
+       |     |     +--ro baud-rate?                        uint32
        |     +--:(explicit-mode)
        |        +--ro explicit-mode
        |           +--ro supported-modes
@@ -453,6 +456,10 @@ module: ietf-ext-xponder-wdm-if
        |           |  |       -> ../../../mode-id
        |           |  +--ro supported-organizational-modes*
        |           |  |       -> ../../../mode-id
+       |           +--ro central-frequency?         
+       |           |         layer0-types:frequency-thz
+       |           +--ro channel-output-power?             dbm-t
+       |           +--ro channel-input-power?              dbm-t
        |           +--ro line-coding-bitrate?
        |           |       identityref
        |           +--ro min-central-frequency?     
@@ -501,19 +508,13 @@ module: ietf-ext-xponder-wdm-if
        |     |  +--ro organizational-mode
        |     |     +--ro operational-mode?
        |     |     |       operational-mode
-       |     |     +--ro organization-identifier?
-       |     |     |       organization-identifier
-       |     |     +--ro min-central-frequency?
-       |     |     |       frequency-thz
-       |     |     +--ro max-central-frequency?
-       |     |     |       frequency-thz
-       |     |     +--ro minimum-channel-spacing?
-       |     |     |       frequency-ghz
-       |     |     +--ro tx-channel-power-min?      dbm-t
-       |     |     +--ro tx-channel-power-max?      dbm-t
-       |     |     +--ro rx-channel-power-min?      dbm-t
-       |     |     +--ro rx-channel-power-max?      dbm-t
-       |     |     +--ro rx-total-power-max?
+       |     |     +--ro organization-identifier?   
+       |     |     |       organization-identifier  string
+       |     |     +--ro part-number-identifier?
+       |     |     |       part-number-identifier   string
+       |     |     +--ro fec-info?                         string
+       |     |     +--ro modulation-format?                string
+       |     |     +--ro baud-rate?                        uint32
        |     +--:(explicit-mode)
        |        +--ro explicit-mode
        |           +--ro supported-modes
@@ -616,7 +617,7 @@ module: ietf-ext-xponder-wdm-if
   </section>
 
 
-    <section title="Structure of the Yang Module">
+ <section title="Structure of the Yang Module">
 
     <t>ietf-ext-xponder-wdm-if is a top level model for the support
        of this feature.
@@ -625,7 +626,7 @@ module: ietf-ext-xponder-wdm-if
 
       </section>
 
-       <section title="Yang Module">
+  <section title="Yang Module">
 
         <t>The ietf-ext-xponder-wdm-if is defined as an extension to
            ietf interfaces.
@@ -749,16 +750,7 @@ module ietf-ext-xponder-wdm-if {
     <artwork><![CDATA[
 
 
-    typedef dbm-t {
-        type int32;
-        units ".01dbm";
-      
-      description "
-        Amplifiers and Transceivers Power in dBm";
-    }
-
-
-    typedef opt-if-och-tca-types {
+   typedef opt-if-och-tca-types {
       type enumeration {
         enum max-laser-linewdt {
           description "The maximum laser linewidth";
@@ -962,8 +954,39 @@ module ietf-ext-xponder-wdm-if {
         description "Maximum Differential group delay of this mode
                      for this lane";
       }
+      leaf max-polarization-dependent-loss{
+        type decimal64;
+        config false;
+        description "Maximum max loss between the two carrier 
+        polarizations";
+      }
       uses opt-if-och-modulation-params;
     }
+
+    grouping chromatic-and-polariz-disp-penal {
+      description "list of chromatic dispersion and polarization 
+                   dispersion penalties";
+      list cd-and-pmd-penalties {}
+        key "penalties"
+        description "list of CD and PMD penalties"
+      }
+      leaf chromatic-dispersion {
+        type decimal64;
+        config false;
+        description "Chromatic Dispersion of this mode for
+                     this lane";
+      }
+      leaf polarization-mode-dispersion {
+        type decimal64;
+        config false;
+        description "Polarization Mode Dispersion";
+      }
+      leaf penalty {
+        type decimal64;
+        config false;
+        description "penalty given by CD and PMD";
+      }
+    }    
 
     grouping opt-if-och-tca-list {
       description "List of TCA's";
@@ -1061,13 +1084,71 @@ module ietf-ext-xponder-wdm-if {
       config false;
       description "ID for the OCh mode template";
     }
-    leaf application-identifier {
-      type uint32;
+    leaf (G.698.2) {
+      type strings;
       config false;
       description "This parameter indicates the application
                    identifier according to G.698.2";
+     uses standard-mode;
+    
+    }
+    leaf (organizational-mode) {
+      type strings;
+      config false;
+      description "This parameter indicates the operational-mode
+                   of different organization";
+     uses organizational-modes;
     }
 
+    leaf (explicit-mode) {
+      type strings;
+      config false;
+      description "This parameter indicates the operational-mode
+                   of different organization";
+     uses explicit-modes;
+    }
+
+
+  grouping standard-mode {
+    description "ITU-T G.698.2 application codes";
+
+    leaf application-code {
+      type string;
+      description "ITU-T G.698.2 application code e.g. DScW-ytz(v)";
+    }
+      uses opt-if-och-central-frequency;
+      uses opt-if-och-power;
+    }
+
+
+  grouping organizational-modes {
+    description "this identifies the vendor or organization
+                operational mode including the Organization Unique
+                Identifier, the i/f part number";
+
+    leaf operational-mode {
+      type string;
+      description "this string is defined by the oprganization or
+                   the vendor";
+    }
+    leaf organization-identifier {
+      type string;
+      description "this string identified the OUI of the vendor or
+                   the organization";
+    }
+    leaf part-number-identifier {
+      type string;
+      description "this string identified the optical interfaces
+                   part number or name given by the vendor or
+                   the organization";
+    }
+      uses opt-if-och-central-frequency;
+      uses opt-if-och-power;
+  }
+
+
+  grouping explicit-modes  {
+    description "interface explicit-modes";
 
     leaf min-central-frequency {
       type layer0-types:frequency-thz;
@@ -1114,6 +1195,8 @@ module ietf-ext-xponder-wdm-if {
       config false;
       description "Q-Factor margin to FEC threshold";
     }
+    uses standard-mode;
+    uses organizational-modes;
     uses opt-if-och-fec;
     uses opt-if-och-lane-param;
   }
