@@ -1,6 +1,6 @@
-module ietf-ext-xponder-wdm-if {
+module ietf-wdm-interface {
   yang-version 1.1;
-  namespace "urn:ietf:params:xml:ns:yang:ietf-ext-xponder-wdm-if";
+  namespace "urn:ietf:params:xml:ns:yang:ietf-wdm-interface";
   prefix wdm-if;
 
   import ietf-interfaces {
@@ -15,135 +15,51 @@ module ietf-ext-xponder-wdm-if {
     "IETF CCAMP Working Group";
 
   contact
-    "WG Web:   <http://tools.ietf.org/wg/ccamp/>
+   "WG Web:   <https://datatracker.ietf.org/wg/ccamp/>
     WG List:  <mailto:ccamp@ietf.org>
 
 
-    Editor:   Dharini Hiremagalur
-              <mailto:dharinih@juniper.net>
-
-    Editor:   Gabriele Galimberti
-              <mailto:  ggalimbe56@gmail.com>
-
-    Editor:   Gert Grammel
-              <mailto:ggrammel@juniper.net>
-
-    Editor:   Roberto Manzotti
-              <mailto:rmanzott@cisco.com>";
+    Editor:   Dharini Hiremagalur <mailto:dharinih@juniper.net>
+    Editor:   Gabriele Galimberti <mailto:ggalimbe56@gmail.com>
+    Editor:   Gert Grammel <mailto:ggrammel@juniper.net>
+    Editor:   Roberto Manzotti <mailto:rmanzott@cisco.com>";
 
   description
-    "This module contains a collection of YANG definitions for
-    configuring Optical interfaces.
+     "This module contains a collection of YANG definitions for
+     configuring DWDM Optical interfaces.
 
-    Copyright (c) 2016 IETF Trust and the persons identified
-    as authors of the code.  All rights reserved.
+     Copyright (c) 2024 IETF Trust and the persons identified as
+     authors of the code.  All rights reserved.
 
-    Redistribution and use in source and binary forms, with or
-    without modification, is permitted pursuant to, and
-    subject to the license terms contained in, the Revised
-    BSD License set forth in Section 4.c of the IETF Trust's
-    Legal Provisions Relating to IETF Documents
-    (http://trustee.ietf.org/license-info).
+     Redistribution and use in source and binary forms, with or
+     without modification, is permitted pursuant to, and subject
+     to the license terms contained in, the Revised BSD
+     License set forth in Section 4.c of the IETF Trust's Legal
+     Provisions Relating to IETF Documents
+     (https://trustee.ietf.org/license-info).
 
-    This version of this YANG module is part of RFC XXXX
-    (https://www.rfc-editor.org/info/rfcXXXX); see the RFC itself
-    for full legal notices.";
+     This version of this YANG module is part of RFC XXXX; see
+     the RFC itself for full legal notices.";
 
-  revision "2024-07-03" {
+// RFC Ed.: replace XXXX with actual RFC number and remove
+// this note
+// replace the revision date with the module publication date
+// the format is (year-month-day)
+
+  revision "2024-11-26" {
     description
-      "Revision 1.11";
+      "v1.0 Initial Version";
     reference
-      "This version of this YANG module is part of RFC XXXX
-     (https://www.rfc-editor.org/info/rfcXXXX); see the RFC itself
-     for full legal notices.";
-  }
-  revision "2023-10-23" {
-    description
-      "Revision 1.10";
-    reference
-      "";
-  }
+      "RFC XXXX: YANG model to manage the optical interface
+       parameters for an external transponder in a WDM network";
+    // RFC Ed.: replace XXXX with actual RFC number, update date
+    // information and remove this note
 
-  revision "2023-03-13" {
-    description
-      "Revision 1.9";
-    reference
-      "";
   }
 
-  revision "2022-10-24" {
-    description
-      "Revision 1.8";
-    reference
-      "";
-  }
-
-  revision "2022-01-10" {
-    description
-      "Revision 1.7";
-    reference
-      "";
-  }
-
-  revision "2021-06-28" {
-    description
-      "Revision 1.6";
-    reference
-      "";
-  }
-
-  revision "2020-03-09" {
-    description
-      "Revision 1.5";
-    reference
-      "";
-  }
-
-  revision "2019-11-04" {
-    description
-      "Revision 1.4";
-    reference
-      "";
-  }
-
-  revision "2019-07-08" {
-    description
-      "Revision 1.3";
-    reference
-      "";
-  }
-
-  revision "2018-10-22" {
-    description
-      "Revision 1.2";
-    reference
-      "";
-  }
-
-  revision "2018-03-06" {
-    description
-      "Revision 1.1";
-    reference
-      "";
-  }
-
-  revision "2017-03-06" {
-    description
-      "Revision 1.0";
-    reference
-      "";
-  }
-
-  revision "2016-03-17" {
-    description
-      "Initial revision.";
-    reference
-      "";
-  }
-
-  typedef opt-if-och-tca-types {
+  typedef wdm-if-tca-types {
     type enumeration {
-      enum laser-linewdt {
+      enum laser-linewdt-tca {
         description "The laser linewidth";
       }
       enum tx-power-tca {
@@ -153,11 +69,12 @@ module ietf-ext-xponder-wdm-if {
         description "The tx power TCA";
       }
       enum pol-power-diff-tca {
-        description "The power difference between polarization
-        TCA";
+        description
+          "The power difference between polarization TCA";
       }
       enum pol-skew-diff-tca {
-        description "The skew between the two polarization TCA";
+        description
+          "The skew between the two polarization TCA";
       }
       enum cd-tca {
         description "The chromatic dispersion TCA";
@@ -181,78 +98,62 @@ module ietf-ext-xponder-wdm-if {
         description "Q Factor TCA";
       }
     }
-    description "The different types of TCA's";
+    description
+      "The different types of TCA's for DWDM Interfaces";
   }
 
-  grouping opt-if-och-power {
-    description "Interface optical Power";
 
-    leaf channel-output-power {
-      type l0-types:power-dbm-or-null;
-      description "The output power for this interface in dBm.
-      The setting of the output power is optional";
-    }
-
-    leaf channel-input-power {
-      type l0-types:power-dbm-or-null;
-      config false;
-      description "The current channel input power of this
-      interface";
-    }
-
-    leaf total-input-power {
-      type l0-types:power-dbm-or-null;
-      config false;
-      description "The total input power of this interface";
-    }
-  }
-
-  grouping opt-if-och-tca-thresholds {
+  grouping wdm-if-tca-thresholds {
     description "Thresholds for TCA's";
     leaf tca-type {
-      type opt-if-och-tca-types;
+      type wdm-if-tca-types;
       description "type of the TCA eg TX Power";
     }
     leaf min-threshold {
       type int32;
-      description "A TCA is generated if the variable is less than
-      this value";
+      description
+        "A TCA is generated if the variable is less than
+        this value";
     }
     leaf max-threshold {
       type int32;
-      description "A TCA is generated if the variable is more than
-      this value";
+      description
+        "A TCA is generated if the variable is more than
+        this value";
     }
     leaf threshold-hysteresis {
       type int32;
-      description "The TCA raise/clear hysteresisis around the
-      threshold value to avoi alert flikering";
+      description
+        "The TCA raise/clear hysteresisis around the
+        threshold value to avoi alert flikering";
     }
   }
 
-  grouping opt-if-och-central-frequency {
+  grouping wdm-if-central-frequency {
     description "Interface Central Frequency";
     leaf central-frequency {
       type l0-types:frequency-thz;
-      description "This parameter indicates the frequency of this
-      interface ";
+      description
+        "This parameter indicates the frequency of this
+        interface ";
     }
   }
 
-  grouping opt-if-och-tca-list {
+  grouping wdm-if-tca-list {
     description "List of TCA's";
     leaf number-of-tcas-supported {
       type uint32;
+      config false;
       description "Number of TCAs supported by this interface";
     }
     list tca-list {
       key "tca-type";
       description "List of the TCAs";
-      uses opt-if-och-tca-thresholds;
+      uses wdm-if-tca-thresholds;
     }
   }
 
-  grouping opt-if-och-mode-params {
+  grouping wdm-if-mode-params {
     description "OCh mode parameters";
 
     leaf min-osnr-margin {
@@ -267,12 +168,12 @@ module ietf-ext-xponder-wdm-if {
       config false;
       description "Q-Factor margin to FEC threshold";
     }
-    uses opt-if-och-central-frequency;
-//    uses opt-if-och-fec-tca-thresholds;
-    uses opt-if-och-tca-list;
+    uses wdm-if-central-frequency;
+//    uses wdm-if-fec-tca-thresholds;
+    uses wdm-if-tca-list;
   }
 
-  grouping opt-if-och-statistics {
+  grouping wdm-if-statistics {
     description "OCh statistics";
     leaf cur-osnr {
       type l0-types:snr;
@@ -300,20 +201,20 @@ module ietf-ext-xponder-wdm-if {
     }
   }
 
-  notification opt-if-och-central-frequency-change {
+  notification wdm-if-central-frequency-change {
     description "A change of Central Frequency has been detected";
 
     leaf "if-name" {
       type leafref { path "/if:interfaces/if:interface/if:name"; }
       description "Interface name";
     }
-    container new-opt-if-och-central-frequency {
+    container new-wdm-if-central-frequency {
       description "The new Central Frequency of the interface";
-      uses opt-if-och-central-frequency;
+      uses wdm-if-central-frequency;
     }
   }
 
-  notification opt-if-och-mode-change {
+  notification wdm-if-mode-change {
     description "A change of Mode Template has been detected";
 
     leaf "if-name" {
@@ -326,7 +227,7 @@ module ietf-ext-xponder-wdm-if {
     }
   }
 
-  notification opt-if-och-min-tca {
+  notification wdm-if-min-tca {
     description "A min output TCA notification";
 
     leaf "if-name" {
@@ -334,7 +235,7 @@ module ietf-ext-xponder-wdm-if {
       description "Interface name";
     }
     leaf tca-type {
-      type opt-if-och-tca-types;
+      type wdm-if-tca-types;
       description "Type of TCA for eg min tx power TCA";
     }
   }
@@ -342,7 +243,8 @@ module ietf-ext-xponder-wdm-if {
   augment "/if:interfaces" {
     description
       "Template definition for Optical Interface explicit-modes";
-    container "optIf-templates" {
+    container "wdm-if-templates" {
+      config false;
       description "Optical Interface explicit-mode templates";
       container explicit-transceiver-modes {
         description
@@ -360,14 +262,16 @@ module ietf-ext-xponder-wdm-if {
           uses l0-types:explicit-mode;
         } // list explicit-transceiver-mode
       } // container explicit-transceiver-modes
-    }
-  }
+    }  // container dwdm-if-templates
+  }  // augment interfaces
 
   augment "/if:interfaces/if:interface" {
     description "Parameters for an optical interface";
 
-    container optIfOChRsSs {
-      description "RsSs path configuration for an interface";
+    container wdm-interface {
+      description
+        "Container for capabilities, configuration,
+        current operational data for a DWDM interface";
 
       uses l0-types:transceiver-capabilities {
         augment "supported-modes/supported-mode/mode/"
@@ -377,7 +281,7 @@ module ietf-ext-xponder-wdm-if {
             proper leafref.";
           leaf explicit-transceiver-mode-ref {
             type leafref {
-              path "../../../../../../wdm-if:optIf-templates"
+              path "../../../../../../wdm-if:wdm-if-templates"
                    + "/wdm-if:explicit-transceiver-modes"
                    + "/wdm-if:explicit-transceiver-mode"
                    + "/wdm-if:explicit-transceiver-mode-id";
@@ -389,7 +293,7 @@ module ietf-ext-xponder-wdm-if {
         }
       }
 
-      container current-opt-if-och-mode-params {
+      container wdm-if-parameters {
         leaf configured-mode {
           type union {
             type empty;
@@ -409,8 +313,8 @@ module ietf-ext-xponder-wdm-if {
         }
         uses l0-types:common-transceiver-param;
         description "Current parameters of this interface";
-        uses opt-if-och-mode-params;
-        uses opt-if-och-statistics;
+        uses wdm-if-mode-params;
+        uses wdm-if-statistics;
       }
     }
   }
