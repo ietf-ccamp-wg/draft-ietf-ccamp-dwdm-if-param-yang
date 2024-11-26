@@ -203,8 +203,7 @@ IETF is fine for non-WG IETF submissions -->
    modules.
  </t>
 <t> The Yang model defined in this memo can be used for Optical Parameters
-   monitoring and/or configuration of the endpoints of a multi-vendor
-   IaDI optical link.
+   monitoring and/or configuration of coherent interfaces.
    The use of this model does not guarantee interworking of transceivers
    over a DWDM. Optical path feasibility and interoperability has to be
    determined by tools and algorithms outside the scope of this document.
@@ -231,34 +230,28 @@ IETF is fine for non-WG IETF submissions -->
 but you should provide more than just the abstract. -->
 
 <t>This memo defines a Yang model for managing single
-   channel optical interface parameters of DWDM applications, using the
+   channel optical interface parameters of coherent interfaces supporting DWDM applications, using the
    approach specified in G.698.2.
    This model supports parameters to characterize coherent transceivers
    found in current implementations to specify the mode of operation.
    As application identifiers like those specified in
    ITU-T G.874 <xref target="ITU.G874"/> ITU-T G.698.2 <xref target="ITU.G698.2"/>
-   may not be available we use mode templates instead. 
+   may not always be available, mode templates are used. 
    A mode template describes transceiver characteristics in
    detail and can be identified by a mode-id.
    </t>
 
-<t>This draft refers and supports the RFC7698 and is alignet to the
+<t>This draft refers and supports the RFC7698 and is aligned to the
     definition of RFC9093 and its extension FRC9093-bis.
     Finally the models described in this draft are compliant with the
     models described in draft-ietf-ccamp-optical-impairment-topology-yang
     and draft-ietf-ccamp-flexigrid-tunnel-yang.
 </t>
 
-<t>The YANG model describing and extending the optical
-   parameters allows different vendors and operators to retrieve, provision
-   and exchange information across the multi-vendor IaDI interfaces in
-   an abstract manner.
-</t>
-
- <t>The concept introduced by this YANG model is the notion of a mode.
-    A mode is a combination of parameters or parameter ranges that is supported
+ <t>The  key concept introduced by this YANG model is the notion of a mode.
+    A mode is a combination of parameters and parameter ranges that is supported
     by a transceiver. As an example, operating a device in QPSK mode may use
-    a different FEC and requires less OSNR to reach the FEC limit than the same
+    a different FEC and requires less OSNR than the same
     transceiver operating in QAM16 mode. Given the number of parameters and
     their possible combinations it is important for vendors to be able to
     qualify a set of combinations which is the basis to define a mode.
