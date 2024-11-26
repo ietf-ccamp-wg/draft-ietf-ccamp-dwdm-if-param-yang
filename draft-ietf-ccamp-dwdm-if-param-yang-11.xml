@@ -197,10 +197,7 @@ IETF is fine for non-WG IETF submissions -->
    100G and above Transceivers support coherent modulation, multiple
    modulation formats, multiple FEC codes including some not yet specified
    (or in phase of specification by) ITU-T G.698.2 or any other ITU-T
-   recommendation. Use cases are described in RFC7698. Is to be noted 
-   that the Transceivers can be located on the Transponders (optical 
-   layer) or on the Router (in general packet layer) in form of Pluggable
-   modules.
+   recommendation. Use cases are described in RFC7698. 
  </t>
 <t> The Yang model defined in this memo can be used for Optical Parameters
    monitoring and/or configuration of the endpoints of a multi-vendor
