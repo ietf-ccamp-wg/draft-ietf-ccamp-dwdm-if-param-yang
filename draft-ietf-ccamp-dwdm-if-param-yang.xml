@@ -1306,44 +1306,50 @@ module: ietf-wdm-interface
              +--ro polarization-skew?                  decimal-2
   augment /if:interfaces/if:interface:
     +--rw wdm-interface
-       +--rw supported-modes!
+       +--ro supported-modes!
        |  +--ro supported-mode* [mode-id]
-       |     +--ro mode-id                         string
+       |     +--ro mode-id                           string
        |     +--ro (mode)
        |        +--:(G.698.2)
-       |        |  +--ro standard-mode?            standard-mode
-       |        |  +--ro line-coding-bitrate*      identityref
-       |        |  +--ro min-central-frequency?    frequency-thz
-       |        |  +--ro max-central-frequency?    frequency-thz
-       |        |  +--ro transceiver-tunability?   frequency-ghz
-       |        |  +--ro tx-channel-power-min?     power-dbm
-       |        |  +--ro tx-channel-power-max?     power-dbm
-       |        |  +--ro rx-channel-power-min?     power-dbm
-       |        |  +--ro rx-channel-power-max?     power-dbm
-       |        |  +--ro rx-total-power-max?       power-dbm
+       |        |  +--ro standard-mode?              standard-mode
+       |        |  +--ro line-coding-bitrate*        identityref
+       |        |  +--ro transmitter-tuning-range
+       |        |  |  +--ro min-central-frequency?    frequency-thz
+       |        |  |  +--ro max-central-frequency?    frequency-thz
+       |        |  |  +--ro transceiver-tunability?   frequency-ghz
+       |        |  +--ro tx-channel-power-min?       power-dbm
+       |        |  +--ro tx-channel-power-max?       power-dbm
+       |        |  +--ro rx-channel-power-min?       power-dbm
+       |        |  +--ro rx-channel-power-max?       power-dbm
+       |        |  +--ro rx-total-power-max?         power-dbm
        |        +--:(organizational-mode)
        |        |  +--ro organizational-mode
        |        |     +--ro operational-mode?
        |        |     |       operational-mode
        |        |     +--ro organization-identifier?
        |        |     |       organization-identifier
-       |        |     +--ro line-coding-bitrate*       identityref
-       |        |     +--ro min-central-frequency?     frequency-thz
-       |        |     +--ro max-central-frequency?     frequency-thz
-       |        |     +--ro transceiver-tunability?    frequency-ghz
-       |        |     +--ro tx-channel-power-min?      power-dbm
-       |        |     +--ro tx-channel-power-max?      power-dbm
-       |        |     +--ro rx-channel-power-min?      power-dbm
-       |        |     +--ro rx-channel-power-max?      power-dbm
-       |        |     +--ro rx-total-power-max?        power-dbm
+       |        |     +--ro line-coding-bitrate*        identityref
+       |        |     +--ro transmitter-tuning-range
+       |        |     |  +--ro min-central-frequency?
+       |        |     |  |       frequency-thz
+       |        |     |  +--ro max-central-frequency?
+       |        |     |  |       frequency-thz
+       |        |     |  +--ro transceiver-tunability?
+       |        |     |          frequency-ghz
+       |        |     +--ro tx-channel-power-min?       power-dbm
+       |        |     +--ro tx-channel-power-max?       power-dbm
+       |        |     +--ro rx-channel-power-min?       power-dbm
+       |        |     +--ro rx-channel-power-max?       power-dbm
+       |        |     +--ro rx-total-power-max?         power-dbm
        |        +--:(explicit-mode)
        |           +--ro explicit-mode
-       |              +--ro min-central-frequency?
-       |              |       frequency-thz
-       |              +--ro max-central-frequency?
-       |              |       frequency-thz
-       |              +--ro transceiver-tunability?
-       |              |       frequency-ghz
+       |              +--ro transmitter-tuning-range
+       |              |  +--ro min-central-frequency?
+       |              |  |       frequency-thz
+       |              |  +--ro max-central-frequency?
+       |              |  |       frequency-thz
+       |              |  +--ro transceiver-tunability?
+       |              |          frequency-ghz
        |              +--ro tx-channel-power-min?
        |              |       power-dbm
        |              +--ro tx-channel-power-max?

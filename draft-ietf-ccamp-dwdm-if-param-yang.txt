@@ -5,13 +5,13 @@
 Internet Engineering Task Force                       G. Galimberti, Ed.
 Internet-Draft                                                         C
 Intended status: Standards Track                     D. Hiremagalur, Ed.
-Expires: 19 June 2025                                    G. Grammel, Ed.
+Expires: 21 June 2025                                    G. Grammel, Ed.
                                                                  Juniper
                                                         R. Manzotti, Ed.
                                                                    Cisco
                                                           D. Breuer, Ed.
                                                      DEUTSCHE TELEKOM AG
-                                                        16 December 2024
+                                                        18 December 2024
 
 
 A YANG model to manage the optical interface parameters for an external
@@ -53,7 +53,7 @@ Status of This Memo
 
 
 
-Galimberti, et al.        Expires 19 June 2025                  [Page 1]
+Galimberti, et al.        Expires 21 June 2025                  [Page 1]
 
 Internet-Draft   draft-ietf-ccamp-dwdm-if-param-yang-12    December 2024
 
@@ -63,7 +63,7 @@ Internet-Draft   draft-ietf-ccamp-dwdm-if-param-yang-12    December 2024
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 19 June 2025.
+   This Internet-Draft will expire on 21 June 2025.
 
 Copyright Notice
 
@@ -109,7 +109,7 @@ Table of Contents
 
 
 
-Galimberti, et al.        Expires 19 June 2025                  [Page 2]
+Galimberti, et al.        Expires 21 June 2025                  [Page 2]
 
 Internet-Draft   draft-ietf-ccamp-dwdm-if-param-yang-12    December 2024
 
@@ -165,7 +165,7 @@ Internet-Draft   draft-ietf-ccamp-dwdm-if-param-yang-12    December 2024
 
 
 
-Galimberti, et al.        Expires 19 June 2025                  [Page 3]
+Galimberti, et al.        Expires 21 June 2025                  [Page 3]
 
 Internet-Draft   draft-ietf-ccamp-dwdm-if-param-yang-12    December 2024
 
@@ -221,7 +221,7 @@ Internet-Draft   draft-ietf-ccamp-dwdm-if-param-yang-12    December 2024
 
 
 
-Galimberti, et al.        Expires 19 June 2025                  [Page 4]
+Galimberti, et al.        Expires 21 June 2025                  [Page 4]
 
 Internet-Draft   draft-ietf-ccamp-dwdm-if-param-yang-12    December 2024
 
@@ -277,7 +277,7 @@ Internet-Draft   draft-ietf-ccamp-dwdm-if-param-yang-12    December 2024
 
 
 
-Galimberti, et al.        Expires 19 June 2025                  [Page 5]
+Galimberti, et al.        Expires 21 June 2025                  [Page 5]
 
 Internet-Draft   draft-ietf-ccamp-dwdm-if-param-yang-12    December 2024
 
@@ -333,7 +333,7 @@ Internet-Draft   draft-ietf-ccamp-dwdm-if-param-yang-12    December 2024
 
 
 
-Galimberti, et al.        Expires 19 June 2025                  [Page 6]
+Galimberti, et al.        Expires 21 June 2025                  [Page 6]
 
 Internet-Draft   draft-ietf-ccamp-dwdm-if-param-yang-12    December 2024
 
@@ -389,7 +389,7 @@ Internet-Draft   draft-ietf-ccamp-dwdm-if-param-yang-12    December 2024
 
 
 
-Galimberti, et al.        Expires 19 June 2025                  [Page 7]
+Galimberti, et al.        Expires 21 June 2025                  [Page 7]
 
 Internet-Draft   draft-ietf-ccamp-dwdm-if-param-yang-12    December 2024
 
@@ -445,7 +445,7 @@ Internet-Draft   draft-ietf-ccamp-dwdm-if-param-yang-12    December 2024
 
 
 
-Galimberti, et al.        Expires 19 June 2025                  [Page 8]
+Galimberti, et al.        Expires 21 June 2025                  [Page 8]
 
 Internet-Draft   draft-ietf-ccamp-dwdm-if-param-yang-12    December 2024
 
@@ -501,7 +501,7 @@ Internet-Draft   draft-ietf-ccamp-dwdm-if-param-yang-12    December 2024
 
 
 
-Galimberti, et al.        Expires 19 June 2025                  [Page 9]
+Galimberti, et al.        Expires 21 June 2025                  [Page 9]
 
 Internet-Draft   draft-ietf-ccamp-dwdm-if-param-yang-12    December 2024
 
@@ -557,7 +557,7 @@ Internet-Draft   draft-ietf-ccamp-dwdm-if-param-yang-12    December 2024
 
 
 
-Galimberti, et al.        Expires 19 June 2025                 [Page 10]
+Galimberti, et al.        Expires 21 June 2025                 [Page 10]
 
 Internet-Draft   draft-ietf-ccamp-dwdm-if-param-yang-12    December 2024
 
@@ -613,7 +613,7 @@ Internet-Draft   draft-ietf-ccamp-dwdm-if-param-yang-12    December 2024
 
 
 
-Galimberti, et al.        Expires 19 June 2025                 [Page 11]
+Galimberti, et al.        Expires 21 June 2025                 [Page 11]
 
 Internet-Draft   draft-ietf-ccamp-dwdm-if-param-yang-12    December 2024
 
@@ -669,7 +669,7 @@ Internet-Draft   draft-ietf-ccamp-dwdm-if-param-yang-12    December 2024
 
 
 
-Galimberti, et al.        Expires 19 June 2025                 [Page 12]
+Galimberti, et al.        Expires 21 June 2025                 [Page 12]
 
 Internet-Draft   draft-ietf-ccamp-dwdm-if-param-yang-12    December 2024
 
@@ -725,7 +725,7 @@ Internet-Draft   draft-ietf-ccamp-dwdm-if-param-yang-12    December 2024
 
 
 
-Galimberti, et al.        Expires 19 June 2025                 [Page 13]
+Galimberti, et al.        Expires 21 June 2025                 [Page 13]
 
 Internet-Draft   draft-ietf-ccamp-dwdm-if-param-yang-12    December 2024
 
@@ -781,7 +781,7 @@ Internet-Draft   draft-ietf-ccamp-dwdm-if-param-yang-12    December 2024
 
 
 
-Galimberti, et al.        Expires 19 June 2025                 [Page 14]
+Galimberti, et al.        Expires 21 June 2025                 [Page 14]
 
 Internet-Draft   draft-ietf-ccamp-dwdm-if-param-yang-12    December 2024
 
@@ -837,7 +837,7 @@ Internet-Draft   draft-ietf-ccamp-dwdm-if-param-yang-12    December 2024
 
 
 
-Galimberti, et al.        Expires 19 June 2025                 [Page 15]
+Galimberti, et al.        Expires 21 June 2025                 [Page 15]
 
 Internet-Draft   draft-ietf-ccamp-dwdm-if-param-yang-12    December 2024
 
@@ -893,7 +893,7 @@ Internet-Draft   draft-ietf-ccamp-dwdm-if-param-yang-12    December 2024
 
 
 
-Galimberti, et al.        Expires 19 June 2025                 [Page 16]
+Galimberti, et al.        Expires 21 June 2025                 [Page 16]
 
 Internet-Draft   draft-ietf-ccamp-dwdm-if-param-yang-12    December 2024
 
@@ -949,7 +949,7 @@ Internet-Draft   draft-ietf-ccamp-dwdm-if-param-yang-12    December 2024
 
 
 
-Galimberti, et al.        Expires 19 June 2025                 [Page 17]
+Galimberti, et al.        Expires 21 June 2025                 [Page 17]
 
 Internet-Draft   draft-ietf-ccamp-dwdm-if-param-yang-12    December 2024
 
@@ -1005,7 +1005,7 @@ Internet-Draft   draft-ietf-ccamp-dwdm-if-param-yang-12    December 2024
 
 
 
-Galimberti, et al.        Expires 19 June 2025                 [Page 18]
+Galimberti, et al.        Expires 21 June 2025                 [Page 18]
 
 Internet-Draft   draft-ietf-ccamp-dwdm-if-param-yang-12    December 2024
 
@@ -1061,7 +1061,7 @@ Internet-Draft   draft-ietf-ccamp-dwdm-if-param-yang-12    December 2024
 
 
 
-Galimberti, et al.        Expires 19 June 2025                 [Page 19]
+Galimberti, et al.        Expires 21 June 2025                 [Page 19]
 
 Internet-Draft   draft-ietf-ccamp-dwdm-if-param-yang-12    December 2024
 
@@ -1117,7 +1117,7 @@ Appendix C.  YANG Tree
 
 
 
-Galimberti, et al.        Expires 19 June 2025                 [Page 20]
+Galimberti, et al.        Expires 21 June 2025                 [Page 20]
 
 Internet-Draft   draft-ietf-ccamp-dwdm-if-param-yang-12    December 2024
 
@@ -1165,52 +1165,58 @@ Internet-Draft   draft-ietf-ccamp-dwdm-if-param-yang-12    December 2024
                +--ro polarization-skew?                  decimal-2
     augment /if:interfaces/if:interface:
       +--rw wdm-interface
-         +--rw supported-modes!
+         +--ro supported-modes!
          |  +--ro supported-mode* [mode-id]
-         |     +--ro mode-id                         string
+         |     +--ro mode-id                           string
          |     +--ro (mode)
          |        +--:(G.698.2)
 
 
 
-Galimberti, et al.        Expires 19 June 2025                 [Page 21]
+Galimberti, et al.        Expires 21 June 2025                 [Page 21]
 
 Internet-Draft   draft-ietf-ccamp-dwdm-if-param-yang-12    December 2024
 
 
-         |        |  +--ro standard-mode?            standard-mode
-         |        |  +--ro line-coding-bitrate*      identityref
-         |        |  +--ro min-central-frequency?    frequency-thz
-         |        |  +--ro max-central-frequency?    frequency-thz
-         |        |  +--ro transceiver-tunability?   frequency-ghz
-         |        |  +--ro tx-channel-power-min?     power-dbm
-         |        |  +--ro tx-channel-power-max?     power-dbm
-         |        |  +--ro rx-channel-power-min?     power-dbm
-         |        |  +--ro rx-channel-power-max?     power-dbm
-         |        |  +--ro rx-total-power-max?       power-dbm
+         |        |  +--ro standard-mode?              standard-mode
+         |        |  +--ro line-coding-bitrate*        identityref
+         |        |  +--ro transmitter-tuning-range
+         |        |  |  +--ro min-central-frequency?    frequency-thz
+         |        |  |  +--ro max-central-frequency?    frequency-thz
+         |        |  |  +--ro transceiver-tunability?   frequency-ghz
+         |        |  +--ro tx-channel-power-min?       power-dbm
+         |        |  +--ro tx-channel-power-max?       power-dbm
+         |        |  +--ro rx-channel-power-min?       power-dbm
+         |        |  +--ro rx-channel-power-max?       power-dbm
+         |        |  +--ro rx-total-power-max?         power-dbm
          |        +--:(organizational-mode)
          |        |  +--ro organizational-mode
          |        |     +--ro operational-mode?
          |        |     |       operational-mode
          |        |     +--ro organization-identifier?
          |        |     |       organization-identifier
-         |        |     +--ro line-coding-bitrate*       identityref
-         |        |     +--ro min-central-frequency?     frequency-thz
-         |        |     +--ro max-central-frequency?     frequency-thz
-         |        |     +--ro transceiver-tunability?    frequency-ghz
-         |        |     +--ro tx-channel-power-min?      power-dbm
-         |        |     +--ro tx-channel-power-max?      power-dbm
-         |        |     +--ro rx-channel-power-min?      power-dbm
-         |        |     +--ro rx-channel-power-max?      power-dbm
-         |        |     +--ro rx-total-power-max?        power-dbm
+         |        |     +--ro line-coding-bitrate*        identityref
+         |        |     +--ro transmitter-tuning-range
+         |        |     |  +--ro min-central-frequency?
+         |        |     |  |       frequency-thz
+         |        |     |  +--ro max-central-frequency?
+         |        |     |  |       frequency-thz
+         |        |     |  +--ro transceiver-tunability?
+         |        |     |          frequency-ghz
+         |        |     +--ro tx-channel-power-min?       power-dbm
+         |        |     +--ro tx-channel-power-max?       power-dbm
+         |        |     +--ro rx-channel-power-min?       power-dbm
+         |        |     +--ro rx-channel-power-max?       power-dbm
+         |        |     +--ro rx-total-power-max?         power-dbm
          |        +--:(explicit-mode)
          |           +--ro explicit-mode
-         |              +--ro min-central-frequency?
-         |              |       frequency-thz
-         |              +--ro max-central-frequency?
-         |              |       frequency-thz
-         |              +--ro transceiver-tunability?
-         |              |       frequency-ghz
+         |              +--ro transmitter-tuning-range
+         |              |  +--ro min-central-frequency?
+         |              |  |       frequency-thz
+         |              |  +--ro max-central-frequency?
+         |              |  |       frequency-thz
+         |              |  +--ro transceiver-tunability?
+         |              |          frequency-ghz
          |              +--ro tx-channel-power-min?
          |              |       power-dbm
          |              +--ro tx-channel-power-max?
@@ -1220,20 +1226,20 @@ Internet-Draft   draft-ietf-ccamp-dwdm-if-param-yang-12    December 2024
          |              +--ro rx-channel-power-max?
          |              |       power-dbm
          |              +--ro rx-total-power-max?
+
+
+
+Galimberti, et al.        Expires 21 June 2025                 [Page 22]
+
+Internet-Draft   draft-ietf-ccamp-dwdm-if-param-yang-12    December 2024
+
+
          |              |       power-dbm
          |              +--ro compatible-modes
          |              |  +--ro supported-application-codes*
          |              |  |       -> ../../../../supported-mode/mode-id
          |              |  +--ro supported-organizational-modes*
          |              |          -> ../../../../supported-mode/mode-id
-
-
-
-Galimberti, et al.        Expires 19 June 2025                 [Page 22]
-
-Internet-Draft   draft-ietf-ccamp-dwdm-if-param-yang-12    December 2024
-
-
          |              +--ro explicit-transceiver-mode-ref?   leafref
          +--rw wdm-if-parameters
             +--rw configured-mode?            union
@@ -1277,18 +1283,17 @@ Appendix D.  Applicability examples
    [Editor Note: We may need to refrase the following sentece, OpenROADM
    has now many DWDM interface mode supported]
 
+
+
+Galimberti, et al.        Expires 21 June 2025                 [Page 23]
+
+Internet-Draft   draft-ietf-ccamp-dwdm-if-param-yang-12    December 2024
+
+
    In OpenROADM MSA there is a limited number of DWDM interfaces
    supported.  Basically only the 100G Staircase FEC and 400G oFEC are
    supported and these two kind of interfaces can be easily summarized
    with the "mode-id" and the "application-identifier" strings.
-
-
-
-
-Galimberti, et al.        Expires 19 June 2025                 [Page 23]
-
-Internet-Draft   draft-ietf-ccamp-dwdm-if-param-yang-12    December 2024
-
 
    the models below are enough to identify the interface and few working
    parameters:
@@ -1330,6 +1335,17 @@ Authors' Addresses
    Email: dharinih@juniper.net
 
 
+
+
+
+
+
+
+Galimberti, et al.        Expires 21 June 2025                 [Page 24]
+
+Internet-Draft   draft-ietf-ccamp-dwdm-if-param-yang-12    December 2024
+
+
    Gert Grammel (editor)
    Juniper
    Oskar-Schlemmer Str. 15
@@ -1337,13 +1353,6 @@ Authors' Addresses
    Germany
    Phone: +49 1725186386
    Email: ggrammel@juniper.net
-
-
-
-
-Galimberti, et al.        Expires 19 June 2025                 [Page 24]
-
-Internet-Draft   draft-ietf-ccamp-dwdm-if-param-yang-12    December 2024
 
 
    Roberto Manzotti (editor)
@@ -1388,13 +1397,4 @@ Internet-Draft   draft-ietf-ccamp-dwdm-if-param-yang-12    December 2024
 
 
 
-
-
-
-
-
-
-
-
-
-Galimberti, et al.        Expires 19 June 2025                 [Page 25]
+Galimberti, et al.        Expires 21 June 2025                 [Page 25]
