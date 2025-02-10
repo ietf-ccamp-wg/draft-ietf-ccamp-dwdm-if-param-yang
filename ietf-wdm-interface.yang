@@ -46,7 +46,7 @@ module ietf-wdm-interface {
 // replace the revision date with the module publication date
 // the format is (year-month-day)
 
-  revision "2024-11-26" {
+  revision "2025-02-10" {
     description
       "v1.0 Initial Version";
     reference
@@ -60,7 +60,7 @@ module ietf-wdm-interface {
   typedef wdm-if-tca-types {
     type enumeration {
       enum laser-linewdt-tca {
-        description "The laser linewidth";
+        description "The laser linewidth TCA";
       }
       enum tx-power-tca {
         description "The tx power TCA";
@@ -129,16 +129,6 @@ module ietf-wdm-interface {
     }
   }
 
-  grouping wdm-if-central-frequency {
-    description "Interface Central Frequency";
-    leaf central-frequency {
-      type l0-types:frequency-thz;
-      description
-        "This parameter indicates the frequency of this
-        interface ";
-    }
-  }
-
   grouping wdm-if-tca-list {
     description "List of TCA's";
     leaf number-of-tcas-supported {
@@ -168,7 +158,11 @@ module ietf-wdm-interface {
       config false;
       description "Q-Factor margin to FEC threshold";
     }
-    uses wdm-if-central-frequency;
+    leaf central-frequency {
+      type l0-types:frequency-thz;
+      description
+        "This parameter indicates the nterface Central Frequency";
+    }
 //    uses wdm-if-fec-tca-thresholds;
     uses wdm-if-tca-list;
   }
@@ -201,41 +195,17 @@ module ietf-wdm-interface {
     }
   }
 
-  notification wdm-if-central-frequency-change {
-    description "A change of Central Frequency has been detected";
-
-    leaf "if-name" {
-      type leafref { path "/if:interfaces/if:interface/if:name"; }
-      description "Interface name";
-    }
-    container new-wdm-if-central-frequency {
-      description "The new Central Frequency of the interface";
-      uses wdm-if-central-frequency;
-    }
-  }
-
-  notification wdm-if-mode-change {
-    description "A change of Mode Template has been detected";
-
-    leaf "if-name" {
-      type leafref { path "/if:interfaces/if:interface/if:name"; }
-      description "Interface name";
-    }
-    leaf mode-id {
-      type string { length "1..255"; }
-      description "ID for the OCh mode template";
-    }
-  }
-
   notification wdm-if-min-tca {
     description "A min output TCA notification";
 
     leaf "if-name" {
       type leafref { path "/if:interfaces/if:interface/if:name"; }
+      mandatory true;
       description "Interface name";
     }
     leaf tca-type {
       type wdm-if-tca-types;
+      mandatory true;
       description "Type of TCA for eg min tx power TCA";
     }
   }
@@ -293,7 +263,7 @@ module ietf-wdm-interface {
         }
       }
 
-      container wdm-if-parameters {
+      container current-wdm-if-parameters {
         leaf configured-mode {
           type union {
             type empty;

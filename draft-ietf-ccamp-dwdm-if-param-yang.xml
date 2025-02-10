@@ -82,8 +82,8 @@ Enter the full document title and an abbreviated version
   to use in the page header.
 -->
 
-    <title abbrev="draft-ietf-ccamp-dwdm-if-param-yang-12">  A YANG model to manage
-    the optical interface parameters for an external transponder in a WDM network
+    <title abbrev="draft-ietf-ccamp-dwdm-if-param-yang-12">
+      A YANG data model to manage configurable DWDM optical interfaces
     </title>
 
     <!-- copy the author block as many times as needed, one for each author.-->
@@ -183,7 +183,7 @@ Enter the full document title and an abbreviated version
     <!-- month and day will be generated automatically by XML2RFC;
 be sure the year is current.-->
 
-    <date year="2024" />
+    <date year="2025" />
 
     <!-- IETF area is optional -->
 
@@ -213,9 +213,9 @@ IETF is fine for non-WG IETF submissions -->
    Use cases are described in <xref target="RFC7698"/>.
  </t>
 <t> The Yang model defined in this memo can be used for Optical Parameters
-   monitoring and/or configuration of coherent interfaces.
-   The use of this model does not guarantee interworking of transceivers
-   over a DWDM. Optical path feasibility and interoperability has to be
+   monitoring and/or configuration of DWDM interfaces.
+   The use of this model does not guarantee interworking of DWDM transceivers.
+   Optical path feasibility and interoperability has to be
    determined by tools and algorithms outside the scope of this document.
    The purpose of this model is to program interface parameters to 
    consistently configure the mode of operation of transceivers.
@@ -251,7 +251,7 @@ but you should provide more than just the abstract. -->
    detail and can be identified by a mode-id.
    </t>
 
-<t>This draft refers and supports the <xref target="RFC7698"/> and is aligned to the
+<t>This draft refers to <xref target="RFC7698"/> use cases and is aligned to the
     definition of <xref target="RFC9093"/> and its extension RFC9093-bis.
     Finally, the models described in this draft are compliant with the
     models described in draft-ietf-ccamp-optical-impairment-topology-yang
@@ -259,7 +259,7 @@ but you should provide more than just the abstract. -->
 </t>
 
  <t>The key concept introduced by this YANG model in accordance with
-    RFC9093-bis is the notion of a mode.
+    draft-ietf-ccamp-optical-impairment-topology-yang and RFC9093-bis is the notion of a mode.
     A mode is a combination of parameters and parameter ranges that is supported
     by a transceiver. As an example, operating a device in QPSK modulation may use
     a different FEC and requires less OSNR than the same
@@ -279,10 +279,10 @@ but you should provide more than just the abstract. -->
    modes is provided by the device for each dwdm coherent module (supported-modes).
  </t>
  <t>
-    The YANG model provides a configuration attribute named "current-mode"
+    The YANG model provides a configuration attribute named "configured-mode"
     as a mean to provision the working mode of the interface
-    from that transceiver modes listed as capabilities.
-    Once provisioned, wdm-if-parameters provide the means to configure
+    from the supported-modes listed as capabilities.
+    Once provisioned, current-wdm-if-parameters provide the means to configure
     specific parameters at run time and retrieve configuration, performance
     and operational state information from the module.
     For example, the frequency is a parameter that can be set within
@@ -330,8 +330,8 @@ but you should provide more than just the abstract. -->
     </section>
 
     <!-- ********************************************* -->
-    <section title="Narrative Section">
-      <t>[Editor Note: Changed the section title according to draft-ietf-netmod-rfc8407bis]</t>
+    <section title="Module Description">
+
       <section title="Overview">
      <!-- <t><cref>TEMPLATE TODO The narrative part should include an
      overview section that describes the scope and field of application
@@ -449,11 +449,8 @@ ROADM = Reconfigurable Optical Add Drop Multiplexer
 </section>
   </section>
 
- <section title="Definitions Section">
- <t>[Editor Note: Changed the section title according to draft-ietf-netmod-rfc8407bis]</t>
-  <section title="Optical Interface for external transponder in a WDM network">
-    <t>[Editor Note: we may need to find a better title for this section and
-    </t>
+  <section title="WDM Interface YANG Module">
+
      <t>
     The ietf-wdm-interface is an augment to the ietf-interface. It
     allows the  user to set the operating mode of transceivers as well as other
@@ -461,9 +458,6 @@ ROADM = Reconfigurable Optical Add Drop Multiplexer
     The module provides also threshold settings and notifications to supervise
     measured parameters and notify the client.
   </t>
-  </section>
-
-  <section title="Yang Module">
 
        <t>ietf-wdm-interface is a top level model for the support
        of this feature. It is defined as an extension to ietf interfaces.
@@ -523,7 +517,7 @@ module ietf-wdm-interface {
 // replace the revision date with the module publication date
 // the format is (year-month-day)
 
-  revision "2024-11-26" {
+  revision "2025-02-10" {
     description
       "v1.0 Initial Version";
     reference
@@ -537,7 +531,7 @@ module ietf-wdm-interface {
   typedef wdm-if-tca-types {
     type enumeration {
       enum laser-linewdt-tca {
-        description "The laser linewidth";
+        description "The laser linewidth TCA";
       }
       enum tx-power-tca {
         description "The tx power TCA";
@@ -606,16 +600,6 @@ module ietf-wdm-interface {
     }
   }
 
-  grouping wdm-if-central-frequency {
-    description "Interface Central Frequency";
-    leaf central-frequency {
-      type l0-types:frequency-thz;
-      description
-        "This parameter indicates the frequency of this
-        interface ";
-    }
-  }
-
   grouping wdm-if-tca-list {
     description "List of TCA's";
     leaf number-of-tcas-supported {
@@ -645,7 +629,11 @@ module ietf-wdm-interface {
       config false;
       description "Q-Factor margin to FEC threshold";
     }
-    uses wdm-if-central-frequency;
+    leaf central-frequency {
+      type l0-types:frequency-thz;
+      description
+        "This parameter indicates the nterface Central Frequency";
+    }
 //    uses wdm-if-fec-tca-thresholds;
     uses wdm-if-tca-list;
   }
@@ -678,41 +666,17 @@ module ietf-wdm-interface {
     }
   }
 
-  notification wdm-if-central-frequency-change {
-    description "A change of Central Frequency has been detected";
-
-    leaf "if-name" {
-      type leafref { path "/if:interfaces/if:interface/if:name"; }
-      description "Interface name";
-    }
-    container new-wdm-if-central-frequency {
-      description "The new Central Frequency of the interface";
-      uses wdm-if-central-frequency;
-    }
-  }
-
-  notification wdm-if-mode-change {
-    description "A change of Mode Template has been detected";
-
-    leaf "if-name" {
-      type leafref { path "/if:interfaces/if:interface/if:name"; }
-      description "Interface name";
-    }
-    leaf mode-id {
-      type string { length "1..255"; }
-      description "ID for the OCh mode template";
-    }
-  }
-
   notification wdm-if-min-tca {
     description "A min output TCA notification";
 
     leaf "if-name" {
       type leafref { path "/if:interfaces/if:interface/if:name"; }
+      mandatory true;
       description "Interface name";
     }
     leaf tca-type {
       type wdm-if-tca-types;
+      mandatory true;
       description "Type of TCA for eg min tx power TCA";
     }
   }
@@ -770,7 +734,7 @@ module ietf-wdm-interface {
         }
       }
 
-      container wdm-if-parameters {
+      container current-wdm-if-parameters {
         leaf configured-mode {
           type union {
             type empty;
@@ -803,7 +767,7 @@ module ietf-wdm-interface {
       </figure>
 
     </section>
-      </section>
+
     <section title="Security Considerations">
 
 
@@ -840,7 +804,7 @@ have particular sensitivities/vulnerabilities:
        .
        .
        .
-       +--rw wdm-if-parameters
+       +--rw current-wdm-if-parameters
           +--rw configured-mode?            union
           +--rw line-coding-bitrate?        identityref
           +--rw tx-channel-power?           power-dbm-or-null
@@ -900,8 +864,14 @@ information on writing an IANA clause for a MIB module internet draft.</cref></t
     from the front information. -->
 
    <section title="Acknowledgements">
-  <t>  
-  </t></section>
+        <figure align='left'>
+        <artwork><![CDATA[
+            Italo Busi
+              Huawei Technologies
+              Email: Italo.Busi@huawei.com
+     ]]></artwork>
+      </figure>
+    </section>
 
     <section title="Contributors">
         <figure align='left'>
@@ -963,10 +933,6 @@ information on writing an IANA clause for a MIB module internet draft.</cref></t
               20871 Vimercate (MB)
               Italy
               Sergio.belotti@nokia.com
-
-            Italo Busi
-              Huawei Technologies
-              Email: Italo.Busi@huawei.com
 
             Andreas Burk
               Architekt Network Automation CTO Board
@@ -1366,7 +1332,7 @@ module: ietf-wdm-interface
        |              |  +--ro supported-organizational-modes*
        |              |          -> ../../../../supported-mode/mode-id
        |              +--ro explicit-transceiver-mode-ref?   leafref
-       +--rw wdm-if-parameters
+       +--rw current-wdm-if-parameters
           +--rw configured-mode?            union
           +--rw line-coding-bitrate?        identityref
           +--rw tx-channel-power?           power-dbm-or-null
@@ -1387,17 +1353,9 @@ module: ietf-wdm-interface
           +--ro pre-fec-ber?                decimal64
 
   notifications:
-    +---n wdm-if-central-frequency-change
-    |  +--ro if-name?
-    |  |       -> /if:interfaces/interface/name
-    |  +--ro new-wdm-if-central-frequency
-    |     +--ro central-frequency?   l0-types:frequency-thz
-    +---n wdm-if-mode-change
-    |  +--ro if-name?   -> /if:interfaces/interface/name
-    |  +--ro mode-id?   string
     +---n wdm-if-min-tca
-       +--ro if-name?    -> /if:interfaces/interface/name
-       +--ro tca-type?   wdm-if-tca-types
+       +--ro if-name     -> /if:interfaces/interface/name
+       +--ro tca-type    wdm-if-tca-types
     ]]></artwork>
     </figure>
 
@@ -1422,7 +1380,7 @@ module: ietf-wdm-interface
 module: ietf-wdm-interface
  augment /if:interfaces/if:interface:
     +--rw wdm-interface
-       +--rw wdm-if-parameters
+       +--rw current-wdm-if-parameters
           +--rw configured-mode?          union
           +--rw central-frequency?        l0-types:frequency-thz
           +--rw tx-channel-power?         power-dbm-or-null

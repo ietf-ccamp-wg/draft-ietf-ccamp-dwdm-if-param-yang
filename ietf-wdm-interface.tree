@@ -101,7 +101,7 @@ module: ietf-wdm-interface
        |              |  +--ro supported-organizational-modes*
        |              |          -> ../../../../supported-mode/mode-id
        |              +--ro explicit-transceiver-mode-ref?   leafref
-       +--rw wdm-if-parameters
+       +--rw current-wdm-if-parameters
           +--rw configured-mode?            union
           +--rw line-coding-bitrate?        identityref
           +--rw tx-channel-power?           power-dbm-or-null
@@ -122,14 +122,6 @@ module: ietf-wdm-interface
           +--ro pre-fec-ber?                decimal64
 
   notifications:
-    +---n wdm-if-central-frequency-change
-    |  +--ro if-name?
-    |  |       -> /if:interfaces/interface/name
-    |  +--ro new-wdm-if-central-frequency
-    |     +--ro central-frequency?   l0-types:frequency-thz
-    +---n wdm-if-mode-change
-    |  +--ro if-name?   -> /if:interfaces/interface/name
-    |  +--ro mode-id?   string
     +---n wdm-if-min-tca
-       +--ro if-name?    -> /if:interfaces/interface/name
-       +--ro tca-type?   wdm-if-tca-types
+       +--ro if-name     -> /if:interfaces/interface/name
+       +--ro tca-type    wdm-if-tca-types
