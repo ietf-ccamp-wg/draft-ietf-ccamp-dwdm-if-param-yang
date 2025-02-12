@@ -1,11 +1,11 @@
-module: ietf-ext-xponder-wdm-if
+module: ietf-wdm-interface
 
   augment /if:interfaces:
-    +--rw optIf-templates
-       +--rw explicit-transceiver-modes
-          +--rw explicit-transceiver-mode*
+    +--ro wdm-if-templates
+       +--ro explicit-transceiver-modes
+          +--ro explicit-transceiver-mode*
                   [explicit-transceiver-mode-id]
-             +--rw explicit-transceiver-mode-id        string
+             +--ro explicit-transceiver-mode-id        string
              +--ro line-coding-bitrate?                identityref
              +--ro bitrate?                            uint16
              +--ro max-diff-group-delay?               decimal-2
@@ -40,45 +40,51 @@ module: ietf-ext-xponder-wdm-if
              +--ro tx-polarization-power-difference?   power-ratio
              +--ro polarization-skew?                  decimal-2
   augment /if:interfaces/if:interface:
-    +--rw optIfOChRsSs
-       +--rw supported-modes!
+    +--rw wdm-interface
+       +--ro supported-modes!
        |  +--ro supported-mode* [mode-id]
-       |     +--ro mode-id                         string
+       |     +--ro mode-id                           string
        |     +--ro (mode)
        |        +--:(G.698.2)
-       |        |  +--ro standard-mode?            standard-mode
-       |        |  +--ro line-coding-bitrate*      identityref
-       |        |  +--ro min-central-frequency?    frequency-thz
-       |        |  +--ro max-central-frequency?    frequency-thz
-       |        |  +--ro transceiver-tunability?   frequency-ghz
-       |        |  +--ro tx-channel-power-min?     power-dbm
-       |        |  +--ro tx-channel-power-max?     power-dbm
-       |        |  +--ro rx-channel-power-min?     power-dbm
-       |        |  +--ro rx-channel-power-max?     power-dbm
-       |        |  +--ro rx-total-power-max?       power-dbm
+       |        |  +--ro standard-mode?              standard-mode
+       |        |  +--ro line-coding-bitrate*        identityref
+       |        |  +--ro transmitter-tuning-range
+       |        |  |  +--ro min-central-frequency?    frequency-thz
+       |        |  |  +--ro max-central-frequency?    frequency-thz
+       |        |  |  +--ro transceiver-tunability?   frequency-ghz
+       |        |  +--ro tx-channel-power-min?       power-dbm
+       |        |  +--ro tx-channel-power-max?       power-dbm
+       |        |  +--ro rx-channel-power-min?       power-dbm
+       |        |  +--ro rx-channel-power-max?       power-dbm
+       |        |  +--ro rx-total-power-max?         power-dbm
        |        +--:(organizational-mode)
        |        |  +--ro organizational-mode
        |        |     +--ro operational-mode?
        |        |     |       operational-mode
        |        |     +--ro organization-identifier?
        |        |     |       organization-identifier
-       |        |     +--ro line-coding-bitrate*       identityref
-       |        |     +--ro min-central-frequency?     frequency-thz
-       |        |     +--ro max-central-frequency?     frequency-thz
-       |        |     +--ro transceiver-tunability?    frequency-ghz
-       |        |     +--ro tx-channel-power-min?      power-dbm
-       |        |     +--ro tx-channel-power-max?      power-dbm
-       |        |     +--ro rx-channel-power-min?      power-dbm
-       |        |     +--ro rx-channel-power-max?      power-dbm
-       |        |     +--ro rx-total-power-max?        power-dbm
+       |        |     +--ro line-coding-bitrate*        identityref
+       |        |     +--ro transmitter-tuning-range
+       |        |     |  +--ro min-central-frequency?
+       |        |     |  |       frequency-thz
+       |        |     |  +--ro max-central-frequency?
+       |        |     |  |       frequency-thz
+       |        |     |  +--ro transceiver-tunability?
+       |        |     |          frequency-ghz
+       |        |     +--ro tx-channel-power-min?       power-dbm
+       |        |     +--ro tx-channel-power-max?       power-dbm
+       |        |     +--ro rx-channel-power-min?       power-dbm
+       |        |     +--ro rx-channel-power-max?       power-dbm
+       |        |     +--ro rx-total-power-max?         power-dbm
        |        +--:(explicit-mode)
        |           +--ro explicit-mode
-       |              +--ro min-central-frequency?
-       |              |       frequency-thz
-       |              +--ro max-central-frequency?
-       |              |       frequency-thz
-       |              +--ro transceiver-tunability?
-       |              |       frequency-ghz
+       |              +--ro transmitter-tuning-range
+       |              |  +--ro min-central-frequency?
+       |              |  |       frequency-thz
+       |              |  +--ro max-central-frequency?
+       |              |  |       frequency-thz
+       |              |  +--ro transceiver-tunability?
+       |              |          frequency-ghz
        |              +--ro tx-channel-power-min?
        |              |       power-dbm
        |              +--ro tx-channel-power-max?
@@ -95,7 +101,7 @@ module: ietf-ext-xponder-wdm-if
        |              |  +--ro supported-organizational-modes*
        |              |          -> ../../../../supported-mode/mode-id
        |              +--ro explicit-transceiver-mode-ref?   leafref
-       +--rw current-opt-if-och-mode-params
+       +--rw current-wdm-if-parameters
           +--rw configured-mode?            union
           +--rw line-coding-bitrate?        identityref
           +--rw tx-channel-power?           power-dbm-or-null
@@ -104,9 +110,9 @@ module: ietf-ext-xponder-wdm-if
           +--ro min-osnr-margin?            l0-types:snr-or-null
           +--ro q-margin?                   int32
           +--rw central-frequency?          l0-types:frequency-thz
-          +--rw number-of-tcas-supported?   uint32
+          +--ro number-of-tcas-supported?   uint32
           +--rw tca-list* [tca-type]
-          |  +--rw tca-type                opt-if-och-tca-types
+          |  +--rw tca-type                wdm-if-tca-types
           |  +--rw min-threshold?          int32
           |  +--rw max-threshold?          int32
           |  +--rw threshold-hysteresis?   int32
@@ -116,14 +122,6 @@ module: ietf-ext-xponder-wdm-if
           +--ro pre-fec-ber?                decimal64
 
   notifications:
-    +---n opt-if-och-central-frequency-change
-    |  +--ro if-name?
-    |  |       -> /if:interfaces/interface/name
-    |  +--ro new-opt-if-och-central-frequency
-    |     +--ro central-frequency?   l0-types:frequency-thz
-    +---n opt-if-och-mode-change
-    |  +--ro if-name?   -> /if:interfaces/interface/name
-    |  +--ro mode-id?   string
-    +---n opt-if-och-min-tca
-       +--ro if-name?    -> /if:interfaces/interface/name
-       +--ro tca-type?   opt-if-och-tca-types
+    +---n wdm-if-min-tca
+       +--ro if-name     -> /if:interfaces/interface/name
+       +--ro tca-type    wdm-if-tca-types
