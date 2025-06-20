@@ -45,6 +45,11 @@ document to be edited.
 <!ENTITY rfc8446 SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.8446.xml">
 <!ENTITY rfc9000 SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.9000.xml">
 <!ENTITY rfc4252 SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.4252.xml">
+<!ENTITY rfc7950 SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.7950.xml">
+<!ENTITY rfc8407 SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.8407.xml">
+<!ENTITY rfc8407bis SYSTEM "https://datatracker.ietf.org/doc/bibxml3/draft-ietf-netmod-rfc8407bis-28.xml">
+<!ENTITY I-Doit SYSTEM "https://datatracker.ietf.org/doc/bibxml3/draft-ietf-ccamp-optical-impairment-topology-yang-18.xml">
+<!ENTITY rfc9093bis SYSTEM "https://datatracker.ietf.org/doc/bibxml3/draft-ietf-ccamp-rfc9093-bis-15.xml">
 ]>
 
 <?rfc toc="yes"?>
@@ -245,29 +250,31 @@ but you should provide more than just the abstract. -->
    This model supports parameters to characterize coherent transceivers
    found in current implementations to specify the mode of operation.
    As application identifiers like those specified in
-   <xref target="ITU-T G.874"/> and <xref target="ITU-T G.698.2"/>
+   <xref target="ITU-T G.874"/>, <xref target="ITU-T G.874.1"/>
+   and <xref target="ITU-T G.698.2"/>
    may not always be available, mode templates are used.
    A mode template describes transceiver characteristics in
    detail and can be identified by a mode-id.
    </t>
 
 <t>This draft refers to <xref target="RFC7698"/> use cases and is aligned to the
-    definition of <xref target="RFC9093"/> and its extension RFC9093-bis.
+    definition of <xref target="RFC9093"/> and its update in I-D <xref target="I-D.ietf-ccamp-rfc9093-bis"/>.
     Finally, the models described in this draft are compliant with the
     models described in draft-ietf-ccamp-optical-impairment-topology-yang
     and draft-ietf-ccamp-wdm-tunnel-yang.
 </t>
 
  <t>The key concept introduced by this YANG model in accordance with
-    draft-ietf-ccamp-optical-impairment-topology-yang and RFC9093-bis is the notion of a mode.
+    I-D <xref target="I-D.ietf-ccamp-optical-impairment-topology-yang"/> and <xref target="I-D.ietf-ccamp-rfc9093-bis"/>
+    is the notion of a mode.
     A mode is a combination of parameters and parameter ranges that is supported
     by a transceiver. As an example, operating a device in QPSK modulation may use
     a different FEC and requires less OSNR than the same
     transceiver operating in QAM16 modulation. Given the number of parameters and
     their possible combinations it is important for vendors to be able to
     qualify a set of combinations which is the basis to define a mode.
-    As described in draft-ccamp-optical-impairment-topology-yang and
-    modeled in RFC9093-bis, the list of transceiver modes  (properly
+    As described in <xref target="I-D.ietf-ccamp-optical-impairment-topology-yang"/> and modeled in
+    <xref target="I-D.ietf-ccamp-rfc9093-bis"/>, the list of transceiver modes  (properly
     classified in standard, organizational and explicit modes)
     provide information about the transmission capabilities
     of an optical DWDM interface. The same approach is used in this RFC
@@ -323,8 +330,15 @@ but you should provide more than just the abstract. -->
      <t>The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL
       NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and
      "OPTIONAL" in this document are to be interpreted as described
-     in BCP 14 <xref target="RFC2119"> </xref> <xref target="RFC8174"/> when,
+     in BCP 14 <xref target="RFC2119"/> <xref target="RFC8174"/> when,
      and  only when,  they appear in all capitals, as shown here.
+     </t>
+
+     <t>
+       This document is structured following the guidelines for
+       documents containing YANG Data defined in
+       <xref target="RFC8407"/> and its update in
+       <xref target="I-D.ietf-netmod-rfc8407bis"/>
      </t>
 
     </section>
@@ -773,7 +787,8 @@ module ietf-wdm-interface {
 
 <t>
   This section is modeled after the template described in Section 3.7
-of [RFC8407bis].
+  of <xref target="RFC8407"/> and the update in draft
+  <xref target="I-D.ietf-netmod-rfc8407bis"/>.
 </t>
 <t>The "ietf-wdm-interface" YANG module defines a data model that is
 designed to be accessed via YANG-based management protocols, such as
@@ -833,31 +848,34 @@ certainly require justification during IESG review.</cref></t>
     </section>
 
     <section title="IANA Considerations">
+  <t>
+   This document registers the following namespace URIs in the IETF XML
+   registry <xref target="RFC3688"/>:
+  </t>
 
-<t><cref>TEMPLATE TODO In order to comply with IESG policy as set forth in
-http://www.ietf.org/ID-Checklist.html, every Internet-Draft that is
-submitted to the IESG for publication MUST contain an IANA
-Considerations section. The requirements for this section vary depending
-what actions are required of the IANA. See "Guidelines for Writing an IANA
-Considerations Section in RFCs" [RFC8126]. and see [RFC4181] section 3.5 for more
-information on writing an IANA clause for a MIB module internet draft.</cref></t>
+  <figure><artwork><![CDATA[
+--------------------------------------------------------------------
+URI: urn:ietf:params:xml:ns:yang:ietf-wdm-interface
+URI: urn:ietf:params:xml:ns:yang:ietf-interfaces:ietf-wdm-interface
+Registrant Contact: The IESG.
+XML: N/A, the requested URI is an XML namespace.
+--------------------------------------------------------------------
+]]></artwork>
+  </figure>
+  <t>
+   This document registers the following YANG modules in the YANG
+   Module Names registry <xref target="RFC7950"/>:</t>
 
-    <t>This document registers a URI in the IETF XML registry
-      <xref target="RFC3688"/>. Following the format in <xref target="RFC3688"/>,
-      the following registration is requested to be made:</t>
+  <figure><artwork><![CDATA[
+--------------------------------------------------------------------
+name:      ietf-wdm-interface
+namespace: urn:ietf:params:xml:ns:yang:ietf-wdm-interface
+prefix:    wdm-if
+reference: RFC XXXX (TDB)
+--------------------------------------------------------------------
+]]></artwork>
+  </figure>
 
-    <t>URI: urn:ietf:params:xml:ns:yang:ietf-interfaces:ietf-wdm-interface</t>
-    <t>Registrant Contact: The IESG.</t>
-
-    <t>XML: N/A, the requested URI is an XML namespace.</t>
-
-    <t>This document registers a YANG module in the YANG Module Names
-       registry [RFC6020].</t>
-
-    <t>This document registers a YANG module in the YANG Module Names
-       registry [RFC6020].</t>
-
-    <t>prefix: ietf-wdm-interface reference: RFC XXXX</t>
     </section>
 
     <!-- The Author's Addresses section will be generated automatically by XML2RFC
@@ -981,19 +999,19 @@ version of the specification in question.
         <!-- TEMPLATE TODO rfc2119, 2578, 2579, and 2580 are required to support MIB
       module boilerplate text. -->
 
-      &rfc2863;
+<!--      &rfc2863;-->
 
       &rfc2119;
 
-      &rfc2578;
+<!--      &rfc2578;-->
 
-      &rfc2579;
+<!--      &rfc2579;-->
 
-      &rfc2580;
+<!--      &rfc2580;-->
 
-      &rfc3591;
+<!--      &rfc3591;-->
 
-      &rfc6205;
+<!--      &rfc6205;-->
 
       &rfc8199;
 
@@ -1004,6 +1022,10 @@ version of the specification in question.
       &rfc8174;
 
       &rfc9093;
+
+      &rfc9093bis;
+
+      &I-Doit;
 
       &rfc3688;
 
@@ -1018,6 +1040,8 @@ version of the specification in question.
       &rfc9000;
 
       &rfc4252;
+
+      &rfc7950;
 
      <reference anchor="ITU-T G.698.2">
      <front>
@@ -1038,6 +1062,7 @@ version of the specification in question.
   <front>
       <title>
       Interface for the Optical Transport Network (OTN)
+        TODO: Add reference in the text or remove this
       </title>
       <author>
       <organization>International Telecommunications Union</organization>
@@ -1052,6 +1077,7 @@ version of the specification in question.
   <front>
       <title>
       Architecture of optical transport networks
+        TODO: Add reference in the text or remove this
       </title>
       <author>
       <organization>International Telecommunications Union</organization>
@@ -1066,6 +1092,7 @@ version of the specification in question.
   <front>
       <title>
       Characteristics of optical transport network hierarchy equipment functional blocks
+        TODO: Add reference in the text or remove this
       </title>
       <author>
       <organization>International Telecommunications Union</organization>
@@ -1111,6 +1138,7 @@ version of the specification in question.
   <front>
       <title>
       Optical transport network physical layer interfaces
+        TODO: Add reference in the text or remove this
       </title>
       <author>
       <organization>International Telecommunications Union</organization>
@@ -1126,6 +1154,7 @@ version of the specification in question.
       <title>
       End-to-end error performance parameters and objectives for international,
       constant bit-rate digital paths and connections
+        TODO: Add reference in the text or remove this
       </title>
       <author>
       <organization>International Telecommunications Union</organization>
@@ -1142,6 +1171,7 @@ version of the specification in question.
       <title>
       Error performance parameters and objectives for multi-operator international
       paths within the Optical Transport Network (OTN)
+        TODO: Add reference in the text or remove this
       </title>
       <author>
       <organization>International Telecommunications Union</organization>
@@ -1156,6 +1186,7 @@ version of the specification in question.
   <front>
       <title>
       Spectral grids for WDM applications: DWDM frequency grid
+        TODO: Add reference in the text or remove this
       </title>
       <author>
       <organization>International Telecommunications Union</organization>
@@ -1169,6 +1200,7 @@ version of the specification in question.
   <front>
       <title>
       Common equipment management function requirements
+        TODO: Add reference in the text or remove this
       </title>
       <author>
       <organization>International Telecommunications Union</organization>
@@ -1185,13 +1217,18 @@ version of the specification in question.
     <references title="Informative References">
 
 <!--  RFC3410 is required to support the boilerplate text.-->
-      &rfc3410;
+<!--      &rfc3410;-->
 
-      &rfc7991;
+<!--      &rfc7991;-->
 
-      &rfc4181;
+<!--      &rfc4181;-->
 
-     &rfc4054;
+<!--     &rfc4054;-->
+
+      &rfc8407;
+
+      &rfc8407bis;
+
     </references>
 
     <!--
