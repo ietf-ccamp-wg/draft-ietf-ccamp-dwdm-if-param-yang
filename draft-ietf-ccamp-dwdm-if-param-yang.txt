@@ -97,7 +97,7 @@ Table of Contents
    8.  Contributors  . . . . . . . . . . . . . . . . . . . . . . . .  14
    9.  References  . . . . . . . . . . . . . . . . . . . . . . . . .  15
      9.1.  Normative References  . . . . . . . . . . . . . . . . . .  15
-     9.2.  Informative References  . . . . . . . . . . . . . . . . .  18
+     9.2.  Informative References  . . . . . . . . . . . . . . . . .  19
    Appendix A.  Change Log . . . . . . . . . . . . . . . . . . . . .  19
    Appendix B.  Open Issues  . . . . . . . . . . . . . . . . . . . .  19
    Appendix C.  YANG Tree  . . . . . . . . . . . . . . . . . . . . .  19
@@ -129,9 +129,9 @@ Internet-Draft   draft-ietf-ccamp-dwdm-if-param-yang-12        June 2025
    This draft refers to [RFC7698] use cases and is aligned to the
    definition of [RFC9093] and its update in I-D
    [I-D.ietf-ccamp-rfc9093-bis].  Finally, the models described in this
-   draft are compliant with the models described in draft-ietf-ccamp-
-   optical-impairment-topology-yang and draft-ietf-ccamp-wdm-tunnel-
-   yang.
+   draft are compliant with the models described in
+   [I-D.ietf-ccamp-optical-impairment-topology-yang] and
+   [I-D.ietf-ccamp-wdm-tunnel-yang].
 
    The key concept introduced by this YANG model in accordance with I-D
    [I-D.ietf-ccamp-optical-impairment-topology-yang] and
@@ -877,9 +877,26 @@ Internet-Draft   draft-ietf-ccamp-dwdm-if-param-yang-12        June 2025
               2025, <https://datatracker.ietf.org/doc/html/draft-ietf-
               ccamp-optical-impairment-topology-yang-18>.
 
+   [I-D.ietf-ccamp-wdm-tunnel-yang]
+              Guo, A., Belotti, S., Galimberti, G., de Madrid, U. A.,
+              and D. P. Burrero, "A YANG Data Model for WDM Tunnels",
+              Work in Progress, Internet-Draft, draft-ietf-ccamp-wdm-
+              tunnel-yang-04, 23 April 2025,
+              <https://datatracker.ietf.org/doc/html/draft-ietf-ccamp-
+              wdm-tunnel-yang-04>.
+
    [RFC3688]  Mealling, M., "The IETF XML Registry", BCP 81, RFC 3688,
               DOI 10.17487/RFC3688, January 2004,
               <https://www.rfc-editor.org/info/rfc3688>.
+
+
+
+
+
+Galimberti, et al.      Expires 22 December 2025               [Page 16]
+
+Internet-Draft   draft-ietf-ccamp-dwdm-if-param-yang-12        June 2025
+
 
    [RFC8040]  Bierman, A., Bjorklund, M., and K. Watsen, "RESTCONF
               Protocol", RFC 8040, DOI 10.17487/RFC8040, January 2017,
@@ -889,14 +906,6 @@ Internet-Draft   draft-ietf-ccamp-dwdm-if-param-yang-12        June 2025
               and A. Bierman, Ed., "Network Configuration Protocol
               (NETCONF)", RFC 6241, DOI 10.17487/RFC6241, June 2011,
               <https://www.rfc-editor.org/info/rfc6241>.
-
-
-
-
-Galimberti, et al.      Expires 22 December 2025               [Page 16]
-
-Internet-Draft   draft-ietf-ccamp-dwdm-if-param-yang-12        June 2025
-
 
    [RFC8341]  Bierman, A. and M. Bjorklund, "Network Configuration
               Access Control Model", STD 91, RFC 8341,
@@ -937,15 +946,6 @@ Internet-Draft   draft-ietf-ccamp-dwdm-if-param-yang-12        June 2025
               optical transport networks TODO: Add reference in the text
               or remove this", ITU-T Recommendation G.872, January 2017.
 
-   [ITU-T_G.798]
-              International Telecommunications Union, "Characteristics
-              of optical transport network hierarchy equipment
-              functional blocks TODO: Add reference in the text or
-              remove this", ITU-T Recommendation G.798, December 2017.
-
-
-
-
 
 
 
@@ -953,6 +953,12 @@ Galimberti, et al.      Expires 22 December 2025               [Page 17]
 
 Internet-Draft   draft-ietf-ccamp-dwdm-if-param-yang-12        June 2025
 
+
+   [ITU-T_G.798]
+              International Telecommunications Union, "Characteristics
+              of optical transport network hierarchy equipment
+              functional blocks TODO: Add reference in the text or
+              remove this", ITU-T Recommendation G.798, December 2017.
 
    [ITU-T_G.874]
               International Telecommunications Union, "Management
@@ -997,18 +1003,14 @@ Internet-Draft   draft-ietf-ccamp-dwdm-if-param-yang-12        June 2025
               the text or remove this", ITU-T Recommendation G.7710,
               August 2017.
 
-9.2.  Informative References
-
-
-
-
-
 
 
 Galimberti, et al.      Expires 22 December 2025               [Page 18]
 
 Internet-Draft   draft-ietf-ccamp-dwdm-if-param-yang-12        June 2025
 
+
+9.2.  Informative References
 
    [RFC8407]  Bierman, A., "Guidelines for Authors and Reviewers of
               Documents Containing YANG Data Models", BCP 216, RFC 8407,
@@ -1056,8 +1058,6 @@ Appendix C.  YANG Tree
                +--ro bitrate?                            uint16
                +--ro max-diff-group-delay?               decimal-2
                +--ro max-chromatic-dispersion?           decimal-2
-               +--ro cd-penalty* [cd-value]
-               |  +--ro cd-value         decimal-2
 
 
 
@@ -1066,6 +1066,8 @@ Galimberti, et al.      Expires 22 December 2025               [Page 19]
 Internet-Draft   draft-ietf-ccamp-dwdm-if-param-yang-12        June 2025
 
 
+               +--ro cd-penalty* [cd-value]
+               |  +--ro cd-value         decimal-2
                |  +--ro penalty-value    union
                +--ro max-polarization-mode-dispersion?   decimal-2
                +--ro pmd-penalty* [pmd-value]
@@ -1112,8 +1114,6 @@ Internet-Draft   draft-ietf-ccamp-dwdm-if-param-yang-12        June 2025
          |        |  +--ro rx-channel-power-max?       power-dbm
          |        |  +--ro rx-total-power-max?         power-dbm
          |        +--:(organizational-mode)
-         |        |  +--ro organizational-mode
-         |        |     +--ro operational-mode?
 
 
 
@@ -1122,6 +1122,8 @@ Galimberti, et al.      Expires 22 December 2025               [Page 20]
 Internet-Draft   draft-ietf-ccamp-dwdm-if-param-yang-12        June 2025
 
 
+         |        |  +--ro organizational-mode
+         |        |     +--ro operational-mode?
          |        |     |       operational-mode
          |        |     +--ro organization-identifier?
          |        |     |       organization-identifier
@@ -1168,8 +1170,6 @@ Internet-Draft   draft-ietf-ccamp-dwdm-if-param-yang-12        June 2025
             +--rw line-coding-bitrate?        identityref
             +--rw tx-channel-power?           power-dbm-or-null
             +--ro rx-channel-power?           power-dbm-or-null
-            +--ro rx-total-power?             power-dbm-or-null
-            +--ro min-osnr-margin?            l0-types:snr-or-null
 
 
 
@@ -1178,6 +1178,8 @@ Galimberti, et al.      Expires 22 December 2025               [Page 21]
 Internet-Draft   draft-ietf-ccamp-dwdm-if-param-yang-12        June 2025
 
 
+            +--ro rx-total-power?             power-dbm-or-null
+            +--ro min-osnr-margin?            l0-types:snr-or-null
             +--ro q-margin?                   int32
             +--rw central-frequency?          l0-types:frequency-thz
             +--ro number-of-tcas-supported?   uint32
@@ -1212,8 +1214,6 @@ Appendix D.  Applicability examples
 
    the models below are enough to identify the interface and few working
    parameters:
-
-
 
 
 

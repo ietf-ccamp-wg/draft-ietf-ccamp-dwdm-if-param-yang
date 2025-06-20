@@ -50,6 +50,7 @@ document to be edited.
 <!ENTITY rfc8407bis SYSTEM "https://datatracker.ietf.org/doc/bibxml3/draft-ietf-netmod-rfc8407bis-28.xml">
 <!ENTITY I-Doit SYSTEM "https://datatracker.ietf.org/doc/bibxml3/draft-ietf-ccamp-optical-impairment-topology-yang-18.xml">
 <!ENTITY rfc9093bis SYSTEM "https://datatracker.ietf.org/doc/bibxml3/draft-ietf-ccamp-rfc9093-bis-15.xml">
+<!ENTITY I-Ddwdmtunnel SYSTEM "https://datatracker.ietf.org/doc/bibxml3/draft-ietf-ccamp-wdm-tunnel-yang-04.xml">
 ]>
 
 <?rfc toc="yes"?>
@@ -260,8 +261,8 @@ but you should provide more than just the abstract. -->
 <t>This draft refers to <xref target="RFC7698"/> use cases and is aligned to the
     definition of <xref target="RFC9093"/> and its update in I-D <xref target="I-D.ietf-ccamp-rfc9093-bis"/>.
     Finally, the models described in this draft are compliant with the
-    models described in draft-ietf-ccamp-optical-impairment-topology-yang
-    and draft-ietf-ccamp-wdm-tunnel-yang.
+    models described in <xref target="I-D.ietf-ccamp-optical-impairment-topology-yang"/>
+    and <xref target="I-D.ietf-ccamp-wdm-tunnel-yang"/>.
 </t>
 
  <t>The key concept introduced by this YANG model in accordance with
@@ -1026,6 +1027,8 @@ version of the specification in question.
       &rfc9093bis;
 
       &I-Doit;
+
+      &I-Ddwdmtunnel;
 
       &rfc3688;
 
