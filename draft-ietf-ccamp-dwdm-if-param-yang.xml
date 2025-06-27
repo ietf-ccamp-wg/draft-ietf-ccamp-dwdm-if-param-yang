@@ -393,6 +393,13 @@ ROADM = Reconfigurable Optical Add Drop Multiplexer
 ]]></artwork>
 <postamble> from Fig. 5.1/G.698.2 </postamble>
 </figure>
+  <t>
+    This document introduce the ietf-wdm-interface model as an augment
+    to the ietf-interface. It allows the client to set the operating
+    mode of transceivers as well as other operational parameters.
+    The module provides also threshold settings and notifications
+    to supervise measured parameters and notify the client.
+  </t>
       </section>
       <section title="YANG Module Classification">
         <t>The model defined in this RFC is meant to be used as Device Model as per
@@ -466,16 +473,10 @@ ROADM = Reconfigurable Optical Add Drop Multiplexer
 
   <section title="WDM Interface YANG Module">
 
-     <t>
-    The ietf-wdm-interface is an augment to the ietf-interface. It
-    allows the  user to set the operating mode of transceivers as well as other
-    operational parameters.
-    The module provides also threshold settings and notifications to supervise
-    measured parameters and notify the client.
-  </t>
 
-       <t>ietf-wdm-interface is a top level model for the support
-       of this feature. It is defined as an extension to ietf interfaces.
+       <t>ietf-wdm-interface is a top level model that allow the
+         configuration and monitoring of DWDM interfaces optical
+         parameters. It is defined as an extension to ietf-interfaces.
        </t>
 
        <figure align='left'>
