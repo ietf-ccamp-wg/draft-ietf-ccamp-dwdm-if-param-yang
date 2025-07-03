@@ -100,7 +100,7 @@ Enter the full document title and an abbreviated version
 
     <author fullname="Gabriele Galimberti" role="editor"
             surname="G. Galimberti">
-      <organization>C</organization>
+      <organization>Nokia</organization>
 
       <address>
         <postal>
@@ -251,8 +251,8 @@ but you should provide more than just the abstract. -->
    This model supports parameters to characterize coherent transceivers
    found in current implementations to specify the mode of operation.
    As application identifiers like those specified in
-   <xref target="ITU-T G.874"/>, <xref target="ITU-T G.874.1"/>
-   and <xref target="ITU-T G.698.2"/>
+   <xref target="ITU-T G.874"/>, <xref target="ITU-T G.874.1"/>,
+   <xref target="ITU-T G.698.2"/> and <xref target="ITU-T G.959.1"/>
    may not always be available, mode templates are used.
    A mode template describes transceiver characteristics in
    detail and can be identified by a mode-id.
@@ -292,7 +292,7 @@ but you should provide more than just the abstract. -->
     from the supported-modes listed as capabilities.
     Once provisioned, current-wdm-if-parameters provide the means to configure
     specific parameters at run time and retrieve configuration, performance
-    and operational state information from the module.
+    and operational state information from the module <xref target="ITU-T G.7710"/>.
     For example, the frequency is a parameter that can be set within
     min/max boundaries defined in the current mode. Laser Temperature,
     RX/TX optical power, RX OSNR, etc. however are read-only parameters
@@ -428,7 +428,7 @@ ROADM = Reconfigurable Optical Add Drop Multiplexer
 
    <t hangText="central frequency:"> <vspace blankLines="0" />
    This parameter indicates the Central frequency value that Ss and Rs will be
-   set to work (in THz)</t>
+   set to work (in THz) <xref target="ITU-T G.694.1"/></t>
 
    </list>
    </t>
@@ -544,6 +544,9 @@ module ietf-wdm-interface {
 
   }
 
+  // Need to verify if the enumeration is the proper approach for
+  // the tca-types, since the list is not fully standardized adn
+  // subject to change.
   typedef wdm-if-tca-types {
     type enumeration {
       enum laser-linewdt-tca {
@@ -594,25 +597,31 @@ module ietf-wdm-interface {
     description "Thresholds for TCA's";
     leaf tca-type {
       type wdm-if-tca-types;
-      description "type of the TCA eg TX Power";
+      description
+        "type of the TCA that identify the
+        performance measurement, eg TX Power";
     }
-    leaf min-threshold {
+    leaf tca-name {
+      type string;
+      description
+        "A name of the TCT athat explain the TCA scope
+        eg 'Low TX Power'";
+    }
+    leaf raise-threshold {
       type int32;
       description
-        "A TCA is generated if the variable is less than
-        this value";
+        "A TCA is raised if the variable cross this threshold:
+        - if raise-threshold is greather than clear-threshold
+        (or clear threshold is not defined), the TCA
+        is raised when the value exceeed the threshold
+        - ir raise-threshol is smaller that clear-threshold, the
+        TCA is raised when the value fall below the threshold";
     }
-    leaf max-threshold {
+    leaf clear-threshold {
       type int32;
       description
-        "A TCA is generated if the variable is more than
-        this value";
-    }
-    leaf threshold-hysteresis {
-      type int32;
-      description
-        "The TCA raise/clear hysteresisis around the
-        threshold value to avoi alert flikering";
+        "A TCA cleared when the variable cross the threshold in the
+        direction defined for raise-threshold";
     }
   }
 
@@ -682,7 +691,7 @@ module ietf-wdm-interface {
     }
   }
 
-  notification wdm-if-min-tca {
+  notification wdm-if-tca {
     description "A min output TCA notification";
 
     leaf "if-name" {
@@ -694,6 +703,12 @@ module ietf-wdm-interface {
       type wdm-if-tca-types;
       mandatory true;
       description "Type of TCA for eg min tx power TCA";
+    }
+    leaf tca-name {
+      type string;
+      description
+        "A name of the TCT athat explain the TCA scope
+        eg 'Low TX Power'";
     }
   }
 
@@ -857,7 +872,7 @@ certainly require justification during IESG review.</cref></t>
 
   <figure><artwork><![CDATA[
 --------------------------------------------------------------------
-URI: urn:ietf:params:xml:ns:yang:ietf-wdm-interface
+<!--URI: urn:ietf:params:xml:ns:yang:ietf-wdm-interface-->
 URI: urn:ietf:params:xml:ns:yang:ietf-interfaces:ietf-wdm-interface
 Registrant Contact: The IESG.
 XML: N/A, the requested URI is an XML namespace.
@@ -937,7 +952,7 @@ reference: RFC XXXX (TDB)
               email Manuel.Paul@telekom.de
 
             Walid Wakim
-              Infinera
+              Nokia
               ILLINOIS
               UNITED STATES
               email wakims@mac.com
@@ -1001,19 +1016,19 @@ version of the specification in question.
         <!-- TEMPLATE TODO rfc2119, 2578, 2579, and 2580 are required to support MIB
       module boilerplate text. -->
 
-<!--      &rfc2863;-->
+<!--      &rfc2863; ok, snmp-->
 
       &rfc2119;
 
-<!--      &rfc2578;-->
+<!--      &rfc2578; ok snmp -->
 
-<!--      &rfc2579;-->
+<!--      &rfc2579; ok snmp-->
 
-<!--      &rfc2580;-->
+<!--      &rfc2580; ok snmp -->
 
-<!--      &rfc3591;-->
+<!--      &rfc3591; snmp, related to optrical interfaces -->
 
-<!--      &rfc6205;-->
+<!--      &rfc6205; GMPLS LSC-->
 
       &rfc8199;
 
@@ -1056,7 +1071,7 @@ version of the specification in question.
           <author>
           <organization>International Telecommunications Union</organization>
           </author>
-          <date month="November" year="2009"/>
+          <date month="November" year="2018"/>
       </front>
           <seriesInfo name="ITU-T" value="Recommendation G.698.2"/>
       </reference>
@@ -1066,12 +1081,12 @@ version of the specification in question.
   <front>
       <title>
       Interface for the Optical Transport Network (OTN)
-        TODO: Add reference in the text or remove this
+<!--        TODO: Add reference in the text or remove this-->
       </title>
       <author>
       <organization>International Telecommunications Union</organization>
       </author>
-      <date month="June" year="2016"/>
+      <date month="June" year="2020"/>
   </front>
           <seriesInfo name="ITU-T" value="Recommendation G.709"/>
       </reference>
@@ -1081,12 +1096,12 @@ version of the specification in question.
   <front>
       <title>
       Architecture of optical transport networks
-        TODO: Add reference in the text or remove this
+<!--        TODO: Add reference in the text or remove this-->
       </title>
       <author>
       <organization>International Telecommunications Union</organization>
       </author>
-      <date month="January" year="2017"/>
+      <date month="June" year="2020"/>
   </front>
           <seriesInfo name="ITU-T" value="Recommendation G.872"/>
       </reference>
@@ -1096,12 +1111,12 @@ version of the specification in question.
   <front>
       <title>
       Characteristics of optical transport network hierarchy equipment functional blocks
-        TODO: Add reference in the text or remove this
+<!--        TODO: Add reference in the text or remove this -->
       </title>
       <author>
       <organization>International Telecommunications Union</organization>
       </author>
-      <date month="December" year="2017"/>
+      <date month="September" year="2023"/>
   </front>
           <seriesInfo name="ITU-T" value="Recommendation G.798"/>
       </reference>
@@ -1142,30 +1157,13 @@ version of the specification in question.
   <front>
       <title>
       Optical transport network physical layer interfaces
-        TODO: Add reference in the text or remove this
       </title>
       <author>
       <organization>International Telecommunications Union</organization>
       </author>
-      <date month="November" year="2009"/>
+      <date month="January" year="2024"/>
   </front>
           <seriesInfo name="ITU-T" value="Recommendation G.959.1"/>
-      </reference>
-
-
-  <reference anchor="ITU-T G.826">
-  <front>
-      <title>
-      End-to-end error performance parameters and objectives for international,
-      constant bit-rate digital paths and connections
-        TODO: Add reference in the text or remove this
-      </title>
-      <author>
-      <organization>International Telecommunications Union</organization>
-      </author>
-      <date month="December" year="2002"/>
-  </front>
-          <seriesInfo name="ITU-T" value="Recommendation G.826"/>
       </reference>
 
 
@@ -1175,7 +1173,8 @@ version of the specification in question.
       <title>
       Error performance parameters and objectives for multi-operator international
       paths within the Optical Transport Network (OTN)
-        TODO: Add reference in the text or remove this
+<!--        TODO: Add reference in the text or remove this
+            We can probably remove also this one related to OTN PM -->
       </title>
       <author>
       <organization>International Telecommunications Union</organization>
@@ -1190,12 +1189,11 @@ version of the specification in question.
   <front>
       <title>
       Spectral grids for WDM applications: DWDM frequency grid
-        TODO: Add reference in the text or remove this
       </title>
       <author>
       <organization>International Telecommunications Union</organization>
       </author>
-      <date month="February" year="2012"/>
+      <date month="October" year="2020"/>
   </front>
           <seriesInfo name="ITU-T" value="Recommendation G.694.1"/>
       </reference>
@@ -1204,12 +1202,11 @@ version of the specification in question.
   <front>
       <title>
       Common equipment management function requirements
-        TODO: Add reference in the text or remove this
       </title>
       <author>
       <organization>International Telecommunications Union</organization>
       </author>
-      <date month="August" year="2017"/>
+      <date month="October" year="2020"/>
   </front>
           <seriesInfo name="ITU-T" value="Recommendation G.7710"/>
       </reference>
@@ -1320,10 +1317,13 @@ module: ietf-wdm-interface
        |        +--:(G.698.2)
        |        |  +--ro standard-mode?              standard-mode
        |        |  +--ro line-coding-bitrate*        identityref
-       |        |  +--ro transmitter-tuning-range
-       |        |  |  +--ro min-central-frequency?    frequency-thz
-       |        |  |  +--ro max-central-frequency?    frequency-thz
-       |        |  |  +--ro transceiver-tunability?   frequency-ghz
+       |        |  +--ro transceiver-tuning-range
+       |        |  |  +--ro min-central-frequency?
+       |        |  |  |       frequency-thz
+       |        |  |  +--ro max-central-frequency?
+       |        |  |  |       frequency-thz
+       |        |  |  +--ro transceiver-tunability-granularity?
+       |        |  |          frequency-ghz
        |        |  +--ro tx-channel-power-min?       power-dbm
        |        |  +--ro tx-channel-power-max?       power-dbm
        |        |  +--ro rx-channel-power-min?       power-dbm
@@ -1336,12 +1336,12 @@ module: ietf-wdm-interface
        |        |     +--ro organization-identifier?
        |        |     |       organization-identifier
        |        |     +--ro line-coding-bitrate*        identityref
-       |        |     +--ro transmitter-tuning-range
+       |        |     +--ro transceiver-tuning-range
        |        |     |  +--ro min-central-frequency?
        |        |     |  |       frequency-thz
        |        |     |  +--ro max-central-frequency?
        |        |     |  |       frequency-thz
-       |        |     |  +--ro transceiver-tunability?
+       |        |     |  +--ro transceiver-tunability-granularity?
        |        |     |          frequency-ghz
        |        |     +--ro tx-channel-power-min?       power-dbm
        |        |     +--ro tx-channel-power-max?       power-dbm
@@ -1350,12 +1350,12 @@ module: ietf-wdm-interface
        |        |     +--ro rx-total-power-max?         power-dbm
        |        +--:(explicit-mode)
        |           +--ro explicit-mode
-       |              +--ro transmitter-tuning-range
+       |              +--ro transceiver-tuning-range
        |              |  +--ro min-central-frequency?
        |              |  |       frequency-thz
        |              |  +--ro max-central-frequency?
        |              |  |       frequency-thz
-       |              |  +--ro transceiver-tunability?
+       |              |  +--ro transceiver-tunability-granularity?
        |              |          frequency-ghz
        |              +--ro tx-channel-power-min?
        |              |       power-dbm
@@ -1384,19 +1384,20 @@ module: ietf-wdm-interface
           +--rw central-frequency?          l0-types:frequency-thz
           +--ro number-of-tcas-supported?   uint32
           +--rw tca-list* [tca-type]
-          |  +--rw tca-type                wdm-if-tca-types
-          |  +--rw min-threshold?          int32
-          |  +--rw max-threshold?          int32
-          |  +--rw threshold-hysteresis?   int32
+          |  +--rw tca-type           wdm-if-tca-types
+          |  +--rw tca-name?          string
+          |  +--rw raise-threshold?   int32
+          |  +--rw clear-threshold?   int32
           +--ro cur-osnr?                   l0-types:snr
           +--ro cur-q-factor?               int32
           +--ro uncorrected-words?          uint64
           +--ro pre-fec-ber?                decimal64
 
   notifications:
-    +---n wdm-if-min-tca
+    +---n wdm-if-tca
        +--ro if-name     -> /if:interfaces/interface/name
        +--ro tca-type    wdm-if-tca-types
+       +--ro tca-name?   string
     ]]></artwork>
     </figure>
 
