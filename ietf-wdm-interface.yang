@@ -117,17 +117,17 @@ module ietf-wdm-interface {
     leaf tca-name {
       type string;
       description
-        "A name of the TCT athat explain the TCA scope
+        "A name of the TCA that explain the TCA scope
         eg 'Low TX Power'";
     }
     leaf raise-threshold {
       type int32;
       description
         "A TCA is raised if the variable cross this threshold:
-        - if raise-threshold is greather than clear-threshold
+        - if raise-threshold is greater than clear-threshold
         (or clear threshold is not defined), the TCA
-        is raised when the value exceeed the threshold
-        - ir raise-threshol is smaller that clear-threshold, the
+        is raised when the value exceed the threshold
+        - if raise-threshold is smaller that clear-threshold, the
         TCA is raised when the value fall below the threshold";
     }
     leaf clear-threshold {
@@ -170,7 +170,7 @@ module ietf-wdm-interface {
     leaf central-frequency {
       type l0-types:frequency-thz;
       description
-        "This parameter indicates the nterface Central Frequency";
+        "This parameter indicates the interface Central Frequency";
     }
 //    uses wdm-if-fec-tca-thresholds;
     uses wdm-if-tca-list;
@@ -205,7 +205,7 @@ module ietf-wdm-interface {
   }
 
   notification wdm-if-tca {
-    description "A min output TCA notification";
+    description "A output TCA notification";
 
     leaf "if-name" {
       type leafref { path "/if:interfaces/if:interface/if:name"; }
@@ -220,7 +220,7 @@ module ietf-wdm-interface {
     leaf tca-name {
       type string;
       description
-        "A name of the TCT athat explain the TCA scope
+        "A name of the TCA that explain the TCA scope
         eg 'Low TX Power'";
     }
   }
@@ -272,7 +272,7 @@ module ietf-wdm-interface {
                    + "/wdm-if:explicit-transceiver-mode-id";
             }
             description
-              "The refernce to the explicit transceiver
+              "The reference to the explicit transceiver
               mode template.";
           }
         }
