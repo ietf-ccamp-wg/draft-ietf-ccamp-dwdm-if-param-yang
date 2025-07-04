@@ -45,6 +45,12 @@ document to be edited.
 <!ENTITY rfc8446 SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.8446.xml">
 <!ENTITY rfc9000 SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.9000.xml">
 <!ENTITY rfc4252 SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.4252.xml">
+<!ENTITY rfc7950 SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.7950.xml">
+<!ENTITY rfc8407 SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.8407.xml">
+<!ENTITY rfc8407bis SYSTEM "https://datatracker.ietf.org/doc/bibxml3/draft-ietf-netmod-rfc8407bis-28.xml">
+<!ENTITY I-Doit SYSTEM "https://datatracker.ietf.org/doc/bibxml3/draft-ietf-ccamp-optical-impairment-topology-yang-18.xml">
+<!ENTITY rfc9093bis SYSTEM "https://datatracker.ietf.org/doc/bibxml3/draft-ietf-ccamp-rfc9093-bis-15.xml">
+<!ENTITY I-Ddwdmtunnel SYSTEM "https://datatracker.ietf.org/doc/bibxml3/draft-ietf-ccamp-wdm-tunnel-yang-04.xml">
 ]>
 
 <?rfc toc="yes"?>
@@ -94,7 +100,7 @@ Enter the full document title and an abbreviated version
 
     <author fullname="Gabriele Galimberti" role="editor"
             surname="G. Galimberti">
-      <organization>C</organization>
+      <organization>Nokia</organization>
 
       <address>
         <postal>
@@ -245,29 +251,31 @@ but you should provide more than just the abstract. -->
    This model supports parameters to characterize coherent transceivers
    found in current implementations to specify the mode of operation.
    As application identifiers like those specified in
-   <xref target="ITU-T G.874"/> and <xref target="ITU-T G.698.2"/>
+   <xref target="ITU-T G.874"/>, <xref target="ITU-T G.874.1"/>,
+   <xref target="ITU-T G.698.2"/> and <xref target="ITU-T G.959.1"/>
    may not always be available, mode templates are used.
    A mode template describes transceiver characteristics in
    detail and can be identified by a mode-id.
    </t>
 
 <t>This draft refers to <xref target="RFC7698"/> use cases and is aligned to the
-    definition of <xref target="RFC9093"/> and its extension RFC9093-bis.
+    definition of <xref target="RFC9093"/> and its update in I-D <xref target="I-D.ietf-ccamp-rfc9093-bis"/>.
     Finally, the models described in this draft are compliant with the
-    models described in draft-ietf-ccamp-optical-impairment-topology-yang
-    and draft-ietf-ccamp-wdm-tunnel-yang.
+    models described in <xref target="I-D.ietf-ccamp-optical-impairment-topology-yang"/>
+    and <xref target="I-D.ietf-ccamp-wdm-tunnel-yang"/>.
 </t>
 
  <t>The key concept introduced by this YANG model in accordance with
-    draft-ietf-ccamp-optical-impairment-topology-yang and RFC9093-bis is the notion of a mode.
+    I-D <xref target="I-D.ietf-ccamp-optical-impairment-topology-yang"/> and <xref target="I-D.ietf-ccamp-rfc9093-bis"/>
+    is the notion of a mode.
     A mode is a combination of parameters and parameter ranges that is supported
     by a transceiver. As an example, operating a device in QPSK modulation may use
     a different FEC and requires less OSNR than the same
     transceiver operating in QAM16 modulation. Given the number of parameters and
     their possible combinations it is important for vendors to be able to
     qualify a set of combinations which is the basis to define a mode.
-    As described in draft-ccamp-optical-impairment-topology-yang and
-    modeled in RFC9093-bis, the list of transceiver modes  (properly
+    As described in <xref target="I-D.ietf-ccamp-optical-impairment-topology-yang"/> and modeled in
+    <xref target="I-D.ietf-ccamp-rfc9093-bis"/>, the list of transceiver modes  (properly
     classified in standard, organizational and explicit modes)
     provide information about the transmission capabilities
     of an optical DWDM interface. The same approach is used in this RFC
@@ -284,7 +292,7 @@ but you should provide more than just the abstract. -->
     from the supported-modes listed as capabilities.
     Once provisioned, current-wdm-if-parameters provide the means to configure
     specific parameters at run time and retrieve configuration, performance
-    and operational state information from the module.
+    and operational state information from the module <xref target="ITU-T G.7710"/>.
     For example, the frequency is a parameter that can be set within
     min/max boundaries defined in the current mode. Laser Temperature,
     RX/TX optical power, RX OSNR, etc. however are read-only parameters
@@ -323,8 +331,15 @@ but you should provide more than just the abstract. -->
      <t>The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL
       NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and
      "OPTIONAL" in this document are to be interpreted as described
-     in BCP 14 <xref target="RFC2119"> </xref> <xref target="RFC8174"/> when,
+     in BCP 14 <xref target="RFC2119"/> <xref target="RFC8174"/> when,
      and  only when,  they appear in all capitals, as shown here.
+     </t>
+
+     <t>
+       This document is structured following the guidelines for
+       documents containing YANG Data defined in
+       <xref target="RFC8407"/> and its update in
+       <xref target="I-D.ietf-netmod-rfc8407bis"/>
      </t>
 
     </section>
@@ -378,6 +393,13 @@ ROADM = Reconfigurable Optical Add Drop Multiplexer
 ]]></artwork>
 <postamble> from Fig. 5.1/G.698.2 </postamble>
 </figure>
+  <t>
+    This document introduce the ietf-wdm-interface model as an augment
+    to the ietf-interface. It allows the client to set the operating
+    mode of transceivers as well as other operational parameters.
+    The module provides also threshold settings and notifications
+    to supervise measured parameters and notify the client.
+  </t>
       </section>
       <section title="YANG Module Classification">
         <t>The model defined in this RFC is meant to be used as Device Model as per
@@ -406,7 +428,7 @@ ROADM = Reconfigurable Optical Add Drop Multiplexer
 
    <t hangText="central frequency:"> <vspace blankLines="0" />
    This parameter indicates the Central frequency value that Ss and Rs will be
-   set to work (in THz)</t>
+   set to work (in THz) <xref target="ITU-T G.694.1"/></t>
 
    </list>
    </t>
@@ -451,16 +473,10 @@ ROADM = Reconfigurable Optical Add Drop Multiplexer
 
   <section title="WDM Interface YANG Module">
 
-     <t>
-    The ietf-wdm-interface is an augment to the ietf-interface. It
-    allows the  user to set the operating mode of transceivers as well as other
-    operational parameters.
-    The module provides also threshold settings and notifications to supervise
-    measured parameters and notify the client.
-  </t>
 
-       <t>ietf-wdm-interface is a top level model for the support
-       of this feature. It is defined as an extension to ietf interfaces.
+       <t>ietf-wdm-interface is a top level model that allow the
+         configuration and monitoring of DWDM interfaces optical
+         parameters. It is defined as an extension to ietf-interfaces.
        </t>
 
        <figure align='left'>
@@ -528,6 +544,9 @@ module ietf-wdm-interface {
 
   }
 
+  // Need to verify if the enumeration is the proper approach for
+  // the tca-types, since the list is not fully standardized adn
+  // subject to change.
   typedef wdm-if-tca-types {
     type enumeration {
       enum laser-linewdt-tca {
@@ -578,25 +597,31 @@ module ietf-wdm-interface {
     description "Thresholds for TCA's";
     leaf tca-type {
       type wdm-if-tca-types;
-      description "type of the TCA eg TX Power";
+      description
+        "type of the TCA that identify the
+        performance measurement, eg TX Power";
     }
-    leaf min-threshold {
+    leaf tca-name {
+      type string;
+      description
+        "A name of the TCA that explain the TCA scope
+        eg 'Low TX Power'";
+    }
+    leaf raise-threshold {
       type int32;
       description
-        "A TCA is generated if the variable is less than
-        this value";
+        "A TCA is raised if the variable cross this threshold:
+        - if raise-threshold is greater than clear-threshold
+        (or clear threshold is not defined), the TCA
+        is raised when the value exceed the threshold
+        - if raise-threshold is smaller that clear-threshold, the
+        TCA is raised when the value fall below the threshold";
     }
-    leaf max-threshold {
+    leaf clear-threshold {
       type int32;
       description
-        "A TCA is generated if the variable is more than
-        this value";
-    }
-    leaf threshold-hysteresis {
-      type int32;
-      description
-        "The TCA raise/clear hysteresisis around the
-        threshold value to avoi alert flikering";
+        "A TCA cleared when the variable cross the threshold in the
+        direction defined for raise-threshold";
     }
   }
 
@@ -632,7 +657,7 @@ module ietf-wdm-interface {
     leaf central-frequency {
       type l0-types:frequency-thz;
       description
-        "This parameter indicates the nterface Central Frequency";
+        "This parameter indicates the interface Central Frequency";
     }
 //    uses wdm-if-fec-tca-thresholds;
     uses wdm-if-tca-list;
@@ -666,8 +691,8 @@ module ietf-wdm-interface {
     }
   }
 
-  notification wdm-if-min-tca {
-    description "A min output TCA notification";
+  notification wdm-if-tca {
+    description "A output TCA notification";
 
     leaf "if-name" {
       type leafref { path "/if:interfaces/if:interface/if:name"; }
@@ -678,6 +703,12 @@ module ietf-wdm-interface {
       type wdm-if-tca-types;
       mandatory true;
       description "Type of TCA for eg min tx power TCA";
+    }
+    leaf tca-name {
+      type string;
+      description
+        "A name of the TCA that explain the TCA scope
+        eg 'Low TX Power'";
     }
   }
 
@@ -728,7 +759,7 @@ module ietf-wdm-interface {
                    + "/wdm-if:explicit-transceiver-mode-id";
             }
             description
-              "The refernce to the explicit transceiver
+              "The reference to the explicit transceiver
               mode template.";
           }
         }
@@ -773,7 +804,8 @@ module ietf-wdm-interface {
 
 <t>
   This section is modeled after the template described in Section 3.7
-of [RFC8407bis].
+  of <xref target="RFC8407"/> and the update in draft
+  <xref target="I-D.ietf-netmod-rfc8407bis"/>.
 </t>
 <t>The "ietf-wdm-interface" YANG module defines a data model that is
 designed to be accessed via YANG-based management protocols, such as
@@ -833,31 +865,34 @@ certainly require justification during IESG review.</cref></t>
     </section>
 
     <section title="IANA Considerations">
+  <t>
+   This document registers the following namespace URIs in the IETF XML
+   registry <xref target="RFC3688"/>:
+  </t>
 
-<t><cref>TEMPLATE TODO In order to comply with IESG policy as set forth in
-http://www.ietf.org/ID-Checklist.html, every Internet-Draft that is
-submitted to the IESG for publication MUST contain an IANA
-Considerations section. The requirements for this section vary depending
-what actions are required of the IANA. See "Guidelines for Writing an IANA
-Considerations Section in RFCs" [RFC8126]. and see [RFC4181] section 3.5 for more
-information on writing an IANA clause for a MIB module internet draft.</cref></t>
+  <figure><artwork><![CDATA[
+--------------------------------------------------------------------
+<!--URI: urn:ietf:params:xml:ns:yang:ietf-wdm-interface-->
+URI: urn:ietf:params:xml:ns:yang:ietf-interfaces:ietf-wdm-interface
+Registrant Contact: The IESG.
+XML: N/A, the requested URI is an XML namespace.
+--------------------------------------------------------------------
+]]></artwork>
+  </figure>
+  <t>
+   This document registers the following YANG modules in the YANG
+   Module Names registry <xref target="RFC7950"/>:</t>
 
-    <t>This document registers a URI in the IETF XML registry
-      <xref target="RFC3688"/>. Following the format in <xref target="RFC3688"/>,
-      the following registration is requested to be made:</t>
+  <figure><artwork><![CDATA[
+--------------------------------------------------------------------
+name:      ietf-wdm-interface
+namespace: urn:ietf:params:xml:ns:yang:ietf-wdm-interface
+prefix:    wdm-if
+reference: RFC XXXX (TDB)
+--------------------------------------------------------------------
+]]></artwork>
+  </figure>
 
-    <t>URI: urn:ietf:params:xml:ns:yang:ietf-interfaces:ietf-wdm-interface</t>
-    <t>Registrant Contact: The IESG.</t>
-
-    <t>XML: N/A, the requested URI is an XML namespace.</t>
-
-    <t>This document registers a YANG module in the YANG Module Names
-       registry [RFC6020].</t>
-
-    <t>This document registers a YANG module in the YANG Module Names
-       registry [RFC6020].</t>
-
-    <t>prefix: ietf-wdm-interface reference: RFC XXXX</t>
     </section>
 
     <!-- The Author's Addresses section will be generated automatically by XML2RFC
@@ -917,7 +952,7 @@ information on writing an IANA clause for a MIB module internet draft.</cref></t
               email Manuel.Paul@telekom.de
 
             Walid Wakim
-              Infinera
+              Nokia
               ILLINOIS
               UNITED STATES
               email wakims@mac.com
@@ -981,19 +1016,19 @@ version of the specification in question.
         <!-- TEMPLATE TODO rfc2119, 2578, 2579, and 2580 are required to support MIB
       module boilerplate text. -->
 
-      &rfc2863;
+<!--      &rfc2863; ok, snmp-->
 
       &rfc2119;
 
-      &rfc2578;
+<!--      &rfc2578; ok snmp -->
 
-      &rfc2579;
+<!--      &rfc2579; ok snmp-->
 
-      &rfc2580;
+<!--      &rfc2580; ok snmp -->
 
-      &rfc3591;
+<!--      &rfc3591; snmp, related to optrical interfaces -->
 
-      &rfc6205;
+<!--      &rfc6205; GMPLS LSC-->
 
       &rfc8199;
 
@@ -1004,6 +1039,12 @@ version of the specification in question.
       &rfc8174;
 
       &rfc9093;
+
+      &rfc9093bis;
+
+      &I-Doit;
+
+      &I-Ddwdmtunnel;
 
       &rfc3688;
 
@@ -1019,6 +1060,8 @@ version of the specification in question.
 
       &rfc4252;
 
+      &rfc7950;
+
      <reference anchor="ITU-T G.698.2">
      <front>
          <title>
@@ -1028,7 +1071,7 @@ version of the specification in question.
           <author>
           <organization>International Telecommunications Union</organization>
           </author>
-          <date month="November" year="2009"/>
+          <date month="November" year="2018"/>
       </front>
           <seriesInfo name="ITU-T" value="Recommendation G.698.2"/>
       </reference>
@@ -1038,11 +1081,12 @@ version of the specification in question.
   <front>
       <title>
       Interface for the Optical Transport Network (OTN)
+<!--        TODO: Add reference in the text or remove this-->
       </title>
       <author>
       <organization>International Telecommunications Union</organization>
       </author>
-      <date month="June" year="2016"/>
+      <date month="June" year="2020"/>
   </front>
           <seriesInfo name="ITU-T" value="Recommendation G.709"/>
       </reference>
@@ -1052,11 +1096,12 @@ version of the specification in question.
   <front>
       <title>
       Architecture of optical transport networks
+<!--        TODO: Add reference in the text or remove this-->
       </title>
       <author>
       <organization>International Telecommunications Union</organization>
       </author>
-      <date month="January" year="2017"/>
+      <date month="June" year="2020"/>
   </front>
           <seriesInfo name="ITU-T" value="Recommendation G.872"/>
       </reference>
@@ -1066,11 +1111,12 @@ version of the specification in question.
   <front>
       <title>
       Characteristics of optical transport network hierarchy equipment functional blocks
+<!--        TODO: Add reference in the text or remove this -->
       </title>
       <author>
       <organization>International Telecommunications Union</organization>
       </author>
-      <date month="December" year="2017"/>
+      <date month="September" year="2023"/>
   </front>
           <seriesInfo name="ITU-T" value="Recommendation G.798"/>
       </reference>
@@ -1115,24 +1161,9 @@ version of the specification in question.
       <author>
       <organization>International Telecommunications Union</organization>
       </author>
-      <date month="November" year="2009"/>
+      <date month="January" year="2024"/>
   </front>
           <seriesInfo name="ITU-T" value="Recommendation G.959.1"/>
-      </reference>
-
-
-  <reference anchor="ITU-T G.826">
-  <front>
-      <title>
-      End-to-end error performance parameters and objectives for international,
-      constant bit-rate digital paths and connections
-      </title>
-      <author>
-      <organization>International Telecommunications Union</organization>
-      </author>
-      <date month="December" year="2002"/>
-  </front>
-          <seriesInfo name="ITU-T" value="Recommendation G.826"/>
       </reference>
 
 
@@ -1142,6 +1173,8 @@ version of the specification in question.
       <title>
       Error performance parameters and objectives for multi-operator international
       paths within the Optical Transport Network (OTN)
+<!--        TODO: Add reference in the text or remove this
+            We can probably remove also this one related to OTN PM -->
       </title>
       <author>
       <organization>International Telecommunications Union</organization>
@@ -1160,7 +1193,7 @@ version of the specification in question.
       <author>
       <organization>International Telecommunications Union</organization>
       </author>
-      <date month="February" year="2012"/>
+      <date month="October" year="2020"/>
   </front>
           <seriesInfo name="ITU-T" value="Recommendation G.694.1"/>
       </reference>
@@ -1173,7 +1206,7 @@ version of the specification in question.
       <author>
       <organization>International Telecommunications Union</organization>
       </author>
-      <date month="August" year="2017"/>
+      <date month="October" year="2020"/>
   </front>
           <seriesInfo name="ITU-T" value="Recommendation G.7710"/>
       </reference>
@@ -1185,13 +1218,18 @@ version of the specification in question.
     <references title="Informative References">
 
 <!--  RFC3410 is required to support the boilerplate text.-->
-      &rfc3410;
+<!--      &rfc3410;-->
 
-      &rfc7991;
+<!--      &rfc7991;-->
 
-      &rfc4181;
+<!--      &rfc4181;-->
 
-     &rfc4054;
+<!--     &rfc4054;-->
+
+      &rfc8407;
+
+      &rfc8407bis;
+
     </references>
 
     <!--
@@ -1279,10 +1317,13 @@ module: ietf-wdm-interface
        |        +--:(G.698.2)
        |        |  +--ro standard-mode?              standard-mode
        |        |  +--ro line-coding-bitrate*        identityref
-       |        |  +--ro transmitter-tuning-range
-       |        |  |  +--ro min-central-frequency?    frequency-thz
-       |        |  |  +--ro max-central-frequency?    frequency-thz
-       |        |  |  +--ro transceiver-tunability?   frequency-ghz
+       |        |  +--ro transceiver-tuning-range
+       |        |  |  +--ro min-central-frequency?
+       |        |  |  |       frequency-thz
+       |        |  |  +--ro max-central-frequency?
+       |        |  |  |       frequency-thz
+       |        |  |  +--ro transceiver-tunability-granularity?
+       |        |  |          frequency-ghz
        |        |  +--ro tx-channel-power-min?       power-dbm
        |        |  +--ro tx-channel-power-max?       power-dbm
        |        |  +--ro rx-channel-power-min?       power-dbm
@@ -1295,12 +1336,12 @@ module: ietf-wdm-interface
        |        |     +--ro organization-identifier?
        |        |     |       organization-identifier
        |        |     +--ro line-coding-bitrate*        identityref
-       |        |     +--ro transmitter-tuning-range
+       |        |     +--ro transceiver-tuning-range
        |        |     |  +--ro min-central-frequency?
        |        |     |  |       frequency-thz
        |        |     |  +--ro max-central-frequency?
        |        |     |  |       frequency-thz
-       |        |     |  +--ro transceiver-tunability?
+       |        |     |  +--ro transceiver-tunability-granularity?
        |        |     |          frequency-ghz
        |        |     +--ro tx-channel-power-min?       power-dbm
        |        |     +--ro tx-channel-power-max?       power-dbm
@@ -1309,12 +1350,12 @@ module: ietf-wdm-interface
        |        |     +--ro rx-total-power-max?         power-dbm
        |        +--:(explicit-mode)
        |           +--ro explicit-mode
-       |              +--ro transmitter-tuning-range
+       |              +--ro transceiver-tuning-range
        |              |  +--ro min-central-frequency?
        |              |  |       frequency-thz
        |              |  +--ro max-central-frequency?
        |              |  |       frequency-thz
-       |              |  +--ro transceiver-tunability?
+       |              |  +--ro transceiver-tunability-granularity?
        |              |          frequency-ghz
        |              +--ro tx-channel-power-min?
        |              |       power-dbm
@@ -1343,19 +1384,20 @@ module: ietf-wdm-interface
           +--rw central-frequency?          l0-types:frequency-thz
           +--ro number-of-tcas-supported?   uint32
           +--rw tca-list* [tca-type]
-          |  +--rw tca-type                wdm-if-tca-types
-          |  +--rw min-threshold?          int32
-          |  +--rw max-threshold?          int32
-          |  +--rw threshold-hysteresis?   int32
+          |  +--rw tca-type           wdm-if-tca-types
+          |  +--rw tca-name?          string
+          |  +--rw raise-threshold?   int32
+          |  +--rw clear-threshold?   int32
           +--ro cur-osnr?                   l0-types:snr
           +--ro cur-q-factor?               int32
           +--ro uncorrected-words?          uint64
           +--ro pre-fec-ber?                decimal64
 
   notifications:
-    +---n wdm-if-min-tca
+    +---n wdm-if-tca
        +--ro if-name     -> /if:interfaces/interface/name
        +--ro tca-type    wdm-if-tca-types
+       +--ro tca-name?   string
     ]]></artwork>
     </figure>
 
@@ -1363,9 +1405,9 @@ module: ietf-wdm-interface
     </section>
 
     <section title="Applicability examples">
-      <t>As an examample here below is the way and OpenROADM compliant equipment 
+      <t>As an example here below is the way and OpenROADM compliant equipment
         could be managed using the Yang models described in thei draft.</t>
-      <t>[Editor Note: We may need to refrase the following sentece, OpenROADM
+      <t>[Editor Note: We may need to rephrase the following sentence, OpenROADM
         has now many DWDM interface mode supported]</t>
       <t>In OpenROADM MSA there is a limited number of DWDM interfaces supported.
         Basically only the 100G Staircase FEC and 400G oFEC are supported and these

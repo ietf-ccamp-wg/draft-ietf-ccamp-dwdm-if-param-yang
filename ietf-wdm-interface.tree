@@ -48,10 +48,13 @@ module: ietf-wdm-interface
        |        +--:(G.698.2)
        |        |  +--ro standard-mode?              standard-mode
        |        |  +--ro line-coding-bitrate*        identityref
-       |        |  +--ro transmitter-tuning-range
-       |        |  |  +--ro min-central-frequency?    frequency-thz
-       |        |  |  +--ro max-central-frequency?    frequency-thz
-       |        |  |  +--ro transceiver-tunability?   frequency-ghz
+       |        |  +--ro transceiver-tuning-range
+       |        |  |  +--ro min-central-frequency?
+       |        |  |  |       frequency-thz
+       |        |  |  +--ro max-central-frequency?
+       |        |  |  |       frequency-thz
+       |        |  |  +--ro transceiver-tunability-granularity?
+       |        |  |          frequency-ghz
        |        |  +--ro tx-channel-power-min?       power-dbm
        |        |  +--ro tx-channel-power-max?       power-dbm
        |        |  +--ro rx-channel-power-min?       power-dbm
@@ -64,12 +67,12 @@ module: ietf-wdm-interface
        |        |     +--ro organization-identifier?
        |        |     |       organization-identifier
        |        |     +--ro line-coding-bitrate*        identityref
-       |        |     +--ro transmitter-tuning-range
+       |        |     +--ro transceiver-tuning-range
        |        |     |  +--ro min-central-frequency?
        |        |     |  |       frequency-thz
        |        |     |  +--ro max-central-frequency?
        |        |     |  |       frequency-thz
-       |        |     |  +--ro transceiver-tunability?
+       |        |     |  +--ro transceiver-tunability-granularity?
        |        |     |          frequency-ghz
        |        |     +--ro tx-channel-power-min?       power-dbm
        |        |     +--ro tx-channel-power-max?       power-dbm
@@ -78,12 +81,12 @@ module: ietf-wdm-interface
        |        |     +--ro rx-total-power-max?         power-dbm
        |        +--:(explicit-mode)
        |           +--ro explicit-mode
-       |              +--ro transmitter-tuning-range
+       |              +--ro transceiver-tuning-range
        |              |  +--ro min-central-frequency?
        |              |  |       frequency-thz
        |              |  +--ro max-central-frequency?
        |              |  |       frequency-thz
-       |              |  +--ro transceiver-tunability?
+       |              |  +--ro transceiver-tunability-granularity?
        |              |          frequency-ghz
        |              +--ro tx-channel-power-min?
        |              |       power-dbm
@@ -112,16 +115,17 @@ module: ietf-wdm-interface
           +--rw central-frequency?          l0-types:frequency-thz
           +--ro number-of-tcas-supported?   uint32
           +--rw tca-list* [tca-type]
-          |  +--rw tca-type                wdm-if-tca-types
-          |  +--rw min-threshold?          int32
-          |  +--rw max-threshold?          int32
-          |  +--rw threshold-hysteresis?   int32
+          |  +--rw tca-type           wdm-if-tca-types
+          |  +--rw tca-name?          string
+          |  +--rw raise-threshold?   int32
+          |  +--rw clear-threshold?   int32
           +--ro cur-osnr?                   l0-types:snr
           +--ro cur-q-factor?               int32
           +--ro uncorrected-words?          uint64
           +--ro pre-fec-ber?                decimal64
 
   notifications:
-    +---n wdm-if-min-tca
+    +---n wdm-if-tca
        +--ro if-name     -> /if:interfaces/interface/name
        +--ro tca-type    wdm-if-tca-types
+       +--ro tca-name?   string
