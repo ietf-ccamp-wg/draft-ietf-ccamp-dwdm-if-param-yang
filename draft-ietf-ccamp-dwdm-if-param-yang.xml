@@ -81,14 +81,14 @@ to use per the rules of RFC3978. The value (as of this template) can be:
 If this document obsoletes an RFC, specify the RFC in the "obsoletes" attribute
 If this document updates an RFC, specify the RFC in the "updates" attribute
 -->
-<rfc category="std" docName="draft-ietf-ccamp-dwdm-if-param-yang-12" ipr="trust200902">
+<rfc category="std" docName="draft-ietf-ccamp-dwdm-if-param-yang-13" ipr="trust200902">
   <front>
     <!--
 Enter the full document title and an abbreviated version
   to use in the page header.
 -->
 
-    <title abbrev="draft-ietf-ccamp-dwdm-if-param-yang-12">
+    <title abbrev="draft-ietf-ccamp-dwdm-if-param-yang-13">
       A YANG data model to manage configurable DWDM optical interfaces
     </title>
 
