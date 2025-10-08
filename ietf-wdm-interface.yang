@@ -73,11 +73,11 @@ module ietf-wdm-interface {
       }
       enum pol-power-diff-tca {
         description
-          "The power difference between polarization TCA";
+          "The power difference between polarizations TCA";
       }
       enum pol-skew-diff-tca {
         description
-          "The skew between the two polarization TCA";
+          "The skew between the two polarizations TCA";
       }
       enum cd-tca {
         description "The chromatic dispersion TCA";
@@ -98,7 +98,7 @@ module ietf-wdm-interface {
         description "Uncorrected words TCA";
       }
       enum q-factor-tca{
-        description "Q Factor TCA";
+        description "Q-Factor TCA";
       }
     }
     description
@@ -172,7 +172,6 @@ module ietf-wdm-interface {
       description
         "This parameter indicates the interface Central Frequency";
     }
-//    uses wdm-if-fec-tca-thresholds;
     uses wdm-if-tca-list;
   }
 

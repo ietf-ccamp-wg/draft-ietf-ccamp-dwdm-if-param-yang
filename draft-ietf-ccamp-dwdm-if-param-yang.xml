@@ -288,9 +288,9 @@ but you should provide more than just the abstract. -->
  </t>
  <t>
     The YANG model provides a configuration attribute named "configured-mode"
-    as a mean to provision the working mode of the interface
+    as a means to provision the working mode of the interface
     from the supported-modes listed as capabilities.
-    Once provisioned, current-wdm-if-parameters provide the means to configure
+    Once provisioned, current-wdm-if-parameters provides the means to configure
     specific parameters at run time and retrieve configuration, performance
     and operational state information from the module <xref target="ITU-T G.7710"/>.
     For example, the frequency is a parameter that can be set within
@@ -354,7 +354,7 @@ but you should provide more than just the abstract. -->
      section 3.2 for a discussion of the Narrative section. </cref></t> -->
 
 
-   <figure anchor="my_figure" title="External transponder in WDM netwoks">
+   <figure anchor="my_figure" title="External transponder in WDM networks">
 <preamble> <xref target="my_figure"/> shows a set of reference points, for
    single-channel connection between transmitters (Tx) and receivers (Rx).
    Here the DWDM  network elements include an OM (Optical Multiplexer) 
@@ -394,7 +394,7 @@ ROADM = Reconfigurable Optical Add Drop Multiplexer
 <postamble> from Fig. 5.1/G.698.2 </postamble>
 </figure>
   <t>
-    This document introduce the ietf-wdm-interface model as an augment
+    This document introduces the ietf-wdm-interface model as an augment
     to the ietf-interface. It allows the client to set the operating
     mode of transceivers as well as other operational parameters.
     The module provides also threshold settings and notifications
@@ -409,7 +409,7 @@ ROADM = Reconfigurable Optical Add Drop Multiplexer
       <t>[Editor Note: This section need some update to describe all the relevant
         parameters added in the model]</t>
    <t>The link between the external transponders through a WDM network media
-     channels are managed at the edges, i.e. at the transmitters (Tx) and
+     channel is managed at the edges, i.e. at the transmitters (Tx) and
      receivers (Rx) attached to the S and R reference points respectively.
    </t>
 
@@ -560,11 +560,11 @@ module ietf-wdm-interface {
       }
       enum pol-power-diff-tca {
         description
-          "The power difference between polarization TCA";
+          "The power difference between polarizations TCA";
       }
       enum pol-skew-diff-tca {
         description
-          "The skew between the two polarization TCA";
+          "The skew between the two polarizations TCA";
       }
       enum cd-tca {
         description "The chromatic dispersion TCA";
@@ -585,7 +585,7 @@ module ietf-wdm-interface {
         description "Uncorrected words TCA";
       }
       enum q-factor-tca{
-        description "Q Factor TCA";
+        description "Q-Factor TCA";
       }
     }
     description
@@ -659,7 +659,6 @@ module ietf-wdm-interface {
       description
         "This parameter indicates the interface Central Frequency";
     }
-//    uses wdm-if-fec-tca-thresholds;
     uses wdm-if-tca-list;
   }
 
@@ -1405,8 +1404,8 @@ module: ietf-wdm-interface
     </section>
 
     <section title="Applicability examples">
-      <t>As an example here below is the way and OpenROADM compliant equipment
-        could be managed using the Yang models described in thei draft.</t>
+      <t>As an example here below is the way an OpenROADM compliant equipment
+        could be managed using the Yang models described in this draft.</t>
       <t>[Editor Note: We may need to rephrase the following sentence, OpenROADM
         has now many DWDM interface mode supported]</t>
       <t>In OpenROADM MSA there is a limited number of DWDM interfaces supported.
