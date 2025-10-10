@@ -8,7 +8,7 @@ module ietf-wdm-interface {
   }
 
   import ietf-layer0-types {
-    // Requires at least revision 2025-10-02
+    // Requires at least revision 2025-10-10
     // will update with rev:recommended-min-date 2025-xx-yy;
     // once RFC9093bis get published
     prefix "l0-types";
@@ -230,16 +230,17 @@ module ietf-wdm-interface {
     description "OCh mode parameters";
 
     leaf min-osnr-margin {
-      type l0-types:snr-or-null;
-      default empty;
+      type l0-types:snr-or-unknown;
+      default unknown;
       config false;
       description
         "Optical Signal to Noise (OSNR) margin to FEC threshold, if
         not supported by the implementation SHALL remain undefined";
     }
     leaf q-margin {
-      type l0-types:decimal-2;
+      type l0-types:decimal-2-or-unknown;
       units "dB";
+      default unknown;
       config false;
       description
         "Q-Factor margin to FEC threshold, if not supported by the
@@ -259,17 +260,18 @@ module ietf-wdm-interface {
   grouping wdm-if-statistics {
     description "OCh statistics";
     leaf cur-osnr {
-      type l0-types:snr-or-null;
+      type l0-types:snr-or-unknown;
       units "dB";
-      default empty;
+      default unknown;
       config false;
       description
         "Current measured Optical Signal to Noise Ratio (OSNR),
         if not supported by the implementation SHALL not be present";
     }
     leaf q-factor {
-      type l0-types:decimal-2;
+      type l0-types:decimal-2-or-unknown;
       units "dB";
+      default unknown;
       config false;
       description
         "Current measured Q-Factor of the interface,
@@ -286,17 +288,17 @@ module ietf-wdm-interface {
         if not supported by the implementation SHALL not be present";
     }
     leaf pre-fec-ber {
-      type l0-types:decimal-18;
+      type l0-types:decimal-18-or-unknown;
+      default unknown;
       config false;
       description
         "Current measured Pre-FEC error rate,
         if not supported by the implementation SHALL not be present";
     }
     leaf chromatic-dispersion {
-      type l0-types:decimal-2 {
-        range "0..max";
-      }
+      type l0-types:decimal-2-or-unknown;
       units "ps/nm";
+      default unknown;
       config false;
       description
         "Chromatic ispersion (CD) on the receive,
@@ -306,10 +308,9 @@ module ietf-wdm-interface {
                    Topology, Section 2.4.6";
     }
     leaf polarization-mode-dispersion {
-      type l0-types:decimal-2 {
-        range "0..max";
-      }
+      type l0-types:decimal-2-or-unknown;
       units "ps";
+      default unknown;
       config false;
       description
         "Current polarization mode dispersion (PMD) on the receive,
@@ -322,7 +323,8 @@ module ietf-wdm-interface {
                    Topology, Section 2.4.6";
     }
     leaf polarization-dependent-loss {
-      type l0-types:power-loss-or-null;
+      type l0-types:power-loss-or-unknown;
+      default unknown;
       config false;
       description
         "Current polarization dependent loss (PDL) on the receive,

@@ -18,7 +18,7 @@ module: ietf-wdm-interface
              |  +--ro pmd-value        decimal-2
              |  +--ro penalty-value    union
              +--ro max-polarization-dependent-loss
-             |       power-loss-or-null
+             |       power-loss-or-unknown
              +--ro pdl-penalty* [pdl-value]
              |  +--ro pdl-value        power-loss
              |  +--ro penalty-value    union
@@ -108,11 +108,13 @@ module: ietf-wdm-interface
        +--rw current-wdm-if-parameters
           +--rw configured-mode?                union
           +--rw line-coding-bitrate?            identityref
-          +--rw tx-channel-power?               power-dbm-or-null
-          +--ro rx-channel-power?               power-dbm-or-null
-          +--ro rx-total-power?                 power-dbm-or-null
-          +--ro min-osnr-margin?                l0-types:snr-or-null
-          +--ro q-margin?                       l0-types:decimal-2
+          +--rw tx-channel-power?               power-dbm-or-unknown
+          +--ro rx-channel-power?               power-dbm-or-unknown
+          +--ro rx-total-power?                 power-dbm-or-unknown
+          +--ro min-osnr-margin?
+          |       l0-types:snr-or-unknown
+          +--ro q-margin?
+          |       l0-types:decimal-2-or-unknown
           +--rw central-frequency?
           |       l0-types:frequency-thz
           +--ro number-of-tcas-supported?       uint32
@@ -122,14 +124,19 @@ module: ietf-wdm-interface
           |  +--rw tca-name           string
           |  +--rw raise-threshold    l0-types:decimal-5
           |  +--rw clear-threshold?   l0-types:decimal-5
-          +--ro cur-osnr?                       l0-types:snr-or-null
-          +--ro q-factor?                       l0-types:decimal-2
+          +--ro cur-osnr?
+          |       l0-types:snr-or-unknown
+          +--ro q-factor?
+          |       l0-types:decimal-2-or-unknown
           +--ro uncorrected-words?              uint64
-          +--ro pre-fec-ber?                    l0-types:decimal-18
-          +--ro chromatic-dispersion?           l0-types:decimal-2
-          +--ro polarization-mode-dispersion?   l0-types:decimal-2
+          +--ro pre-fec-ber?
+          |       l0-types:decimal-18-or-unknown
+          +--ro chromatic-dispersion?
+          |       l0-types:decimal-2-or-unknown
+          +--ro polarization-mode-dispersion?
+          |       l0-types:decimal-2-or-unknown
           +--ro polarization-dependent-loss?
-                  l0-types:power-loss-or-null
+                  l0-types:power-loss-or-unknown
 
   notifications:
     +---n wdm-if-tca
