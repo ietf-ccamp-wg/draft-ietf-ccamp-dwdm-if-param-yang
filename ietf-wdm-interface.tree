@@ -106,24 +106,30 @@ module: ietf-wdm-interface
        |              |          -> ../../../../supported-mode/mode-id
        |              +--ro explicit-transceiver-mode-ref    leafref
        +--rw current-wdm-if-parameters
-          +--rw configured-mode?            union
-          +--rw line-coding-bitrate?        identityref
-          +--rw tx-channel-power?           power-dbm-or-null
-          +--ro rx-channel-power?           power-dbm-or-null
-          +--ro rx-total-power?             power-dbm-or-null
-          +--ro min-osnr-margin?            l0-types:snr-or-null
-          +--ro q-margin?                   l0-types:decimal-2
-          +--rw central-frequency?          l0-types:frequency-thz
-          +--ro number-of-tcas-supported?   uint32
-          +--rw tca-list* [tca-type]
+          +--rw configured-mode?                union
+          +--rw line-coding-bitrate?            identityref
+          +--rw tx-channel-power?               power-dbm-or-null
+          +--ro rx-channel-power?               power-dbm-or-null
+          +--ro rx-total-power?                 power-dbm-or-null
+          +--ro min-osnr-margin?                l0-types:snr-or-null
+          +--ro q-margin?                       l0-types:decimal-2
+          +--rw central-frequency?
+          |       l0-types:frequency-thz
+          +--ro number-of-tcas-supported?       uint32
+          +--rw tca-list* [tca-id]
+          |  +--rw tca-id             string
           |  +--rw tca-type           identityref
           |  +--rw tca-name           string
-          |  +--rw raise-threshold    int32
-          |  +--rw clear-threshold?   int32
-          +--ro cur-osnr?                   l0-types:snr-or-null
-          +--ro cur-q-factor?               l0-types:decimal-2
-          +--ro uncorrected-words?          uint64
-          +--ro pre-fec-ber?                decimal64
+          |  +--rw raise-threshold    l0-types:decimal-5
+          |  +--rw clear-threshold?   l0-types:decimal-5
+          +--ro cur-osnr?                       l0-types:snr-or-null
+          +--ro q-factor?                       l0-types:decimal-2
+          +--ro uncorrected-words?              uint64
+          +--ro pre-fec-ber?                    l0-types:decimal-18
+          +--ro chromatic-dispersion?           l0-types:decimal-2
+          +--ro polarization-mode-dispersion?   l0-types:decimal-2
+          +--ro polarization-dependent-loss?
+                  l0-types:power-loss-or-null
 
   notifications:
     +---n wdm-if-tca

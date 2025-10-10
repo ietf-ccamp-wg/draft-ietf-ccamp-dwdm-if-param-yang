@@ -110,6 +110,20 @@ module ietf-wdm-interface {
       interface";
   }
 
+  identity rx-pmd-tca {
+    base wdm-if-tca-type;
+    description
+      "The polarization mode dispersion (PMD) TCA on the receiver
+      interface";
+  }
+
+  identity rx-pdl-tca {
+    base wdm-if-tca-type;
+    description
+      "The polarization dependent loss (PDL) TCA on the receiver
+      interface";
+  }
+
   identity rx-frequency-offset-tca {
     base wdm-if-tca-type;
     description "The Frequency offset TCA ";
@@ -166,7 +180,7 @@ module ietf-wdm-interface {
         eg 'TX Power Degrade'";
     }
     leaf raise-threshold {
-      type int32;
+      type l0-types:decimal-5;
       mandatory true;
       description
         "A TCA is raised if the variable cross this threshold:
@@ -179,7 +193,7 @@ module ietf-wdm-interface {
         on the same raise-threshold";
     }
     leaf clear-threshold {
-      type int32;
+      type l0-types:decimal-5;
       description
         "A TCA cleared when the variable cross the threshold in the
         direction defined for raise-threshold.
@@ -195,13 +209,19 @@ module ietf-wdm-interface {
       default 0;
       config false;
       description
-        "Number of TCAs supported by this interface
-        If not defined the default is 0, i.e. TCAs are not
-        supported by the implementaiton";
+        "Number of TCAs supported by this interface,
+        if the implementation do not suport TCAs it SHALL leave this
+        value to defualt = 0";
     }
     list tca-list {
-      key "tca-type";
+      key "tca-id";
       description "List of the TCAs";
+      leaf tca-id {
+        type string;
+        mandatory true;
+        description
+          "Unique Identifier of the TCA defined for the interface";
+      }
       uses wdm-if-tca-thresholds;
     }
   }  // end grouping wdm-if-tca-list
@@ -214,16 +234,19 @@ module ietf-wdm-interface {
       default empty;
       config false;
       description
-        "OSNR margin to FEC threshold, if not present the
-        measure is not supported by the implementation";
+        "Optical Signal to Noise (OSNR) margin to FEC threshold, if
+        not supported by the implementation SHALL remain undefined";
     }
     leaf q-margin {
       type l0-types:decimal-2;
       units "dB";
       config false;
       description
-        "Q-Factor margin to FEC threshold, if not present the
-        measure is not supported by the implementation";
+        "Q-Factor margin to FEC threshold, if not supported by the
+        implementationp SHALL remaoin undefined";
+      reference
+        "ITU-T O.201 (07/2003): Q-factor test equipment to estimate
+                   the transmission performance of optical channels";
     }
     leaf central-frequency {
       type l0-types:frequency-thz;
@@ -242,32 +265,71 @@ module ietf-wdm-interface {
       config false;
       description
         "Current measured Optical Signal to Noise Ratio (OSNR),
-        if not present the measure is not supported by the
-        implementation";
+        if not supported by the implementation SHALL not be present";
     }
-    leaf cur-q-factor {
+    leaf q-factor {
       type l0-types:decimal-2;
       units "dB";
       config false;
       description
-        "Current measured Q-Factor of the interface, if not present
-        the measure is not supported by the implementation";
+        "Current measured Q-Factor of the interface,
+        if not supported by the implementation SHALL not be present";
+      reference
+        "ITU-T O.201 (07/2003): Q-factor test equipment to estimate
+                   the transmission performance of optical channels";
     }
     leaf uncorrected-words {
       type uint64;
       config false;
       description
-        "Counter of Post-FEC uncorrected errored words, if not
-        present the measure is not supported by the implementation";
+        "Counter of Post-FEC uncorrected errored words,
+        if not supported by the implementation SHALL not be present";
     }
     leaf pre-fec-ber {
-      type decimal64 {
-        fraction-digits 18;
-      }
+      type l0-types:decimal-18;
       config false;
       description
-        "Current measured Pre-FEC error rate, if not present the
-        measure is not supported by the implementation";
+        "Current measured Pre-FEC error rate,
+        if not supported by the implementation SHALL not be present";
+    }
+    leaf chromatic-dispersion {
+      type l0-types:decimal-2 {
+        range "0..max";
+      }
+      units "ps/nm";
+      config false;
+      description
+        "Chromatic ispersion (CD) on the receive,
+        if not supported by the implementation SHALL not be present";
+      reference
+        "RFC ZZZZ: A YANG Data Model for Optical Impairment-aware
+                   Topology, Section 2.4.6";
+    }
+    leaf polarization-mode-dispersion {
+      type l0-types:decimal-2 {
+        range "0..max";
+      }
+      units "ps";
+      config false;
+      description
+        "Current polarization mode dispersion (PMD) on the receive,
+        if not supported by the implementation SHALL not be present";
+      reference
+        "ITU-T G.666 (02/2011): Characteristics of polarization
+                   mode dispersion compensators and of receivers that
+                   compensate for polarization mode dispersion
+         RFC ZZZZ: A YANG Data Model for Optical Impairment-aware
+                   Topology, Section 2.4.6";
+    }
+    leaf polarization-dependent-loss {
+      type l0-types:power-loss-or-null;
+      config false;
+      description
+        "Current polarization dependent loss (PDL) on the receive,
+        if not supported by the implementation SHALL not be present";
+      reference
+        "RFC ZZZZ: A YANG Data Model for Optical Impairment-aware
+                   Topology, Section 2.4.6";
     }
   }  // end grouping wdm-if-statistics
 
