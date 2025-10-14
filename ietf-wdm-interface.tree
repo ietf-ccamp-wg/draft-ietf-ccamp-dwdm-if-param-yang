@@ -105,27 +105,31 @@ module: ietf-wdm-interface
        |              |  +--ro supported-organizational-mode*
        |              |          -> ../../../../supported-mode/mode-id
        |              +--ro explicit-transceiver-mode-ref    leafref
-       +--rw current-wdm-if-parameters
-          +--rw configured-mode?                union
-          +--rw line-coding-bitrate?            identityref
-          +--rw tx-channel-power?               power-dbm-or-unknown
+       +--rw wdm-if-config
+       |  +--rw configured-mode?            union
+       |  +--rw target-central-frequency?   l0-types:frequency-thz
+       |  +--rw target-tx-channel-power?    l0-types:power-dbm
+       +--rw wdm-if-tcas
+       |  +--ro number-of-tcas-supported?   uint32
+       |  +--rw tca-list* [tca-id]
+       |     +--rw tca-id             string
+       |     +--rw tca-type           identityref
+       |     +--rw tca-name           string
+       |     +--rw raise-threshold    l0-types:decimal-5
+       |     +--rw clear-threshold?   l0-types:decimal-5
+       +--rw wdm-if-status
+          +--ro line-coding-bitrate?            identityref
+          +--ro tx-channel-power?               power-dbm-or-unknown
           +--ro rx-channel-power?               power-dbm-or-unknown
           +--ro rx-total-power?                 power-dbm-or-unknown
+          +--ro central-frequency?
+          |       l0-types:frequency-thz
+          +--ro cur-osnr?
+          |       l0-types:snr-or-unknown
           +--ro min-osnr-margin?
           |       l0-types:snr-or-unknown
           +--ro q-margin?
           |       l0-types:decimal-2-or-unknown
-          +--rw central-frequency?
-          |       l0-types:frequency-thz
-          +--ro number-of-tcas-supported?       uint32
-          +--rw tca-list* [tca-id]
-          |  +--rw tca-id             string
-          |  +--rw tca-type           identityref
-          |  +--rw tca-name           string
-          |  +--rw raise-threshold    l0-types:decimal-5
-          |  +--rw clear-threshold?   l0-types:decimal-5
-          +--ro cur-osnr?
-          |       l0-types:snr-or-unknown
           +--ro q-factor?
           |       l0-types:decimal-2-or-unknown
           +--ro uncorrected-words?              uint64
