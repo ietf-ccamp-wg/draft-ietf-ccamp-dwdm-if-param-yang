@@ -226,8 +226,44 @@ module ietf-wdm-interface {
     }
   }  // end grouping wdm-if-tca-list
 
-  grouping wdm-if-mode-params {
-    description "OCh mode parameters";
+  grouping wdm-if-config {
+    description "DWDM Interface Configuration parameters";
+
+    leaf target-central-frequency {
+      type l0-types:frequency-thz;
+      description
+        "This parameter indicates the interface Central Frequency
+        configuration.";
+    }
+
+    leaf target-tx-channel-power {
+      type l0-types:power-dbm;
+      description
+        "This parameter indicates the terget configured TX channel
+        optical power.";
+    }
+  }  // end grouping wdm-if-node-params
+
+  grouping wdm-if-operational {
+    description "DWDM Interface Operational status data";
+
+    leaf central-frequency {
+      type l0-types:frequency-thz;
+      config false;
+      description
+        "This parameter indicates the current interface Central
+        Frequency.";
+    }
+
+    leaf cur-osnr {
+      type l0-types:snr-or-unknown;
+      units "dB";
+      default unknown;
+      config false;
+      description
+        "Current measured Optical Signal to Noise Ratio (OSNR),
+        if not supported by the implementation SHALL not be present";
+    }
 
     leaf min-osnr-margin {
       type l0-types:snr-or-unknown;
@@ -237,6 +273,7 @@ module ietf-wdm-interface {
         "Optical Signal to Noise (OSNR) margin to FEC threshold, if
         not supported by the implementation SHALL remain undefined";
     }
+
     leaf q-margin {
       type l0-types:decimal-2-or-unknown;
       units "dB";
@@ -249,25 +286,7 @@ module ietf-wdm-interface {
         "ITU-T O.201 (07/2003): Q-factor test equipment to estimate
                    the transmission performance of optical channels";
     }
-    leaf central-frequency {
-      type l0-types:frequency-thz;
-      description
-        "This parameter indicates the interface Central Frequency";
-    }
-    uses wdm-if-tca-list;
-  }  // end grouping wdm-if-node-params
 
-  grouping wdm-if-statistics {
-    description "OCh statistics";
-    leaf cur-osnr {
-      type l0-types:snr-or-unknown;
-      units "dB";
-      default unknown;
-      config false;
-      description
-        "Current measured Optical Signal to Noise Ratio (OSNR),
-        if not supported by the implementation SHALL not be present";
-    }
     leaf q-factor {
       type l0-types:decimal-2-or-unknown;
       units "dB";
@@ -333,7 +352,7 @@ module ietf-wdm-interface {
         "RFC ZZZZ: A YANG Data Model for Optical Impairment-aware
                    Topology, Section 2.4.6";
     }
-  }  // end grouping wdm-if-statistics
+  }  // end grouping wdm-if-operational
 
   notification wdm-if-tca {
     description "A notification for a Treshold Crossing Alert (TCA)";
@@ -383,7 +402,7 @@ module ietf-wdm-interface {
           uses l0-types:explicit-mode;
         }  // end list explicit-transceiver-mode
       }  // end container explicit-transceiver-modes
-    }  // end container dwdm-if-templates
+    }  // end container wdm-if-templates
   }  // end augmentation interfaces
 
   augment "/if:interfaces/if:interface" {
@@ -416,7 +435,9 @@ module ietf-wdm-interface {
         }  // end augmentation explicit-mode
       }  // end uses l0-types:transceiver-capabilities
 
-      container current-wdm-if-parameters {
+      container wdm-if-config {
+        description
+          "Configuration parameters of this interface";
         leaf configured-mode {
           type union {
             type empty;
@@ -436,11 +457,28 @@ module ietf-wdm-interface {
             by the server, this means the interface is not
             configured";
         }
-        uses l0-types:common-transceiver-param;
-        description "Current parameters of this interface";
-        uses wdm-if-mode-params;
-        uses wdm-if-statistics;
-      }  // end container current-wdm-if-parameters
+        uses wdm-if-config;
+      }  // end container wdm-if-config
+
+      container wdm-if-tcas {
+        description
+          "Threshold Crossing Alerts definition and configuration";
+        uses wdm-if-tca-list;
+      }  // end of container wdm-if-tcas
+
+      container wdm-if-status {
+        description
+          "Current operationa status parameters of this interface";
+        uses l0-types:common-transceiver-param {
+          refine "tx-channel-power" {
+            config false;
+          }
+          refine "line-coding-bitrate" {
+            config false;
+          }
+        }
+        uses wdm-if-operational;
+      }  // end container wdm-if-status
     }  // end container wdm-interface
   }  // end augmentation interface
 }  // end module
