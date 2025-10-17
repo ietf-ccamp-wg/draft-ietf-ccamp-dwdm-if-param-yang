@@ -355,7 +355,8 @@ module ietf-wdm-interface {
   }  // end grouping wdm-if-operational
 
   notification wdm-if-tca {
-    description "A notification for a Threshold Crossing Alert (TCA)";
+    description
+      "A notification for a Threshold Crossing Alert (TCA)";
 
     leaf "if-name" {
       type leafref { path "/if:interfaces/if:interface/if:name"; }

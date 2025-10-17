@@ -84,14 +84,14 @@ to use per the rules of RFC3978. The value (as of this template) can be:
 If this document obsoletes an RFC, specify the RFC in the "obsoletes" attribute
 If this document updates an RFC, specify the RFC in the "updates" attribute
 -->
-<rfc category="std" docName="draft-ietf-ccamp-dwdm-if-param-yang-13" ipr="trust200902">
+<rfc category="std" docName="draft-ietf-ccamp-dwdm-if-param-yang-14" ipr="trust200902">
   <front>
     <!--
 Enter the full document title and an abbreviated version
   to use in the page header.
 -->
 
-    <title abbrev="draft-ietf-ccamp-dwdm-if-param-yang-13">
+    <title abbrev="draft-ietf-ccamp-dwdm-if-param-yang-14">
       A YANG data model to manage configurable DWDM optical interfaces
     </title>
 
@@ -925,7 +925,8 @@ module ietf-wdm-interface {
   }  // end grouping wdm-if-operational
 
   notification wdm-if-tca {
-    description "A notification for a Threshold Crossing Alert (TCA)";
+    description
+      "A notification for a Threshold Crossing Alert (TCA)";
 
     leaf "if-name" {
       type leafref { path "/if:interfaces/if:interface/if:name"; }
