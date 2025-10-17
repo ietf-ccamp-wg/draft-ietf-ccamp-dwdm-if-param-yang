@@ -55,12 +55,12 @@ module ietf-wdm-interface {
 // replace the revision date with the module publication date
 // the format is (year-month-day)
 
-  revision "2025-10-12" {
+  revision "2025-10-17" {
     description
       "v1.0 Initial Version";
     reference
-      "RFC XXXX: YANG model to manage the optical interface
-       parameters for an external transponder in a WDM network";
+      "RFC XXXX: A YANG data model to manage configurable DWDM
+      optical interfaces";
     // RFC Ed.: replace XXXX with actual RFC number, update date
     // information and remove this note
 
@@ -69,7 +69,7 @@ module ietf-wdm-interface {
 
   identity wdm-if-tca-type {
     description
-        "The different types of Treshold Crossing Alert (TCA's)
+        "The different types of Threshold Crossing Alert (TCA's)
         for DWDM Interfaces. Any augmentation of the list of
         tca-type MUST use this identity as base";
   }
@@ -355,7 +355,7 @@ module ietf-wdm-interface {
   }  // end grouping wdm-if-operational
 
   notification wdm-if-tca {
-    description "A notification for a Treshold Crossing Alert (TCA)";
+    description "A notification for a Threshold Crossing Alert (TCA)";
 
     leaf "if-name" {
       type leafref { path "/if:interfaces/if:interface/if:name"; }
@@ -467,6 +467,7 @@ module ietf-wdm-interface {
       }  // end of container wdm-if-tcas
 
       container wdm-if-status {
+        config false;
         description
           "Current operationa status parameters of this interface";
         uses l0-types:common-transceiver-param {

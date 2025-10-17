@@ -47,10 +47,13 @@ document to be edited.
 <!ENTITY rfc4252 SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.4252.xml">
 <!ENTITY rfc7950 SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.7950.xml">
 <!ENTITY rfc8407 SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.8407.xml">
+<!ENTITY rfc8343 SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.8343.xml">
+<!ENTITY rfc8340 SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.8340.xml">
+<!ENTITY rfc6566 SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.6566.xml">
 <!ENTITY rfc8407bis SYSTEM "https://datatracker.ietf.org/doc/bibxml3/draft-ietf-netmod-rfc8407bis-28.xml">
-<!ENTITY I-Doit SYSTEM "https://datatracker.ietf.org/doc/bibxml3/draft-ietf-ccamp-optical-impairment-topology-yang-18.xml">
-<!ENTITY rfc9093bis SYSTEM "https://datatracker.ietf.org/doc/bibxml3/draft-ietf-ccamp-rfc9093-bis-15.xml">
-<!ENTITY I-Ddwdmtunnel SYSTEM "https://datatracker.ietf.org/doc/bibxml3/draft-ietf-ccamp-wdm-tunnel-yang-04.xml">
+<!ENTITY I-Doit SYSTEM "https://datatracker.ietf.org/doc/bibxml3/draft-ietf-ccamp-optical-impairment-topology-yang-20.xml">
+<!ENTITY rfc9093bis SYSTEM "https://datatracker.ietf.org/doc/bibxml3/draft-ietf-ccamp-rfc9093-bis-18.xml">
+<!ENTITY I-Ddwdmtunnel SYSTEM "https://datatracker.ietf.org/doc/bibxml3/draft-ietf-ccamp-wdm-tunnel-yang-05.xml">
 ]>
 
 <?rfc toc="yes"?>
@@ -202,7 +205,7 @@ IETF is fine for non-WG IETF submissions -->
 
     <keyword>Network Management</keyword>
 
-    <keyword>External transponder in a WDM network YANG model</keyword>
+    <keyword>A YANG data model to manage configurable DWDM optical interfaces</keyword>
 
     <keyword>YANG</keyword>
 
@@ -289,9 +292,10 @@ but you should provide more than just the abstract. -->
     The YANG model provides a configuration attribute named "configured-mode"
     as a means to provision the working mode of the interface
     from the supported-modes listed as capabilities.
-    Once provisioned, current-wdm-if-parameters provides the means to configure
-    specific parameters at run time and retrieve configuration, performance
-    and operational state information from the module <xref target="ITU-T G.7710"/>.
+    Once provisioned, wdm-if-config container provides the means to configure
+    specific parameters at run time while wdm-if-status container
+    allow to retrieve operational state information from the module as
+    defined in <xref target="ITU-T G.7710"/>.
     For example, the frequency is a parameter that can be set within
     min/max boundaries defined in the current mode. Laser Temperature,
     RX/TX optical power, RX OSNR, etc. however are read-only parameters
@@ -299,27 +303,77 @@ but you should provide more than just the abstract. -->
     mode boundaries and may trigger events.
   </t>
 
+  <section title="Terminology">
+  <t>
+   Refer to <xref target="RFC6566"/>, <xref target="RFC7698"/>, and
+   <xref target="ITU-T G.807"/> for the key terms used in
+   this document.
+  </t>
 
-    </section>
-    <!--
-    <section title="The Internet-Standard Management Framework">
-    <t><cref>The title and text for this section has been copied from the
-    official boilerplate, and should not be modified unless the boilerplate text
-    at http;//ops.ietf.org/mib-boilerplate.html has changed. See RFC4818
-    section 3.1 for a discussion of the boilerplate section.</cref></t>
+  <t>
+   The following terms are defined in <xref target="RFC7950"/>
+  </t>
 
-    <t>
-      [Editor Note: This section refer to Standard Management Framework for SNMP
-      check if this reference is really required]
-    </t>
+  <t><list style="symbols"><?rfc subcompact="yes"?>
+   <t>client</t>
+   <t>server</t>
+   <t>augment</t>
+   <t>data model</t>
+   <t>data node</t>
+  <?rfc subcompact="no"?>
+  </list></t>
 
-    <t>For a detailed overview of the documents that describe the current
-    Internet-Standard Management Framework, please refer to section 7 of RFC
-    3410 <xref target="RFC3410"></xref>.</t>
+  <t>
+   The following terms are defined in <xref target="RFC6241"/>
+  </t>
 
-      <t> This memo specifies a Yang model for optical interfaces. </t>
-    </section>
-    -->
+  <t><list style="symbols"><?rfc subcompact="yes"?>
+   <t>configuration data</t>
+   <t>state data</t>
+  <?rfc subcompact="no"?>
+  </list></t>
+
+  <t>
+   The terminology for describing YANG data models is found in
+   <xref target="RFC7950"/>.
+  </t>
+
+  <t>
+   The term DWDM Network Element refers to a physical device, which
+    is managed as a single network element, that has Dense Wavelength
+    Division Multiplexing capabilities.
+  </t>
+
+  <t>
+   The term DWDM Link refers to a physical optical link (fiber pair)
+    between two DWDM Network Elements where one or multiple channels are
+    transmitted using Dense Wavelength Division Multiplexing technology.
+  </t>
+
+  <t>
+   The term DWDM interface refers to an interface, as defined and modelled
+    in <xref target="RFC8343"/>, that is capable to generate and
+    receive a signal at a specific wavelength and suitable
+    to be transmitted over a DWDM Link.
+  </t>
+
+  <t>
+   The term ROADM in this document refers to the term "multi-degree
+   reconfigurable optical add/drop multiplexer (MD-ROADM)" as defined
+   in <xref target="ITU-T G.672"/>.
+  </t>
+
+  </section>
+
+  <section title="Tree Diagram">
+  <t>
+   A simplified graphical representation of the data model is used in
+   the Appendix of document <xref target="yang-tree"/>.
+   The meaning of the symbols in these
+   diagrams is defined in <xref target="RFC8340"/>.
+  </t>
+
+  </section>
 
     <section title="Conventions">
     <!-- <t><cref>TEMPLATE TODO This boilerplate should be used if the
@@ -343,6 +397,28 @@ but you should provide more than just the abstract. -->
 
     </section>
 
+    </section>
+    <!--
+    <section title="The Internet-Standard Management Framework">
+    <t><cref>The title and text for this section has been copied from the
+    official boilerplate, and should not be modified unless the boilerplate text
+    at http;//ops.ietf.org/mib-boilerplate.html has changed. See RFC4818
+    section 3.1 for a discussion of the boilerplate section.</cref></t>
+
+    <t>
+      [Editor Note: This section refer to Standard Management Framework for SNMP
+      check if this reference is really required]
+    </t>
+
+    <t>For a detailed overview of the documents that describe the current
+    Internet-Standard Management Framework, please refer to section 7 of RFC
+    3410 <xref target="RFC3410"></xref>.</t>
+
+      <t> This memo specifies a Yang model for optical interfaces. </t>
+    </section>
+    -->
+
+
     <!-- ********************************************* -->
     <section title="Module Description">
 
@@ -353,7 +429,7 @@ but you should provide more than just the abstract. -->
      section 3.2 for a discussion of the Narrative section. </cref></t> -->
 
 
-   <figure anchor="my_figure" title="External transponder in WDM networks">
+   <figure anchor="my_figure" title="Transponder in WDM networks">
 <preamble> <xref target="my_figure"/> shows a set of reference points, for
    single-channel connection between transmitters (TX) and receivers (RX).
    Here the DWDM  network elements include an OM (Optical Multiplexer) 
@@ -396,8 +472,9 @@ ROADM = Reconfigurable Optical Add Drop Multiplexer
     This document introduces the ietf-wdm-interface model as an augment
     to the ietf-interface. It allows the client to set the operating
     mode of transceivers as well as other operational parameters.
-    The module provides also threshold settings and notifications
-    to supervise measured parameters and notify the client.
+    The YANG model also provide the container wdm-if-tca for the
+    configuration of Threshold Crossing Alert (TCA) that can trigger
+    stateless notification to supervise parameters and notify the client.
   </t>
       </section>
       <section title="YANG Module Classification">
@@ -405,16 +482,21 @@ ROADM = Reconfigurable Optical Add Drop Multiplexer
           definition in <xref target="RFC8199"/> and <xref target="RFC8309"/></t>
       </section>
     <section title="Optical Parameters Description">
-      <t>[Editor Note: This section need some update to describe all the relevant
-        parameters added in the model]</t>
-   <t>The link between the external transponders through a WDM network media
-     channel is managed at the edges, i.e. at the transmitters (TX) and
-     receivers (RX) attached to the S and R reference points respectively.
+<!--      <t>[Editor Note: This section need some update to describe all the relevant-->
+<!--        parameters added in the model]</t>-->
+   <t>The network architecture presented in <xref target="my_figure"/> is
+     described in <xref target="ITU-T G.698.2"/> section 5.2.
+     The transponders are usually a combination of the TX
+     and RX function in single interface, implementing the connectivity
+     at Rs and Ss points in a bidirectional way.
    </t>
 
-   <t>Definitions of the optical parameters are provided below to
-   increase the readability of the document.</t>
+   <t>Definitions of the optical parameters introduced in this document
+     are listed in the YANG tree in <xref target="yang-tree"/>
+     and described within the model definition in <xref target="yang-code"/>
+   </t>
 
+<!--
 
     <section title="Parameters at Ss ">
 
@@ -452,7 +534,9 @@ ROADM = Reconfigurable Optical Add Drop Multiplexer
 </list>
  </t>
 
+
 </section>
+-->
 
  </section>
 
@@ -470,7 +554,7 @@ ROADM = Reconfigurable Optical Add Drop Multiplexer
 </section>
   </section>
 
-  <section title="WDM Interface YANG Module">
+  <section anchor="yang-code" title="WDM Interface YANG Module">
 
 
        <t>ietf-wdm-interface is a top level model that allow the
@@ -541,12 +625,12 @@ module ietf-wdm-interface {
 // replace the revision date with the module publication date
 // the format is (year-month-day)
 
-  revision "2025-10-12" {
+  revision "2025-10-17" {
     description
       "v1.0 Initial Version";
     reference
-      "RFC XXXX: YANG model to manage the optical interface
-       parameters for an external transponder in a WDM network";
+      "RFC XXXX: A YANG data model to manage configurable DWDM
+      optical interfaces";
     // RFC Ed.: replace XXXX with actual RFC number, update date
     // information and remove this note
 
@@ -555,7 +639,7 @@ module ietf-wdm-interface {
 
   identity wdm-if-tca-type {
     description
-        "The different types of Treshold Crossing Alert (TCA's)
+        "The different types of Threshold Crossing Alert (TCA's)
         for DWDM Interfaces. Any augmentation of the list of
         tca-type MUST use this identity as base";
   }
@@ -712,8 +796,44 @@ module ietf-wdm-interface {
     }
   }  // end grouping wdm-if-tca-list
 
-  grouping wdm-if-mode-params {
-    description "OCh mode parameters";
+  grouping wdm-if-config {
+    description "DWDM Interface Configuration parameters";
+
+    leaf target-central-frequency {
+      type l0-types:frequency-thz;
+      description
+        "This parameter indicates the interface Central Frequency
+        configuration.";
+    }
+
+    leaf target-tx-channel-power {
+      type l0-types:power-dbm;
+      description
+        "This parameter indicates the terget configured TX channel
+        optical power.";
+    }
+  }  // end grouping wdm-if-node-params
+
+  grouping wdm-if-operational {
+    description "DWDM Interface Operational status data";
+
+    leaf central-frequency {
+      type l0-types:frequency-thz;
+      config false;
+      description
+        "This parameter indicates the current interface Central
+        Frequency.";
+    }
+
+    leaf cur-osnr {
+      type l0-types:snr-or-unknown;
+      units "dB";
+      default unknown;
+      config false;
+      description
+        "Current measured Optical Signal to Noise Ratio (OSNR),
+        if not supported by the implementation SHALL not be present";
+    }
 
     leaf min-osnr-margin {
       type l0-types:snr-or-unknown;
@@ -723,6 +843,7 @@ module ietf-wdm-interface {
         "Optical Signal to Noise (OSNR) margin to FEC threshold, if
         not supported by the implementation SHALL remain undefined";
     }
+
     leaf q-margin {
       type l0-types:decimal-2-or-unknown;
       units "dB";
@@ -735,25 +856,7 @@ module ietf-wdm-interface {
         "ITU-T O.201 (07/2003): Q-factor test equipment to estimate
                    the transmission performance of optical channels";
     }
-    leaf central-frequency {
-      type l0-types:frequency-thz;
-      description
-        "This parameter indicates the interface Central Frequency";
-    }
-    uses wdm-if-tca-list;
-  }  // end grouping wdm-if-node-params
 
-  grouping wdm-if-statistics {
-    description "OCh statistics";
-    leaf cur-osnr {
-      type l0-types:snr-or-unknown;
-      units "dB";
-      default unknown;
-      config false;
-      description
-        "Current measured Optical Signal to Noise Ratio (OSNR),
-        if not supported by the implementation SHALL not be present";
-    }
     leaf q-factor {
       type l0-types:decimal-2-or-unknown;
       units "dB";
@@ -819,10 +922,10 @@ module ietf-wdm-interface {
         "RFC ZZZZ: A YANG Data Model for Optical Impairment-aware
                    Topology, Section 2.4.6";
     }
-  }  // end grouping wdm-if-statistics
+  }  // end grouping wdm-if-operational
 
   notification wdm-if-tca {
-    description "A notification for a Treshold Crossing Alert (TCA)";
+    description "A notification for a Threshold Crossing Alert (TCA)";
 
     leaf "if-name" {
       type leafref { path "/if:interfaces/if:interface/if:name"; }
@@ -869,7 +972,7 @@ module ietf-wdm-interface {
           uses l0-types:explicit-mode;
         }  // end list explicit-transceiver-mode
       }  // end container explicit-transceiver-modes
-    }  // end container dwdm-if-templates
+    }  // end container wdm-if-templates
   }  // end augmentation interfaces
 
   augment "/if:interfaces/if:interface" {
@@ -902,7 +1005,9 @@ module ietf-wdm-interface {
         }  // end augmentation explicit-mode
       }  // end uses l0-types:transceiver-capabilities
 
-      container current-wdm-if-parameters {
+      container wdm-if-config {
+        description
+          "Configuration parameters of this interface";
         leaf configured-mode {
           type union {
             type empty;
@@ -922,11 +1027,29 @@ module ietf-wdm-interface {
             by the server, this means the interface is not
             configured";
         }
-        uses l0-types:common-transceiver-param;
-        description "Current parameters of this interface";
-        uses wdm-if-mode-params;
-        uses wdm-if-statistics;
-      }  // end container current-wdm-if-parameters
+        uses wdm-if-config;
+      }  // end container wdm-if-config
+
+      container wdm-if-tcas {
+        description
+          "Threshold Crossing Alerts definition and configuration";
+        uses wdm-if-tca-list;
+      }  // end of container wdm-if-tcas
+
+      container wdm-if-status {
+        config false;
+        description
+          "Current operationa status parameters of this interface";
+        uses l0-types:common-transceiver-param {
+          refine "tx-channel-power" {
+            config false;
+          }
+          refine "line-coding-bitrate" {
+            config false;
+          }
+        }
+        uses wdm-if-operational;
+      }  // end container wdm-if-status
     }  // end container wdm-interface
   }  // end augmentation interface
 }  // end module
@@ -975,11 +1098,10 @@ have particular sensitivities/vulnerabilities:
        .
        .
        .
-       +--rw current-wdm-if-parameters
-          +--rw configured-mode?            union
-          +--rw line-coding-bitrate?        identityref
-          +--rw tx-channel-power?           power-dbm-or-null
-          +--rw central-frequency?          l0-types:frequency-thz
+       +--rw wdm-if-config
+       |  +--rw configured-mode?            union
+       |  +--rw target-central-frequency?   l0-types:frequency-thz
+       |  +--rw target-tx-channel-power?    l0-types:power-dbm
 
   ]]></artwork>
    </figure>
@@ -1192,6 +1314,12 @@ version of the specification in question.
 
       &rfc7950;
 
+      &rfc8343;
+
+      &rfc6566;
+
+      &rfc8340;
+
      <reference anchor="ITU-T G.698.2">
      <front>
          <title>
@@ -1341,7 +1469,32 @@ version of the specification in question.
           <seriesInfo name="ITU-T" value="Recommendation G.7710"/>
       </reference>
 
+     <reference anchor="ITU-T G.672">
+     <front>
+         <title>
+           Characteristics of multi-degree reconfigurable optical
+           add/drop multiplexers
+          </title>
+          <author>
+          <organization>International Telecommunications Union</organization>
+          </author>
+          <date month="May" year="2025"/>
+      </front>
+          <seriesInfo name="ITU-T" value="Recommendation G.672"/>
+      </reference>
 
+     <reference anchor="ITU-T G.807">
+     <front>
+         <title>
+           Generic functional architecture of the optical media layer
+          </title>
+          <author>
+          <organization>International Telecommunications Union</organization>
+          </author>
+          <date month="October" year="2024"/>
+      </front>
+          <seriesInfo name="ITU-T" value="Recommendation G.807"/>
+      </reference>
 
 </references>
 
@@ -1394,7 +1547,7 @@ instead of numbers</t>
         -->
     </section>
 
-  <section title="YANG Tree">
+  <section anchor="yang-tree" title="YANG Tree">
    <figure align='left'>
      <artwork><![CDATA[
 module: ietf-wdm-interface
@@ -1504,27 +1657,31 @@ module: ietf-wdm-interface
        |              |  +--ro supported-organizational-mode*
        |              |          -> ../../../../supported-mode/mode-id
        |              +--ro explicit-transceiver-mode-ref    leafref
-       +--rw current-wdm-if-parameters
-          +--rw configured-mode?                union
-          +--rw line-coding-bitrate?            identityref
-          +--rw tx-channel-power?               power-dbm-or-unknown
+       +--rw wdm-if-config
+       |  +--rw configured-mode?            union
+       |  +--rw target-central-frequency?   l0-types:frequency-thz
+       |  +--rw target-tx-channel-power?    l0-types:power-dbm
+       +--rw wdm-if-tcas
+       |  +--ro number-of-tcas-supported?   uint32
+       |  +--rw tca-list* [tca-id]
+       |     +--rw tca-id             string
+       |     +--rw tca-type           identityref
+       |     +--rw tca-name           string
+       |     +--rw raise-threshold    l0-types:decimal-5
+       |     +--rw clear-threshold?   l0-types:decimal-5
+       +--ro wdm-if-status
+          +--ro line-coding-bitrate?            identityref
+          +--ro tx-channel-power?               power-dbm-or-unknown
           +--ro rx-channel-power?               power-dbm-or-unknown
           +--ro rx-total-power?                 power-dbm-or-unknown
+          +--ro central-frequency?
+          |       l0-types:frequency-thz
+          +--ro cur-osnr?
+          |       l0-types:snr-or-unknown
           +--ro min-osnr-margin?
           |       l0-types:snr-or-unknown
           +--ro q-margin?
           |       l0-types:decimal-2-or-unknown
-          +--rw central-frequency?
-          |       l0-types:frequency-thz
-          +--ro number-of-tcas-supported?       uint32
-          +--rw tca-list* [tca-id]
-          |  +--rw tca-id             string
-          |  +--rw tca-type           identityref
-          |  +--rw tca-name           string
-          |  +--rw raise-threshold    l0-types:decimal-5
-          |  +--rw clear-threshold?   l0-types:decimal-5
-          +--ro cur-osnr?
-          |       l0-types:snr-or-unknown
           +--ro q-factor?
           |       l0-types:decimal-2-or-unknown
           +--ro uncorrected-words?              uint64
@@ -1551,8 +1708,8 @@ module: ietf-wdm-interface
     <section title="Applicability examples">
       <t>As an example here below is the way an OpenROADM compliant equipment
         could be managed using the YANG models described in this draft.</t>
-      <t>[Editor Note: We may need to rephrase the following sentence, OpenROADM
-        has now many DWDM interface mode supported]</t>
+<!--      <t>[Editor Note: We may need to rephrase the following sentence, OpenROADM
+        has now many DWDM interface mode supported]</t>-->
       <t>In OpenROADM MSA there is a limited number of DWDM interfaces supported.
         Basically only the 100G Staircase FEC and 400G oFEC are supported and these
         two kind of interfaces can be easily summarized with the "mode-id" and
@@ -1566,19 +1723,16 @@ module: ietf-wdm-interface
 module: ietf-wdm-interface
  augment /if:interfaces/if:interface:
     +--rw wdm-interface
-       +--rw current-wdm-if-parameters
-          +--rw configured-mode?          union
-          +--rw central-frequency?        l0-types:frequency-thz
-          +--rw tx-channel-power?         power-dbm-or-null
-          +--ro rx-channel-power?         power-dbm-or-null
-          .
-          .
-          .
-          +--ro cur-osnr?                 layer0-types:snr
-          +--ro cur-q-factor?             int32
-          +--ro uncorrected-words?        uint64
-          +--ro pre-fec-ber?              decimal64
-
+       +--rw wdm-if-config
+       |  +--rw configured-mode?            union
+       |  +--rw target-central-frequency?   l0-types:frequency-thz
+       |  +--rw target-tx-channel-power?    l0-types:power-dbm
+       +--ro wdm-if-status
+          +--ro cur-osnr?
+          +--ro q-factor?
+          |       l0-types:decimal-2-or-unknown
+          +--ro uncorrected-words?              uint64
+          +--ro pre-fec-ber?
 
     ]]></artwork>
     </figure>
