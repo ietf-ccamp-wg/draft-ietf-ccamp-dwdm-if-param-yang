@@ -18,7 +18,7 @@ module: ietf-wdm-interface
              |  +--ro pmd-value        decimal-2
              |  +--ro penalty-value    union
              +--ro max-polarization-dependent-loss
-             |       power-loss-or-null
+             |       power-loss-or-unknown
              +--ro pdl-penalty* [pdl-value]
              |  +--ro pdl-value        power-loss
              |  +--ro penalty-value    union
@@ -43,28 +43,29 @@ module: ietf-wdm-interface
     +--rw wdm-interface
        +--ro supported-modes!
        |  +--ro supported-mode* [mode-id]
-       |     +--ro mode-id                           string
+       |     +--ro mode-id                      string
        |     +--ro (mode)
-       |        +--:(G.698.2)
-       |        |  +--ro standard-mode?              standard-mode
-       |        |  +--ro line-coding-bitrate*        identityref
-       |        |  +--ro transceiver-tuning-range
-       |        |  |  +--ro min-central-frequency?
-       |        |  |  |       frequency-thz
-       |        |  |  +--ro max-central-frequency?
-       |        |  |  |       frequency-thz
-       |        |  |  +--ro transceiver-tunability-granularity?
-       |        |  |          frequency-ghz
-       |        |  +--ro tx-channel-power-min?       power-dbm
-       |        |  +--ro tx-channel-power-max?       power-dbm
-       |        |  +--ro rx-channel-power-min?       power-dbm
-       |        |  +--ro rx-channel-power-max?       power-dbm
-       |        |  +--ro rx-total-power-max?         power-dbm
+       |        +--:(g.698.2)
+       |        |  +--ro g.698.2
+       |        |     +--ro standard-mode               standard-mode
+       |        |     +--ro line-coding-bitrate*        identityref
+       |        |     +--ro transceiver-tuning-range
+       |        |     |  +--ro min-central-frequency?
+       |        |     |  |       frequency-thz
+       |        |     |  +--ro max-central-frequency?
+       |        |     |  |       frequency-thz
+       |        |     |  +--ro transceiver-tunability-granularity?
+       |        |     |          frequency-ghz
+       |        |     +--ro tx-channel-power-min?       power-dbm
+       |        |     +--ro tx-channel-power-max?       power-dbm
+       |        |     +--ro rx-channel-power-min?       power-dbm
+       |        |     +--ro rx-channel-power-max?       power-dbm
+       |        |     +--ro rx-total-power-max?         power-dbm
        |        +--:(organizational-mode)
        |        |  +--ro organizational-mode
-       |        |     +--ro operational-mode?
+       |        |     +--ro operational-mode
        |        |     |       operational-mode
-       |        |     +--ro organization-identifier?
+       |        |     +--ro organization-identifier
        |        |     |       organization-identifier
        |        |     +--ro line-coding-bitrate*        identityref
        |        |     +--ro transceiver-tuning-range
@@ -99,33 +100,50 @@ module: ietf-wdm-interface
        |              +--ro rx-total-power-max?
        |              |       power-dbm
        |              +--ro compatible-modes
-       |              |  +--ro supported-application-codes*
+       |              |  +--ro supported-application-code*
        |              |  |       -> ../../../../supported-mode/mode-id
-       |              |  +--ro supported-organizational-modes*
+       |              |  +--ro supported-organizational-mode*
        |              |          -> ../../../../supported-mode/mode-id
-       |              +--ro explicit-transceiver-mode-ref?   leafref
-       +--rw current-wdm-if-parameters
-          +--rw configured-mode?            union
-          +--rw line-coding-bitrate?        identityref
-          +--rw tx-channel-power?           power-dbm-or-null
-          +--ro rx-channel-power?           power-dbm-or-null
-          +--ro rx-total-power?             power-dbm-or-null
-          +--ro min-osnr-margin?            l0-types:snr-or-null
-          +--ro q-margin?                   int32
-          +--rw central-frequency?          l0-types:frequency-thz
-          +--ro number-of-tcas-supported?   uint32
-          +--rw tca-list* [tca-type]
-          |  +--rw tca-type           wdm-if-tca-types
-          |  +--rw tca-name?          string
-          |  +--rw raise-threshold?   int32
-          |  +--rw clear-threshold?   int32
-          +--ro cur-osnr?                   l0-types:snr
-          +--ro cur-q-factor?               int32
-          +--ro uncorrected-words?          uint64
-          +--ro pre-fec-ber?                decimal64
+       |              +--ro explicit-transceiver-mode-ref    leafref
+       +--rw wdm-if-config
+       |  +--rw configured-mode?            union
+       |  +--rw target-central-frequency?   l0-types:frequency-thz
+       |  +--rw target-tx-channel-power?    l0-types:power-dbm
+       +--rw wdm-if-tcas
+       |  +--ro number-of-tcas-supported?   uint32
+       |  +--rw tca-list* [tca-id]
+       |     +--rw tca-id             string
+       |     +--rw tca-type           identityref
+       |     +--rw tca-name           string
+       |     +--rw raise-threshold    l0-types:decimal-5
+       |     +--rw clear-threshold?   l0-types:decimal-5
+       +--ro wdm-if-status
+          +--ro line-coding-bitrate?            identityref
+          +--ro tx-channel-power?               power-dbm-or-unknown
+          +--ro rx-channel-power?               power-dbm-or-unknown
+          +--ro rx-total-power?                 power-dbm-or-unknown
+          +--ro central-frequency?
+          |       l0-types:frequency-thz
+          +--ro cur-osnr?
+          |       l0-types:snr-or-unknown
+          +--ro min-osnr-margin?
+          |       l0-types:snr-or-unknown
+          +--ro q-margin?
+          |       l0-types:decimal-2-or-unknown
+          +--ro q-factor?
+          |       l0-types:decimal-2-or-unknown
+          +--ro uncorrected-words?              uint64
+          +--ro pre-fec-ber?
+          |       l0-types:decimal-18-or-unknown
+          +--ro chromatic-dispersion?
+          |       l0-types:decimal-2-or-unknown
+          +--ro polarization-mode-dispersion?
+          |       l0-types:decimal-2-or-unknown
+          +--ro polarization-dependent-loss?
+                  l0-types:power-loss-or-unknown
 
   notifications:
     +---n wdm-if-tca
        +--ro if-name     -> /if:interfaces/interface/name
-       +--ro tca-type    wdm-if-tca-types
-       +--ro tca-name?   string
+       +--ro tca-type    identityref
+       +--ro tca-name    string
