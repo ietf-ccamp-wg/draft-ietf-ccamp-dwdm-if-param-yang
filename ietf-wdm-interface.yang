@@ -56,7 +56,7 @@ module ietf-wdm-interface {
   //
   // and finally delete this note.
 
-  revision 2025-12-15 {
+  revision 2026-02-16 {
     description
       "Initial Version";
     reference
@@ -160,7 +160,7 @@ module ietf-wdm-interface {
   identity rx-q-factor-tca {
     base wdm-if-tca-type;
     description
-      "Q-Factor TCA on the receiver interface";
+      "Q-factor TCA on the receiver interface";
   }
 
   grouping wdm-if-tca-thresholds {
@@ -195,9 +195,7 @@ module ietf-wdm-interface {
          (or clear threshold is not defined), the TCA
          is raised when the value exceed this threshold
          - if raise-threshold is smaller than clear-threshold, the
-         TCA is raised when the value fall below this threshold
-         - if clear-threshold is not defined the TCA raise and clear
-         on the same raise-threshold";
+         TCA is raised when the value fall below this threshold";
     }
     leaf clear-threshold {
       type l0-types:decimal-5;
@@ -205,14 +203,13 @@ module ietf-wdm-interface {
         error-message
           "TCA raise and clear thresholds must be different";
       }
+      mandatory true;
       description
         "A TCA cleared when the variable cross this threshold:
          - if clear-threshold is smaller than raise-threshold
          the TCA is cleared when the value fall below this threshold
          - if clear-threshold is grater than raise-threshold, the
-         TCA is raised when the value exceed this threshold
-         - If clear-threshold is not defined the TCA raise and clear
-         on the same raise-threshold";
+         TCA is cleared when the value exceed this threshold";
     }
   } // end grouping wdm-if-tca-threshold
 
@@ -293,8 +290,8 @@ module ietf-wdm-interface {
       default "unknown";
       config false;
       description
-        "Q-Factor margin to FEC threshold, if not supported by the
-         implementationp SHALL remaoin undefined";
+        "Q-factor margin to FEC threshold, if not supported by the
+         implementationp SHALL remain undefined";
       reference
         "ITU-T O.201 (07/2003): Q-factor test equipment to estimate
                    the transmission performance of optical channels";
@@ -305,7 +302,7 @@ module ietf-wdm-interface {
       default "unknown";
       config false;
       description
-        "Current measured Q-Factor of the interface,
+        "Current measured Q-factor of the interface,
          if not supported by the implementation SHALL
          not be present";
       reference

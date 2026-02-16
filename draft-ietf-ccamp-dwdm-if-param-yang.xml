@@ -192,7 +192,7 @@ Enter the full document title and an abbreviated version
     <!-- month and day will be generated automatically by XML2RFC;
 be sure the year is current.-->
 
-    <date year="2025" />
+    <date year="2026" />
 
     <!-- IETF area is optional -->
 
@@ -252,7 +252,7 @@ but you should provide more than just the abstract. -->
 <t>This document defines a YANG model for managing single
    channel optical interface parameters of coherent interfaces supporting
    Dense Wavelength Division Multiplexing (DWDM) applications,
-   using the approach specified in G.698.2.
+   using the approach specified in <xref target="ITU-T G.698.2"/>.
    This model supports parameters to characterize coherent transceivers
    found in current implementations to specify the mode of operation.
    As application identifiers like those specified in
@@ -471,7 +471,7 @@ OM = Optical Mux
 OD = Optical Demux
 ROADM = Reconfigurable Optical Add Drop Multiplexer
 ]]></artwork>
-<postamble> from Fig. 5.1/G.698.2 </postamble>
+<postamble> from Fig. 5.1/<xref target="ITU-T G.698.2"/> </postamble>
 </figure>
   <t>
     This document introduces the ietf-wdm-interface model as an augment
@@ -631,7 +631,7 @@ module ietf-wdm-interface {
   //
   // and finally delete this note.
 
-  revision 2025-12-15 {
+  revision 2026-02-16 {
     description
       "Initial Version";
     reference
@@ -735,7 +735,7 @@ module ietf-wdm-interface {
   identity rx-q-factor-tca {
     base wdm-if-tca-type;
     description
-      "Q-Factor TCA on the receiver interface";
+      "Q-factor TCA on the receiver interface";
   }
 
   grouping wdm-if-tca-thresholds {
@@ -770,9 +770,7 @@ module ietf-wdm-interface {
          (or clear threshold is not defined), the TCA
          is raised when the value exceed this threshold
          - if raise-threshold is smaller than clear-threshold, the
-         TCA is raised when the value fall below this threshold
-         - if clear-threshold is not defined the TCA raise and clear
-         on the same raise-threshold";
+         TCA is raised when the value fall below this threshold";
     }
     leaf clear-threshold {
       type l0-types:decimal-5;
@@ -780,14 +778,13 @@ module ietf-wdm-interface {
         error-message
           "TCA raise and clear thresholds must be different";
       }
+      mandatory true;
       description
         "A TCA cleared when the variable cross this threshold:
          - if clear-threshold is smaller than raise-threshold
          the TCA is cleared when the value fall below this threshold
          - if clear-threshold is grater than raise-threshold, the
-         TCA is raised when the value exceed this threshold
-         - If clear-threshold is not defined the TCA raise and clear
-         on the same raise-threshold";
+         TCA is cleared when the value exceed this threshold";
     }
   } // end grouping wdm-if-tca-threshold
 
@@ -868,8 +865,8 @@ module ietf-wdm-interface {
       default "unknown";
       config false;
       description
-        "Q-Factor margin to FEC threshold, if not supported by the
-         implementationp SHALL remaoin undefined";
+        "Q-factor margin to FEC threshold, if not supported by the
+         implementationp SHALL remain undefined";
       reference
         "ITU-T O.201 (07/2003): Q-factor test equipment to estimate
                    the transmission performance of optical channels";
@@ -880,7 +877,7 @@ module ietf-wdm-interface {
       default "unknown";
       config false;
       description
-        "Current measured Q-Factor of the interface,
+        "Current measured Q-factor of the interface,
          if not supported by the implementation SHALL
          not be present";
       reference
@@ -1115,24 +1112,11 @@ default).  All writable data nodes are likely to be reasonably
 sensitive or vulnerable in some network environments.  Write
 operations (e.g., edit-config) and delete operations to these data
 nodes without proper protection or authentication can have a negative
-effect on network operations.  The following subtrees and data nodes
-have particular sensitivities/vulnerabilities:
+effect on network operations.
 </t>
-   <figure align='left'>
-     <artwork><![CDATA[
-  augment /if:interfaces/if:interface:
-    +--rw wdm-interface
-       .
-       .
-       .
-       +--rw wdm-if-config
-       |  +--rw configured-mode?            union
-       |  +--rw target-central-frequency?   l0-types:frequency-thz
-       |  +--rw target-tx-channel-power?    l0-types:power-dbm
-
-  ]]></artwork>
-   </figure>
-
+<t>
+  There are no particularly sensitive writable data nodes..
+</t>
 <t>
   There are no particularly sensitive readable data nodes.
 </t>
@@ -1695,7 +1679,7 @@ module: ietf-wdm-interface
        |     +--rw tca-type           identityref
        |     +--rw tca-name           string
        |     +--rw raise-threshold    l0-types:decimal-5
-       |     +--rw clear-threshold?   l0-types:decimal-5
+       |     +--rw clear-threshold    l0-types:decimal-5
        +--ro wdm-if-status
           +--ro line-coding-bitrate?            identityref
           +--ro tx-channel-power?               power-dbm-or-unknown

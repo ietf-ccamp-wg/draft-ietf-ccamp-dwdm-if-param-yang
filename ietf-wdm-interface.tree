@@ -116,7 +116,7 @@ module: ietf-wdm-interface
        |     +--rw tca-type           identityref
        |     +--rw tca-name           string
        |     +--rw raise-threshold    l0-types:decimal-5
-       |     +--rw clear-threshold?   l0-types:decimal-5
+       |     +--rw clear-threshold    l0-types:decimal-5
        +--ro wdm-if-status
           +--ro line-coding-bitrate?            identityref
           +--ro tx-channel-power?               power-dbm-or-unknown
