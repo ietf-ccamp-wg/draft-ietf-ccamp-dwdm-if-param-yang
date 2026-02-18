@@ -192,7 +192,7 @@ module ietf-wdm-interface {
       description
         "A TCA is raised if the variable cross this threshold:
          - if raise-threshold is greater than clear-threshold
-         (or clear threshold is not defined), the TCA
+         the TCA
          is raised when the value exceed this threshold
          - if raise-threshold is smaller than clear-threshold, the
          TCA is raised when the value fall below this threshold";
