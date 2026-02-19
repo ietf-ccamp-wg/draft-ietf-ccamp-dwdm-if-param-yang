@@ -20,10 +20,10 @@ module ietf-wdm-interface {
      WG List:  <mailto:ccamp@ietf.org>
 
 
-     Editor:   Dharini Hiremagalur <mailto:dharinih@juniper.net>
-     Editor:   Gabriele Galimberti <mailto:ggalimbe56@gmail.com>
-     Editor:   Gert Grammel <mailto:ggrammel@juniper.net>
-     Editor:   Roberto Manzotti <mailto:rmanzott@cisco.com>";
+     Editor: Dharini Hiremagalur <mailto:dharini.hiremagalur@hpe.com>
+     Editor: Gabriele Galimberti <mailto:ggalimbe56@gmail.com>
+     Editor: Gert Grammel <mailto:gert.grammel@hpe.com>
+     Editor: Roberto Manzotti <mailto:rmanzott@cisco.com>";
   description
     "This module contains a collection of YANG definitions for
      configuring DWDM Optical interfaces.
@@ -184,7 +184,7 @@ module ietf-wdm-interface {
     }
     leaf raise-threshold {
       type l0-types:decimal-5;
-      must "current() != ../clear-threshold" {
+      must 'current() != ../clear-threshold' {
         error-message
           "TCA raise and clear thresholds must be different";
       }
@@ -192,14 +192,13 @@ module ietf-wdm-interface {
       description
         "A TCA is raised if the variable cross this threshold:
          - if raise-threshold is greater than clear-threshold
-         the TCA
-         is raised when the value exceed this threshold
+         the TCA is raised when the value exceed this threshold
          - if raise-threshold is smaller than clear-threshold, the
          TCA is raised when the value fall below this threshold";
     }
     leaf clear-threshold {
       type l0-types:decimal-5;
-      must "current() != ../raise-threshold" {
+      must 'current() != ../raise-threshold' {
         error-message
           "TCA raise and clear thresholds must be different";
       }
@@ -253,6 +252,9 @@ module ietf-wdm-interface {
       description
         "This parameter indicates the terget configured TX channel
          optical power.";
+      reference
+        "ITU-T G.694.1 (10/2020): Spectral grids for WDM
+         applications: DWDM frequency grid";
     }
   } // end grouping wdm-if-node-params
 
@@ -265,6 +267,9 @@ module ietf-wdm-interface {
       description
         "This parameter indicates the current interface Central
          Frequency.";
+      reference
+        "ITU-T G.694.1 (10/2020): Spectral grids for WDM
+         applications: DWDM frequency grid";
     }
     leaf cur-osnr {
       type l0-types:snr-or-unknown;
@@ -415,7 +420,7 @@ module ietf-wdm-interface {
             "The list of the transceivers' explicit modes.";
           leaf explicit-transceiver-mode-id {
             type string {
-              length 64;
+              length "64";
             }
             description
               "The identifier of the transceivers' explicit mode.";
