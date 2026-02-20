@@ -180,7 +180,7 @@ module ietf-wdm-interface {
       mandatory true;
       description
         "A textual name of the TCA that explain its scope
-         eg 'TX Power Degrade'";
+         eg 'High-RX-Power'";
     }
     leaf raise-threshold {
       type l0-types:decimal-5;

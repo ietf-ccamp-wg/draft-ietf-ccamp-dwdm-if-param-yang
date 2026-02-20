@@ -5,13 +5,13 @@
 Internet Engineering Task Force                       G. Galimberti, Ed.
 Internet-Draft                                                     Nokia
 Intended status: Standards Track                          D. Hiremagalur
-Expires: 23 August 2026                                  G. Grammel, Ed.
+Expires: 24 August 2026                                  G. Grammel, Ed.
                                                                      HPE
                                                         R. Manzotti, Ed.
                                                                    Cisco
                                                                D. Breuer
                                                      DEUTSCHE TELEKOM AG
-                                                        19 February 2026
+                                                        20 February 2026
 
 
     A YANG data model to manage configurable DWDM optical interfaces
@@ -53,12 +53,12 @@ Status of This Memo
 
 
 
-Galimberti, et al.       Expires 23 August 2026                 [Page 1]
+Galimberti, et al.       Expires 24 August 2026                 [Page 1]
 
 Internet-Draft   draft-ietf-ccamp-dwdm-if-param-yang-15    February 2026
 
 
-   This Internet-Draft will expire on 23 August 2026.
+   This Internet-Draft will expire on 24 August 2026.
 
 Copyright Notice
 
@@ -96,8 +96,9 @@ Table of Contents
    Appendix A.  Change Log . . . . . . . . . . . . . . . . . . . . .  24
    Appendix B.  Open Issues  . . . . . . . . . . . . . . . . . . . .  24
    Appendix C.  YANG Tree  . . . . . . . . . . . . . . . . . . . . .  24
-   Appendix D.  Applicability examples . . . . . . . . . . . . . . .  27
-   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  28
+   Appendix D.  Threshold crossing example . . . . . . . . . . . . .  27
+   Appendix E.  Applicability examples . . . . . . . . . . . . . . .  28
+   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  29
 
 
 
@@ -108,8 +109,7 @@ Table of Contents
 
 
 
-
-Galimberti, et al.       Expires 23 August 2026                 [Page 2]
+Galimberti, et al.       Expires 24 August 2026                 [Page 2]
 
 Internet-Draft   draft-ietf-ccamp-dwdm-if-param-yang-15    February 2026
 
@@ -165,7 +165,7 @@ Internet-Draft   draft-ietf-ccamp-dwdm-if-param-yang-15    February 2026
 
 
 
-Galimberti, et al.       Expires 23 August 2026                 [Page 3]
+Galimberti, et al.       Expires 24 August 2026                 [Page 3]
 
 Internet-Draft   draft-ietf-ccamp-dwdm-if-param-yang-15    February 2026
 
@@ -221,7 +221,7 @@ Internet-Draft   draft-ietf-ccamp-dwdm-if-param-yang-15    February 2026
 
 
 
-Galimberti, et al.       Expires 23 August 2026                 [Page 4]
+Galimberti, et al.       Expires 24 August 2026                 [Page 4]
 
 Internet-Draft   draft-ietf-ccamp-dwdm-if-param-yang-15    February 2026
 
@@ -277,7 +277,7 @@ Internet-Draft   draft-ietf-ccamp-dwdm-if-param-yang-15    February 2026
 
 
 
-Galimberti, et al.       Expires 23 August 2026                 [Page 5]
+Galimberti, et al.       Expires 24 August 2026                 [Page 5]
 
 Internet-Draft   draft-ietf-ccamp-dwdm-if-param-yang-15    February 2026
 
@@ -333,7 +333,7 @@ Internet-Draft   draft-ietf-ccamp-dwdm-if-param-yang-15    February 2026
 
 
 
-Galimberti, et al.       Expires 23 August 2026                 [Page 6]
+Galimberti, et al.       Expires 24 August 2026                 [Page 6]
 
 Internet-Draft   draft-ietf-ccamp-dwdm-if-param-yang-15    February 2026
 
@@ -389,7 +389,7 @@ Internet-Draft   draft-ietf-ccamp-dwdm-if-param-yang-15    February 2026
 
 
 
-Galimberti, et al.       Expires 23 August 2026                 [Page 7]
+Galimberti, et al.       Expires 24 August 2026                 [Page 7]
 
 Internet-Draft   draft-ietf-ccamp-dwdm-if-param-yang-15    February 2026
 
@@ -445,7 +445,7 @@ Internet-Draft   draft-ietf-ccamp-dwdm-if-param-yang-15    February 2026
 
 
 
-Galimberti, et al.       Expires 23 August 2026                 [Page 8]
+Galimberti, et al.       Expires 24 August 2026                 [Page 8]
 
 Internet-Draft   draft-ietf-ccamp-dwdm-if-param-yang-15    February 2026
 
@@ -501,7 +501,7 @@ Internet-Draft   draft-ietf-ccamp-dwdm-if-param-yang-15    February 2026
 
 
 
-Galimberti, et al.       Expires 23 August 2026                 [Page 9]
+Galimberti, et al.       Expires 24 August 2026                 [Page 9]
 
 Internet-Draft   draft-ietf-ccamp-dwdm-if-param-yang-15    February 2026
 
@@ -557,7 +557,7 @@ Internet-Draft   draft-ietf-ccamp-dwdm-if-param-yang-15    February 2026
 
 
 
-Galimberti, et al.       Expires 23 August 2026                [Page 10]
+Galimberti, et al.       Expires 24 August 2026                [Page 10]
 
 Internet-Draft   draft-ietf-ccamp-dwdm-if-param-yang-15    February 2026
 
@@ -575,7 +575,7 @@ Internet-Draft   draft-ietf-ccamp-dwdm-if-param-yang-15    February 2026
          mandatory true;
          description
            "A textual name of the TCA that explain its scope
-            eg 'TX Power Degrade'";
+            eg 'High-RX-Power'";
        }
        leaf raise-threshold {
          type l0-types:decimal-5;
@@ -613,7 +613,7 @@ Internet-Draft   draft-ietf-ccamp-dwdm-if-param-yang-15    February 2026
 
 
 
-Galimberti, et al.       Expires 23 August 2026                [Page 11]
+Galimberti, et al.       Expires 24 August 2026                [Page 11]
 
 Internet-Draft   draft-ietf-ccamp-dwdm-if-param-yang-15    February 2026
 
@@ -669,7 +669,7 @@ Internet-Draft   draft-ietf-ccamp-dwdm-if-param-yang-15    February 2026
 
 
 
-Galimberti, et al.       Expires 23 August 2026                [Page 12]
+Galimberti, et al.       Expires 24 August 2026                [Page 12]
 
 Internet-Draft   draft-ietf-ccamp-dwdm-if-param-yang-15    February 2026
 
@@ -725,7 +725,7 @@ Internet-Draft   draft-ietf-ccamp-dwdm-if-param-yang-15    February 2026
 
 
 
-Galimberti, et al.       Expires 23 August 2026                [Page 13]
+Galimberti, et al.       Expires 24 August 2026                [Page 13]
 
 Internet-Draft   draft-ietf-ccamp-dwdm-if-param-yang-15    February 2026
 
@@ -781,7 +781,7 @@ Internet-Draft   draft-ietf-ccamp-dwdm-if-param-yang-15    February 2026
 
 
 
-Galimberti, et al.       Expires 23 August 2026                [Page 14]
+Galimberti, et al.       Expires 24 August 2026                [Page 14]
 
 Internet-Draft   draft-ietf-ccamp-dwdm-if-param-yang-15    February 2026
 
@@ -837,7 +837,7 @@ Internet-Draft   draft-ietf-ccamp-dwdm-if-param-yang-15    February 2026
 
 
 
-Galimberti, et al.       Expires 23 August 2026                [Page 15]
+Galimberti, et al.       Expires 24 August 2026                [Page 15]
 
 Internet-Draft   draft-ietf-ccamp-dwdm-if-param-yang-15    February 2026
 
@@ -893,7 +893,7 @@ Internet-Draft   draft-ietf-ccamp-dwdm-if-param-yang-15    February 2026
 
 
 
-Galimberti, et al.       Expires 23 August 2026                [Page 16]
+Galimberti, et al.       Expires 24 August 2026                [Page 16]
 
 Internet-Draft   draft-ietf-ccamp-dwdm-if-param-yang-15    February 2026
 
@@ -949,7 +949,7 @@ Internet-Draft   draft-ietf-ccamp-dwdm-if-param-yang-15    February 2026
 
 
 
-Galimberti, et al.       Expires 23 August 2026                [Page 17]
+Galimberti, et al.       Expires 24 August 2026                [Page 17]
 
 Internet-Draft   draft-ietf-ccamp-dwdm-if-param-yang-15    February 2026
 
@@ -1005,7 +1005,7 @@ Internet-Draft   draft-ietf-ccamp-dwdm-if-param-yang-15    February 2026
 
 
 
-Galimberti, et al.       Expires 23 August 2026                [Page 18]
+Galimberti, et al.       Expires 24 August 2026                [Page 18]
 
 Internet-Draft   draft-ietf-ccamp-dwdm-if-param-yang-15    February 2026
 
@@ -1061,7 +1061,7 @@ Internet-Draft   draft-ietf-ccamp-dwdm-if-param-yang-15    February 2026
 
 
 
-Galimberti, et al.       Expires 23 August 2026                [Page 19]
+Galimberti, et al.       Expires 24 August 2026                [Page 19]
 
 Internet-Draft   draft-ietf-ccamp-dwdm-if-param-yang-15    February 2026
 
@@ -1117,7 +1117,7 @@ Internet-Draft   draft-ietf-ccamp-dwdm-if-param-yang-15    February 2026
 
 
 
-Galimberti, et al.       Expires 23 August 2026                [Page 20]
+Galimberti, et al.       Expires 24 August 2026                [Page 20]
 
 Internet-Draft   draft-ietf-ccamp-dwdm-if-param-yang-15    February 2026
 
@@ -1173,7 +1173,7 @@ Internet-Draft   draft-ietf-ccamp-dwdm-if-param-yang-15    February 2026
 
 
 
-Galimberti, et al.       Expires 23 August 2026                [Page 21]
+Galimberti, et al.       Expires 24 August 2026                [Page 21]
 
 Internet-Draft   draft-ietf-ccamp-dwdm-if-param-yang-15    February 2026
 
@@ -1229,7 +1229,7 @@ Internet-Draft   draft-ietf-ccamp-dwdm-if-param-yang-15    February 2026
 
 
 
-Galimberti, et al.       Expires 23 August 2026                [Page 22]
+Galimberti, et al.       Expires 24 August 2026                [Page 22]
 
 Internet-Draft   draft-ietf-ccamp-dwdm-if-param-yang-15    February 2026
 
@@ -1285,7 +1285,7 @@ Internet-Draft   draft-ietf-ccamp-dwdm-if-param-yang-15    February 2026
 
 
 
-Galimberti, et al.       Expires 23 August 2026                [Page 23]
+Galimberti, et al.       Expires 24 August 2026                [Page 23]
 
 Internet-Draft   draft-ietf-ccamp-dwdm-if-param-yang-15    February 2026
 
@@ -1341,7 +1341,7 @@ Appendix C.  YANG Tree
 
 
 
-Galimberti, et al.       Expires 23 August 2026                [Page 24]
+Galimberti, et al.       Expires 24 August 2026                [Page 24]
 
 Internet-Draft   draft-ietf-ccamp-dwdm-if-param-yang-15    February 2026
 
@@ -1397,7 +1397,7 @@ Internet-Draft   draft-ietf-ccamp-dwdm-if-param-yang-15    February 2026
 
 
 
-Galimberti, et al.       Expires 23 August 2026                [Page 25]
+Galimberti, et al.       Expires 24 August 2026                [Page 25]
 
 Internet-Draft   draft-ietf-ccamp-dwdm-if-param-yang-15    February 2026
 
@@ -1453,7 +1453,7 @@ Internet-Draft   draft-ietf-ccamp-dwdm-if-param-yang-15    February 2026
 
 
 
-Galimberti, et al.       Expires 23 August 2026                [Page 26]
+Galimberti, et al.       Expires 24 August 2026                [Page 26]
 
 Internet-Draft   draft-ietf-ccamp-dwdm-if-param-yang-15    February 2026
 
@@ -1497,7 +1497,53 @@ Internet-Draft   draft-ietf-ccamp-dwdm-if-param-yang-15    February 2026
          +--ro tca-type    identityref
          +--ro tca-name    string
 
-Appendix D.  Applicability examples
+Appendix D.  Threshold crossing example
+
+
+
+
+
+
+
+
+
+
+
+Galimberti, et al.       Expires 24 August 2026                [Page 27]
+
+Internet-Draft   draft-ietf-ccamp-dwdm-if-param-yang-15    February 2026
+
+
+     Identity: rx-power-tca
+
+    ^  RX-Power
+    |
+    |          ..
+    |        .   .
+    | ------.-----.-------------------------- raise-threshold
+    |      . |     .
+    | ----.---------.------------------------ clear-threshold
+    |    .   |      |.                   . .
+    | ...    |      | ....              .
+    |        |      |     .            .
+    | ---------------------.----------.------ clear-threshold
+    |        |      |       .        .|
+    | -----------------------.------.-------- raise-threshold
+    |        |      |        |..  ..  |
+    |        |      |        |  ..    |
+    +-------------------------------------------------------->
+           High-RX-Power    Low-RX-Power
+           raise  clear    raise    clear
+
+                  Figure 2: Example of Threshold crossing
+
+   Threshold Crossing Alarm use a hysteresis mechanism.  To avoid
+   ambiguity and TCA flipping the rise and clear thresholds are always
+   mandatory.  A check on the proper value must be done carefully.  E.g.
+   the Low-RX-Power alarm has the raise-threshold < clear-threshold
+   while the High-RX-Power alarm has raise-threshold > clear-threshold.
+
+Appendix E.  Applicability examples
 
    As an example here below is the way an OpenROADM compliant equipment
    could be managed using the YANG models described in this document.
@@ -1507,15 +1553,22 @@ Appendix D.  Applicability examples
    supported and these two kind of interfaces can be easily summarized
    with the "mode-id" and the "application-identifier" strings.
 
+   the models below are enough to identify the interface and few working
+   parameters:
 
 
-Galimberti, et al.       Expires 23 August 2026                [Page 27]
+
+
+
+
+
+
+
+
+Galimberti, et al.       Expires 24 August 2026                [Page 28]
 
 Internet-Draft   draft-ietf-ccamp-dwdm-if-param-yang-15    February 2026
 
-
-   the models below are enough to identify the interface and few working
-   parameters:
 
    module: ietf-wdm-interface
     augment /if:interfaces/if:interface:
@@ -1560,21 +1613,19 @@ Authors' Addresses
    Email: gert.grammel@hpe.com
 
 
-
-
-
-
-
-Galimberti, et al.       Expires 23 August 2026                [Page 28]
-
-Internet-Draft   draft-ietf-ccamp-dwdm-if-param-yang-15    February 2026
-
-
    Roberto Manzotti (editor)
    Cisco
    Santa Maria Molgora 48 C
    20871 Vimercate
    Italy
+
+
+
+Galimberti, et al.       Expires 24 August 2026                [Page 29]
+
+Internet-Draft   draft-ietf-ccamp-dwdm-if-param-yang-15    February 2026
+
+
    Phone: +390392091280
    Email: rmanzott@cisco.com
 
@@ -1621,4 +1672,9 @@ Internet-Draft   draft-ietf-ccamp-dwdm-if-param-yang-15    February 2026
 
 
 
-Galimberti, et al.       Expires 23 August 2026                [Page 29]
+
+
+
+
+
+Galimberti, et al.       Expires 24 August 2026                [Page 30]

@@ -754,7 +754,7 @@ module ietf-wdm-interface {
       mandatory true;
       description
         "A textual name of the TCA that explain its scope
-         eg 'TX Power Degrade'";
+         eg 'High-RX-Power'";
     }
     leaf raise-threshold {
       type l0-types:decimal-5;
@@ -1723,6 +1723,41 @@ module: ietf-wdm-interface
 
     </section>
 
+    <section title="Threshold crossing example">
+        <figure align="center" anchor="threshold-crossing-example" title="Example of Threshold crossing">
+            <artwork><![CDATA[
+  Identity: rx-power-tca
+
+ ^  RX-Power
+ |
+ |          ..
+ |        .   .
+ | ------.-----.-------------------------- raise-threshold
+ |      . |     .
+ | ----.---------.------------------------ clear-threshold
+ |    .   |      |.                   . .
+ | ...    |      | ....              .
+ |        |      |     .            .
+ | ---------------------.----------.------ clear-threshold
+ |        |      |       .        .|
+ | -----------------------.------.-------- raise-threshold
+ |        |      |        |..  ..  |
+ |        |      |        |  ..    |
+ +-------------------------------------------------------->
+        High-RX-Power    Low-RX-Power
+        raise  clear    raise    clear
+            ]]></artwork>
+        </figure>
+        <t>
+Threshold Crossing Alarm use a hysteresis mechanism.
+To avoid ambiguity and TCA flipping the rise and clear
+thresholds are always mandatory.
+A check on the proper value must be done carefully.
+E.g. the Low-RX-Power alarm has the
+raise-threshold &lt; clear-threshold while the High-RX-Power alarm
+has raise-threshold &gt; clear-threshold.
+        </t>
+    </section>
     <section title="Applicability examples">
       <t>As an example here below is the way an OpenROADM compliant equipment
         could be managed using the YANG models described in this document.</t>
