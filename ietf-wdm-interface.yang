@@ -3,14 +3,15 @@ module ietf-wdm-interface {
   namespace "urn:ietf:params:xml:ns:yang:ietf-wdm-interface";
   prefix wdm-if;
 
+  import ietf-yang-revisions {
+    prefix "rev";
+  }
   import ietf-interfaces {
     prefix if;
   }
   import ietf-layer0-types {
-    // Requires at least revision 2025-11-03
-    // will update with rev:recommended-min-date 2025-xx-yy;
-    // once RFC9093bis get published
     prefix l0-types;
+    rev:recommended-min-date 2025-11-03;
   }
 
   organization
@@ -56,7 +57,7 @@ module ietf-wdm-interface {
   //
   // and finally delete this note.
 
-  revision 2026-02-16 {
+  revision 2026-02-26 {
     description
       "Initial Version";
     reference

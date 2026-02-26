@@ -54,6 +54,7 @@ document to be edited.
 <!ENTITY I-Doit SYSTEM "https://datatracker.ietf.org/doc/bibxml3/draft-ietf-ccamp-optical-impairment-topology-yang-21.xml">
 <!ENTITY rfc9093bis SYSTEM "https://datatracker.ietf.org/doc/bibxml3/draft-ietf-ccamp-rfc9093-bis-19.xml">
 <!ENTITY I-Ddwdmtunnel SYSTEM "https://datatracker.ietf.org/doc/bibxml3/draft-ietf-ccamp-wdm-tunnel-yang-06.xml">
+<!ENTITY I-Dversioning SYSTEM "https://datatracker.ietf.org/doc/bibxml3/draft-ietf-netmod-yang-module-versioning-15.xml">
 ]>
 
 <?rfc toc="yes"?>
@@ -379,6 +380,40 @@ but you should provide more than just the abstract. -->
   </t>
 
   </section>
+<section title="Prefixes in Data Node Names" anchor="sect-1.3">
+  <t>
+   In this document, names of data nodes and other data model objects
+   are prefixed using the standard prefix associated with the
+   corresponding YANG imported modules, as shown in
+   <xref target="tab-prefixes"/>.
+  </t>
+
+  <texttable title="Prefixes and corresponding YANG modules"
+   anchor="tab-prefixes" style="full">
+   <ttcol> Prefix</ttcol>
+   <ttcol> YANG module</ttcol>
+   <ttcol> Reference</ttcol>
+   <c>wdm-if</c>
+   <c>ietf-wdm-interface</c>
+   <c>[RFCXXXX]</c>
+   <c>rev</c>
+   <c>ietf-yang-revisions</c>
+   <c><xref target="I-D.ietf-netmod-yang-module-versioning"/></c>
+   <c>if</c>
+   <c>ietf-interfaces</c>
+   <c><xref target="RFC8343"/></c>
+   <c>l0-types</c>
+   <c>ietf-layer0-types</c>
+   <c><xref target="I-D.ietf-ccamp-rfc9093-bis"/></c>
+  </texttable>
+
+  <t>
+   [Note to RFC editor: Please replace XXXX with the number
+   assigned to the RFC along the full document once this draft
+   becomes an RFC.]
+  </t>
+
+  </section>
 
     <section title="Conventions">
     <!-- <t><cref>TEMPLATE TODO This boilerplate should be used if the
@@ -577,14 +612,15 @@ module ietf-wdm-interface {
   namespace "urn:ietf:params:xml:ns:yang:ietf-wdm-interface";
   prefix wdm-if;
 
+  import ietf-yang-revisions {
+    prefix "rev";
+  }
   import ietf-interfaces {
     prefix if;
   }
   import ietf-layer0-types {
-    // Requires at least revision 2025-11-03
-    // will update with rev:recommended-min-date 2025-xx-yy;
-    // once RFC9093bis get published
     prefix l0-types;
+    rev:recommended-min-date 2025-11-03;
   }
 
   organization
@@ -630,7 +666,7 @@ module ietf-wdm-interface {
   //
   // and finally delete this note.
 
-  revision 2026-02-16 {
+  revision 2026-02-26 {
     description
       "Initial Version";
     reference
@@ -1333,6 +1369,8 @@ version of the specification in question.
 
       &rfc8340;
 
+      &I-Dversioning;
+
      <reference anchor="ITU-T G.698.2">
      <front>
          <title>
@@ -1539,18 +1577,18 @@ version of the specification in question.
 difference is that they go under "back" element, and get letters
 instead of numbers</t>
 </section>
--->
+
 
     <section title="Change Log ">
       <t>This optional section should be removed before the internet draft is
       submitted to the IESG for publication as an RFC.</t>
       <t>Note to RFC Editor: please remove this appendix before publication as an RFC.</t>
-<!--
+
       from draft 12 to draft 13
       <t><list style="numbers">
       <t></t>
         </list></t>
-          -->
+
     </section>
 
     <section title="Open Issues">
@@ -1558,13 +1596,13 @@ instead of numbers</t>
       be cleared and removed, and this optional section should be removed before the
       internet draft is submitted to the IESG for publication as an RFC.</cref></t>
       <t>Note to RFC Editor: please remove this appendix before publication as an RFC.</t>
-           <!--
+
       <t><list style="numbers">
           <t>Contributor addresses need to be updated</t>
         </list></t>
-        -->
-    </section>
 
+    </section>
+-->
   <section anchor="yang-tree" title="YANG Tree">
    <figure align='left'>
      <artwork><![CDATA[
