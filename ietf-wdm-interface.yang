@@ -359,9 +359,9 @@ module ietf-wdm-interface {
          if not supported by the implementation SHALL
          not be present";
       reference
-        "ITU-T G.666 (02/2011): Characteristics of polarization
-                   mode dispersion compensators and of receivers that
-                   compensate for polarization mode dispersion
+        "ITU-T G.650.2 (02/2015): Definitions and test methods for
+         statistical and non-linear related attributes of
+         single-mode fibre and cable. Section 3.1
          RFC ZZZZ: A YANG Data Model for Optical Impairment-aware
                    Topology, Section 2.4.6";
     }
@@ -387,7 +387,8 @@ module ietf-wdm-interface {
          carrier frequency, if not supported by the implementation
          SHALL not be present";
       reference
-        "OIF CMIS"; // TODO
+        "OIF-400GZR-02.0 Implementation Agreement
+         Section 13.1";
     }
 
     leaf rx-central-frequency-offset {
@@ -400,7 +401,8 @@ module ietf-wdm-interface {
          optical interfaces, if not supported by the implementation
          SHALL not be present";
       reference
-        "OIF CMIS"; // TODO
+        "OIF-400GZR-02.0 Implementation Agreement
+         Section 13.1";
     }
 
     leaf laser-temperature {
@@ -413,7 +415,7 @@ module ietf-wdm-interface {
          if not supported by the implementation SHALL
          not be present";
       reference
-        "????";  // TODO
+        "Openconfig openconfig-platform.yang rev. 0.32.0";
     }
 
     leaf diff-group-delay {
@@ -426,7 +428,8 @@ module ietf-wdm-interface {
          reciever, if not supported by the implementation SHALL
          not be present";
       reference
-        "OIF CMIS"; // TODO
+        "OIF-400GZR-02.0 Implementation Agreement
+         Section 13.4.7";
     }
 
     leaf laser-bias-current {
@@ -440,7 +443,7 @@ module ietf-wdm-interface {
          if not supported by the implementation SHALL
          not be present";
       reference
-        "open-config"; // TODO
+        "Openconfig openconfig-platform.yang rev. 0.32.0";
     }
 
     leaf modulation-error-ratio {
@@ -452,7 +455,8 @@ module ietf-wdm-interface {
          if not supported by the implementation SHALL
          not be present";
       reference
-        "open-config"; // TODO
+        "OIF-400GZR-02.0 Implementation Agreement
+         Section 14.4.3";
     }
     leaf tx-variable-optical-attenuation {
       type l0-types:power-ratio-or-unknown;
@@ -463,7 +467,8 @@ module ietf-wdm-interface {
          if not supported by the implementation SHALL
          not be present";
       reference
-        "TAPI"; // TODO
+        "TAPI v2.5.0 Reference Implementation Agreement
+         TR-547, Table 106";
     }
     leaf rx-variable-optical-attenuation {
       type l0-types:power-ratio-or-unknown;
@@ -474,7 +479,8 @@ module ietf-wdm-interface {
          if not supported by the implementation SHALL
          not be present";
       reference
-        "TAPI"; // TODO
+        "TAPI v2.5.0 Reference Implementation Agreement
+         TR-547, Table 106";
     }
     leaf max-error-vector-magnitude {
       type l0-types:decimal-5-or-unknown;
@@ -486,7 +492,8 @@ module ietf-wdm-interface {
          optics, if not supported by the implementation SHALL
          not be present";
       reference
-        "OIF"; // TODO
+        "OIF-400GZR-02.0 Implementation Agreement
+         Section 14.4.1 and 20.1";
     }
     leaf rms-error-vector-magnitude {
       type l0-types:decimal-5-or-unknown;
@@ -498,7 +505,8 @@ module ietf-wdm-interface {
          coherent optical signal quality, if not supported
          by the implementation SHALL not be present";
       reference
-        "OIF"; // TODO
+        "OIF-400GZR-02.0 Implementation Agreement
+         Section 14.4.2";
     }
     leaf second-order-polarization-mode-dispersion {
       type l0-types:decimal-5-or-unknown;
@@ -508,7 +516,9 @@ module ietf-wdm-interface {
         "Second Order Polarization Mode Dispersion, if not supported
          by the implementation SHALL not be present";
       reference
-        "OIF"; // TODO
+        "ITU-T G.650.2 (02/2015): Definitions and test methods for
+         statistical and non-linear related attributes of
+         single-mode fibre and cable. Section 3.1";
     }
     leaf sop-rate-of-change {
       type l0-types:decimal-5-or-unknown;
@@ -520,7 +530,9 @@ module ietf-wdm-interface {
          receiver, if not supported by the implementation SHALL not
          be present";
       reference
-        "OIF"; // TODO
+        "ITU-T G.698.2 (11/2018): Amplified multichannel dense
+         wavelength division multiplexing applications with single
+         channel optical interfaces. Section 7.3.7";
     }
     leaf modulation-bias-x-i {
       type l0-types:decimal-2-or-unknown;
@@ -531,7 +543,7 @@ module ietf-wdm-interface {
          coherent optical modulator, expressed as a percentage, if
          not supported by the implementation SHALL not be present";
       reference
-        "OIF/Openconfig"; // TODO
+        "Openconfig openconfig-platform.yang rev. 0.32.0";
     }
     leaf modulation-bias-x-q {
       type l0-types:decimal-2-or-unknown;
@@ -542,7 +554,7 @@ module ietf-wdm-interface {
          coherent optical modulator, expressed as a percentage, if
          not supported by the implementation SHALL not be present";
       reference
-        "OIF/Openconfig"; // TODO
+        "Openconfig openconfig-platform.yang rev. 0.32.0l";
     }
     leaf modulation-bias-y-i {
       type l0-types:decimal-2-or-unknown;
@@ -553,7 +565,7 @@ module ietf-wdm-interface {
          coherent optical modulator, expressed as a percentage, if
          not supported by the implementation SHALL not be present";
       reference
-        "OIF/Openconfig"; // TODO
+        "Openconfig openconfig-platform.yang rev. 0.32.0";
     }
     leaf modulation-bias-y-q {
       type l0-types:decimal-2-or-unknown;
@@ -564,7 +576,7 @@ module ietf-wdm-interface {
          coherent optical modulator, expressed as a percentag, if
          not supported by the implementation SHALL not be present";
       reference
-        "OIF/Openconfig"; // TODO
+        "Openconfig openconfig-platform.yang rev. 0.32.0";
     }
     leaf modulation-bias-x-phase {
       type l0-types:decimal-2-or-unknown;
@@ -575,7 +587,7 @@ module ietf-wdm-interface {
          optical modulator, expressed as a percentage, if not
          supported by the implementation SHALL not be present";
       reference
-        "OIF/Openconfig"; // TODO
+        "Openconfig openconfig-platform.yang rev. 0.32.0";
     }
     leaf modulation-bias-y-phase {
       type l0-types:decimal-2-or-unknown;
@@ -586,7 +598,7 @@ module ietf-wdm-interface {
          optical modulator, expressed as a percentage, if not
          supported by the implementation SHALL not be present";
       reference
-        "OIF/Openconfig"; // TODO
+        "Openconfig openconfig-platform.yang rev. 0.32.0";
     }
     leaf self-phase-modulation {
       type l0-types:decimal-2-or-unknown;
@@ -598,7 +610,9 @@ module ietf-wdm-interface {
          intensity due to the Kerr effect, if not supported by the
          implementation SHALL not be present";
       reference
-        "ITU-T G.696.1"; // TODO
+        "ITU-T G.650.2 (02/2015): Definitions and test methods for
+         statistical and non-linear related attributes of
+         single-mode fibre and cable. Section II.3.1";
     }
     leaf cross-phase-modulation {
       type l0-types:decimal-2-or-unknown;
@@ -610,7 +624,9 @@ module ietf-wdm-interface {
          of another signal traveling through the same fiber, if not
          supported by the implementation SHALL not be present";
       reference
-        "ITU-T G.696.1"; // TODO
+        "ITU-T G.650.2 (02/2015): Definitions and test methods for
+         statistical and non-linear related attributes of
+         single-mode fibre and cable. Section II.3.3";
     }
   } // end grouping wdm-if-operational
 

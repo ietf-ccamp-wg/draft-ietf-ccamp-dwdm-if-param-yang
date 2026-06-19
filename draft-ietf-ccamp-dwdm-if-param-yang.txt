@@ -88,7 +88,7 @@ Table of Contents
      2.4.  Use Cases . . . . . . . . . . . . . . . . . . . . . . . .   7
    3.  WDM Interface YANG Module . . . . . . . . . . . . . . . . . .   7
    4.  Security Considerations . . . . . . . . . . . . . . . . . . .  23
-   5.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .  23
+   5.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .  24
    6.  Acknowledgements  . . . . . . . . . . . . . . . . . . . . . .  24
    7.  Contributors  . . . . . . . . . . . . . . . . . . . . . . . .  24
    8.  References  . . . . . . . . . . . . . . . . . . . . . . . . .  25
@@ -800,9 +800,9 @@ Internet-Draft   draft-ietf-ccamp-dwdm-if-param-yang-16        June 2026
             if not supported by the implementation SHALL
             not be present";
          reference
-           "ITU-T G.666 (02/2011): Characteristics of polarization
-                      mode dispersion compensators and of receivers that
-                      compensate for polarization mode dispersion
+           "ITU-T G.650.2 (02/2015): Definitions and test methods for
+            statistical and non-linear related attributes of
+            single-mode fibre and cable. Section 3.1
             RFC ZZZZ: A YANG Data Model for Optical Impairment-aware
                       Topology, Section 2.4.6";
        }
@@ -828,12 +828,12 @@ Internet-Draft   draft-ietf-ccamp-dwdm-if-param-yang-16        June 2026
             carrier frequency, if not supported by the implementation
             SHALL not be present";
          reference
-           "OIF CMIS"; // TODO
+           "OIF-400GZR-02.0 Implementation Agreement
+            Section 13.1";
        }
 
        leaf rx-central-frequency-offset {
          type l0-types:frequency-ghz;
-         default 0;
 
 
 
@@ -842,6 +842,7 @@ Galimberti, et al.      Expires 21 December 2026               [Page 15]
 Internet-Draft   draft-ietf-ccamp-dwdm-if-param-yang-16        June 2026
 
 
+         default 0;
          config false;
          description
            "Frequency difference between received signal carrier
@@ -849,7 +850,8 @@ Internet-Draft   draft-ietf-ccamp-dwdm-if-param-yang-16        June 2026
             optical interfaces, if not supported by the implementation
             SHALL not be present";
          reference
-           "OIF CMIS"; // TODO
+           "OIF-400GZR-02.0 Implementation Agreement
+            Section 13.1";
        }
 
        leaf laser-temperature {
@@ -862,7 +864,7 @@ Internet-Draft   draft-ietf-ccamp-dwdm-if-param-yang-16        June 2026
             if not supported by the implementation SHALL
             not be present";
          reference
-           "????";  // TODO
+           "Openconfig openconfig-platform.yang rev. 0.32.0";
        }
 
        leaf diff-group-delay {
@@ -875,7 +877,8 @@ Internet-Draft   draft-ietf-ccamp-dwdm-if-param-yang-16        June 2026
             reciever, if not supported by the implementation SHALL
             not be present";
          reference
-           "OIF CMIS"; // TODO
+           "OIF-400GZR-02.0 Implementation Agreement
+            Section 13.4.7";
        }
 
        leaf laser-bias-current {
@@ -887,9 +890,6 @@ Internet-Draft   draft-ietf-ccamp-dwdm-if-param-yang-16        June 2026
            "The electircal current applied the the Tx Laser to
             achieve the required output power, expressed in mA,
             if not supported by the implementation SHALL
-            not be present";
-         reference
-           "open-config"; // TODO
 
 
 
@@ -898,6 +898,9 @@ Galimberti, et al.      Expires 21 December 2026               [Page 16]
 Internet-Draft   draft-ietf-ccamp-dwdm-if-param-yang-16        June 2026
 
 
+            not be present";
+         reference
+           "Openconfig openconfig-platform.yang rev. 0.32.0";
        }
 
        leaf modulation-error-ratio {
@@ -909,7 +912,8 @@ Internet-Draft   draft-ietf-ccamp-dwdm-if-param-yang-16        June 2026
             if not supported by the implementation SHALL
             not be present";
          reference
-           "open-config"; // TODO
+           "OIF-400GZR-02.0 Implementation Agreement
+            Section 14.4.3";
        }
        leaf tx-variable-optical-attenuation {
          type l0-types:power-ratio-or-unknown;
@@ -920,7 +924,8 @@ Internet-Draft   draft-ietf-ccamp-dwdm-if-param-yang-16        June 2026
             if not supported by the implementation SHALL
             not be present";
          reference
-           "TAPI"; // TODO
+           "TAPI v2.5.0 Reference Implementation Agreement
+            TR-547, Table 106";
        }
        leaf rx-variable-optical-attenuation {
          type l0-types:power-ratio-or-unknown;
@@ -931,7 +936,8 @@ Internet-Draft   draft-ietf-ccamp-dwdm-if-param-yang-16        June 2026
             if not supported by the implementation SHALL
             not be present";
          reference
-           "TAPI"; // TODO
+           "TAPI v2.5.0 Reference Implementation Agreement
+            TR-547, Table 106";
        }
        leaf max-error-vector-magnitude {
          type l0-types:decimal-5-or-unknown;
@@ -940,12 +946,6 @@ Internet-Draft   draft-ietf-ccamp-dwdm-if-param-yang-16        June 2026
          description
            "EVMmax (Error Vector Magnitude Max) is a metric for
             evaluating maximum error vector magnitude in coherent
-            optics, if not supported by the implementation SHALL
-            not be present";
-         reference
-           "OIF"; // TODO
-       }
-       leaf rms-error-vector-magnitude {
 
 
 
@@ -954,6 +954,13 @@ Galimberti, et al.      Expires 21 December 2026               [Page 17]
 Internet-Draft   draft-ietf-ccamp-dwdm-if-param-yang-16        June 2026
 
 
+            optics, if not supported by the implementation SHALL
+            not be present";
+         reference
+           "OIF-400GZR-02.0 Implementation Agreement
+            Section 14.4.1 and 20.1";
+       }
+       leaf rms-error-vector-magnitude {
          type l0-types:decimal-5-or-unknown;
          default "unknown";
          config false;
@@ -963,7 +970,8 @@ Internet-Draft   draft-ietf-ccamp-dwdm-if-param-yang-16        June 2026
             coherent optical signal quality, if not supported
             by the implementation SHALL not be present";
          reference
-           "OIF"; // TODO
+           "OIF-400GZR-02.0 Implementation Agreement
+            Section 14.4.2";
        }
        leaf second-order-polarization-mode-dispersion {
          type l0-types:decimal-5-or-unknown;
@@ -973,7 +981,9 @@ Internet-Draft   draft-ietf-ccamp-dwdm-if-param-yang-16        June 2026
            "Second Order Polarization Mode Dispersion, if not supported
             by the implementation SHALL not be present";
          reference
-           "OIF"; // TODO
+           "ITU-T G.650.2 (02/2015): Definitions and test methods for
+            statistical and non-linear related attributes of
+            single-mode fibre and cable. Section 3.1";
        }
        leaf sop-rate-of-change {
          type l0-types:decimal-5-or-unknown;
@@ -985,23 +995,13 @@ Internet-Draft   draft-ietf-ccamp-dwdm-if-param-yang-16        June 2026
             receiver, if not supported by the implementation SHALL not
             be present";
          reference
-           "OIF"; // TODO
+           "ITU-T G.698.2 (11/2018): Amplified multichannel dense
+            wavelength division multiplexing applications with single
+            channel optical interfaces. Section 7.3.7";
        }
        leaf modulation-bias-x-i {
          type l0-types:decimal-2-or-unknown;
          default "unknown";
-         config false;
-         description
-           "Bias on the in-phase (I) path of polarization X in a
-            coherent optical modulator, expressed as a percentage, if
-            not supported by the implementation SHALL not be present";
-         reference
-           "OIF/Openconfig"; // TODO
-       }
-       leaf modulation-bias-x-q {
-         type l0-types:decimal-2-or-unknown;
-         default "unknown";
-         config false;
 
 
 
@@ -1010,12 +1010,24 @@ Galimberti, et al.      Expires 21 December 2026               [Page 18]
 Internet-Draft   draft-ietf-ccamp-dwdm-if-param-yang-16        June 2026
 
 
+         config false;
+         description
+           "Bias on the in-phase (I) path of polarization X in a
+            coherent optical modulator, expressed as a percentage, if
+            not supported by the implementation SHALL not be present";
+         reference
+           "Openconfig openconfig-platform.yang rev. 0.32.0";
+       }
+       leaf modulation-bias-x-q {
+         type l0-types:decimal-2-or-unknown;
+         default "unknown";
+         config false;
          description
            "Bias on the quadrature (Q) path of polarization X in a
             coherent optical modulator, expressed as a percentage, if
             not supported by the implementation SHALL not be present";
          reference
-           "OIF/Openconfig"; // TODO
+           "Openconfig openconfig-platform.yang rev. 0.32.0l";
        }
        leaf modulation-bias-y-i {
          type l0-types:decimal-2-or-unknown;
@@ -1026,7 +1038,7 @@ Internet-Draft   draft-ietf-ccamp-dwdm-if-param-yang-16        June 2026
             coherent optical modulator, expressed as a percentage, if
             not supported by the implementation SHALL not be present";
          reference
-           "OIF/Openconfig"; // TODO
+           "Openconfig openconfig-platform.yang rev. 0.32.0";
        }
        leaf modulation-bias-y-q {
          type l0-types:decimal-2-or-unknown;
@@ -1037,7 +1049,7 @@ Internet-Draft   draft-ietf-ccamp-dwdm-if-param-yang-16        June 2026
             coherent optical modulator, expressed as a percentag, if
             not supported by the implementation SHALL not be present";
          reference
-           "OIF/Openconfig"; // TODO
+           "Openconfig openconfig-platform.yang rev. 0.32.0";
        }
        leaf modulation-bias-x-phase {
          type l0-types:decimal-2-or-unknown;
@@ -1046,9 +1058,17 @@ Internet-Draft   draft-ietf-ccamp-dwdm-if-param-yang-16        June 2026
          description
            "Bias on the phase path of polarization X in a coherent
             optical modulator, expressed as a percentage, if not
+
+
+
+Galimberti, et al.      Expires 21 December 2026               [Page 19]
+
+Internet-Draft   draft-ietf-ccamp-dwdm-if-param-yang-16        June 2026
+
+
             supported by the implementation SHALL not be present";
          reference
-           "OIF/Openconfig"; // TODO
+           "Openconfig openconfig-platform.yang rev. 0.32.0";
        }
        leaf modulation-bias-y-phase {
          type l0-types:decimal-2-or-unknown;
@@ -1058,16 +1078,8 @@ Internet-Draft   draft-ietf-ccamp-dwdm-if-param-yang-16        June 2026
            "Bias on the phase path of polarization Y in a coherent
             optical modulator, expressed as a percentage, if not
             supported by the implementation SHALL not be present";
-
-
-
-Galimberti, et al.      Expires 21 December 2026               [Page 19]
-
-Internet-Draft   draft-ietf-ccamp-dwdm-if-param-yang-16        June 2026
-
-
          reference
-           "OIF/Openconfig"; // TODO
+           "Openconfig openconfig-platform.yang rev. 0.32.0";
        }
        leaf self-phase-modulation {
          type l0-types:decimal-2-or-unknown;
@@ -1079,7 +1091,9 @@ Internet-Draft   draft-ietf-ccamp-dwdm-if-param-yang-16        June 2026
             intensity due to the Kerr effect, if not supported by the
             implementation SHALL not be present";
          reference
-           "ITU-T G.696.1"; // TODO
+           "ITU-T G.650.2 (02/2015): Definitions and test methods for
+            statistical and non-linear related attributes of
+            single-mode fibre and cable. Section II.3.1";
        }
        leaf cross-phase-modulation {
          type l0-types:decimal-2-or-unknown;
@@ -1091,13 +1105,23 @@ Internet-Draft   draft-ietf-ccamp-dwdm-if-param-yang-16        June 2026
             of another signal traveling through the same fiber, if not
             supported by the implementation SHALL not be present";
          reference
-           "ITU-T G.696.1"; // TODO
+           "ITU-T G.650.2 (02/2015): Definitions and test methods for
+            statistical and non-linear related attributes of
+            single-mode fibre and cable. Section II.3.3";
        }
      } // end grouping wdm-if-operational
 
      notification wdm-if-tca {
        description
          "A notification for a Threshold Crossing Alert (TCA)";
+
+
+
+Galimberti, et al.      Expires 21 December 2026               [Page 20]
+
+Internet-Draft   draft-ietf-ccamp-dwdm-if-param-yang-16        June 2026
+
+
        leaf if-name {
          type leafref {
            path "/if:interfaces/if:interface/if:name";
@@ -1114,14 +1138,6 @@ Internet-Draft   draft-ietf-ccamp-dwdm-if-param-yang-16        June 2026
          description
            "The Type of TCA that have triggered the notification,
             e.g, tx-power-tca";
-
-
-
-Galimberti, et al.      Expires 21 December 2026               [Page 20]
-
-Internet-Draft   draft-ietf-ccamp-dwdm-if-param-yang-16        June 2026
-
-
        }
        leaf tca-name {
          type string;
@@ -1154,6 +1170,14 @@ Internet-Draft   draft-ietf-ccamp-dwdm-if-param-yang-16        June 2026
                description
                  "The identifier of the transceivers' explicit mode.";
              }
+
+
+
+Galimberti, et al.      Expires 21 December 2026               [Page 21]
+
+Internet-Draft   draft-ietf-ccamp-dwdm-if-param-yang-16        June 2026
+
+
              uses l0-types:explicit-mode;
            } // end list explicit-transceiver-mode
          } // end container explicit-transceiver-modes
@@ -1170,14 +1194,6 @@ Internet-Draft   draft-ietf-ccamp-dwdm-if-param-yang-16        June 2026
          uses l0-types:transceiver-capabilities {
            augment "supported-modes/supported-mode/mode/"
                  + "explicit-mode/explicit-mode" {
-
-
-
-Galimberti, et al.      Expires 21 December 2026               [Page 21]
-
-Internet-Draft   draft-ietf-ccamp-dwdm-if-param-yang-16        June 2026
-
-
              description
                "Augment the explicit-mode container with the
                 proper leafref.";
@@ -1210,6 +1226,14 @@ Internet-Draft   draft-ietf-ccamp-dwdm-if-param-yang-16        June 2026
                require-instance false;
              }
            }
+
+
+
+Galimberti, et al.      Expires 21 December 2026               [Page 22]
+
+Internet-Draft   draft-ietf-ccamp-dwdm-if-param-yang-16        June 2026
+
+
            default "empty";
            description
              "Reference to the configured mode for transceiver
@@ -1226,14 +1250,6 @@ Internet-Draft   draft-ietf-ccamp-dwdm-if-param-yang-16        June 2026
          uses l0-types:common-transceiver-param;
          uses wdm-if-operational;
        } // end container wdm-interface
-
-
-
-Galimberti, et al.      Expires 21 December 2026               [Page 22]
-
-Internet-Draft   draft-ietf-ccamp-dwdm-if-param-yang-16        June 2026
-
-
      } // end augmentation interface
 
    }
@@ -1267,6 +1283,13 @@ Internet-Draft   draft-ietf-ccamp-dwdm-if-param-yang-16        June 2026
 
    There are no particularly sensitive readable data nodes.
 
+
+
+Galimberti, et al.      Expires 21 December 2026               [Page 23]
+
+Internet-Draft   draft-ietf-ccamp-dwdm-if-param-yang-16        June 2026
+
+
 5.  IANA Considerations
 
    This document registers the following namespace URIs in the IETF XML
@@ -1280,15 +1303,6 @@ Internet-Draft   draft-ietf-ccamp-dwdm-if-param-yang-16        June 2026
 
    This document registers the following YANG modules in the YANG Module
    Names registry [RFC7950]:
-
-
-
-
-
-Galimberti, et al.      Expires 21 December 2026               [Page 23]
-
-Internet-Draft   draft-ietf-ccamp-dwdm-if-param-yang-16        June 2026
-
 
    --------------------------------------------------------------------
    name:      ietf-wdm-interface
@@ -1324,6 +1338,14 @@ Internet-Draft   draft-ietf-ccamp-dwdm-if-param-yang-16        June 2026
                  Germany
                  email B.Zeuner@telekom.de
 
+
+
+
+Galimberti, et al.      Expires 21 December 2026               [Page 24]
+
+Internet-Draft   draft-ietf-ccamp-dwdm-if-param-yang-16        June 2026
+
+
                Massimiliano Salsi
                  Nokia
                  Sunnyvale, CA, 94089
@@ -1338,14 +1360,6 @@ Internet-Draft   draft-ietf-ccamp-dwdm-if-param-yang-16        June 2026
 
                Walid Wakim
                  Nokia
-
-
-
-Galimberti, et al.      Expires 21 December 2026               [Page 24]
-
-Internet-Draft   draft-ietf-ccamp-dwdm-if-param-yang-16        June 2026
-
-
                  ILLINOIS
                  UNITED STATES
                  email wakims@mac.com
@@ -1381,6 +1395,13 @@ Internet-Draft   draft-ietf-ccamp-dwdm-if-param-yang-16        June 2026
               DOI 10.17487/RFC2119, March 1997,
               <https://www.rfc-editor.org/info/rfc2119>.
 
+
+
+Galimberti, et al.      Expires 21 December 2026               [Page 25]
+
+Internet-Draft   draft-ietf-ccamp-dwdm-if-param-yang-16        June 2026
+
+
    [RFC8199]  Bogdanovic, D., Claise, B., and C. Moberg, "YANG Module
               Classification", RFC 8199, DOI 10.17487/RFC8199, July
               2017, <https://www.rfc-editor.org/info/rfc8199>.
@@ -1388,19 +1409,6 @@ Internet-Draft   draft-ietf-ccamp-dwdm-if-param-yang-16        June 2026
    [RFC8309]  Wu, Q., Liu, W., and A. Farrel, "Service Models
               Explained", RFC 8309, DOI 10.17487/RFC8309, January 2018,
               <https://www.rfc-editor.org/info/rfc8309>.
-
-
-
-
-
-
-
-
-
-Galimberti, et al.      Expires 21 December 2026               [Page 25]
-
-Internet-Draft   draft-ietf-ccamp-dwdm-if-param-yang-16        June 2026
-
 
    [RFC7698]  Gonzalez de Dios, O., Ed., Casellas, R., Ed., Zhang, F.,
               Fu, X., Ceccarelli, D., and I. Hussain, "Framework and
@@ -1442,14 +1450,6 @@ Internet-Draft   draft-ietf-ccamp-dwdm-if-param-yang-16        June 2026
               Protocol", RFC 8040, DOI 10.17487/RFC8040, January 2017,
               <https://www.rfc-editor.org/info/rfc8040>.
 
-   [RFC6241]  Enns, R., Ed., Bjorklund, M., Ed., Schoenwaelder, J., Ed.,
-              and A. Bierman, Ed., "Network Configuration Protocol
-              (NETCONF)", RFC 6241, DOI 10.17487/RFC6241, June 2011,
-              <https://www.rfc-editor.org/info/rfc6241>.
-
-
-
-
 
 
 
@@ -1457,6 +1457,11 @@ Galimberti, et al.      Expires 21 December 2026               [Page 26]
 
 Internet-Draft   draft-ietf-ccamp-dwdm-if-param-yang-16        June 2026
 
+
+   [RFC6241]  Enns, R., Ed., Bjorklund, M., Ed., Schoenwaelder, J., Ed.,
+              and A. Bierman, Ed., "Network Configuration Protocol
+              (NETCONF)", RFC 6241, DOI 10.17487/RFC6241, June 2011,
+              <https://www.rfc-editor.org/info/rfc6241>.
 
    [RFC8341]  Bierman, A. and M. Bjorklund, "Network Configuration
               Access Control Model", STD 91, RFC 8341,
@@ -1501,11 +1506,6 @@ Internet-Draft   draft-ietf-ccamp-dwdm-if-param-yang-16        June 2026
               versioning-15, 18 October 2025,
               <https://datatracker.ietf.org/doc/html/draft-ietf-netmod-
               yang-module-versioning-15>.
-
-
-
-
-
 
 
 
