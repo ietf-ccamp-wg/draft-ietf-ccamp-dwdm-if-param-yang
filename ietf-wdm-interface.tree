@@ -105,10 +105,6 @@ module: ietf-wdm-interface
        |              |  +--ro supported-organizational-mode*
        |              |          -> ../../../../supported-mode/mode-id
        |              +--ro explicit-transceiver-mode-ref    leafref
-       +--rw wdm-if-config
-       |  +--rw configured-mode?            union
-       |  +--rw target-central-frequency?   l0-types:frequency-thz
-       |  +--rw target-tx-channel-power?    l0-types:power-dbm
        +--rw wdm-if-tcas
        |  +--ro number-of-tcas-supported?   uint32
        |  +--rw tca-list* [tca-id]
@@ -117,30 +113,76 @@ module: ietf-wdm-interface
        |     +--rw tca-name           string
        |     +--rw raise-threshold    l0-types:decimal-5
        |     +--rw clear-threshold    l0-types:decimal-5
-       +--ro wdm-if-status
-          +--ro line-coding-bitrate?            identityref
-          +--ro tx-channel-power?               power-dbm-or-unknown
-          +--ro rx-channel-power?               power-dbm-or-unknown
-          +--ro rx-total-power?                 power-dbm-or-unknown
-          +--ro central-frequency?
-          |       l0-types:frequency-thz
-          +--ro cur-osnr?
-          |       l0-types:snr-or-unknown
-          +--ro min-osnr-margin?
-          |       l0-types:snr-or-unknown
-          +--ro q-margin?
-          |       l0-types:decimal-2-or-unknown
-          +--ro q-factor?
-          |       l0-types:decimal-2-or-unknown
-          +--ro uncorrected-words?              uint64
-          +--ro pre-fec-ber?
-          |       l0-types:decimal-18-or-unknown
-          +--ro chromatic-dispersion?
-          |       l0-types:decimal-2-or-unknown
-          +--ro polarization-mode-dispersion?
-          |       l0-types:decimal-2-or-unknown
-          +--ro polarization-dependent-loss?
-                  l0-types:power-loss-or-unknown
+       +--rw configured-mode?                             union
+       +--rw central-frequency?
+       |       l0-types:frequency-thz
+       +--rw line-coding-bitrate?                         identityref
+       +--rw tx-channel-power?
+       |       power-dbm-or-unknown
+       +--ro rx-channel-power?
+       |       power-dbm-or-unknown
+       +--ro rx-total-power?
+       |       power-dbm-or-unknown
+       +--ro tx-total-power?
+       |       l0-types:power-dbm-or-unknown
+       +--ro cur-osnr?
+       |       l0-types:snr-or-unknown
+       +--ro min-osnr-margin?
+       |       l0-types:snr-or-unknown
+       +--ro q-margin?
+       |       l0-types:decimal-2-or-unknown
+       +--ro q-factor?
+       |       l0-types:decimal-2-or-unknown
+       +--ro fec-uncorrected-words?                       uint64
+       +--ro fec-uncorrectable-blocks?                    uint64
+       +--ro pre-fec-ber?
+       |       l0-types:decimal-18-or-unknown
+       +--ro chromatic-dispersion?
+       |       l0-types:decimal-2-or-unknown
+       +--ro polarization-mode-dispersion?
+       |       l0-types:decimal-2-or-unknown
+       +--ro polarization-dependent-loss?
+       |       l0-types:power-loss-or-unknown
+       +--ro tx-central-frequency-offset?
+       |       l0-types:frequency-ghz
+       +--ro rx-central-frequency-offset?
+       |       l0-types:frequency-ghz
+       +--ro laser-temperature?
+       |       l0-types:decimal-2-or-unknown
+       +--ro diff-group-delay?
+       |       l0-types:decimal-2-or-unknown
+       +--ro laser-bias-current?
+       |       l0-types:decimal-2-or-unknown
+       +--ro modulation-error-ratio?
+       |       l0-types:power-ratio-or-unknown
+       +--ro tx-variable-optical-attenuation?
+       |       l0-types:power-ratio-or-unknown
+       +--ro rx-variable-optical-attenuation?
+       |       l0-types:power-ratio-or-unknown
+       +--ro max-error-vector-magnitude?
+       |       l0-types:decimal-5-or-unknown
+       +--ro rms-error-vector-magnitude?
+       |       l0-types:decimal-5-or-unknown
+       +--ro second-order-polarization-mode-dispersion?
+       |       l0-types:decimal-5-or-unknown
+       +--ro sop-rate-of-change?
+       |       l0-types:decimal-5-or-unknown
+       +--ro modulation-bias-x-i?
+       |       l0-types:decimal-2-or-unknown
+       +--ro modulation-bias-x-q?
+       |       l0-types:decimal-2-or-unknown
+       +--ro modulation-bias-y-i?
+       |       l0-types:decimal-2-or-unknown
+       +--ro modulation-bias-y-q?
+       |       l0-types:decimal-2-or-unknown
+       +--ro modulation-bias-x-phase?
+       |       l0-types:decimal-2-or-unknown
+       +--ro modulation-bias-y-phase?
+       |       l0-types:decimal-2-or-unknown
+       +--ro self-phase-modulation?
+       |       l0-types:decimal-2-or-unknown
+       +--ro cross-phase-modulation?
+               l0-types:decimal-2-or-unknown
 
   notifications:
     +---n wdm-if-tca
