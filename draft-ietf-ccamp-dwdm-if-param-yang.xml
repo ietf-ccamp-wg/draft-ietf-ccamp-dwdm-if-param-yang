@@ -51,8 +51,8 @@ document to be edited.
 <!ENTITY rfc8340 SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.8340.xml">
 <!ENTITY rfc6566 SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.6566.xml">
 <!ENTITY rfc8407bis SYSTEM "https://datatracker.ietf.org/doc/bibxml3/draft-ietf-netmod-rfc8407bis-28.xml">
-<!ENTITY I-Doit SYSTEM "https://datatracker.ietf.org/doc/bibxml3/draft-ietf-ccamp-optical-impairment-topology-yang-21.xml">
-<!ENTITY rfc9093bis SYSTEM "https://datatracker.ietf.org/doc/bibxml3/draft-ietf-ccamp-rfc9093-bis-19.xml">
+<!ENTITY I-Doit SYSTEM "https://datatracker.ietf.org/doc/bibxml3/draft-ietf-ccamp-optical-impairment-topology-yang-22.xml">
+<!ENTITY rfc9093bis SYSTEM "https://datatracker.ietf.org/doc/bibxml3/draft-ietf-ccamp-rfc9093-bis-20.xml">
 <!ENTITY I-Ddwdmtunnel SYSTEM "https://datatracker.ietf.org/doc/bibxml3/draft-ietf-ccamp-wdm-tunnel-yang-06.xml">
 <!ENTITY I-Dversioning SYSTEM "https://datatracker.ietf.org/doc/bibxml3/draft-ietf-netmod-yang-module-versioning-15.xml">
 ]>
@@ -613,14 +613,14 @@ module ietf-wdm-interface {
   prefix wdm-if;
 
   import ietf-yang-revisions {
-    prefix "rev";
+    prefix rev;
   }
   import ietf-interfaces {
     prefix if;
   }
   import ietf-layer0-types {
     prefix l0-types;
-    rev:recommended-min-date 2025-11-03;
+    rev:recommended-min-date "2025-11-03";
   }
 
   organization
@@ -666,7 +666,7 @@ module ietf-wdm-interface {
   //
   // and finally delete this note.
 
-  revision 2026-06-19 {
+  revision 2026-06-25 {
     description
       "Initial Version";
     reference
@@ -848,7 +848,7 @@ module ietf-wdm-interface {
     }
   } // end grouping wdm-if-tca-list
 
-  grouping wdm-if-config {
+  grouping wdm-if-parameters {
     description
       "DWDM Interface Configuration and Operational parameters";
     leaf central-frequency {
@@ -864,11 +864,7 @@ module ietf-wdm-interface {
         "ITU-T G.694.1 (10/2020): Spectral grids for WDM
          applications: DWDM frequency grid";
     }
-  } // end grouping wdm-if-node-params
-
-  grouping wdm-if-operational {
-    description
-      "DWDM Interface Operational status data";
+    uses l0-types:common-transceiver-param;
     leaf tx-total-power {
       type l0-types:power-dbm-or-unknown;
       default "unknown";
@@ -986,10 +982,9 @@ module ietf-wdm-interface {
         "RFC ZZZZ: A YANG Data Model for Optical Impairment-aware
                    Topology, Section 2.4.6";
     }
-
     leaf tx-central-frequency-offset {
       type l0-types:frequency-ghz;
-      default 0;
+      default "0";
       config false;
       description
         "Frequency difference between nominal and actual optical
@@ -999,10 +994,9 @@ module ietf-wdm-interface {
         "OIF-400GZR-02.0 Implementation Agreement
          Section 13.1";
     }
-
     leaf rx-central-frequency-offset {
       type l0-types:frequency-ghz;
-      default 0;
+      default "0";
       config false;
       description
         "Frequency difference between received signal carrier
@@ -1013,7 +1007,6 @@ module ietf-wdm-interface {
         "OIF-400GZR-02.0 Implementation Agreement
          Section 13.1";
     }
-
     leaf laser-temperature {
       type l0-types:decimal-2-or-unknown;
       units "Deg Celsius";
@@ -1026,7 +1019,6 @@ module ietf-wdm-interface {
       reference
         "Openconfig openconfig-platform.yang rev. 0.32.0";
     }
-
     leaf diff-group-delay {
       type l0-types:decimal-2-or-unknown;
       units "ps";
@@ -1040,7 +1032,6 @@ module ietf-wdm-interface {
         "OIF-400GZR-02.0 Implementation Agreement
          Section 13.4.7";
     }
-
     leaf laser-bias-current {
       type l0-types:decimal-2-or-unknown;
       units "mA";
@@ -1054,7 +1045,6 @@ module ietf-wdm-interface {
       reference
         "Openconfig openconfig-platform.yang rev. 0.32.0";
     }
-
     leaf modulation-error-ratio {
       type l0-types:power-ratio-or-unknown;
       default "unknown";
@@ -1237,7 +1227,7 @@ module ietf-wdm-interface {
          statistical and non-linear related attributes of
          single-mode fibre and cable. Section II.3.3";
     }
-  } // end grouping wdm-if-operational
+  } // end grouping wdm-if-parameters
 
   notification wdm-if-tca {
     description
@@ -1329,7 +1319,6 @@ module ietf-wdm-interface {
           "Threshold Crossing Alerts definition and configuration";
         uses wdm-if-tca-list;
       } // end of container wdm-if-tcas
-
       leaf configured-mode {
         type union {
           type empty;
@@ -1350,9 +1339,7 @@ module ietf-wdm-interface {
            by the server, this means the interface is not
            configured";
       }
-      uses wdm-if-config;
-      uses l0-types:common-transceiver-param;
-      uses wdm-if-operational;
+      uses wdm-if-parameters;
     } // end container wdm-interface
   } // end augmentation interface
 
@@ -2078,6 +2065,152 @@ raise-threshold &lt; clear-threshold while the High-RX-Power alarm
 has raise-threshold &gt; clear-threshold.
         </t>
     </section>
+    <section title="Tree description - examples">
+        <t>
+            This section provides a simple description of the wdm-if Yang models
+            through the tree representation.
+        </t>
+        <t>
+   The key model to start the description is the "wdm-if-templates", this
+   augments the IETF general "/if:interfaces:"
+   The leaves of this model represent and describe the most important
+   wdm interface parameters covering the optical parameters and the
+   electrical characteristics. The detailed description of the parameters
+   is out of scope of this document and can be found in the referenced
+   standard documents.
+        </t>
+        <t>
+   An important parameter to identify the wdm interface capabilities and
+   apply the proper provisioning is:
+        </t>
+   <figure align='left'>
+     <artwork><![CDATA[
++--rw wdm-interface
+  +--ro supported-modes!
+  |  +--ro supported-mode* [mode-id]
+  |     +--ro mode-id                      string
+  |     +--ro (mode)
+  |        +--:(g.698.2)
+  |        |  +--ro g.698.2
+  |        |     +--ro standard-mode               standard-mode
+
+           snipped
+
+  |        +--:(organizational-mode)
+  |        |  +--ro organizational-mode
+  |        |     +--ro operational-mode
+  |        |     |       operational-mode
+  |        |     +--ro organization-identifier
+  |        |     |       organization-identifier
+
+           snipped
+
+  |        +--:(explicit-mode)
+  |           +--ro explicit-mode
+    ]]></artwork>
+    </figure>
+        <t>
+ The "supported-modes" is a list of the interface supported modes, they represent
+the transceiver capabilities. Each list element can be either a "standard-mode",
+an "organizational-mode" or an "explicit-mode". There are not limits to the
+list length. Only one element of the list can be selected to provision the
+transceiver using the model:
+        </t>
+   <figure align='left'>
+     <artwork><![CDATA[
++--rw wdm-interface
+  +--ro supported-modes!
+  |  +--ro supported-mode* [mode-id]
+
+           snipped
+
+  +--rw configured-mode?         union
+  +--rw central-frequency?       l0-types:frequency-thz
+  +--rw line-coding-bitrate?     identityref
+  +--rw tx-channel-power?        power-dbm-or-unknown
+
+           snipped
+    ]]></artwork>
+    </figure>
+        <t>
+It is possible at any time to read the wdm interface status to
+verify the provisioning and the operational status:
+        </t>
+   <figure align='left'>
+     <artwork><![CDATA[
++--rw wdm-interface
+  +--ro supported-modes!
+  |  +--ro supported-mode* [mode-id]
+
+           snipped
+
+  +--ro rx-channel-power?
+  |       power-dbm-or-unknown
+  +--ro rx-total-power?
+  |       power-dbm-or-unknown
+  +--ro tx-total-power?
+  |       l0-types:power-dbm-or-unknown
+  +--ro cur-osnr?
+  |       l0-types:snr-or-unknown
+  +--ro min-osnr-margin?
+  |       l0-types:snr-or-unknown
+  +--ro q-margin?
+  |       l0-types:decimal-2-or-unknown
+  +--ro q-factor?
+  |       l0-types:decimal-2-or-unknown
+  +--ro fec-uncorrected-words?                       uint64
+  +--ro fec-uncorrectable-blocks?                    uint64
+  +--ro pre-fec-ber?
+  |       l0-types:decimal-18-or-unknown
+  +--ro chromatic-dispersion?
+  |       l0-types:decimal-2-or-unknown
+  +--ro polarization-mode-dispersion?
+  |       l0-types:decimal-2-or-unknown
+  +--ro polarization-dependent-loss?
+  |       l0-types:power-loss-or-unknown
+  +--ro tx-central-frequency-offset?
+  |       l0-types:frequency-ghz
+  +--ro rx-central-frequency-offset?
+  |       l0-types:frequency-ghz
+  +--ro laser-temperature?
+  |       l0-types:decimal-2-or-unknown
+  +--ro diff-group-delay?
+  |       l0-types:decimal-2-or-unknown
+  +--ro laser-bias-current?
+  |       l0-types:decimal-2-or-unknown
+  +--ro modulation-error-ratio?
+  |       l0-types:power-ratio-or-unknown
+  +--ro tx-variable-optical-attenuation?
+  |       l0-types:power-ratio-or-unknown
+  +--ro rx-variable-optical-attenuation?
+  |       l0-types:power-ratio-or-unknown
+  +--ro max-error-vector-magnitude?
+  |       l0-types:decimal-5-or-unknown
+  +--ro rms-error-vector-magnitude?
+  |       l0-types:decimal-5-or-unknown
+  +--ro second-order-polarization-mode-dispersion?
+  |       l0-types:decimal-5-or-unknown
+  +--ro sop-rate-of-change?
+  |       l0-types:decimal-5-or-unknown
+  +--ro modulation-bias-x-i?
+  |       l0-types:decimal-2-or-unknown
+  +--ro modulation-bias-x-q?
+  |       l0-types:decimal-2-or-unknown
+  +--ro modulation-bias-y-i?
+  |       l0-types:decimal-2-or-unknown
+  +--ro modulation-bias-y-q?
+  |       l0-types:decimal-2-or-unknown
+  +--ro modulation-bias-x-phase?
+  |       l0-types:decimal-2-or-unknown
+  +--ro modulation-bias-y-phase?
+  |       l0-types:decimal-2-or-unknown
+  +--ro self-phase-modulation?
+  |       l0-types:decimal-2-or-unknown
+  +--ro cross-phase-modulation?
+          l0-types:decimal-2-or-unknown
+    ]]></artwork>
+    </figure>
+    </section>
     <section title="Applicability examples">
       <t>As an example here below is the way an OpenROADM compliant equipment
         could be managed using the YANG models described in this document.</t>
@@ -2096,16 +2229,14 @@ has raise-threshold &gt; clear-threshold.
 module: ietf-wdm-interface
  augment /if:interfaces/if:interface:
     +--rw wdm-interface
-       +--rw wdm-if-config
-       |  +--rw configured-mode?            union
-       |  +--rw target-central-frequency?   l0-types:frequency-thz
-       |  +--rw target-tx-channel-power?    l0-types:power-dbm
-       +--ro wdm-if-status
-          +--ro cur-osnr?
-          +--ro q-factor?
-          |       l0-types:decimal-2-or-unknown
-          +--ro uncorrected-words?              uint64
-          +--ro pre-fec-ber?
+       +--rw configured-mode?        union
+       +--rw central-frequency?      l0-types:frequency-thz
+       +--rw tx-channel-power?       l0-types:power-dbm
+       +--ro cur-osnr?
+       +--ro q-factor?
+       |       l0-types:decimal-2-or-unknown
+       +--ro uncorrected-words?       uint64
+       +--ro pre-fec-ber?
 
     ]]></artwork>
     </figure>

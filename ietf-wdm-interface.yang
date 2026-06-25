@@ -4,14 +4,14 @@ module ietf-wdm-interface {
   prefix wdm-if;
 
   import ietf-yang-revisions {
-    prefix "rev";
+    prefix rev;
   }
   import ietf-interfaces {
     prefix if;
   }
   import ietf-layer0-types {
     prefix l0-types;
-    rev:recommended-min-date 2025-11-03;
+    rev:recommended-min-date "2025-11-03";
   }
 
   organization
@@ -57,7 +57,7 @@ module ietf-wdm-interface {
   //
   // and finally delete this note.
 
-  revision 2026-06-19 {
+  revision 2026-06-25 {
     description
       "Initial Version";
     reference
@@ -239,7 +239,7 @@ module ietf-wdm-interface {
     }
   } // end grouping wdm-if-tca-list
 
-  grouping wdm-if-config {
+  grouping wdm-if-parameters {
     description
       "DWDM Interface Configuration and Operational parameters";
     leaf central-frequency {
@@ -255,11 +255,7 @@ module ietf-wdm-interface {
         "ITU-T G.694.1 (10/2020): Spectral grids for WDM
          applications: DWDM frequency grid";
     }
-  } // end grouping wdm-if-node-params
-
-  grouping wdm-if-operational {
-    description
-      "DWDM Interface Operational status data";
+    uses l0-types:common-transceiver-param;
     leaf tx-total-power {
       type l0-types:power-dbm-or-unknown;
       default "unknown";
@@ -377,10 +373,9 @@ module ietf-wdm-interface {
         "RFC ZZZZ: A YANG Data Model for Optical Impairment-aware
                    Topology, Section 2.4.6";
     }
-
     leaf tx-central-frequency-offset {
       type l0-types:frequency-ghz;
-      default 0;
+      default "0";
       config false;
       description
         "Frequency difference between nominal and actual optical
@@ -390,10 +385,9 @@ module ietf-wdm-interface {
         "OIF-400GZR-02.0 Implementation Agreement
          Section 13.1";
     }
-
     leaf rx-central-frequency-offset {
       type l0-types:frequency-ghz;
-      default 0;
+      default "0";
       config false;
       description
         "Frequency difference between received signal carrier
@@ -404,7 +398,6 @@ module ietf-wdm-interface {
         "OIF-400GZR-02.0 Implementation Agreement
          Section 13.1";
     }
-
     leaf laser-temperature {
       type l0-types:decimal-2-or-unknown;
       units "Deg Celsius";
@@ -417,7 +410,6 @@ module ietf-wdm-interface {
       reference
         "Openconfig openconfig-platform.yang rev. 0.32.0";
     }
-
     leaf diff-group-delay {
       type l0-types:decimal-2-or-unknown;
       units "ps";
@@ -431,7 +423,6 @@ module ietf-wdm-interface {
         "OIF-400GZR-02.0 Implementation Agreement
          Section 13.4.7";
     }
-
     leaf laser-bias-current {
       type l0-types:decimal-2-or-unknown;
       units "mA";
@@ -445,7 +436,6 @@ module ietf-wdm-interface {
       reference
         "Openconfig openconfig-platform.yang rev. 0.32.0";
     }
-
     leaf modulation-error-ratio {
       type l0-types:power-ratio-or-unknown;
       default "unknown";
@@ -628,7 +618,7 @@ module ietf-wdm-interface {
          statistical and non-linear related attributes of
          single-mode fibre and cable. Section II.3.3";
     }
-  } // end grouping wdm-if-operational
+  } // end grouping wdm-if-parameters
 
   notification wdm-if-tca {
     description
@@ -720,7 +710,6 @@ module ietf-wdm-interface {
           "Threshold Crossing Alerts definition and configuration";
         uses wdm-if-tca-list;
       } // end of container wdm-if-tcas
-
       leaf configured-mode {
         type union {
           type empty;
@@ -741,9 +730,7 @@ module ietf-wdm-interface {
            by the server, this means the interface is not
            configured";
       }
-      uses wdm-if-config;
-      uses l0-types:common-transceiver-param;
-      uses wdm-if-operational;
+      uses wdm-if-parameters;
     } // end container wdm-interface
   } // end augmentation interface
 
