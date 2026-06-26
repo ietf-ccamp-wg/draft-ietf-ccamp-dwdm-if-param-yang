@@ -57,7 +57,7 @@ module ietf-wdm-interface {
   //
   // and finally delete this note.
 
-  revision 2026-06-25 {
+  revision 2026-06-26 {
     description
       "Initial Version";
     reference
@@ -666,7 +666,7 @@ module ietf-wdm-interface {
             "The list of the transceivers' explicit modes.";
           leaf explicit-transceiver-mode-id {
             type string {
-              length "64";
+              length "8..64";
             }
             description
               "The identifier of the transceivers' explicit mode.";
@@ -714,7 +714,7 @@ module ietf-wdm-interface {
         type union {
           type empty;
           type leafref {
-            path "../../supported-modes/supported-mode/mode-id";
+            path "../supported-modes/supported-mode/mode-id";
             require-instance false;
           }
         }

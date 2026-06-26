@@ -666,7 +666,7 @@ module ietf-wdm-interface {
   //
   // and finally delete this note.
 
-  revision 2026-06-25 {
+  revision 2026-06-26 {
     description
       "Initial Version";
     reference
@@ -1275,7 +1275,7 @@ module ietf-wdm-interface {
             "The list of the transceivers' explicit modes.";
           leaf explicit-transceiver-mode-id {
             type string {
-              length "64";
+              length "8..64";
             }
             description
               "The identifier of the transceivers' explicit mode.";
@@ -1323,7 +1323,7 @@ module ietf-wdm-interface {
         type union {
           type empty;
           type leafref {
-            path "../../supported-modes/supported-mode/mode-id";
+            path "../supported-modes/supported-mode/mode-id";
             require-instance false;
           }
         }
@@ -2212,36 +2212,136 @@ verify the provisioning and the operational status:
     </figure>
     </section>
     <section title="Applicability examples">
-      <t>As an example here below is the way an OpenROADM compliant equipment
-        could be managed using the YANG models described in this document.</t>
-<!--      <t>[Editor Note: We may need to rephrase the following sentence, OpenROADM
-        has now many DWDM interface mode supported]</t>-->
-      <t>In OpenROADM MSA there is a limited number of DWDM interfaces supported.
-        Basically only the 100G Staircase FEC and 400G oFEC are supported and these
-        two kind of interfaces can be easily summarized with the "mode-id" and
-        the "application-identifier" strings.
+      <t>As an example here below is the way an OpenZR+ compliant interface
+        could be configured using the YANG models described in this document.</t>
+
+      <t>The optical interface considered in this example is able to support OpenZR+ ("organizational-mode")
+          at 400G High Power colorless. The interface also extend the OpenZR+ 400G-HB performance
+          specification, hence also expose an explicit-mode with detailed specs that is fully compatible
+          with OpenZR+. Both capability are exposed using the "wdw-if-template" container for the explicit mode,
+          that is then reference in the "supported-mode" list together with the OpenZR+ "organizational-mode"
       </t>
-      <t> the models below are enough to identify the interface and few working parameters:
+        <t>
+            The example also show how the configuration section show (or allow to configure with write operation)
+            the actual working mode of the interface, the carrier central frequency and the transmitter power.
+        </t>
+      <t> The JSON example below is enough to identify the interface capabilities and properly show the
+          optical interface configuration:
       </t>
 
    <figure align='left'>
      <artwork><![CDATA[
-module: ietf-wdm-interface
- augment /if:interfaces/if:interface:
-    +--rw wdm-interface
-       +--rw configured-mode?        union
-       +--rw central-frequency?      l0-types:frequency-thz
-       +--rw tx-channel-power?       l0-types:power-dbm
-       +--ro cur-osnr?
-       +--ro q-factor?
-       |       l0-types:decimal-2-or-unknown
-       +--ro uncorrected-words?       uint64
-       +--ro pre-fec-ber?
-
+{
+  "ietf-interfaces:interfaces": {
+    "ietf-wdm-interface:wdm-if-templates": {
+      "explicit-transceiver-modes": {
+        "explicit-transceiver-mode": [
+          {
+            "explicit-transceiver-mode-id": "VenA-400G-ZR+-HB",
+            "bitrate": 400,
+            "max-diff-group-delay": "50",
+            "max-chromatic-dispersion": "22000",
+            "cd-penalty": [
+              {
+                "cd-value": "1000",
+                "penalty-value": "0"
+              },
+              {
+                "cd-value": "20000",
+                "penalty-value": "0.5"
+              }
+            ],
+            "max-polarization-mode-dispersion": "20",
+            "pmd-penalty": [
+              {
+                "pmd-value": "20",
+                "penalty-value": "0.5"
+              }
+            ],
+            "max-polarization-dependent-loss": "3.5",
+            "pdl-penalty": [
+              {
+                "pdl-value": "3.0",
+                "penalty-value": "1.3"
+              },
+              {
+                "pdl-value": "3.5",
+                "penalty-value": "1.8"
+              }
+            ],
+            "available-modulation-type": "ietf-layer0-types:dp-qam16",
+            "min-osnr": "24.0",
+            "rx-ref-channel-power": "-10.0",
+            "available-baud-rate": "60138547000",
+            "roll-off": "0.25",
+            "min-carrier-spacing": "75",
+            "available-fec-type": "ietf-layer0-types:c-fec",
+            "in-band-osnr": "34",
+            "out-of-band-osnr": "23"
+          }
+        ]
+      }
+    },
+    "interface": [
+      {
+        "name": "Trunk-0/1",
+        "description": "DWDM Trunk interface - slot0 port1",
+        "type": "iana-if-type:opticalChannel",
+        "admin-status": "up",
+        "oper-status": "up",
+        "if-index": 1234,
+        "ietf-wdm-interface:wdm-interface": {
+          "supported-modes": {
+            "supported-mode": [
+              {
+                "mode-id": "ZR400-OFEC-16QAM-HB",
+                "organizational-mode": {
+                  "operational-mode": "ZR400-OFEC-16QAM-HB",
+                  "organization-identifier": "Open-ZR+",
+                  "transceiver-tuning-range": {
+                    "min-central-frequency": "191.275",
+                    "max-central-frequency": "196.125",
+                    "transceiver-tunability-granularity": "0.1"
+                  },
+                  "tx-channel-power-min": "-4.0",
+                  "tx-channel-power-max": "1.0",
+                  "rx-channel-power-min": "-12"
+                }
+              },
+              {
+                "mode-id": "VendorA-400G-ZR+-HB",
+                "explicit-mode": {
+                  "transceiver-tuning-range": {
+                    "min-central-frequency": "191.275",
+                    "max-central-frequency": "196.125",
+                    "transceiver-tunability-granularity": "0.1"
+                  },
+                  "tx-channel-power-min": "-4.0",
+                  "tx-channel-power-max": "1.0",
+                  "rx-channel-power-min": "-12.0",
+                  "compatible-modes": {
+                    "supported-organizational-mode": [
+                      "Open-ZR+-400G-HB"
+                    ]
+                  },
+                  "explicit-transceiver-mode-ref": "VenA-400G-ZR+-HB"
+                }
+              }
+            ]
+          },
+          "configured-mode": "VendorA-400G-ZR+-HB",
+          "central-frequency": "193.100",
+          "tx-channel-power": "-1.0"
+        },
+        "statistics": {
+          "discontinuity-time": "2026-06-26T14:00:00Z"
+        }
+      }
+    ]
+  }
+}
     ]]></artwork>
     </figure>
-
-
     </section>
 
 
