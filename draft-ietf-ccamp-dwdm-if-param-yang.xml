@@ -50,7 +50,7 @@ document to be edited.
 <!ENTITY rfc8343 SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.8343.xml">
 <!ENTITY rfc8340 SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.8340.xml">
 <!ENTITY rfc6566 SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.6566.xml">
-<!ENTITY rfc8243 SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.8243.xml">
+<!ENTITY rfc8342 SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.8342.xml">
 <!ENTITY rfc8407bis SYSTEM "https://datatracker.ietf.org/doc/bibxml3/draft-ietf-netmod-rfc8407bis-28.xml">
 <!ENTITY I-Doit SYSTEM "https://datatracker.ietf.org/doc/bibxml3/draft-ietf-ccamp-optical-impairment-topology-yang-22.xml">
 <!ENTITY rfc9093bis SYSTEM "https://datatracker.ietf.org/doc/bibxml3/draft-ietf-ccamp-rfc9093-bis-20.xml">
@@ -1597,7 +1597,7 @@ version of the specification in question.
 
       &rfc8340;
 
-      &rfc8243;
+      &rfc8342;
 
       &I-Dversioning;
 
@@ -2075,7 +2075,7 @@ has raise-threshold &gt; clear-threshold.
         </t>
         <t>
             This model follows the indication of Network Management Datastore
-            Architecture (NMDA) <xref target="RFC8243"/> whereby
+            Architecture (NMDA) <xref target="RFC8342"/> whereby
             configured parameters are stored in the config datastore and operational parameters
             in the operational datastore. E.g. the tx-power is configurable and describes a target
             that can be set and read from the config datastore. The same parameter can be read

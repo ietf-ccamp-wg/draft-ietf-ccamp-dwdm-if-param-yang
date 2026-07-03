@@ -1489,11 +1489,10 @@ Internet-Draft   draft-ietf-ccamp-dwdm-if-param-yang-16        July 2026
               BCP 215, RFC 8340, DOI 10.17487/RFC8340, March 2018,
               <https://www.rfc-editor.org/info/rfc8340>.
 
-   [RFC8243]  Perlman, R., Eastlake 3rd, D., Zhang, M., Ghanwani, A.,
-              and H. Zhai, "Alternatives for Multilevel Transparent
-              Interconnection of Lots of Links (TRILL)", RFC 8243,
-              DOI 10.17487/RFC8243, September 2017,
-              <https://www.rfc-editor.org/info/rfc8243>.
+   [RFC8342]  Bjorklund, M., Schoenwaelder, J., Shafer, P., Watsen, K.,
+              and R. Wilton, "Network Management Datastore Architecture
+              (NMDA)", RFC 8342, DOI 10.17487/RFC8342, March 2018,
+              <https://www.rfc-editor.org/info/rfc8342>.
 
    [I-D.ietf-netmod-yang-module-versioning]
               Wilton, R., Rahman, R., Lengyel, B., Clarke, J., and J.
@@ -1502,6 +1501,7 @@ Internet-Draft   draft-ietf-ccamp-dwdm-if-param-yang-16        July 2026
               versioning-15, 18 October 2025,
               <https://datatracker.ietf.org/doc/html/draft-ietf-netmod-
               yang-module-versioning-15>.
+
 
 
 
@@ -1864,7 +1864,7 @@ Appendix C.  Tree description - examples
    through the tree representation.
 
    This model follows the indication of Network Management Datastore
-   Architecture (NMDA) [RFC8243] whereby configured parameters are
+   Architecture (NMDA) [RFC8342] whereby configured parameters are
    stored in the config datastore and operational parameters in the
    operational datastore.  E.g. the tx-power is configurable and
    describes a target that can be set and read from the config
