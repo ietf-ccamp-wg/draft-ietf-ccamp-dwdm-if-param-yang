@@ -50,9 +50,10 @@ document to be edited.
 <!ENTITY rfc8343 SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.8343.xml">
 <!ENTITY rfc8340 SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.8340.xml">
 <!ENTITY rfc6566 SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.6566.xml">
+<!ENTITY rfc8243 SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.8243.xml">
 <!ENTITY rfc8407bis SYSTEM "https://datatracker.ietf.org/doc/bibxml3/draft-ietf-netmod-rfc8407bis-28.xml">
-<!ENTITY I-Doit SYSTEM "https://datatracker.ietf.org/doc/bibxml3/draft-ietf-ccamp-optical-impairment-topology-yang-21.xml">
-<!ENTITY rfc9093bis SYSTEM "https://datatracker.ietf.org/doc/bibxml3/draft-ietf-ccamp-rfc9093-bis-19.xml">
+<!ENTITY I-Doit SYSTEM "https://datatracker.ietf.org/doc/bibxml3/draft-ietf-ccamp-optical-impairment-topology-yang-22.xml">
+<!ENTITY rfc9093bis SYSTEM "https://datatracker.ietf.org/doc/bibxml3/draft-ietf-ccamp-rfc9093-bis-20.xml">
 <!ENTITY I-Ddwdmtunnel SYSTEM "https://datatracker.ietf.org/doc/bibxml3/draft-ietf-ccamp-wdm-tunnel-yang-06.xml">
 <!ENTITY I-Dversioning SYSTEM "https://datatracker.ietf.org/doc/bibxml3/draft-ietf-netmod-yang-module-versioning-15.xml">
 ]>
@@ -85,14 +86,14 @@ to use per the rules of RFC3978. The value (as of this template) can be:
 If this document obsoletes an RFC, specify the RFC in the "obsoletes" attribute
 If this document updates an RFC, specify the RFC in the "updates" attribute
 -->
-<rfc category="std" docName="draft-ietf-ccamp-dwdm-if-param-yang-15" ipr="trust200902">
+<rfc category="std" docName="draft-ietf-ccamp-dwdm-if-param-yang-16" ipr="trust200902">
   <front>
     <!--
 Enter the full document title and an abbreviated version
   to use in the page header.
 -->
 
-    <title abbrev="draft-ietf-ccamp-dwdm-if-param-yang-15">
+    <title abbrev="draft-ietf-ccamp-dwdm-if-param-yang-16">
       A YANG data model to manage configurable DWDM optical interfaces
     </title>
 
@@ -613,14 +614,14 @@ module ietf-wdm-interface {
   prefix wdm-if;
 
   import ietf-yang-revisions {
-    prefix "rev";
+    prefix rev;
   }
   import ietf-interfaces {
     prefix if;
   }
   import ietf-layer0-types {
     prefix l0-types;
-    rev:recommended-min-date 2025-11-03;
+    rev:recommended-min-date "2025-11-03";
   }
 
   organization
@@ -666,7 +667,7 @@ module ietf-wdm-interface {
   //
   // and finally delete this note.
 
-  revision 2026-03-02 {
+  revision 2026-07-03 {
     description
       "Initial Version";
     reference
@@ -848,38 +849,30 @@ module ietf-wdm-interface {
     }
   } // end grouping wdm-if-tca-list
 
-  grouping wdm-if-config {
+  grouping wdm-if-parameters {
     description
-      "DWDM Interface Configuration parameters";
-    leaf target-central-frequency {
-      type l0-types:frequency-thz;
-      description
-        "This parameter indicates the interface Central Frequency
-         configuration.";
-      reference
-        "ITU-T G.694.1 (10/2020): Spectral grids for WDM
-         applications: DWDM frequency grid";
-    }
-    leaf target-tx-channel-power {
-      type l0-types:power-dbm;
-      description
-        "This parameter indicates the terget configured TX channel
-         optical power.";
-    }
-  } // end grouping wdm-if-node-params
-
-  grouping wdm-if-operational {
-    description
-      "DWDM Interface Operational status data";
+      "DWDM Interface Configuration and Operational parameters";
     leaf central-frequency {
       type l0-types:frequency-thz;
-      config false;
       description
-        "This parameter indicates the current interface Central
-         Frequency.";
+        "This parameter indicates the interface Central Frequency.
+         In the configuration datastore the target central-frequency
+         configuration can be set/get;
+         when reading the operational datastore the implementation
+         shall provide the current central-frequency, that may differ
+         from the configured value";
       reference
         "ITU-T G.694.1 (10/2020): Spectral grids for WDM
          applications: DWDM frequency grid";
+    }
+    uses l0-types:common-transceiver-param;
+    leaf tx-total-power {
+      type l0-types:power-dbm-or-unknown;
+      default "unknown";
+      config false;
+      description
+        "The current total transmitted power, if not supported by the
+         implementation SHALL not be present";
     }
     leaf cur-osnr {
       type l0-types:snr-or-unknown;
@@ -924,11 +917,19 @@ module ietf-wdm-interface {
         "ITU-T O.201 (07/2003): Q-factor test equipment to estimate
                    the transmission performance of optical channels";
     }
-    leaf uncorrected-words {
+    leaf fec-uncorrected-words {
       type uint64;
       config false;
       description
         "Counter of Post-FEC uncorrected errored words,
+         if not supported by the implementation SHALL
+         not be present";
+    }
+    leaf fec-uncorrectable-blocks {
+      type uint64;
+      config false;
+      description
+        "Counter of the uncorectable FEC data blocks,
          if not supported by the implementation SHALL
          not be present";
     }
@@ -964,9 +965,9 @@ module ietf-wdm-interface {
          if not supported by the implementation SHALL
          not be present";
       reference
-        "ITU-T G.666 (02/2011): Characteristics of polarization
-                   mode dispersion compensators and of receivers that
-                   compensate for polarization mode dispersion
+        "ITU-T G.650.2 (02/2015): Definitions and test methods for
+         statistical and non-linear related attributes of
+         single-mode fibre and cable. Section 3.1
          RFC ZZZZ: A YANG Data Model for Optical Impairment-aware
                    Topology, Section 2.4.6";
     }
@@ -982,7 +983,252 @@ module ietf-wdm-interface {
         "RFC ZZZZ: A YANG Data Model for Optical Impairment-aware
                    Topology, Section 2.4.6";
     }
-  } // end grouping wdm-if-operational
+    leaf tx-central-frequency-offset {
+      type l0-types:frequency-ghz;
+      default "0";
+      config false;
+      description
+        "Frequency difference between nominal and actual optical
+         carrier frequency, if not supported by the implementation
+         SHALL not be present";
+      reference
+        "OIF-400GZR-02.0 Implementation Agreement
+         Section 13.1";
+    }
+    leaf rx-central-frequency-offset {
+      type l0-types:frequency-ghz;
+      default "0";
+      config false;
+      description
+        "Frequency difference between received signal carrier
+         frequency and the local laser frequency in coherent
+         optical interfaces, if not supported by the implementation
+         SHALL not be present";
+      reference
+        "OIF-400GZR-02.0 Implementation Agreement
+         Section 13.1";
+    }
+    leaf laser-temperature {
+      type l0-types:decimal-2-or-unknown;
+      units "Deg Celsius";
+      default "unknown";
+      config false;
+      description
+        "Laser temperature mesured in degree Celsius,
+         if not supported by the implementation SHALL
+         not be present";
+      reference
+        "Openconfig openconfig-platform.yang rev. 0.32.0";
+    }
+    leaf diff-group-delay {
+      type l0-types:decimal-2-or-unknown;
+      units "ps";
+      default "unknown";
+      config false;
+      description
+        "Transmission delay between polarization modes at the
+         reciever, if not supported by the implementation SHALL
+         not be present";
+      reference
+        "OIF-400GZR-02.0 Implementation Agreement
+         Section 13.4.7";
+    }
+    leaf laser-bias-current {
+      type l0-types:decimal-2-or-unknown;
+      units "mA";
+      default "unknown";
+      config false;
+      description
+        "The electircal current applied the the Tx Laser to
+         achieve the required output power, expressed in mA,
+         if not supported by the implementation SHALL
+         not be present";
+      reference
+        "Openconfig openconfig-platform.yang rev. 0.32.0";
+    }
+    leaf modulation-error-ratio {
+      type l0-types:power-ratio-or-unknown;
+      default "unknown";
+      config false;
+      description
+        "Modulation error ratio in dB with two decimal precision.
+         if not supported by the implementation SHALL
+         not be present";
+      reference
+        "OIF-400GZR-02.0 Implementation Agreement
+         Section 14.4.3";
+    }
+    leaf tx-variable-optical-attenuation {
+      type l0-types:power-ratio-or-unknown;
+      default "unknown";
+      config false;
+      description
+        "Variable Optical Attenutor on the TX signal.
+         if not supported by the implementation SHALL
+         not be present";
+      reference
+        "TAPI v2.5.0 Reference Implementation Agreement
+         TR-547, Table 106";
+    }
+    leaf rx-variable-optical-attenuation {
+      type l0-types:power-ratio-or-unknown;
+      default "unknown";
+      config false;
+      description
+        "Variable Optical Attenutor on the RX signal.
+         if not supported by the implementation SHALL
+         not be present";
+      reference
+        "TAPI v2.5.0 Reference Implementation Agreement
+         TR-547, Table 106";
+    }
+    leaf max-error-vector-magnitude {
+      type l0-types:decimal-5-or-unknown;
+      default "unknown";
+      config false;
+      description
+        "EVMmax (Error Vector Magnitude Max) is a metric for
+         evaluating maximum error vector magnitude in coherent
+         optics, if not supported by the implementation SHALL
+         not be present";
+      reference
+        "OIF-400GZR-02.0 Implementation Agreement
+         Section 14.4.1 and 20.1";
+    }
+    leaf rms-error-vector-magnitude {
+      type l0-types:decimal-5-or-unknown;
+      default "unknown";
+      config false;
+      description
+        "Error Vector Magnitude normalized by RMS value of
+         reference constellation points; used to evaluate
+         coherent optical signal quality, if not supported
+         by the implementation SHALL not be present";
+      reference
+        "OIF-400GZR-02.0 Implementation Agreement
+         Section 14.4.2";
+    }
+    leaf second-order-polarization-mode-dispersion {
+      type l0-types:decimal-5-or-unknown;
+      default "unknown";
+      config false;
+      description
+        "Second Order Polarization Mode Dispersion, if not supported
+         by the implementation SHALL not be present";
+      reference
+        "ITU-T G.650.2 (02/2015): Definitions and test methods for
+         statistical and non-linear related attributes of
+         single-mode fibre and cable. Section 3.1";
+    }
+    leaf sop-rate-of-change {
+      type l0-types:decimal-5-or-unknown;
+      default "unknown";
+      config false;
+      description
+        "Rate of change of polarization state, measured in real-time
+         by tracking the speed of polarization state rotation at the
+         receiver, if not supported by the implementation SHALL not
+         be present";
+      reference
+        "ITU-T G.698.2 (11/2018): Amplified multichannel dense
+         wavelength division multiplexing applications with single
+         channel optical interfaces. Section 7.3.7";
+    }
+    leaf modulation-bias-x-i {
+      type l0-types:decimal-2-or-unknown;
+      default "unknown";
+      config false;
+      description
+        "Bias on the in-phase (I) path of polarization X in a
+         coherent optical modulator, expressed as a percentage, if
+         not supported by the implementation SHALL not be present";
+      reference
+        "Openconfig openconfig-platform.yang rev. 0.32.0";
+    }
+    leaf modulation-bias-x-q {
+      type l0-types:decimal-2-or-unknown;
+      default "unknown";
+      config false;
+      description
+        "Bias on the quadrature (Q) path of polarization X in a
+         coherent optical modulator, expressed as a percentage, if
+         not supported by the implementation SHALL not be present";
+      reference
+        "Openconfig openconfig-platform.yang rev. 0.32.0l";
+    }
+    leaf modulation-bias-y-i {
+      type l0-types:decimal-2-or-unknown;
+      default "unknown";
+      config false;
+      description
+        "Bias on the in-phase (I) path of polarization Y in a
+         coherent optical modulator, expressed as a percentage, if
+         not supported by the implementation SHALL not be present";
+      reference
+        "Openconfig openconfig-platform.yang rev. 0.32.0";
+    }
+    leaf modulation-bias-y-q {
+      type l0-types:decimal-2-or-unknown;
+      default "unknown";
+      config false;
+      description
+        "Bias on the quadrature (Q) path of polarization Y in a
+         coherent optical modulator, expressed as a percentag, if
+         not supported by the implementation SHALL not be present";
+      reference
+        "Openconfig openconfig-platform.yang rev. 0.32.0";
+    }
+    leaf modulation-bias-x-phase {
+      type l0-types:decimal-2-or-unknown;
+      default "unknown";
+      config false;
+      description
+        "Bias on the phase path of polarization X in a coherent
+         optical modulator, expressed as a percentage, if not
+         supported by the implementation SHALL not be present";
+      reference
+        "Openconfig openconfig-platform.yang rev. 0.32.0";
+    }
+    leaf modulation-bias-y-phase {
+      type l0-types:decimal-2-or-unknown;
+      default "unknown";
+      config false;
+      description
+        "Bias on the phase path of polarization Y in a coherent
+         optical modulator, expressed as a percentage, if not
+         supported by the implementation SHALL not be present";
+      reference
+        "Openconfig openconfig-platform.yang rev. 0.32.0";
+    }
+    leaf self-phase-modulation {
+      type l0-types:decimal-2-or-unknown;
+      default "unknown";
+      config false;
+      description
+        "Self-phase modulation (SPM) is a nonlinear optical effect
+         where the phase of a light pulse is modulated by its own
+         intensity due to the Kerr effect, if not supported by the
+         implementation SHALL not be present";
+      reference
+        "ITU-T G.650.2 (02/2015): Definitions and test methods for
+         statistical and non-linear related attributes of
+         single-mode fibre and cable. Section II.3.1";
+    }
+    leaf cross-phase-modulation {
+      type l0-types:decimal-2-or-unknown;
+      default "unknown";
+      config false;
+      description
+        "Cross-phase modulation (XPM) is a nonlinear optical effect
+         where the intensity of one light signal modulates the phase
+         of another signal traveling through the same fiber, if not
+         supported by the implementation SHALL not be present";
+      reference
+        "ITU-T G.650.2 (02/2015): Definitions and test methods for
+         statistical and non-linear related attributes of
+         single-mode fibre and cable. Section II.3.3";
+    }
+  } // end grouping wdm-if-parameters
 
   notification wdm-if-tca {
     description
@@ -1030,7 +1276,7 @@ module ietf-wdm-interface {
             "The list of the transceivers' explicit modes.";
           leaf explicit-transceiver-mode-id {
             type string {
-              length "64";
+              length "8..64";
             }
             description
               "The identifier of the transceivers' explicit mode.";
@@ -1069,50 +1315,32 @@ module ietf-wdm-interface {
           } // end explicit-transceiver-mode-ref
         } // end augmentation explicit-mode
       } // end uses l0-types:transceiver-capabilities
-      container wdm-if-config {
-        description
-          "Configuration parameters of this interface";
-        leaf configured-mode {
-          type union {
-            type empty;
-            type leafref {
-              path "../../supported-modes/supported-mode/mode-id";
-              require-instance false;
-            }
-          }
-          default "empty";
-          description
-            "Reference to the configured mode for transceiver
-             compatibility approach.
-
-             The empty value is used to report that no mode has
-             been configured and there is no default mode.
-
-             When not present, the configured-mode is not reported
-             by the server, this means the interface is not
-             configured";
-        }
-        uses wdm-if-config;
-      } // end container wdm-if-config
       container wdm-if-tcas {
         description
           "Threshold Crossing Alerts definition and configuration";
         uses wdm-if-tca-list;
       } // end of container wdm-if-tcas
-      container wdm-if-status {
-        config false;
-        description
-          "Current operationa status parameters of this interface";
-        uses l0-types:common-transceiver-param {
-          refine "tx-channel-power" {
-            config false;
-          }
-          refine "line-coding-bitrate" {
-            config false;
+      leaf configured-mode {
+        type union {
+          type empty;
+          type leafref {
+            path "../supported-modes/supported-mode/mode-id";
+            require-instance false;
           }
         }
-        uses wdm-if-operational;
-      } // end container wdm-if-status
+        default "empty";
+        description
+          "Reference to the configured mode for transceiver
+           compatibility approach.
+
+           The empty value is used to report that no mode has
+           been configured and there is no default mode.
+
+           When not present, the configured-mode is not reported
+           by the server, this means the interface is not
+           configured";
+      }
+      uses wdm-if-parameters;
     } // end container wdm-interface
   } // end augmentation interface
 
@@ -1243,7 +1471,7 @@ reference: RFC XXXX (TDB)
               email B.Zeuner@telekom.de
               
             Massimiliano Salsi
-              Juniper Networks
+              Nokia
               Sunnyvale, CA, 94089
               U.S.A.
               email msalsi@google.com
@@ -1368,6 +1596,8 @@ version of the specification in question.
       &rfc6566;
 
       &rfc8340;
+
+      &rfc8243;
 
       &I-Dversioning;
 
@@ -1713,10 +1943,6 @@ module: ietf-wdm-interface
        |              |  +--ro supported-organizational-mode*
        |              |          -> ../../../../supported-mode/mode-id
        |              +--ro explicit-transceiver-mode-ref    leafref
-       +--rw wdm-if-config
-       |  +--rw configured-mode?            union
-       |  +--rw target-central-frequency?   l0-types:frequency-thz
-       |  +--rw target-tx-channel-power?    l0-types:power-dbm
        +--rw wdm-if-tcas
        |  +--ro number-of-tcas-supported?   uint32
        |  +--rw tca-list* [tca-id]
@@ -1725,30 +1951,76 @@ module: ietf-wdm-interface
        |     +--rw tca-name           string
        |     +--rw raise-threshold    l0-types:decimal-5
        |     +--rw clear-threshold    l0-types:decimal-5
-       +--ro wdm-if-status
-          +--ro line-coding-bitrate?            identityref
-          +--ro tx-channel-power?               power-dbm-or-unknown
-          +--ro rx-channel-power?               power-dbm-or-unknown
-          +--ro rx-total-power?                 power-dbm-or-unknown
-          +--ro central-frequency?
-          |       l0-types:frequency-thz
-          +--ro cur-osnr?
-          |       l0-types:snr-or-unknown
-          +--ro min-osnr-margin?
-          |       l0-types:snr-or-unknown
-          +--ro q-margin?
-          |       l0-types:decimal-2-or-unknown
-          +--ro q-factor?
-          |       l0-types:decimal-2-or-unknown
-          +--ro uncorrected-words?              uint64
-          +--ro pre-fec-ber?
-          |       l0-types:decimal-18-or-unknown
-          +--ro chromatic-dispersion?
-          |       l0-types:decimal-2-or-unknown
-          +--ro polarization-mode-dispersion?
-          |       l0-types:decimal-2-or-unknown
-          +--ro polarization-dependent-loss?
-                  l0-types:power-loss-or-unknown
+       +--rw configured-mode?                             union
+       +--rw central-frequency?
+       |       l0-types:frequency-thz
+       +--rw line-coding-bitrate?                         identityref
+       +--rw tx-channel-power?
+       |       power-dbm-or-unknown
+       +--ro rx-channel-power?
+       |       power-dbm-or-unknown
+       +--ro rx-total-power?
+       |       power-dbm-or-unknown
+       +--ro tx-total-power?
+       |       l0-types:power-dbm-or-unknown
+       +--ro cur-osnr?
+       |       l0-types:snr-or-unknown
+       +--ro min-osnr-margin?
+       |       l0-types:snr-or-unknown
+       +--ro q-margin?
+       |       l0-types:decimal-2-or-unknown
+       +--ro q-factor?
+       |       l0-types:decimal-2-or-unknown
+       +--ro fec-uncorrected-words?                       uint64
+       +--ro fec-uncorrectable-blocks?                    uint64
+       +--ro pre-fec-ber?
+       |       l0-types:decimal-18-or-unknown
+       +--ro chromatic-dispersion?
+       |       l0-types:decimal-2-or-unknown
+       +--ro polarization-mode-dispersion?
+       |       l0-types:decimal-2-or-unknown
+       +--ro polarization-dependent-loss?
+       |       l0-types:power-loss-or-unknown
+       +--ro tx-central-frequency-offset?
+       |       l0-types:frequency-ghz
+       +--ro rx-central-frequency-offset?
+       |       l0-types:frequency-ghz
+       +--ro laser-temperature?
+       |       l0-types:decimal-2-or-unknown
+       +--ro diff-group-delay?
+       |       l0-types:decimal-2-or-unknown
+       +--ro laser-bias-current?
+       |       l0-types:decimal-2-or-unknown
+       +--ro modulation-error-ratio?
+       |       l0-types:power-ratio-or-unknown
+       +--ro tx-variable-optical-attenuation?
+       |       l0-types:power-ratio-or-unknown
+       +--ro rx-variable-optical-attenuation?
+       |       l0-types:power-ratio-or-unknown
+       +--ro max-error-vector-magnitude?
+       |       l0-types:decimal-5-or-unknown
+       +--ro rms-error-vector-magnitude?
+       |       l0-types:decimal-5-or-unknown
+       +--ro second-order-polarization-mode-dispersion?
+       |       l0-types:decimal-5-or-unknown
+       +--ro sop-rate-of-change?
+       |       l0-types:decimal-5-or-unknown
+       +--ro modulation-bias-x-i?
+       |       l0-types:decimal-2-or-unknown
+       +--ro modulation-bias-x-q?
+       |       l0-types:decimal-2-or-unknown
+       +--ro modulation-bias-y-i?
+       |       l0-types:decimal-2-or-unknown
+       +--ro modulation-bias-y-q?
+       |       l0-types:decimal-2-or-unknown
+       +--ro modulation-bias-x-phase?
+       |       l0-types:decimal-2-or-unknown
+       +--ro modulation-bias-y-phase?
+       |       l0-types:decimal-2-or-unknown
+       +--ro self-phase-modulation?
+       |       l0-types:decimal-2-or-unknown
+       +--ro cross-phase-modulation?
+               l0-types:decimal-2-or-unknown
 
   notifications:
     +---n wdm-if-tca
@@ -1796,39 +2068,292 @@ raise-threshold &lt; clear-threshold while the High-RX-Power alarm
 has raise-threshold &gt; clear-threshold.
         </t>
     </section>
+    <section title="Tree description - examples">
+        <t>
+            This section provides a simple description of the wdm-if Yang models
+            through the tree representation.
+        </t>
+        <t>
+            This model follows the indication of Network Management Datastore
+            Architecture (NMDA) <xref target="RFC8243"/> whereby
+            configured parameters are stored in the config datastore and operational parameters
+            in the operational datastore. E.g. the tx-power is configurable and describes a target
+            that can be set and read from the config datastore. The same parameter can be read
+            from the operational datastore and in this case reports the transmit power that is
+            actually transmitted as reported by the transceiver.
+        </t>
+        <t>
+   The key model to start the description is the "wdm-if-templates", this
+   augments the IETF general "/if:interfaces:"
+   The leaves of this model represent and describe the most important
+   wdm interface parameters covering the optical parameters and the
+   electrical characteristics. The detailed description of the parameters
+   is out of scope of this document and can be found in the referenced
+   standard documents.
+        </t>
+        <t>
+   An important parameter to identify the wdm interface capabilities and
+   apply the proper provisioning is:
+        </t>
+   <figure align='left'>
+     <artwork><![CDATA[
++--rw wdm-interface
+  +--ro supported-modes!
+  |  +--ro supported-mode* [mode-id]
+  |     +--ro mode-id                      string
+  |     +--ro (mode)
+  |        +--:(g.698.2)
+  |        |  +--ro g.698.2
+  |        |     +--ro standard-mode               standard-mode
+
+           snipped
+
+  |        +--:(organizational-mode)
+  |        |  +--ro organizational-mode
+  |        |     +--ro operational-mode
+  |        |     |       operational-mode
+  |        |     +--ro organization-identifier
+  |        |     |       organization-identifier
+
+           snipped
+
+  |        +--:(explicit-mode)
+  |           +--ro explicit-mode
+    ]]></artwork>
+    </figure>
+        <t>
+ The "supported-modes" is a list of the interface supported modes, they represent
+the transceiver capabilities. Each list element can be either a "standard-mode",
+an "organizational-mode" or an "explicit-mode". There are not limits to the
+list length. Only one element of the list can be selected to provision the
+transceiver using the model:
+        </t>
+   <figure align='left'>
+     <artwork><![CDATA[
++--rw wdm-interface
+  +--ro supported-modes!
+  |  +--ro supported-mode* [mode-id]
+
+           snipped
+
+  +--rw configured-mode?         union
+  +--rw central-frequency?       l0-types:frequency-thz
+  +--rw line-coding-bitrate?     identityref
+  +--rw tx-channel-power?        power-dbm-or-unknown
+
+           snipped
+    ]]></artwork>
+    </figure>
+        <t>
+It is possible at any time to read the wdm interface status to
+verify the provisioning and the operational status:
+        </t>
+   <figure align='left'>
+     <artwork><![CDATA[
++--rw wdm-interface
+  +--ro supported-modes!
+  |  +--ro supported-mode* [mode-id]
+
+           snipped
+
+  +--ro rx-channel-power?
+  |       power-dbm-or-unknown
+  +--ro rx-total-power?
+  |       power-dbm-or-unknown
+  +--ro tx-total-power?
+  |       l0-types:power-dbm-or-unknown
+  +--ro cur-osnr?
+  |       l0-types:snr-or-unknown
+  +--ro min-osnr-margin?
+  |       l0-types:snr-or-unknown
+  +--ro q-margin?
+  |       l0-types:decimal-2-or-unknown
+  +--ro q-factor?
+  |       l0-types:decimal-2-or-unknown
+  +--ro fec-uncorrected-words?                       uint64
+  +--ro fec-uncorrectable-blocks?                    uint64
+  +--ro pre-fec-ber?
+  |       l0-types:decimal-18-or-unknown
+  +--ro chromatic-dispersion?
+  |       l0-types:decimal-2-or-unknown
+  +--ro polarization-mode-dispersion?
+  |       l0-types:decimal-2-or-unknown
+  +--ro polarization-dependent-loss?
+  |       l0-types:power-loss-or-unknown
+  +--ro tx-central-frequency-offset?
+  |       l0-types:frequency-ghz
+  +--ro rx-central-frequency-offset?
+  |       l0-types:frequency-ghz
+  +--ro laser-temperature?
+  |       l0-types:decimal-2-or-unknown
+  +--ro diff-group-delay?
+  |       l0-types:decimal-2-or-unknown
+  +--ro laser-bias-current?
+  |       l0-types:decimal-2-or-unknown
+  +--ro modulation-error-ratio?
+  |       l0-types:power-ratio-or-unknown
+  +--ro tx-variable-optical-attenuation?
+  |       l0-types:power-ratio-or-unknown
+  +--ro rx-variable-optical-attenuation?
+  |       l0-types:power-ratio-or-unknown
+  +--ro max-error-vector-magnitude?
+  |       l0-types:decimal-5-or-unknown
+  +--ro rms-error-vector-magnitude?
+  |       l0-types:decimal-5-or-unknown
+  +--ro second-order-polarization-mode-dispersion?
+  |       l0-types:decimal-5-or-unknown
+  +--ro sop-rate-of-change?
+  |       l0-types:decimal-5-or-unknown
+  +--ro modulation-bias-x-i?
+  |       l0-types:decimal-2-or-unknown
+  +--ro modulation-bias-x-q?
+  |       l0-types:decimal-2-or-unknown
+  +--ro modulation-bias-y-i?
+  |       l0-types:decimal-2-or-unknown
+  +--ro modulation-bias-y-q?
+  |       l0-types:decimal-2-or-unknown
+  +--ro modulation-bias-x-phase?
+  |       l0-types:decimal-2-or-unknown
+  +--ro modulation-bias-y-phase?
+  |       l0-types:decimal-2-or-unknown
+  +--ro self-phase-modulation?
+  |       l0-types:decimal-2-or-unknown
+  +--ro cross-phase-modulation?
+          l0-types:decimal-2-or-unknown
+    ]]></artwork>
+    </figure>
+    </section>
     <section title="Applicability examples">
-      <t>As an example here below is the way an OpenROADM compliant equipment
-        could be managed using the YANG models described in this document.</t>
-<!--      <t>[Editor Note: We may need to rephrase the following sentence, OpenROADM
-        has now many DWDM interface mode supported]</t>-->
-      <t>In OpenROADM MSA there is a limited number of DWDM interfaces supported.
-        Basically only the 100G Staircase FEC and 400G oFEC are supported and these
-        two kind of interfaces can be easily summarized with the "mode-id" and
-        the "application-identifier" strings.
+      <t>As an example here below is the way an OpenZR+ compliant interface
+        could be configured using the YANG models described in this document.</t>
+
+      <t>The optical interface considered in this example is able to support OpenZR+ ("organizational-mode")
+          at 400G High Power colorless. The interface also extend the OpenZR+ 400G-HB performance
+          specification, hence also expose an explicit-mode with detailed specs that is fully compatible
+          with OpenZR+. Both capability are exposed using the "wdw-if-template" container for the explicit mode,
+          that is then reference in the "supported-mode" list together with the OpenZR+ "organizational-mode"
       </t>
-      <t> the models below are enough to identify the interface and few working parameters:
+        <t>
+            The example also describes how the configuration section show (or allow to configure with write operation)
+            the actual working mode of the interface, the carrier central frequency and the transmitter power.
+        </t>
+      <t> The JSON example below is enough to identify the interface capabilities and properly show the
+          optical interface configuration:
       </t>
 
    <figure align='left'>
      <artwork><![CDATA[
-module: ietf-wdm-interface
- augment /if:interfaces/if:interface:
-    +--rw wdm-interface
-       +--rw wdm-if-config
-       |  +--rw configured-mode?            union
-       |  +--rw target-central-frequency?   l0-types:frequency-thz
-       |  +--rw target-tx-channel-power?    l0-types:power-dbm
-       +--ro wdm-if-status
-          +--ro cur-osnr?
-          +--ro q-factor?
-          |       l0-types:decimal-2-or-unknown
-          +--ro uncorrected-words?              uint64
-          +--ro pre-fec-ber?
-
+{
+  "ietf-interfaces:interfaces": {
+    "ietf-wdm-interface:wdm-if-templates": {
+      "explicit-transceiver-modes": {
+        "explicit-transceiver-mode": [
+          {
+            "explicit-transceiver-mode-id": "VenA-400G-ZR+-HB",
+            "bitrate": 400,
+            "max-diff-group-delay": "50",
+            "max-chromatic-dispersion": "22000",
+            "cd-penalty": [
+              {
+                "cd-value": "1000",
+                "penalty-value": "0"
+              },
+              {
+                "cd-value": "20000",
+                "penalty-value": "0.5"
+              }
+            ],
+            "max-polarization-mode-dispersion": "20",
+            "pmd-penalty": [
+              {
+                "pmd-value": "20",
+                "penalty-value": "0.5"
+              }
+            ],
+            "max-polarization-dependent-loss": "3.5",
+            "pdl-penalty": [
+              {
+                "pdl-value": "3.0",
+                "penalty-value": "1.3"
+              },
+              {
+                "pdl-value": "3.5",
+                "penalty-value": "1.8"
+              }
+            ],
+            "available-modulation-type": "ietf-layer0-types:dp-qam16",
+            "min-osnr": "24.0",
+            "rx-ref-channel-power": "-10.0",
+            "available-baud-rate": "60138547000",
+            "roll-off": "0.25",
+            "min-carrier-spacing": "75",
+            "available-fec-type": "ietf-layer0-types:c-fec",
+            "in-band-osnr": "34",
+            "out-of-band-osnr": "23"
+          }
+        ]
+      }
+    },
+    "interface": [
+      {
+        "name": "Trunk-0/1",
+        "description": "DWDM Trunk interface - slot0 port1",
+        "type": "iana-if-type:opticalChannel",
+        "admin-status": "up",
+        "oper-status": "up",
+        "if-index": 1234,
+        "ietf-wdm-interface:wdm-interface": {
+          "supported-modes": {
+            "supported-mode": [
+              {
+                "mode-id": "ZR400-OFEC-16QAM-HB",
+                "organizational-mode": {
+                  "operational-mode": "ZR400-OFEC-16QAM-HB",
+                  "organization-identifier": "Open-ZR+",
+                  "transceiver-tuning-range": {
+                    "min-central-frequency": "191.275",
+                    "max-central-frequency": "196.125",
+                    "transceiver-tunability-granularity": "0.1"
+                  },
+                  "tx-channel-power-min": "-4.0",
+                  "tx-channel-power-max": "1.0",
+                  "rx-channel-power-min": "-12"
+                }
+              },
+              {
+                "mode-id": "VendorA-400G-ZR+-HB",
+                "explicit-mode": {
+                  "transceiver-tuning-range": {
+                    "min-central-frequency": "191.275",
+                    "max-central-frequency": "196.125",
+                    "transceiver-tunability-granularity": "0.1"
+                  },
+                  "tx-channel-power-min": "-4.0",
+                  "tx-channel-power-max": "1.0",
+                  "rx-channel-power-min": "-12.0",
+                  "compatible-modes": {
+                    "supported-organizational-mode": [
+                      "Open-ZR+-400G-HB"
+                    ]
+                  },
+                  "explicit-transceiver-mode-ref": "VenA-400G-ZR+-HB"
+                }
+              }
+            ]
+          },
+          "configured-mode": "VendorA-400G-ZR+-HB",
+          "central-frequency": "193.100",
+          "tx-channel-power": "-1.0"
+        },
+        "statistics": {
+          "discontinuity-time": "2026-06-26T14:00:00Z"
+        }
+      }
+    ]
+  }
+}
     ]]></artwork>
     </figure>
-
-
     </section>
 
 

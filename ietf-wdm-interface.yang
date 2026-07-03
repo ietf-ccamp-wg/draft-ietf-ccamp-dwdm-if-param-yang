@@ -4,14 +4,14 @@ module ietf-wdm-interface {
   prefix wdm-if;
 
   import ietf-yang-revisions {
-    prefix "rev";
+    prefix rev;
   }
   import ietf-interfaces {
     prefix if;
   }
   import ietf-layer0-types {
     prefix l0-types;
-    rev:recommended-min-date 2025-11-03;
+    rev:recommended-min-date "2025-11-03";
   }
 
   organization
@@ -57,7 +57,7 @@ module ietf-wdm-interface {
   //
   // and finally delete this note.
 
-  revision 2026-03-02 {
+  revision 2026-07-03 {
     description
       "Initial Version";
     reference
@@ -239,38 +239,30 @@ module ietf-wdm-interface {
     }
   } // end grouping wdm-if-tca-list
 
-  grouping wdm-if-config {
+  grouping wdm-if-parameters {
     description
-      "DWDM Interface Configuration parameters";
-    leaf target-central-frequency {
-      type l0-types:frequency-thz;
-      description
-        "This parameter indicates the interface Central Frequency
-         configuration.";
-    }
-    leaf target-tx-channel-power {
-      type l0-types:power-dbm;
-      description
-        "This parameter indicates the terget configured TX channel
-         optical power.";
-      reference
-        "ITU-T G.694.1 (10/2020): Spectral grids for WDM
-         applications: DWDM frequency grid";
-    }
-  } // end grouping wdm-if-node-params
-
-  grouping wdm-if-operational {
-    description
-      "DWDM Interface Operational status data";
+      "DWDM Interface Configuration and Operational parameters";
     leaf central-frequency {
       type l0-types:frequency-thz;
-      config false;
       description
-        "This parameter indicates the current interface Central
-         Frequency.";
+        "This parameter indicates the interface Central Frequency.
+         In the configuration datastore the target central-frequency
+         configuration can be set/get;
+         when reading the operational datastore the implementation
+         shall provide the current central-frequency, that may differ
+         from the configured value";
       reference
         "ITU-T G.694.1 (10/2020): Spectral grids for WDM
          applications: DWDM frequency grid";
+    }
+    uses l0-types:common-transceiver-param;
+    leaf tx-total-power {
+      type l0-types:power-dbm-or-unknown;
+      default "unknown";
+      config false;
+      description
+        "The current total transmitted power, if not supported by the
+         implementation SHALL not be present";
     }
     leaf cur-osnr {
       type l0-types:snr-or-unknown;
@@ -315,11 +307,19 @@ module ietf-wdm-interface {
         "ITU-T O.201 (07/2003): Q-factor test equipment to estimate
                    the transmission performance of optical channels";
     }
-    leaf uncorrected-words {
+    leaf fec-uncorrected-words {
       type uint64;
       config false;
       description
         "Counter of Post-FEC uncorrected errored words,
+         if not supported by the implementation SHALL
+         not be present";
+    }
+    leaf fec-uncorrectable-blocks {
+      type uint64;
+      config false;
+      description
+        "Counter of the uncorectable FEC data blocks,
          if not supported by the implementation SHALL
          not be present";
     }
@@ -355,9 +355,9 @@ module ietf-wdm-interface {
          if not supported by the implementation SHALL
          not be present";
       reference
-        "ITU-T G.666 (02/2011): Characteristics of polarization
-                   mode dispersion compensators and of receivers that
-                   compensate for polarization mode dispersion
+        "ITU-T G.650.2 (02/2015): Definitions and test methods for
+         statistical and non-linear related attributes of
+         single-mode fibre and cable. Section 3.1
          RFC ZZZZ: A YANG Data Model for Optical Impairment-aware
                    Topology, Section 2.4.6";
     }
@@ -373,7 +373,252 @@ module ietf-wdm-interface {
         "RFC ZZZZ: A YANG Data Model for Optical Impairment-aware
                    Topology, Section 2.4.6";
     }
-  } // end grouping wdm-if-operational
+    leaf tx-central-frequency-offset {
+      type l0-types:frequency-ghz;
+      default "0";
+      config false;
+      description
+        "Frequency difference between nominal and actual optical
+         carrier frequency, if not supported by the implementation
+         SHALL not be present";
+      reference
+        "OIF-400GZR-02.0 Implementation Agreement
+         Section 13.1";
+    }
+    leaf rx-central-frequency-offset {
+      type l0-types:frequency-ghz;
+      default "0";
+      config false;
+      description
+        "Frequency difference between received signal carrier
+         frequency and the local laser frequency in coherent
+         optical interfaces, if not supported by the implementation
+         SHALL not be present";
+      reference
+        "OIF-400GZR-02.0 Implementation Agreement
+         Section 13.1";
+    }
+    leaf laser-temperature {
+      type l0-types:decimal-2-or-unknown;
+      units "Deg Celsius";
+      default "unknown";
+      config false;
+      description
+        "Laser temperature mesured in degree Celsius,
+         if not supported by the implementation SHALL
+         not be present";
+      reference
+        "Openconfig openconfig-platform.yang rev. 0.32.0";
+    }
+    leaf diff-group-delay {
+      type l0-types:decimal-2-or-unknown;
+      units "ps";
+      default "unknown";
+      config false;
+      description
+        "Transmission delay between polarization modes at the
+         reciever, if not supported by the implementation SHALL
+         not be present";
+      reference
+        "OIF-400GZR-02.0 Implementation Agreement
+         Section 13.4.7";
+    }
+    leaf laser-bias-current {
+      type l0-types:decimal-2-or-unknown;
+      units "mA";
+      default "unknown";
+      config false;
+      description
+        "The electircal current applied the the Tx Laser to
+         achieve the required output power, expressed in mA,
+         if not supported by the implementation SHALL
+         not be present";
+      reference
+        "Openconfig openconfig-platform.yang rev. 0.32.0";
+    }
+    leaf modulation-error-ratio {
+      type l0-types:power-ratio-or-unknown;
+      default "unknown";
+      config false;
+      description
+        "Modulation error ratio in dB with two decimal precision.
+         if not supported by the implementation SHALL
+         not be present";
+      reference
+        "OIF-400GZR-02.0 Implementation Agreement
+         Section 14.4.3";
+    }
+    leaf tx-variable-optical-attenuation {
+      type l0-types:power-ratio-or-unknown;
+      default "unknown";
+      config false;
+      description
+        "Variable Optical Attenutor on the TX signal.
+         if not supported by the implementation SHALL
+         not be present";
+      reference
+        "TAPI v2.5.0 Reference Implementation Agreement
+         TR-547, Table 106";
+    }
+    leaf rx-variable-optical-attenuation {
+      type l0-types:power-ratio-or-unknown;
+      default "unknown";
+      config false;
+      description
+        "Variable Optical Attenutor on the RX signal.
+         if not supported by the implementation SHALL
+         not be present";
+      reference
+        "TAPI v2.5.0 Reference Implementation Agreement
+         TR-547, Table 106";
+    }
+    leaf max-error-vector-magnitude {
+      type l0-types:decimal-5-or-unknown;
+      default "unknown";
+      config false;
+      description
+        "EVMmax (Error Vector Magnitude Max) is a metric for
+         evaluating maximum error vector magnitude in coherent
+         optics, if not supported by the implementation SHALL
+         not be present";
+      reference
+        "OIF-400GZR-02.0 Implementation Agreement
+         Section 14.4.1 and 20.1";
+    }
+    leaf rms-error-vector-magnitude {
+      type l0-types:decimal-5-or-unknown;
+      default "unknown";
+      config false;
+      description
+        "Error Vector Magnitude normalized by RMS value of
+         reference constellation points; used to evaluate
+         coherent optical signal quality, if not supported
+         by the implementation SHALL not be present";
+      reference
+        "OIF-400GZR-02.0 Implementation Agreement
+         Section 14.4.2";
+    }
+    leaf second-order-polarization-mode-dispersion {
+      type l0-types:decimal-5-or-unknown;
+      default "unknown";
+      config false;
+      description
+        "Second Order Polarization Mode Dispersion, if not supported
+         by the implementation SHALL not be present";
+      reference
+        "ITU-T G.650.2 (02/2015): Definitions and test methods for
+         statistical and non-linear related attributes of
+         single-mode fibre and cable. Section 3.1";
+    }
+    leaf sop-rate-of-change {
+      type l0-types:decimal-5-or-unknown;
+      default "unknown";
+      config false;
+      description
+        "Rate of change of polarization state, measured in real-time
+         by tracking the speed of polarization state rotation at the
+         receiver, if not supported by the implementation SHALL not
+         be present";
+      reference
+        "ITU-T G.698.2 (11/2018): Amplified multichannel dense
+         wavelength division multiplexing applications with single
+         channel optical interfaces. Section 7.3.7";
+    }
+    leaf modulation-bias-x-i {
+      type l0-types:decimal-2-or-unknown;
+      default "unknown";
+      config false;
+      description
+        "Bias on the in-phase (I) path of polarization X in a
+         coherent optical modulator, expressed as a percentage, if
+         not supported by the implementation SHALL not be present";
+      reference
+        "Openconfig openconfig-platform.yang rev. 0.32.0";
+    }
+    leaf modulation-bias-x-q {
+      type l0-types:decimal-2-or-unknown;
+      default "unknown";
+      config false;
+      description
+        "Bias on the quadrature (Q) path of polarization X in a
+         coherent optical modulator, expressed as a percentage, if
+         not supported by the implementation SHALL not be present";
+      reference
+        "Openconfig openconfig-platform.yang rev. 0.32.0l";
+    }
+    leaf modulation-bias-y-i {
+      type l0-types:decimal-2-or-unknown;
+      default "unknown";
+      config false;
+      description
+        "Bias on the in-phase (I) path of polarization Y in a
+         coherent optical modulator, expressed as a percentage, if
+         not supported by the implementation SHALL not be present";
+      reference
+        "Openconfig openconfig-platform.yang rev. 0.32.0";
+    }
+    leaf modulation-bias-y-q {
+      type l0-types:decimal-2-or-unknown;
+      default "unknown";
+      config false;
+      description
+        "Bias on the quadrature (Q) path of polarization Y in a
+         coherent optical modulator, expressed as a percentag, if
+         not supported by the implementation SHALL not be present";
+      reference
+        "Openconfig openconfig-platform.yang rev. 0.32.0";
+    }
+    leaf modulation-bias-x-phase {
+      type l0-types:decimal-2-or-unknown;
+      default "unknown";
+      config false;
+      description
+        "Bias on the phase path of polarization X in a coherent
+         optical modulator, expressed as a percentage, if not
+         supported by the implementation SHALL not be present";
+      reference
+        "Openconfig openconfig-platform.yang rev. 0.32.0";
+    }
+    leaf modulation-bias-y-phase {
+      type l0-types:decimal-2-or-unknown;
+      default "unknown";
+      config false;
+      description
+        "Bias on the phase path of polarization Y in a coherent
+         optical modulator, expressed as a percentage, if not
+         supported by the implementation SHALL not be present";
+      reference
+        "Openconfig openconfig-platform.yang rev. 0.32.0";
+    }
+    leaf self-phase-modulation {
+      type l0-types:decimal-2-or-unknown;
+      default "unknown";
+      config false;
+      description
+        "Self-phase modulation (SPM) is a nonlinear optical effect
+         where the phase of a light pulse is modulated by its own
+         intensity due to the Kerr effect, if not supported by the
+         implementation SHALL not be present";
+      reference
+        "ITU-T G.650.2 (02/2015): Definitions and test methods for
+         statistical and non-linear related attributes of
+         single-mode fibre and cable. Section II.3.1";
+    }
+    leaf cross-phase-modulation {
+      type l0-types:decimal-2-or-unknown;
+      default "unknown";
+      config false;
+      description
+        "Cross-phase modulation (XPM) is a nonlinear optical effect
+         where the intensity of one light signal modulates the phase
+         of another signal traveling through the same fiber, if not
+         supported by the implementation SHALL not be present";
+      reference
+        "ITU-T G.650.2 (02/2015): Definitions and test methods for
+         statistical and non-linear related attributes of
+         single-mode fibre and cable. Section II.3.3";
+    }
+  } // end grouping wdm-if-parameters
 
   notification wdm-if-tca {
     description
@@ -421,7 +666,7 @@ module ietf-wdm-interface {
             "The list of the transceivers' explicit modes.";
           leaf explicit-transceiver-mode-id {
             type string {
-              length "64";
+              length "8..64";
             }
             description
               "The identifier of the transceivers' explicit mode.";
@@ -460,50 +705,32 @@ module ietf-wdm-interface {
           } // end explicit-transceiver-mode-ref
         } // end augmentation explicit-mode
       } // end uses l0-types:transceiver-capabilities
-      container wdm-if-config {
-        description
-          "Configuration parameters of this interface";
-        leaf configured-mode {
-          type union {
-            type empty;
-            type leafref {
-              path "../../supported-modes/supported-mode/mode-id";
-              require-instance false;
-            }
-          }
-          default "empty";
-          description
-            "Reference to the configured mode for transceiver
-             compatibility approach.
-
-             The empty value is used to report that no mode has
-             been configured and there is no default mode.
-
-             When not present, the configured-mode is not reported
-             by the server, this means the interface is not
-             configured";
-        }
-        uses wdm-if-config;
-      } // end container wdm-if-config
       container wdm-if-tcas {
         description
           "Threshold Crossing Alerts definition and configuration";
         uses wdm-if-tca-list;
       } // end of container wdm-if-tcas
-      container wdm-if-status {
-        config false;
-        description
-          "Current operationa status parameters of this interface";
-        uses l0-types:common-transceiver-param {
-          refine "tx-channel-power" {
-            config false;
-          }
-          refine "line-coding-bitrate" {
-            config false;
+      leaf configured-mode {
+        type union {
+          type empty;
+          type leafref {
+            path "../supported-modes/supported-mode/mode-id";
+            require-instance false;
           }
         }
-        uses wdm-if-operational;
-      } // end container wdm-if-status
+        default "empty";
+        description
+          "Reference to the configured mode for transceiver
+           compatibility approach.
+
+           The empty value is used to report that no mode has
+           been configured and there is no default mode.
+
+           When not present, the configured-mode is not reported
+           by the server, this means the interface is not
+           configured";
+      }
+      uses wdm-if-parameters;
     } // end container wdm-interface
   } // end augmentation interface
 

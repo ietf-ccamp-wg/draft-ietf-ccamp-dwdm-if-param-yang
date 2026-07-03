@@ -1,0 +1,109 @@
+{
+  "ietf-interfaces:interfaces": {
+    "ietf-wdm-interface:wdm-if-templates": {
+      "explicit-transceiver-modes": {
+        "explicit-transceiver-mode": [
+          {
+            "explicit-transceiver-mode-id": "VenA-400G-ZR+-HB",
+            "bitrate": 400,
+            "max-diff-group-delay": "50",
+            "max-chromatic-dispersion": "22000",
+            "cd-penalty": [
+              {
+                "cd-value": "1000",
+                "penalty-value": "0"
+              },
+              {
+                "cd-value": "20000",
+                "penalty-value": "0.5"
+              }
+            ],
+            "max-polarization-mode-dispersion": "20",
+            "pmd-penalty": [
+              {
+                "pmd-value": "20",
+                "penalty-value": "0.5"
+              }
+            ],
+            "max-polarization-dependent-loss": "3.5",
+            "pdl-penalty": [
+              {
+                "pdl-value": "3.0",
+                "penalty-value": "1.3"
+              },
+              {
+                "pdl-value": "3.5",
+                "penalty-value": "1.8"
+              }
+            ],
+            "available-modulation-type": "ietf-layer0-types:dp-qam16",
+            "min-osnr": "24.0",
+            "rx-ref-channel-power": "-10.0",
+            "available-baud-rate": "60138547000",
+            "roll-off": "0.25",
+            "min-carrier-spacing": "75",
+            "available-fec-type": "ietf-layer0-types:c-fec",
+            "in-band-osnr": "34",
+            "out-of-band-osnr": "23"
+          }
+        ]
+      }
+    },
+    "interface": [
+      {
+        "name": "Trunk-0/1",
+        "description": "DWDM Trunk interface - slot0 port1",
+        "type": "iana-if-type:opticalChannel",
+        "admin-status": "up",
+        "oper-status": "up",
+        "if-index": 1234,
+        "ietf-wdm-interface:wdm-interface": {
+          "supported-modes": {
+            "supported-mode": [
+              {
+                "mode-id": "ZR400-OFEC-16QAM-HB",
+                "organizational-mode": {
+                  "operational-mode": "ZR400-OFEC-16QAM-HB",
+                  "organization-identifier": "Open-ZR+",
+                  "transceiver-tuning-range": {
+                    "min-central-frequency": "191.275",
+                    "max-central-frequency": "196.125",
+                    "transceiver-tunability-granularity": "0.1"
+                  },
+                  "tx-channel-power-min": "-4.0",
+                  "tx-channel-power-max": "1.0",
+                  "rx-channel-power-min": "-12"
+                }
+              },
+              {
+                "mode-id": "VendorA-400G-ZR+-HB",
+                "explicit-mode": {
+                  "transceiver-tuning-range": {
+                    "min-central-frequency": "191.275",
+                    "max-central-frequency": "196.125",
+                    "transceiver-tunability-granularity": "0.1"
+                  },
+                  "tx-channel-power-min": "-4.0",
+                  "tx-channel-power-max": "1.0",
+                  "rx-channel-power-min": "-12.0",
+                  "compatible-modes": {
+                    "supported-organizational-mode": [
+                      "Open-ZR+-400G-HB"
+                    ]
+                  },
+                  "explicit-transceiver-mode-ref": "VenA-400G-ZR+-HB"
+                }
+              }
+            ]
+          },
+          "configured-mode": "VendorA-400G-ZR+-HB",
+          "central-frequency": "193.100",
+          "tx-channel-power": "-1.0"
+        },
+        "statistics": {
+          "discontinuity-time": "2026-06-26T14:00:00Z"
+        }
+      }
+    ]
+  }
+}
