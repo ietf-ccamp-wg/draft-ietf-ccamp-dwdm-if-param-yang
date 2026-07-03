@@ -50,6 +50,7 @@ document to be edited.
 <!ENTITY rfc8343 SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.8343.xml">
 <!ENTITY rfc8340 SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.8340.xml">
 <!ENTITY rfc6566 SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.6566.xml">
+<!ENTITY rfc8243 SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.8243.xml">
 <!ENTITY rfc8407bis SYSTEM "https://datatracker.ietf.org/doc/bibxml3/draft-ietf-netmod-rfc8407bis-28.xml">
 <!ENTITY I-Doit SYSTEM "https://datatracker.ietf.org/doc/bibxml3/draft-ietf-ccamp-optical-impairment-topology-yang-22.xml">
 <!ENTITY rfc9093bis SYSTEM "https://datatracker.ietf.org/doc/bibxml3/draft-ietf-ccamp-rfc9093-bis-20.xml">
@@ -666,7 +667,7 @@ module ietf-wdm-interface {
   //
   // and finally delete this note.
 
-  revision 2026-06-26 {
+  revision 2026-07-03 {
     description
       "Initial Version";
     reference
@@ -1596,6 +1597,8 @@ version of the specification in question.
 
       &rfc8340;
 
+      &rfc8243;
+
       &I-Dversioning;
 
      <reference anchor="ITU-T G.698.2">
@@ -2071,6 +2074,15 @@ has raise-threshold &gt; clear-threshold.
             through the tree representation.
         </t>
         <t>
+            This model follows the indication of Network Management Datastore
+            Architecture (NMDA) <xref target="RFC8243"/> whereby
+            configured parameters are stored in the config datastore and operational parameters
+            in the operational datastore. E.g. the tx-power is configurable and describes a target
+            that can be set and read from the config datastore. The same parameter can be read
+            from the operational datastore and in this case reports the transmit power that is
+            actually transmitted as reported by the transceiver.
+        </t>
+        <t>
    The key model to start the description is the "wdm-if-templates", this
    augments the IETF general "/if:interfaces:"
    The leaves of this model represent and describe the most important
@@ -2222,7 +2234,7 @@ verify the provisioning and the operational status:
           that is then reference in the "supported-mode" list together with the OpenZR+ "organizational-mode"
       </t>
         <t>
-            The example also show how the configuration section show (or allow to configure with write operation)
+            The example also describes how the configuration section show (or allow to configure with write operation)
             the actual working mode of the interface, the carrier central frequency and the transmitter power.
         </t>
       <t> The JSON example below is enough to identify the interface capabilities and properly show the
