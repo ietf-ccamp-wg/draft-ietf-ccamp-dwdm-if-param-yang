@@ -46,12 +46,11 @@ document to be edited.
 <!ENTITY rfc9000 SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.9000.xml">
 <!ENTITY rfc4252 SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.4252.xml">
 <!ENTITY rfc7950 SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.7950.xml">
-<!ENTITY rfc8407 SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.8407.xml">
 <!ENTITY rfc8343 SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.8343.xml">
 <!ENTITY rfc8340 SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.8340.xml">
 <!ENTITY rfc6566 SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.6566.xml">
 <!ENTITY rfc8342 SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.8342.xml">
-<!ENTITY rfc8407bis SYSTEM "https://datatracker.ietf.org/doc/bibxml3/draft-ietf-netmod-rfc8407bis-28.xml">
+<!ENTITY rfc9907 SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.9907.xml">
 <!ENTITY I-Doit SYSTEM "https://datatracker.ietf.org/doc/bibxml3/draft-ietf-ccamp-optical-impairment-topology-yang-22.xml">
 <!ENTITY rfc9093bis SYSTEM "https://datatracker.ietf.org/doc/bibxml3/draft-ietf-ccamp-rfc9093-bis-20.xml">
 <!ENTITY I-Ddwdmtunnel SYSTEM "https://datatracker.ietf.org/doc/bibxml3/draft-ietf-ccamp-wdm-tunnel-yang-06.xml">
@@ -86,14 +85,14 @@ to use per the rules of RFC3978. The value (as of this template) can be:
 If this document obsoletes an RFC, specify the RFC in the "obsoletes" attribute
 If this document updates an RFC, specify the RFC in the "updates" attribute
 -->
-<rfc category="std" docName="draft-ietf-ccamp-dwdm-if-param-yang-16" ipr="trust200902">
+<rfc category="std" docName="draft-ietf-ccamp-dwdm-if-param-yang-17" ipr="trust200902">
   <front>
     <!--
 Enter the full document title and an abbreviated version
   to use in the page header.
 -->
 
-    <title abbrev="draft-ietf-ccamp-dwdm-if-param-yang-16">
+    <title abbrev="draft-ietf-ccamp-dwdm-if-param-yang-17">
       A YANG data model to manage configurable DWDM optical interfaces
     </title>
 
@@ -432,8 +431,7 @@ but you should provide more than just the abstract. -->
      <t>
        This document is structured following the guidelines for
        documents containing YANG Data defined in
-       <xref target="RFC8407"/> and its update in
-       <xref target="I-D.ietf-netmod-rfc8407bis"/>
+       <xref target="RFC9907"/>
      </t>
 
     </section>
@@ -667,7 +665,7 @@ module ietf-wdm-interface {
   //
   // and finally delete this note.
 
-  revision 2026-07-03 {
+  revision 2026-09-02 {
     description
       "Initial Version";
     reference
@@ -1358,8 +1356,7 @@ module ietf-wdm-interface {
 
 <t>
   This section is modeled after the template described in Section 3.7
-  of <xref target="RFC8407"/> and the update in document
-  <xref target="I-D.ietf-netmod-rfc8407bis"/>.
+  <xref target="RFC9907"/>.
 </t>
 <t>The "ietf-wdm-interface" YANG module defines a data model that is
 designed to be accessed via YANG-based management protocols, such as
@@ -1794,9 +1791,7 @@ version of the specification in question.
 
 <!--     &rfc4054;-->
 
-      &rfc8407;
-
-      &rfc8407bis;
+      &rfc9907;
 
       &I-Ddwdmtunnel;
     </references>

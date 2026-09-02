@@ -57,7 +57,7 @@ module ietf-wdm-interface {
   //
   // and finally delete this note.
 
-  revision 2026-07-03 {
+  revision 2026-09-02 {
     description
       "Initial Version";
     reference
