@@ -61,7 +61,7 @@
           "supported-modes": {
             "supported-mode": [
               {
-                "mode-id": "ZR400-OFEC-16QAM-HB",
+                "mode-id": "Open-ZR+-400G-HB",
                 "organizational-mode": {
                   "operational-mode": "ZR400-OFEC-16QAM-HB",
                   "organization-identifier": "Open-ZR+",
@@ -96,9 +96,22 @@
               }
             ]
           },
+          "wdm-if-tcas": {
+            "number-of-tcas-supported": 10,
+            "tca-list": [
+              {
+                "tca-id": "rx-channel-power-low",
+                "tca-type": "/ietf-interfaces:interfaces/interface[name='Trunk-0/1']/ietf-wdm-interface:wdm-interface/rx-channel-power",
+                "tca-name": "Low-RX-Power",
+                "raise-threshold": "-13.0",
+                "clear-threshold": "-12.0"
+              }
+            ]
+          },
           "configured-mode": "VendorA-400G-ZR+-HB",
           "central-frequency": "193.100",
-          "tx-channel-power": "-1.0"
+          "tx-channel-power": "-1.0",
+          "rx-channel-power": "-11.5"
         },
         "statistics": {
           "discontinuity-time": "2026-06-26T14:00:00Z"

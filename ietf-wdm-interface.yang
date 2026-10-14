@@ -21,7 +21,7 @@ module ietf-wdm-interface {
      WG List:  <mailto:ccamp@ietf.org>
 
 
-     Editor: Dharini Hiremagalur <mailto:dharini.hiremagalur@hpe.com>
+     Editor: Dharini Hiremagalur <mailto:dharinih@yahoo.com>
      Editor: Gabriele Galimberti <mailto:ggalimbe56@gmail.com>
      Editor: Gert Grammel <mailto:gert.grammel@hpe.com>
      Editor: Roberto Manzotti <mailto:rmanzott@cisco.com>";
@@ -168,13 +168,26 @@ module ietf-wdm-interface {
     description
       "Thresholds for TCA's";
     leaf tca-type {
-      type identityref {
-        base wdm-if-tca-type;
+      type instance-identifier {
+        require-instance false;
+      }
+      must 'count(deref(.)/..
+                  | current()/../../..) = 1' {
+        error-message
+          "The TCA type must reference an attribute of the
+           current wdm-interface";
       }
       mandatory true;
       description
-        "type of the TCA that identify the
-         performance measurement, eg tx-power-tca";
+        "XPath identifying the performance-measurement attribute
+         monitored by the TCA. The referenced attribute MUST be a
+         leaf directly contained in the current wdm-interface.
+         Please note that the must statement cannot verify the
+         existence of the node in the operational datastore, since
+         it is not accessible from the config datastore where this
+         leaf is defined. Validation of the existence of the
+         attribute in the operational datastore SHALL be done by
+         the server implementation";
     }
     leaf tca-name {
       type string;

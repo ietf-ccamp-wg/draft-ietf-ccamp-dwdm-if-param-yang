@@ -135,7 +135,7 @@ Enter the full document title and an abbreviated version
 
         <phone></phone>
 
-        <email>dharini.hiremagalur@hpe.com</email>
+        <email>dharinih@yahoo.com</email>
       </address>
     </author>
 
@@ -629,7 +629,7 @@ module ietf-wdm-interface {
      WG List:  <mailto:ccamp@ietf.org>
 
 
-     Editor: Dharini Hiremagalur <mailto:dharini.hiremagalur@hpe.com>
+     Editor: Dharini Hiremagalur <mailto:dharinih@yahoo.com>
      Editor: Gabriele Galimberti <mailto:ggalimbe56@gmail.com>
      Editor: Gert Grammel <mailto:gert.grammel@hpe.com>
      Editor: Roberto Manzotti <mailto:rmanzott@cisco.com>";
@@ -1454,7 +1454,7 @@ reference: RFC XXXX (TDB)
               10781 Berlin
               Germany
               +491702275321
-              RKunze@telekom.de
+              email RKunze@telekom.de
 
             Dean Bogdanovic
               Westford
@@ -1488,14 +1488,12 @@ reference: RFC XXXX (TDB)
             Hing-Kam Lam
               Fhusa
               USA
-              kam.lam@fhusainc.com
+              email kam.lam@fhusainc.com
 
             Sergio Belotti
               Nokia
-              Via Energy Park
-              20871 Vimercate (MB)
               Italy
-              Sergio.belotti@nokia.com
+              email s.belotti.ietf@gmail.com
 
             Andreas Burk
               Architekt Network Automation CTO Board
@@ -1503,7 +1501,7 @@ reference: RFC XXXX (TDB)
               Versatel Deutschland GmbH Solmsstr. 73 
               D-60486 Frankfurt am Main
               +49 69 21789246 
-              Andreas.Burk@1und1.net
+              email Andreas.Burk@1und1.net
 
 
      ]]></artwork>
