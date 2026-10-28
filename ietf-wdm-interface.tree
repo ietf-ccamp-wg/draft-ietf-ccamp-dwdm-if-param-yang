@@ -109,7 +109,7 @@ module: ietf-wdm-interface
        |  +--ro number-of-tcas-supported?   uint32
        |  +--rw tca-list* [tca-id]
        |     +--rw tca-id             string
-       |     +--rw tca-type           identityref
+       |     +--rw tca-type           instance-identifier
        |     +--rw tca-name           string
        |     +--rw raise-threshold    l0-types:decimal-5
        |     +--rw clear-threshold    l0-types:decimal-5
@@ -187,5 +187,5 @@ module: ietf-wdm-interface
   notifications:
     +---n wdm-if-tca
        +--ro if-name     -> /if:interfaces/interface/name
-       +--ro tca-type    identityref
+       +--ro tca-type    instance-identifier
        +--ro tca-name    string
