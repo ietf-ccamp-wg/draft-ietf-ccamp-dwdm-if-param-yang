@@ -46,12 +46,11 @@ document to be edited.
 <!ENTITY rfc9000 SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.9000.xml">
 <!ENTITY rfc4252 SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.4252.xml">
 <!ENTITY rfc7950 SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.7950.xml">
-<!ENTITY rfc8407 SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.8407.xml">
 <!ENTITY rfc8343 SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.8343.xml">
 <!ENTITY rfc8340 SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.8340.xml">
 <!ENTITY rfc6566 SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.6566.xml">
 <!ENTITY rfc8342 SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.8342.xml">
-<!ENTITY rfc8407bis SYSTEM "https://datatracker.ietf.org/doc/bibxml3/draft-ietf-netmod-rfc8407bis-28.xml">
+<!ENTITY rfc9907 SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.9907.xml">
 <!ENTITY I-Doit SYSTEM "https://datatracker.ietf.org/doc/bibxml3/draft-ietf-ccamp-optical-impairment-topology-yang-22.xml">
 <!ENTITY rfc9093bis SYSTEM "https://datatracker.ietf.org/doc/bibxml3/draft-ietf-ccamp-rfc9093-bis-20.xml">
 <!ENTITY I-Ddwdmtunnel SYSTEM "https://datatracker.ietf.org/doc/bibxml3/draft-ietf-ccamp-wdm-tunnel-yang-06.xml">
@@ -86,14 +85,14 @@ to use per the rules of RFC3978. The value (as of this template) can be:
 If this document obsoletes an RFC, specify the RFC in the "obsoletes" attribute
 If this document updates an RFC, specify the RFC in the "updates" attribute
 -->
-<rfc category="std" docName="draft-ietf-ccamp-dwdm-if-param-yang-16" ipr="trust200902">
+<rfc category="std" docName="draft-ietf-ccamp-dwdm-if-param-yang-17" ipr="trust200902">
   <front>
     <!--
 Enter the full document title and an abbreviated version
   to use in the page header.
 -->
 
-    <title abbrev="draft-ietf-ccamp-dwdm-if-param-yang-16">
+    <title abbrev="draft-ietf-ccamp-dwdm-if-param-yang-17">
       A YANG data model to manage configurable DWDM optical interfaces
     </title>
 
@@ -136,7 +135,7 @@ Enter the full document title and an abbreviated version
 
         <phone></phone>
 
-        <email>dharini.hiremagalur@hpe.com</email>
+        <email>dharinih@yahoo.com</email>
       </address>
     </author>
 
@@ -157,8 +156,8 @@ Enter the full document title and an abbreviated version
       </address>
     </author>
 
-       <author fullname="Roberto Manzotti"  role="editor"
-            surname="R. Manzotti">
+       <author fullname="Roberto Manzotti" initials="R" role="editor"
+            surname="Manzotti">
       <organization>Cisco</organization>
       <address>
         <postal>
@@ -432,8 +431,7 @@ but you should provide more than just the abstract. -->
      <t>
        This document is structured following the guidelines for
        documents containing YANG Data defined in
-       <xref target="RFC8407"/> and its update in
-       <xref target="I-D.ietf-netmod-rfc8407bis"/>
+       <xref target="RFC9907"/>
      </t>
 
     </section>
@@ -631,7 +629,7 @@ module ietf-wdm-interface {
      WG List:  <mailto:ccamp@ietf.org>
 
 
-     Editor: Dharini Hiremagalur <mailto:dharini.hiremagalur@hpe.com>
+     Editor: Dharini Hiremagalur <mailto:dharinih@yahoo.com>
      Editor: Gabriele Galimberti <mailto:ggalimbe56@gmail.com>
      Editor: Gert Grammel <mailto:gert.grammel@hpe.com>
      Editor: Roberto Manzotti <mailto:rmanzott@cisco.com>";
@@ -667,7 +665,7 @@ module ietf-wdm-interface {
   //
   // and finally delete this note.
 
-  revision 2026-07-03 {
+  revision 2026-10-30 {
     description
       "Initial Version";
     reference
@@ -675,116 +673,32 @@ module ietf-wdm-interface {
        optical interfaces";
   }
 
-  identity wdm-if-tca-type {
-    description
-      "The different types of Threshold Crossing Alert (TCA's)
-       for DWDM Interfaces. Any augmentation of the list of
-       tca-type MUST use this identity as base";
-  }
-
-  identity laser-linewdt-tca {
-    base wdm-if-tca-type;
-    description
-      "The laser linewidth TCA";
-  }
-
-  identity tx-power-tca {
-    base wdm-if-tca-type;
-    description
-      "The Interface Transmit power TCA";
-  }
-
-  identity rx-power-tca {
-    base wdm-if-tca-type;
-    description
-      "The Interface Receive power TCA";
-  }
-
-  identity rx-pol-power-diff-tca {
-    base wdm-if-tca-type;
-    description
-      "The X-Y power difference between the two polarizations TCA
-       on the receiver interface";
-  }
-
-  identity rx-pol-skew-diff-tca {
-    base wdm-if-tca-type;
-    description
-      "The X-Y skew between the two polarizations TCA on the
-       receiver interface";
-  }
-
-  identity rx-cd-tca {
-    base wdm-if-tca-type;
-    description
-      "The fiber chromatic dispersion (CD) TCA on the receiver
-       interface";
-  }
-
-  identity rx-pmd-tca {
-    base wdm-if-tca-type;
-    description
-      "The polarization mode dispersion (PMD) TCA on the receiver
-       interface";
-  }
-
-  identity rx-pdl-tca {
-    base wdm-if-tca-type;
-    description
-      "The polarization dependent loss (PDL) TCA on the receiver
-       interface";
-  }
-
-  identity rx-frequency-offset-tca {
-    base wdm-if-tca-type;
-    description
-      "The Frequency offset TCA ";
-  }
-
-  identity rx-osnr-tca {
-    base wdm-if-tca-type;
-    description
-      "Optical Signal to Noise Ratio (OSNR) TCA on the receiver
-       interface";
-  }
-
-  identity laser-temperature-tca {
-    base wdm-if-tca-type;
-    description
-      "Laser temperature TCA on the transmiter laser";
-  }
-
-  identity rx-pre-fec-ber-tca {
-    base wdm-if-tca-type;
-    description
-      "Pre-FEC Bit Error Rate (BER) TCA on the receiver
-       interface";
-  }
-
-  identity rx-uncorrected-words-tca {
-    base wdm-if-tca-type;
-    description
-      "Counter of Post-FEC uncorrected words TCA on the receiver
-       interface";
-  }
-
-  identity rx-q-factor-tca {
-    base wdm-if-tca-type;
-    description
-      "Q-factor TCA on the receiver interface";
-  }
-
   grouping wdm-if-tca-thresholds {
     description
       "Thresholds for TCA's";
     leaf tca-type {
-      type identityref {
-        base wdm-if-tca-type;
+      type instance-identifier {
+        require-instance false;
+      }
+      must 'count(deref(.)/..
+                  | current()/../../..) = 1' {
+        error-message
+          "The TCA type must reference an attribute of the
+           current wdm-interface";
       }
       mandatory true;
       description
-        "type of the TCA that identify the
-         performance measurement, eg tx-power-tca";
+        "XPath expression identifying the performance-measurement
+         attribute monitored by the TCA. This instance-identifier
+         refer to an attribute that MUST be a leaf directly
+         contained within the current wdm-interface.
+         The associated 'must' statement cannot verify the existence
+         of the referenced node in the operational datastore,
+         since the operational datastore is not accessible from the
+         configuration datastore where this leaf is defined.
+         Validation of the existence of the referenced attribute in
+         the operational datastore SHALL be performed by the server
+         implementation.";
     }
     leaf tca-name {
       type string;
@@ -832,8 +746,8 @@ module ietf-wdm-interface {
       config false;
       description
         "Number of TCAs supported by this interface,
-         if the implementation do not suport TCAs it SHALL leave this
-         value to defualt = 0";
+         if the implementation do not support TCAs it SHALL leave
+         this value to default = 0";
     }
     list tca-list {
       key "tca-id";
@@ -1242,13 +1156,14 @@ module ietf-wdm-interface {
         "Interface name";
     }
     leaf tca-type {
-      type identityref {
-        base wdm-if-tca-type;
+      type instance-identifier {
+        require-instance false;
       }
       mandatory true;
       description
-        "The Type of TCA that have triggered the notification,
-         e.g, tx-power-tca";
+        "XPath expression identifying the performance-measurement
+         attribute monitored by the TCA that triggered the
+         notification";
     }
     leaf tca-name {
       type string;
@@ -1343,7 +1258,6 @@ module ietf-wdm-interface {
       uses wdm-if-parameters;
     } // end container wdm-interface
   } // end augmentation interface
-
 }
 <CODE ENDS>
 
@@ -1358,8 +1272,7 @@ module ietf-wdm-interface {
 
 <t>
   This section is modeled after the template described in Section 3.7
-  of <xref target="RFC8407"/> and the update in document
-  <xref target="I-D.ietf-netmod-rfc8407bis"/>.
+  <xref target="RFC9907"/>.
 </t>
 <t>The "ietf-wdm-interface" YANG module defines a data model that is
 designed to be accessed via YANG-based management protocols, such as
@@ -1393,7 +1306,7 @@ effect on network operations.
 are sensitive or vulnerable and the associated security risks should
 be spelled out (for instance, if they might reveal customer
 information or violate personal privacy laws such as those of the
-European Union if exposed to unathorized parties).</cref></t>
+European Union if exposed to unauthorized parties).</cref></t>
 
 
 
@@ -1457,7 +1370,7 @@ reference: RFC XXXX (TDB)
               10781 Berlin
               Germany
               +491702275321
-              RKunze@telekom.de
+              email RKunze@telekom.de
 
             Dean Bogdanovic
               Westford
@@ -1491,14 +1404,12 @@ reference: RFC XXXX (TDB)
             Hing-Kam Lam
               Fhusa
               USA
-              kam.lam@fhusainc.com
+              email kam.lam@fhusainc.com
 
             Sergio Belotti
               Nokia
-              Via Energy Park
-              20871 Vimercate (MB)
               Italy
-              Sergio.belotti@nokia.com
+              email s.belotti.ietf@gmail.com
 
             Andreas Burk
               Architekt Network Automation CTO Board
@@ -1506,7 +1417,7 @@ reference: RFC XXXX (TDB)
               Versatel Deutschland GmbH Solmsstr. 73 
               D-60486 Frankfurt am Main
               +49 69 21789246 
-              Andreas.Burk@1und1.net
+              email Andreas.Burk@1und1.net
 
 
      ]]></artwork>
@@ -1794,9 +1705,7 @@ version of the specification in question.
 
 <!--     &rfc4054;-->
 
-      &rfc8407;
-
-      &rfc8407bis;
+      &rfc9907;
 
       &I-Ddwdmtunnel;
     </references>
@@ -1947,7 +1856,7 @@ module: ietf-wdm-interface
        |  +--ro number-of-tcas-supported?   uint32
        |  +--rw tca-list* [tca-id]
        |     +--rw tca-id             string
-       |     +--rw tca-type           identityref
+       |     +--rw tca-type           instance-identifier
        |     +--rw tca-name           string
        |     +--rw raise-threshold    l0-types:decimal-5
        |     +--rw clear-threshold    l0-types:decimal-5
@@ -2025,7 +1934,7 @@ module: ietf-wdm-interface
   notifications:
     +---n wdm-if-tca
        +--ro if-name     -> /if:interfaces/interface/name
-       +--ro tca-type    identityref
+       +--ro tca-type    instance-identifier
        +--ro tca-name    string
     ]]></artwork>
     </figure>
@@ -2243,6 +2152,8 @@ verify the provisioning and the operational status:
 
    <figure align='left'>
      <artwork><![CDATA[
+=============== NOTE: '\' line wrapping per RFC 8792 ================
+
 {
   "ietf-interfaces:interfaces": {
     "ietf-wdm-interface:wdm-if-templates": {
@@ -2306,7 +2217,7 @@ verify the provisioning and the operational status:
           "supported-modes": {
             "supported-mode": [
               {
-                "mode-id": "ZR400-OFEC-16QAM-HB",
+                "mode-id": "Open-ZR+-400G-HB",
                 "organizational-mode": {
                   "operational-mode": "ZR400-OFEC-16QAM-HB",
                   "organization-identifier": "Open-ZR+",
@@ -2341,9 +2252,24 @@ verify the provisioning and the operational status:
               }
             ]
           },
+          "wdm-if-tcas": {
+            "number-of-tcas-supported": 10,
+            "tca-list": [
+              {
+                "tca-id": "rx-channel-power-low",
+                "tca-type": "/ietf-interfaces:interfaces/\
+                interface[name='Trunk-0/1']/\
+                ietf-wdm-interface:wdm-interface/rx-channel-power",
+                "tca-name": "Low-RX-Power",
+                "raise-threshold": "-13.0",
+                "clear-threshold": "-12.0"
+              }
+            ]
+          },
           "configured-mode": "VendorA-400G-ZR+-HB",
           "central-frequency": "193.100",
-          "tx-channel-power": "-1.0"
+          "tx-channel-power": "-1.0",
+          "rx-channel-power": "-11.5"
         },
         "statistics": {
           "discontinuity-time": "2026-06-26T14:00:00Z"
