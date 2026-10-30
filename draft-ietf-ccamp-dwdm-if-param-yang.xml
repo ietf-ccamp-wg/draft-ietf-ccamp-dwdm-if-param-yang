@@ -156,8 +156,8 @@ Enter the full document title and an abbreviated version
       </address>
     </author>
 
-       <author fullname="Roberto Manzotti"  role="editor"
-            surname="R. Manzotti">
+       <author fullname="Roberto Manzotti" initials="R" role="editor"
+            surname="Manzotti">
       <organization>Cisco</organization>
       <address>
         <postal>
@@ -689,15 +689,16 @@ module ietf-wdm-interface {
       mandatory true;
       description
         "XPath expression identifying the performance-measurement
-        attribute monitored by the TCA. The referenced attribute
-        MUST be a leaf directly contained within the current
-        wdm-interface. The associated ?must? statement cannot
-        verify the existence of the referenced node in the
-        operational datastore, since the operational datastore is
-        not accessible from the configuration datastore where this
-        leaf is defined. Validation of the existence of the
-        referenced attribute in the operational datastore SHALL
-        be performed by the server implementation.";
+         attribute monitored by the TCA. This instance-identifier
+         refer to an attribute that MUST be a leaf directly
+         contained within the current wdm-interface.
+         The associated 'must' statement cannot verify the existence
+         of the referenced node in the operational datastore,
+         since the operational datastore is not accessible from the
+         configuration datastore where this leaf is defined.
+         Validation of the existence of the referenced attribute in
+         the operational datastore SHALL be performed by the server
+         implementation.";
     }
     leaf tca-name {
       type string;
@@ -745,8 +746,8 @@ module ietf-wdm-interface {
       config false;
       description
         "Number of TCAs supported by this interface,
-         if the implementation do not suport TCAs it SHALL leave this
-         value to defualt = 0";
+         if the implementation do not support TCAs it SHALL leave
+         this value to default = 0";
     }
     list tca-list {
       key "tca-id";
@@ -1305,7 +1306,7 @@ effect on network operations.
 are sensitive or vulnerable and the associated security risks should
 be spelled out (for instance, if they might reveal customer
 information or violate personal privacy laws such as those of the
-European Union if exposed to unathorized parties).</cref></t>
+European Union if exposed to unauthorized parties).</cref></t>
 
 
 
